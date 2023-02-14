@@ -1,4 +1,7 @@
 Feature: Gerar link de compartilhamento personalizado
+  As a Cliente do Sistema
+  I want to criar um link de compartilhamento personalizado
+  So that Eu posso compartilhar mais facilmente páginas do sistema
 
 Scenario: Sucesso ao gerar um link de compartilhamento de um produto válido
   Given Eu estou logado como "Cliente" com o login "João"
