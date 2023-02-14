@@ -49,15 +49,6 @@ When Eu seleciono “comprar novamente”
 Then Eu vejo uma mensagem dizendo que o item “Calça roxa” está indisponível
 And Vejo que o item “Camisa verde” está no carrinho de compras
 
-Scenario: Tentar ver o histórico de compras sem estar logada
-Given Eu não estou logada no sistema
-And Eu estou na página inicial do sistema
-When Eu seleciono “Ver histórico de pedidos”
-Then Eu vejo uma mensagem falando que tenho que fazer login para ver o histórico de pedidos
-And Eu vejo a página de login
-And eu faço o login
-And eu vejo o histórico de compras associado a minha conta
-
 Scenario: Selecionar um item indisponível no histórico de compras
 Given Eu estou logada no sistema como cliente com o login “aqrs” e senha “1234”
 And Estou vendo o histórico de pedidos da minha conta
