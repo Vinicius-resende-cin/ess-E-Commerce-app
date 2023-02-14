@@ -76,5 +76,3 @@ Scenario: Erro ao gerar um link de compartilhamento da página do carrinho de co
   When Eu seleciono a opção "Gerar link de compartilhamento"
   Then Eu vejo a mensagem "Erro: Não é possível gerar um link desta página"
   And A opção "Gerar link de compartilhamento" é desativada
-
-Scenario: 
