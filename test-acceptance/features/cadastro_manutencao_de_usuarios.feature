@@ -33,7 +33,8 @@ Scenario: Administrador deseja remover um usuário do sistema
     And Eu estou logado com a conta de administrador default de email  "admin@hotmail.com" e senha  "adminadmin"
     And Vejo uma tabela com os usuários do sistema
     And Eu vejo o usuário de "nome"  "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail"
-    When Eu clico no Botão "X" no usuário "Guilherme Maciel de Melo" And: Escrevo  "adminadmin" em "Senha"
+    When Eu clico no Botão "X" no usuário "Guilherme Maciel de Melo"
+    And Escrevo  "adminadmin" em "Senha"
     And Clico em "confirmar"
     Then Eu recebo uma mensagem de que o usuário foi excluído
     And Verifico que o usuário "Guilherme Maciel de Melo" não consta mais na tabela

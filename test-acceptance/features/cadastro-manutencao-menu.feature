@@ -1,4 +1,4 @@
-Feature: Produto
+Feature: Cadastro e Manutenção de Produto
     As a usuário admin do sistema
     I want to adicionar, remover e atualizar produto
     So that a loja pertencente a conta seja atualizada
@@ -48,7 +48,7 @@ And Estou na página "Cadastrar Produto"
 And Eu vejo os campos "Nome, Descrição, Preço, Foto, Forma de pagamento, Disponibilidade, Categorias" vazios
 When Eu adiciono as informações "Camisa polo, Camisa polo preta esportiva com bom pano, R$80, camisa.png, Cartão, 20 unidades, Moda" nos campos "Nome, Descrição, Preço, Foto, Forma de pagamento, Disponibilidade, Categorias"
 And Eu clico em "Cadastrar"
-Then Eu vejo na tela uma mensagem de erro indicando que o título(nome) do produto já pertence a outro produto na minha loja
+Then Eu vejo na tela uma mensagem de erro "Título já existente"
 And Eu clico em "Retornar"
 And Eu ainda estou no preenchimento do cadastro do produto
 
