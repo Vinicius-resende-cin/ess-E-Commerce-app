@@ -1,4 +1,6 @@
-Scenario: Gerar um link de compartilhamento personalizado
+Feature: Gerar link de compartilhamento personalizado
+
+Scenario: Sucesso ao gerar um link de compartilhamento de um produto válido
   Given Eu estou logado como "Cliente" com o login "João"
   And Eu estou na página de venda do produto "Teclado mecânico gamer" da categoria "Eletrônicos"
   And Eu estou com o menu geral aberto
@@ -7,6 +9,26 @@ Scenario: Gerar um link de compartilhamento personalizado
   And Eu insiro "tecladolegal" no campo de "Nome do link"
   And Eu seleciono a opção "Gerar"
   Then Eu vejo a mensagem "Link copiado para a área de transferência"
+
+Scenario: Sucesso ao gerar um link de compartilhamento da página home
+  Given Eu estou logado como "Cliente" com o login "Clara"
+  And Eu estou na página "Home"
+  And Eu estou com o menu geral aberto
+  When Eu seleciono a opção "Gerar link de compartilhamento"
+  And Eu vejo o campo de "Nome do link"
+  And Eu insiro "commercinHome" no campo de "Nome do link"
+  And Eu seleciono a opção "Gerar"
+  Then Eu vejo a mensagem "Link copiado para a área de transferência"
+
+Scenario: Erro ao gerar um link de compartilhamento sem nome
+  Given Eu estou logado como "Cliente" com o login "Pedro"
+  And Eu estou na página "Home"
+  And Eu estou com o menu geral aberto
+  When Eu seleciono a opção "Gerar link de compartilhamento"
+  And Eu vejo o campo de "Nome do link"
+  And Eu insiro "" no campo de "Nome do link"
+  And Eu seleciono a opção "Gerar"
+  Then Eu vejo a mensagem "Erro: O nome do link não pode ser vazio"
 
 Scenario: Erro ao gerar um link de compartilhamento contendo um termo inadequado
   Given Eu estou logado como "Cliente" com o login "Maria"
@@ -54,3 +76,5 @@ Scenario: Erro ao gerar um link de compartilhamento da página do carrinho de co
   When Eu seleciono a opção "Gerar link de compartilhamento"
   Then Eu vejo a mensagem "Erro: Não é possível gerar um link desta página"
   And A opção "Gerar link de compartilhamento" é desativada
+
+Scenario: 
