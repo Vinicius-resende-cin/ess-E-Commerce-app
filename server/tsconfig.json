@@ -8,7 +8,9 @@
     "experimentalDecorators": true,
     "lib": ["es2016", "dom"],
     "noImplicitAny": true,
-    "outDir": "typeScript"
+    "outDir": "typeScript",
+    "esModuleInterop": true,
+    "resolveJsonModule": true
   },
   "compileOnSave": true
 }

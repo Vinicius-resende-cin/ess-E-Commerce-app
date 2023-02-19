@@ -1,15 +1,6 @@
-const express = require("express");
-const app = express();
-const api = require("./routes/api");
-
-app.use("/api", api);
-
-app.get("/", (req: any, res: any) => {
-  res.send("Server is working!");
-});
+const app = require("./config/express")();
+const port = app.get("port");
 
 app.listen(3000, () => {
-  console.log("Example app listening on port 3000!");
+  console.log(`Servidor rodando na porta ${port}!`);
 });
-
-export {};

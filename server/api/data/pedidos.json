@@ -1,0 +1,10 @@
+{
+  "pedidos": {
+    "data": [
+      { "id_pedido": "a1", "id_produto": "p1" },
+      { "id_pedido": "a2", "id_produto": "p2" },
+      { "id_pedido": "a3", "id_produto": "p3" },
+      { "id_pedido": "a4", "id_produto": "p4" }
+    ]
+  }
+}
