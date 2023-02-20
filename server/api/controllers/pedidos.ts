@@ -1,8 +1,15 @@
 module.exports = () => {
-  const pedidosDB = require("../data/pedidos.json");
+  const Pedido = require("../../models/pedidoModel")();
+
   const controller = {
-    listOrders: (req: any, res: any) => {
-      res.status(200).json(pedidosDB);
+    listOrders: async (req: any, res: any) => {
+      try {
+        // Retorna todos os pedidos
+        const pedidos = await Pedido.find({});
+        res.json(pedidos);
+      } catch (err) {
+        res.status(500).send(err);
+      }
     },
   };
 

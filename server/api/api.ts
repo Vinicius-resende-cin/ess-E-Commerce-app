@@ -2,12 +2,7 @@ module.exports = () => {
   const express = require("express");
   const router = express.Router();
 
-  // Define uma rota para o endpoint da api
-  router.get("/", (req: any, res: any) => {
-    res.send("A api está funcionando!");
-  });
-
-  // Define as rotas para cada feature
+  // Define as rotas
   // const usuarios = require("./routes/usuarios")();
   // const auth = require("./routes/auth")();
   const pedidos = require("./routes/pedidos")();
