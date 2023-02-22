@@ -2,6 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const config = require("config");
 const mongoose = require("mongoose");
+const cors = require("cors");
 
 mongoose.set("strictQuery", false);
 
@@ -15,6 +16,7 @@ module.exports = () => {
 
   // middlewares
   app.use(bodyParser.json());
+  app.use(cors(process.env.CORS_OPT || config.get("corsOptions")));
 
   return app;
 };
