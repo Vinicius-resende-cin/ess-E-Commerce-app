@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let c of contents; index as i">
-        <th scope="row">{{ i }}</th>
+        <th scope="row">{{ i + 1 }}</th>
         <td *ngFor="let item of c | keyvalue">{{ item.value }}</td>
       </tr>
     </tbody>
