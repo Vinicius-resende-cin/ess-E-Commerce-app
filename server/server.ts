@@ -3,7 +3,7 @@ const app = require("./config/express")();
 const api = require("./api/api")();
 
 const port = app.get("port");
-const admin = app.get("db_admin");
+const db_admin_psw = app.get("db_admin_psw");
 
 // rotas
 app.use("/api", api);
@@ -11,7 +11,7 @@ app.use("/api", api);
 // Conecta ao mongodb
 mongoose
   .connect(
-    `mongodb+srv://${admin.name}:${admin.password}@cluster0.zopdelz.mongodb.net/e-commerce?retryWrites=true&w=majority`,
+    `mongodb+srv://admin:${db_admin_psw}@cluster0.zopdelz.mongodb.net/e-commerce?retryWrites=true&w=majority`,
     {
       useNewUrlParser: true,
       useUnifiedTopology: true,

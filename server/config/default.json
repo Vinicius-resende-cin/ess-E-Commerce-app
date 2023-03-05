@@ -2,10 +2,6 @@
   "server": {
     "port": 3000
   },
-  "databaseAuth": {
-    "user": { "name": "user", "password": "2E1dFZWgYpY2ig6k" },
-    "admin": { "name": "admin", "password": "yw39zE34zZ9vV12L" }
-  },
   "corsOptions": {
     "origin": "http://localhost:4200",
     "optionsSuccessStatus": 200

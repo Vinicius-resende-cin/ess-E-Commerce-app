@@ -1,5 +1,3 @@
-<p>{{ title }} works!</p>
-<app-list-render
-  [listTitle]="'Pedidos'"
-  [listType]="'pedidos'"
-></app-list-render>
+<h1>{{ title }}</h1>
+<a [routerLink]="['/resumo-mensal']">Resumo Mensal</a>
+<router-outlet></router-outlet>

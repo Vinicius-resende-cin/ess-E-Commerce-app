@@ -5,5 +5,7 @@ module.exports = () => {
 
   router.get("/", controller.listOrders);
 
+  router.get("/resumo", controller.calcMonthRange);
+
   return router;
 };

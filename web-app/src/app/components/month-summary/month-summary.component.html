@@ -1,0 +1,11 @@
+<div class="content-fluid p-3">
+  <input class="form-control w-25" type="month" id="start-month" />
+  <input class="form-control w-25" type="month" id="end-month" />
+  <button class="btn btn-primary" (click)="searchRange()">Filtrar</button>
+
+  <app-list-render
+    [listTitle]="'Pedidos'"
+    [backendRoute]="'/pedidos/resumo'"
+    [filter]="filter"
+  ></app-list-render>
+</div>

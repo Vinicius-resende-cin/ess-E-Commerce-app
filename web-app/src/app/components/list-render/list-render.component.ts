@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { ListService } from 'src/app/services/list.service';
 
 @Component({
@@ -6,9 +6,10 @@ import { ListService } from 'src/app/services/list.service';
   templateUrl: './list-render.component.html',
   styleUrls: ['./list-render.component.scss'],
 })
-export class ListRenderComponent implements OnInit {
+export class ListRenderComponent implements OnInit, OnChanges {
   @Input() listTitle = '';
-  @Input() listType = '';
+  @Input() backendRoute = '';
+  @Input() filter: any = {};
 
   contents: Object[] = [];
   labels: string[] = [];
@@ -16,13 +17,20 @@ export class ListRenderComponent implements OnInit {
   constructor(private listService: ListService) {}
 
   ngOnInit(): void {
-    this.getItems();
+    this.getItems(this.filter);
   }
 
-  getItems() {
-    this.listService.getAll(this.listType).subscribe((contents) => {
-      this.contents = contents;
-      this.labels = Object.keys(contents[0]);
-    });
+  ngOnChanges(): void {
+    console.log(this.filter);
+    this.getItems(this.filter);
+  }
+
+  getItems(filter: any = {}) {
+    this.listService
+      .getFilter(this.backendRoute, filter)
+      .subscribe((contents) => {
+        this.contents = contents;
+        this.labels = Object.keys(contents[0]);
+      });
   }
 }

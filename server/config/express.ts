@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const config = require("config");
 const mongoose = require("mongoose");
 const cors = require("cors");
+require("dotenv").config({ path: "./config/.env" });
 
 mongoose.set("strictQuery", false);
 
@@ -11,8 +12,8 @@ module.exports = () => {
 
   // definindo variaveis globais
   app.set("port", process.env.PORT || config.get("server.port"));
-  app.set("db_admin", process.env.DB_ADMIN || config.get("databaseAuth.admin"));
-  app.set("db_user", process.env.DB_ADMIN || config.get("databaseAuth.user"));
+  app.set("db_admin_psw", process.env.DB_ADMIN_PSW);
+  app.set("db_user_psw", process.env.DB_USER_PSW);
 
   // middlewares
   app.use(bodyParser.json());
