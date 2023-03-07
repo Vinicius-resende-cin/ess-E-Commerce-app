@@ -1,4 +1,11 @@
-import { Component, Input, OnInit, OnChanges } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  OnInit,
+  OnChanges,
+  EventEmitter,
+} from '@angular/core';
 import { ListService } from 'src/app/services/list.service';
 
 @Component({
@@ -7,11 +14,13 @@ import { ListService } from 'src/app/services/list.service';
   styleUrls: ['./list-render.component.scss'],
 })
 export class ListRenderComponent implements OnInit, OnChanges {
+  Object = Object;
+
   @Input() listTitle = '';
   @Input() backendRoute = '';
   @Input() filter: any = {};
 
-  Object: any = Object;
+  @Output() currentContents = new EventEmitter<Object>();
 
   contents: Object[] = [];
   labels: string[] = [];
@@ -31,7 +40,8 @@ export class ListRenderComponent implements OnInit, OnChanges {
       .getFilter(this.backendRoute, filter)
       .subscribe((contents) => {
         this.contents = contents;
-        this.labels = Object.keys(contents[0]);
+        this.labels = contents.length > 0 ? Object.keys(this.contents[0]) : [];
+        this.currentContents.emit(this.contents);
       });
   }
 }

@@ -31,7 +31,7 @@ module.exports = () => {
           if (req.query.end != "") {
             let end = new Date(req.query.end);
             end = new Date(end.setMonth(end.getMonth() + 1));
-            filter.data_hora.$lte = end;
+            filter.data_hora.$lt = end;
           }
         }
 

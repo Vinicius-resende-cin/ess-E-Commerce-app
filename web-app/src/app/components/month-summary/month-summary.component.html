@@ -3,9 +3,18 @@
   <input class="form-control w-25" type="month" id="end-month" />
   <button class="btn btn-primary" (click)="searchRange()">Filtrar</button>
 
-  <app-list-render
-    [listTitle]="'Pedidos'"
-    [backendRoute]="'/pedidos/resumo'"
-    [filter]="filter"
-  ></app-list-render>
+  <div class="content-fluid p-3 d-flex flex-column">
+    <app-list-render
+      [listTitle]="'Pedidos'"
+      [backendRoute]="'/pedidos/resumo'"
+      [filter]="filter"
+      (currentContents)="listContents = $event"
+    ></app-list-render>
+    <h1
+      class="align-self-center"
+      *ngIf="Object.entries(listContents).length === 0"
+    >
+      Não há pedidos nesse período!
+    </h1>
+  </div>
 </div>

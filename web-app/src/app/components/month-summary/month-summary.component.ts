@@ -6,7 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./month-summary.component.scss'],
 })
 export class MonthSummaryComponent {
+  Object = Object;
+
   filter: {} = {};
+  listContents = {};
 
   searchRange() {
     const startInput = document.querySelector(
