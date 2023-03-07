@@ -3,8 +3,8 @@ module.exports = () => {
 
   const controller = {
     listOrders: async (req: any, res: any) => {
+      /** Retorna todos os pedidos */
       try {
-        // Retorna todos os pedidos
         const pedidos = await Pedido.find({}, { _id: false });
         res.json(pedidos);
       } catch (err) {
@@ -13,30 +13,46 @@ module.exports = () => {
     },
 
     calcMonthRange: async (req: any, res: any) => {
+      /** Calcula o resumo mensal para o range de meses solicitado */
       try {
-        // Calcula o resumo mensal para o range de meses solicitado
         let filter: any = {};
+
         const stringCheck = JSON.stringify(req.query);
         if (
           stringCheck !== "{}" &&
           stringCheck !== JSON.stringify({ start: "", end: "" })
         ) {
-          filter.mes_ano = {};
+          filter.data_hora = {};
 
           if (req.query.start != "") {
-            console.log("start");
-            filter.mes_ano.$gte = req.query.start;
+            filter.data_hora.$gte = new Date(req.query.start);
           }
 
           if (req.query.end != "") {
-            console.log("end");
-            let end_ = new Date(req.query.end);
-            let end = new Date(end_.setMonth(end_.getMonth() + 1));
-            filter.mes_ano.$lte = end.toISOString();
+            let end = new Date(req.query.end);
+            end = new Date(end.setMonth(end.getMonth() + 1));
+            filter.data_hora.$lte = end;
           }
         }
 
-        const resultado = await Pedido.find(filter, { _id: false });
+        let resultado = await Pedido.aggregate([
+          { $match: filter },
+          {
+            $project: {
+              _id: false,
+              id_pedido: "$id_pedido",
+              id_produto: "$id_produto",
+              data_hora: {
+                $dateToString: {
+                  date: "$data_hora",
+                  timezone: "-03:00",
+                  format: "%d/%m/%Y %H:%M:%S"
+                }
+              }
+            }
+          }
+        ]);
+
         res.json(resultado);
       } catch (err) {
         res.status(500).send(err);

@@ -10,7 +10,7 @@
     <tbody>
       <tr *ngFor="let c of contents; index as i">
         <th scope="row">{{ i + 1 }}</th>
-        <td *ngFor="let item of c | keyvalue">{{ item.value }}</td>
+        <td *ngFor="let item of Object.values(c)">{{ item }}</td>
       </tr>
     </tbody>
   </table>

@@ -11,6 +11,8 @@ export class ListRenderComponent implements OnInit, OnChanges {
   @Input() backendRoute = '';
   @Input() filter: any = {};
 
+  Object: any = Object;
+
   contents: Object[] = [];
   labels: string[] = [];
 
@@ -21,7 +23,6 @@ export class ListRenderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(): void {
-    console.log(this.filter);
     this.getItems(this.filter);
   }
 
