@@ -6,19 +6,6 @@ let assert = chai.assert;
 
 defineSupportCode(function ({ Given, When, Then }) {
   Given(
-    /^eu estou logado como "(.*)" com login "(.*)" e senha "(.*)"$/,
-    function (nivelUsuario, login, senha) {
-      return;
-    }
-  );
-
-  Given(/^eu estou na página "(.*)"$/, async function (pagina) {
-    await browser.get("http://localhost:4200/");
-    await expect(browser.getTitle()).to.eventually.equal("E-commerCin");
-    await element(by.name((<string>pagina).toLowerCase().replaceAll(" ", "-"))).click();
-  });
-
-  Given(
     /^no período de "(\d{2}\/\d{4})" até "(\d{2}\/\d{4})" houveram "(\d+)" pedidos, de valor total igual a "R\$(\d+,\d{2})"$/,
     async function (dataInicio, dataFim, quantPedidos, valorTotal) {
       this.periodo = {
