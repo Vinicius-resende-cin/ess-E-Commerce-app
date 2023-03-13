@@ -20,7 +20,7 @@ export class ListRenderComponent implements OnInit, OnChanges {
   @Input() backendRoute = '';
   @Input() filter: any = {};
 
-  @Output() currentContents = new EventEmitter<Object>();
+  @Output() currentContents = new EventEmitter<any>();
 
   contents: Object[] = [];
   labels: string[] = [];

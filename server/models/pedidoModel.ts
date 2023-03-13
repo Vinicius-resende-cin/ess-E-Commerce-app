@@ -7,7 +7,8 @@ module.exports = () => {
   const pedidoSchema = new Schema({
     id_pedido: String,
     id_produto: String,
-    data_hora: Date
+    data_hora: Date,
+    valor: Number
   });
 
   // Define o modelo

@@ -48,7 +48,8 @@ module.exports = () => {
                   timezone: "-03:00",
                   format: "%d/%m/%Y %H:%M:%S"
                 }
-              }
+              },
+              valor: "$valor"
             }
           }
         ]);
