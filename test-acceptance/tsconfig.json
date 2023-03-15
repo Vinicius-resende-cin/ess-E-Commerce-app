@@ -9,7 +9,7 @@
     "removeComments": false,
     "noImplicitAny": false,
     "outDir": "typeScript",
-    "typeRoots": ["./node_modules/@types"],
+    "typeRoots": ["./node_modules/@types", "./node_modules/@cucumber"],
     "types": ["node", "cucumber"]
   },
   "exclude": ["node_modules", "typescript"]
