@@ -15,7 +15,7 @@ export let config: Config = {
   specs: ["../features/*.feature"],
 
   onPrepare: () => {
-    browser.waitForAngularEnabled(false);
+    browser.waitForAngularEnabled(true);
     browser.manage().window().maximize();
   },
   cucumberOpts: {
