@@ -14,6 +14,6 @@ defineSupportCode(function ({ Given, When, Then }) {
   Given(/^eu estou na página "(.*)"$/, async function (pagina) {
     await browser.get("http://localhost:4200/");
     await expect(browser.getTitle()).to.eventually.equal("E-commerCin");
-    await element(by.name(<string>pagina)).click();
+    await element(by.name((<string>pagina).toLowerCase().replaceAll(" ", "-"))).click();
   });
 });

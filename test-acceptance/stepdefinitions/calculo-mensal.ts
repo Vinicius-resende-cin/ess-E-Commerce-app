@@ -20,10 +20,6 @@ defineSupportCode(function ({ Given, When, Then }) {
   When(
     /^eu seleciono o período do cálculo de "(\d{2}\/\d{4})" até "(\d{2}\/\d{4})"$/,
     async function (dataInicio, dataFim) {
-      this.filtro = {
-        inicio: dataInicio,
-        fim: dataFim
-      };
       await $("input[name='data-inicio']").sendKeys(<string>dataInicio);
       await $("input[name='data-fim']").sendKeys(<string>dataFim);
       await element(by.name("filtrar")).click();
