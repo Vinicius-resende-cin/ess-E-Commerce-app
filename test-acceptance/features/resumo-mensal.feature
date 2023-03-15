@@ -23,12 +23,11 @@ Feature: Calcular Total de pedidos no Mês
   Scenario: Cálculo de todos os pedidos já feitos
     Given eu estou logado como "Usuário" com login "vrb" e senha "1234"
     And eu estou na página "Resumo mensal"
-    And eu fiz o meu primeiro pedido em "05/2022"
-    And no período de "05/2022" até "12/2022" houveram "32" pedidos, de valor total igual a "R$1472,00"
-    When eu solicito o cálculo para todo o período
-    Then eu posso ver o "quantidade total" dos pedidos igual a "32"
-    And eu posso ver o "valor total" dos pedidos igual a "R$1472,00"
-    And eu posso ver o "média do valor" dos pedidos igual a "R$46,00"
+    And no período de "05/2022" até "12/2022" houveram "5" pedidos, de valor total igual a "R$375,00"
+    When eu filtro os pedidos sem adicionar um período
+    Then eu posso ver o "quantidade total" dos pedidos igual a "5"
+    And eu posso ver o "valor total" dos pedidos igual a "R$375,00"
+    And eu posso ver o "média do valor" dos pedidos igual a "R$75,00"
     And eu posso ver a lista de pedidos do período
 
   Scenario: Filtrar apenas o valor total dos pedidos do período
