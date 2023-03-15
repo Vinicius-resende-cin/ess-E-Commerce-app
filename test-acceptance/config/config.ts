@@ -12,7 +12,7 @@ export let config: Config = {
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
 
-  specs: ["../features/*.feature"],
+  specs: ["../../features/*.feature"],
 
   onPrepare: () => {
     browser.waitForAngularEnabled(true);
@@ -22,6 +22,6 @@ export let config: Config = {
     compiler: "ts:ts-node/register",
     strict: true,
     format: ["pretty"],
-    require: ["../stepdefinitions/*.ts"]
+    require: ["../../stepdefinitions/*.ts"]
   }
 };
