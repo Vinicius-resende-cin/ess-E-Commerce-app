@@ -28,7 +28,8 @@ export class MonthSummaryComponent {
       });
       return sum;
     })();
-    this.media = this.valorTotal / this.quantPedidos;
+    this.media =
+      this.quantPedidos > 0 ? this.valorTotal / this.quantPedidos : 0;
   }
 
   searchRange() {
