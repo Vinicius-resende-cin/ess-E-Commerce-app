@@ -16,9 +16,9 @@ Feature: Calcular Total de pedidos no Mês
   Scenario: Tentativa de cálculo quando não há nenhum pedido no período
     Given eu estou logado como "Usuário" com login "vrb" e senha "1234"
     And eu estou na página "Resumo mensal"
-    And no período de "12/2022" até "12/2022" houveram "0" pedidos, de valor total igual a "R$0,00"
-    When eu seleciono o período do cálculo de "12/2022" até "12/2022"
-    Then eu vejo uma mensagem de "falha por falta de pedidos"
+    And no período de "01/2022" até "01/2022" houveram "0" pedidos, de valor total igual a "R$0,00"
+    When eu seleciono o período do cálculo de "01/2022" até "01/2022"
+    Then eu vejo uma mensagem do tipo "falha" por conta de "Não há pedidos no período!"
 
   Scenario: Cálculo de todos os pedidos já feitos
     Given eu estou logado como "Usuário" com login "vrb" e senha "1234"

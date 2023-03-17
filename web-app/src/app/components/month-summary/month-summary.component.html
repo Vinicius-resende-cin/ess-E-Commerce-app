@@ -24,10 +24,11 @@
         (currentContents)="updateMetrics($event)"
       ></app-list-render>
       <h1
+        name="falha"
         class="align-self-center"
         *ngIf="Object.entries(listContents).length === 0"
       >
-        Não há pedidos nesse período!
+        Não há pedidos no período!
       </h1>
     </div>
     <div
