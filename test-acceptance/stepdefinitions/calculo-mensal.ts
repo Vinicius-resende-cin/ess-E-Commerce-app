@@ -83,9 +83,27 @@ defineSupportCode(function ({ Given, When, Then }) {
     await element(by.name("filtrar")).click();
   });
 
+  When(/^eu seleciono por "(.*)" dos pedidos$/, async function (propriedade) {
+    let checkBtn = element(
+      by.name((<string>propriedade).toLowerCase().replaceAll(" ", "-") + "-check")
+    );
+
+    if (!(await checkBtn.isSelected())) {
+      await checkBtn.click();
+    }
+
+    await expect(checkBtn.isSelected()).to.eventually.be.true;
+  });
+
   Then(
     /^eu posso ver o "(.*)" dos pedidos igual a "(.*)"$/,
     async function (propriedade, valor) {
+      await expect(
+        element(
+          by.name((<string>propriedade).toLowerCase().replaceAll(" ", "-"))
+        ).isPresent()
+      ).to.eventually.be.true;
+
       await assert.eventually.equal(
         element(by.name((<string>propriedade).toLowerCase().replaceAll(" ", "-")))
           .getText()
@@ -97,6 +115,24 @@ defineSupportCode(function ({ Given, When, Then }) {
       );
     }
   );
+
+  Then(/^eu não posso ver o "(.*)" dos pedidos$/, async function (propriedade) {
+    let checkBtn = element(
+      by.name((<string>propriedade).toLowerCase().replaceAll(" ", "-") + "-check")
+    );
+
+    if (await checkBtn.isSelected()) {
+      await checkBtn.click();
+    }
+
+    await expect(checkBtn.isSelected()).to.eventually.be.false;
+
+    await expect(
+      element(
+        by.name((<string>propriedade).toLowerCase().replaceAll(" ", "-"))
+      ).isPresent()
+    ).to.eventually.be.false;
+  });
 
   Then(/^eu posso ver a lista de pedidos do período$/, async function () {
     let listaPedidos: ElementArrayFinder = $$("tr");
