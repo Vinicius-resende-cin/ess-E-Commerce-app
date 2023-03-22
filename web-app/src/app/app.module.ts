@@ -12,6 +12,7 @@ import { MonthSummaryComponent } from './components/month-summary/month-summary.
 import { MainPageComponent } from './components/main-page/main-page.component';
 
 import ptBr from '@angular/common/locales/pt';
+import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -20,6 +21,7 @@ registerLocaleData(ptBr);
     ListRenderComponent,
     MonthSummaryComponent,
     MainPageComponent,
+    CadastroUserComponent,
   ],
   imports: [
     BrowserModule,

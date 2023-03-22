@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anek+Devanagari:wght@300&display=swap" rel="stylesheet">
+  
+  <title>Document</title>
+</head>
+<body>
+
+  
+
+  <div class="container-flex d-flex bg-white p-5">
+    <div class=" p-5 rounded w-100">
+      <div>
+        <h3 class="text-start text-blue">Dados Pessoais:</h3>
+
+        <label class="mt-4 input-group text-sub">Nome Completo</label>
+        <input [(ngModel)]="user.nomeCompleto" class="input-group-text d-block w-100 text-start form-control-lg mt-1 container-flex d-flex " type="text">
+
+        <label class="mt-4 text-sub input-group">Celular com DDD</label>
+        <input [(ngModel)]="user.celular" class="input-group-text w-100 text-start form-control-lg mt-1 d-flex " type="text">
+
+        <label class="mt-4 text-sub input-group">Data de Nascimento</label>
+        <input [(ngModel)]="user.dataNasci" class="input-group-text w-100 text-start form-control-lg mt-1 d-flex " type="date">
+      </div>
+
+      <div>
+        <h3 class="text-start text-blue mt-5">Dados de Acesso:</h3>
+
+        <label class="mt-4 text-sub input-group">E-mail</label>
+        <input [(ngModel)]="user.email" class="input-group-text w-100 text-start form-control-lg mt-1" type="email">
+
+        <label class="mt-4 text-sub input-group">Confirmação do E-mail</label>
+        <input [(ngModel)]="user.emailC" class="input-group-text w-100 text-start form-control-lg mt-1" type="email">
+
+        <label class="mt-4 text-sub input-group">Senha</label>
+        <input [(ngModel)]="user.senha" (keyup)="verificaSenha()" class="input-group-text w-100 text-start form-control-lg mt-1" type="password">
+
+        <label class="mt-4 text-sub input-group">Confirmação Senha</label> 
+        <input [(ngModel)]="user.senhaC" (keyup)="verificaSenha()" class="input-group-text w-100 text-start form-control-lg mt-1" type="password">
+      </div>
+
+        <p class="mt-2" *ngIf="passwordSize"> Senha com menos de 8 dígitos</p>
+        <p class="mt-2" *ngIf="passwordDiff"> Senhas não coincidem</p>
+      <div>
+        <h3 class="text-start text-blue mt-5">Dados de Entrega:</h3>
+
+        <label class="mt-4 text-sub input-group">Endereço</label>
+        <input [(ngModel)]="user.endereco"  class="input-group-text w-100 text-start form-control-lg mt-1" type="text">
+
+        <label class="mt-4 text-sub input-group">Complemento</label>
+        <input [(ngModel)]="user.complemento" class="input-group-text w-100 text-start form-control-lg mt-1" type="text">
+
+        <label class="mt-4 text-sub input-group">CEP</label>
+        <input [(ngModel)]="user.cep" class="input-group-text w-100 text-start form-control-lg mt-1" type="text">
+        
+        <div class="row justify-content-start mt-4">
+          <div class="col">
+            <label class="mt-1 text-sub input-group">Estado</label> 
+            <select [(ngModel)]="user.estado" class="input-group-text text-center mt-2 W-100" aria-label="Default select example">
+              <option selected>Estado</option>
+              <option value="PE">PE</option>
+              <option value="RJ">RJ</option>
+              <option value="SP">SP</option>
+            </select>
+          </div>
+          
+          <div class="col">
+            <label class="mt-1 text-sub input-group">Cidade</label> 
+            <select [(ngModel)]="user.cidade" class="input-group-text text-center mt-2 W-100 ">
+              <option selected>Cidade</option>
+              <option value="Caruaru">Caruaru</option>
+              <option value="Recife">Recife</option>
+              <option value="Olinda">Olinda</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button (click)="criaUser()" [disabled]="(passwordSize && passwordDiff)" type="button" class="btn btn-lg btn-dark-pj mt-5 d-flex ms-auto text-center w-25 d-flex justify-content-center">Finalizar Cadastro</button>
+    </div>
+
+  </div>
+</body>
+</html>
