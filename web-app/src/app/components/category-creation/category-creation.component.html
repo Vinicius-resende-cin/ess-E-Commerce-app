@@ -1,4 +1,5 @@
-<html (mousemove)="onMove()">
+<!-- html (mousemove)="onMove()" -->
+<html>
 
 <table>
 <tr>
@@ -11,11 +12,8 @@
 </tr>
 <tr>
    <td><button (click)="createCategoria(categoria)">Adicionar</button></td>
-   <td *ngIf="categoriaDuplicada">
-    ERRO, JÁ EXISTE ESSA CATEGORIA NO SISTEMA!!!
-   </td>
-   <td *ngIf="nomeInvalido">
-      ERRO, UMA CATEGORIA PRECISA DE UM NOME!!!
+   <td>
+      <app-alert [message]="alertMessage" *ngIf="categoriaDuplicada || nomeInvalido"></app-alert>
    </td>
 </tr>
 </table>

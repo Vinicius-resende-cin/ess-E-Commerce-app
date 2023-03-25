@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 })
 //export class CategoryCreationComponent implements OnInit {
 export class CategoryCreationComponent{
+  //constructor(private categoryService: CategoryService) {}
+
   categoria: Categoria = {
     nome_categoria: "",
     descricao_categoria: ""
@@ -18,8 +20,7 @@ export class CategoryCreationComponent{
   categorias: Categoria[] = [];
   categoriaDuplicada: boolean = false;
   nomeInvalido: boolean = false;
-
-  //constructor(private categoryService: CategoryService) {}
+  alertMessage: string = "";
 
   /*createCategoria(categoria: Categoria): void {
     this.categoryService.createCategory(categoria)
@@ -44,10 +45,12 @@ export class CategoryCreationComponent{
         this.clear_categoria();
       }
       else {
+        this.alertMessage = "ERRO, NOME NECESSÁRIO!!!";
         this.nomeInvalido = true;
       }
     }
     else {
+      this.alertMessage = "ERRO, CATEGORIA JÁ EXISTE!!!";
       this.categoriaDuplicada = true;
     }
   }
@@ -60,10 +63,9 @@ export class CategoryCreationComponent{
            );
   }*/
 
-  onMove(): void {
-    this.categoriaDuplicada = false;
-    this.nomeInvalido = false;
-  }
+  /*onMove(): void {
+    this.clearErros();
+  }*/
 
   clear_categoria(): void {
    this.categoria.nome_categoria = "";
@@ -72,5 +74,10 @@ export class CategoryCreationComponent{
 
   cloneCategoria(categoria: Categoria): Categoria {
     return Object.assign({}, categoria);
+  }
+
+  clearErros(): void {
+    this.categoriaDuplicada = false;
+    this.nomeInvalido = false;
   }
 }

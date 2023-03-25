@@ -11,6 +11,7 @@ import { ListRenderComponent } from './components/list-render/list-render.compon
 import { MonthSummaryComponent } from './components/month-summary/month-summary.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { CategoryCreationComponent } from './components/category-creation/category-creation.component';
+import { AlertComponent } from './components/alert/alert.component';
 
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
@@ -22,6 +23,7 @@ registerLocaleData(ptBr);
     MonthSummaryComponent,
     CategoryCreationComponent,
     MainPageComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
