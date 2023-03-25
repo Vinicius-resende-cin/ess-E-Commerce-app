@@ -4,3 +4,8 @@ export type Pedido = {
   data_hora: Date;
   valor: number;
 };
+
+export type Categoria = {
+  nome_categoria: String;
+  descricao_categoria: String;
+};

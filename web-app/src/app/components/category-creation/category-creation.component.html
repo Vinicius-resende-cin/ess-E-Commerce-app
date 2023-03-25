@@ -1,0 +1,34 @@
+<html (mousemove)="onMove()">
+
+<table>
+<tr>
+   <td><label>Nome </label></td>
+   <td><input [(ngModel)]="categoria.nome_categoria" name="namebox"></td>
+</tr>
+<tr>
+   <td><label>Descrição </label></td>
+   <td><input [(ngModel)]="categoria.descricao_categoria" name="descbox"></td>
+</tr>
+<tr>
+   <td><button (click)="createCategoria(categoria)">Adicionar</button></td>
+   <td *ngIf="categoriaDuplicada">
+    ERRO, JÁ EXISTE ESSA CATEGORIA NO SISTEMA!!!
+   </td>
+   <td *ngIf="nomeInvalido">
+      ERRO, UMA CATEGORIA PRECISA DE UM NOME!!!
+   </td>
+</tr>
+</table>
+
+<table>
+<tr *ngIf="categorias.length > 0">
+   <th>Nome</th>
+   <th>Descrição</th>
+</tr>
+<tr *ngFor="let catg of categorias" name="categorialist">
+   <td name="categorialist">{{catg.nome_categoria}}</td>
+   <td name="categorialist">{{catg.descricao_categoria}}</td>
+</tr>
+</table>
+
+</html>
