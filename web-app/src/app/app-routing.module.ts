@@ -5,6 +5,7 @@ import { MonthSummaryComponent } from './components/month-summary/month-summary.
 import { LoginComponent } from './components/login/login.component';
 import { RecoverPassword } from './components/recover-password/recover-password.component';
 import { ResetPassword } from './components/reset-password/reset-password.component';
+import { CategoryCreationComponent } from './components/category-creation/category-creation.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'recuperar-senha', component: RecoverPassword },
   { path: 'redefinir-senha', component: ResetPassword },
+  { path: 'categoria', component: CategoryCreationComponent },
 ];
 
 @NgModule({
