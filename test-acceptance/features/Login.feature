@@ -35,18 +35,20 @@ Scenario: Login com senha errada
 	And Eu continuo na página de login
 	And Não sou logado no sistema
 	
-Scenario: Recuperar senha
+Scenario: Solicitação de recuperação de senha
 	Given Eu estou na página de "Recuperar Senha"
 	And O email "jvs2@cin.ufpe.br" já foi cadastrado com a senha "qwe12345678"
 	When Eu insiro meu endereço de e-mail "jvs2@cin.ufpe.br" em "Email"
 	And Clico em "Enviar"
 	Then Eu recebo um e-mail com instruções para recuperar minha senha
-	And Eu sigo as instruções do e-mail e vou para a página de "Redefinição de senha"
+
+Scenario: 
+	Given Eu estou na página de "Redefinição de Senha"
 	And Insiro a senha "qwer87654321" em "Nova Senha" e "Repetir Senha"
 	And Clico em "Confirmar"
 	Then Eu recebo uma mensagem de sucesso informando que minha senha foi atualizada
 	And Eu recebo um email avisando que minha senha foi alterada
-	And Eu posso usar a senha "qwer87654321" para acessar minha conta
+	And Minha senha foi alterada para "qwer87654321"
 
 Scenario: Número de tentativas de login excedidas
 	Given Eu já tentei logar com dados errados 4 vezes

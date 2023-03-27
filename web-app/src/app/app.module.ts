@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { ListRenderComponent } from './components/list-render/list-render.component';
 import { MonthSummaryComponent } from './components/month-summary/month-summary.component';
+import { LoginComponent } from './components/login/login.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 
 import ptBr from '@angular/common/locales/pt';
@@ -19,6 +20,7 @@ registerLocaleData(ptBr);
     AppComponent,
     ListRenderComponent,
     MonthSummaryComponent,
+    LoginComponent,
     MainPageComponent,
   ],
   imports: [

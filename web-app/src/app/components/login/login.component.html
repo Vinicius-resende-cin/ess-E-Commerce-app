@@ -1,0 +1,35 @@
+<div class="content-fluid p-3">
+    <div class="w-50 m-auto">
+        <div class="form-group m-2">
+            <div class="w-25 d-inline-block">
+                <label for="input-email">Email</label>
+            </div>
+            <input name="input-email" id="input-email"
+                type="email" placeholder="Insira seu email"
+                class="form-control d-inline-block w-75">
+        </div>
+
+        <div class="form-group m-2">
+            <div class="w-25 d-inline-block">
+                <label for="input-password">Senha</label>
+            </div>
+            <input name="input-senha" id="input-password"        
+                type="password" placeholder="Insira sua senha"
+                class="form-control d-inline-block w-75" (input)="enableButton()">
+
+                <span class="w-100 d-inline-block d-none" id="failed-message">Email não registrado</span>
+
+                <a class="ml-100 w-auto d-inline-block" href="./recuperar-senha">Esqueci minha senha</a>
+
+                <button id="toggle-password" name="mostrar-senha" class="btn btn-small" (click)="togglePassword()">
+                    Mostrar senha
+                </button>
+        </div>
+        <div class="text-center m-auto w-25">
+            <button id="login-button" name="login" class="btn btn-primary m-2" (click)="login()">
+                Entrar
+            </button>
+        </div>
+    </div>
+</div>
+  
