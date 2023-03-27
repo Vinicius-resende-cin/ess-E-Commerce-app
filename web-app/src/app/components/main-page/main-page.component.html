@@ -1,4 +1,9 @@
-<p>main-page works!</p>
-<button name="logout" class="btn btn-primary m-2" (click)="logout()">
+<div class="d-flex flex-column">
+  <div class="nav-bar">
+    <a name="resumo-mensal" [routerLink]="['resumo-mensal']">Resumo Mensal</a>
+  </div>
+  <button name="logout" class="btn btn-primary m-2" (click)="logout()">
     Logout
-</button>
+  </button>
+</div>
+<router-outlet></router-outlet>
