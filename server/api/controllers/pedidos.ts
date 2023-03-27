@@ -15,28 +15,31 @@ module.exports = () => {
     calcMonthRange: async (req: any, res: any) => {
       /** Calcula o resumo mensal para o range de meses solicitado */
       try {
-        let filter: any = {};
+        let filter: any = {
+          data_hora: {
+            gte: new Date(0),
+            lt: new Date()
+          }
+        };
 
         const stringCheck = JSON.stringify(req.query);
         if (
           stringCheck !== "{}" &&
           stringCheck !== JSON.stringify({ start: "", end: "" })
         ) {
-          filter.data_hora = {};
-
           if (req.query.start != "") {
-            filter.data_hora.$gte = new Date(req.query.start);
+            filter.data_hora.gte = new Date(req.query.start);
           }
 
           if (req.query.end != "") {
             let end = new Date(req.query.end);
             end = new Date(end.setMonth(end.getMonth() + 1));
-            filter.data_hora.$lt = end;
+            filter.data_hora.lt = end;
           }
         }
 
         let resultado = await Pedido.aggregate([
-          { $match: filter },
+          { $match: {data_hora: {$gte: filter.data_hora.gte, $lt: filter.data_hora.lt} } },
           {
             $project: {
               _id: false,
@@ -49,10 +52,16 @@ module.exports = () => {
                   format: "%d/%m/%Y %H:%M:%S"
                 }
               },
-              valor: "$valor"
+              valor: "$valor",
+              quantidade: "$quantidade",
+              status: "$status"
             }
           }
         ]);
+
+        console.log(filter);
+        console.log(resultado);
+        console.log("\n");
 
         res.json(resultado);
       } catch (err) {
