@@ -15,6 +15,7 @@ import { CategoryCreationComponent } from './components/category-creation/catego
 import { AlertComponent } from './components/alert/alert.component';
 
 import ptBr from '@angular/common/locales/pt';
+import { GeneralMainPageComponent } from './components/general-main-page/general-main-page.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -26,6 +27,7 @@ registerLocaleData(ptBr);
     CategoryCreationComponent,
     MainPageComponent,
     AlertComponent,
+    GeneralMainPageComponent,
   ],
   imports: [
     BrowserModule,

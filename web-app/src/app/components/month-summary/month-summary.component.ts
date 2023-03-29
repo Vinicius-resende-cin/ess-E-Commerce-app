@@ -18,6 +18,10 @@ export class MonthSummaryComponent {
   valorTotal = 0;
   media = 0;
 
+  quantCheck = true;
+  valCheck = true;
+  medCheck = true;
+
   updateMetrics(newContents: Pedido[]) {
     this.listContents = newContents;
     this.quantPedidos = this.listContents.length;

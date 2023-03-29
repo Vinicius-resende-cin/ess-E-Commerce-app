@@ -1,19 +1,62 @@
 <div class="content-fluid p-3">
-  <input
-    name="data-inicio"
-    class="form-control w-25"
-    type="month"
-    id="start-month"
-  />
-  <input
-    name="data-fim"
-    class="form-control w-25"
-    type="month"
-    id="end-month"
-  />
-  <button name="filtrar" class="btn btn-primary" (click)="searchRange()">
-    Filtrar
-  </button>
+  <form class="content-fluid">
+    <input
+      name="data-inicio"
+      class="form-control w-50"
+      type="month"
+      id="start-month"
+    />
+    <input
+      name="data-fim"
+      class="form-control w-50"
+      type="month"
+      id="end-month"
+    />
+    <div class="w-50 d-flex align-items-center">
+      <div class="btn-group form-check d-flex justify-content-around flex-fill">
+        <span>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="quantCheck"
+            (change)="quantCheck = !quantCheck"
+            name="quantidade-total-check"
+            id="quant-check"
+          />
+          <label class="form-check-label" for="quant-check"> Quantidade </label>
+        </span>
+        <span>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="valCheck"
+            (change)="valCheck = !valCheck"
+            name="valor-total-check"
+            id="val-check"
+          />
+          <label class="form-check-label" for="val-check"> Valor Total </label>
+        </span>
+        <span>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            [checked]="medCheck"
+            (change)="medCheck = !medCheck"
+            name="média-do-valor-check"
+            id="med-check"
+          />
+          <label class="form-check-label" for="med-check"> Valor Médio </label>
+        </span>
+      </div>
+      <button
+        name="filtrar"
+        class="btn btn-primary align-self-end"
+        (click)="searchRange()"
+      >
+        Filtrar
+      </button>
+    </div>
+  </form>
 
   <div class="content-fluid p-3 d-flex">
     <div class="d-flex flex-column">
@@ -31,21 +74,25 @@
         Não há pedidos no período!
       </h1>
     </div>
-    <div
-      class="p-3 d-flex flex-column align-items-center justify-content-between"
-    >
-      <label for="quant">Quantidade de Pedidos</label>
-      <h2 name="quantidade-total" id="quant">
-        {{ quantPedidos | number : "1.0-2" }}
-      </h2>
-      <label for="val">Valor Total</label>
-      <h2 name="valor-total" id="val">
-        {{ valorTotal | currency : "BRL" : "symbol" : "1.2-2" }}
-      </h2>
-      <label for="med">Valor Médio</label>
-      <h2 name="média-do-valor" id="med">
-        {{ media | currency : "BRL" : "symbol" : "1.2-2" }}
-      </h2>
+    <div class="p-3 d-flex flex-column justify-content-around">
+      <span *ngIf="quantCheck" class="d-flex flex-column align-items-center">
+        <label for="quant">Quantidade de Pedidos</label>
+        <h2 name="quantidade-total" id="quant">
+          {{ quantPedidos | number : "1.0-2" }}
+        </h2>
+      </span>
+      <span *ngIf="valCheck" class="d-flex flex-column align-items-center">
+        <label for="val">Valor Total</label>
+        <h2 name="valor-total" id="val">
+          {{ valorTotal | currency : "BRL" : "symbol" : "1.2-2" }}
+        </h2>
+      </span>
+      <span *ngIf="medCheck" class="d-flex flex-column align-items-center">
+        <label for="med">Valor Médio</label>
+        <h2 name="média-do-valor" id="med">
+          {{ media | currency : "BRL" : "symbol" : "1.2-2" }}
+        </h2>
+      </span>
     </div>
   </div>
 </div>
