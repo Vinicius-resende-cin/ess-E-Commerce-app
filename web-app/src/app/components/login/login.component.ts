@@ -9,10 +9,6 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent {
   constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {
-    this.checkSession();
-  }
-
   enableButton() {
     const loginButton = document.getElementById(
       'login-button'
@@ -88,15 +84,6 @@ export class LoginComponent {
     this.authService.logout().subscribe((resp: any) => {
       if (resp.success) {
         window.location.href = 'http://localhost:4200/login';
-      }
-    });
-  }
-
-  checkSession() {
-    //**Checa se o usuario ja esta logado*/
-    this.authService.checkSession().subscribe((resp: any) => {
-      if (resp.loggedIn) {
-        window.location.href = 'http://localhost:4200/home';
       }
     });
   }

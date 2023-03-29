@@ -5,9 +5,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RecoverPassword } from './components/recover-password/recover-password.component';
 import { ResetPassword } from './components/reset-password/reset-password.component';
 import { CategoryCreationComponent } from './components/category-creation/category-creation.component';
+import { authGuardLogin, authGuardMain } from './common/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: GeneralMainPageComponent },
+  { path: '', component: GeneralMainPageComponent, canActivate: [authGuardMain] },
   {
     path: 'home',
     loadChildren: () =>
@@ -15,7 +16,7 @@ const routes: Routes = [
         (m) => m.MainPageRoutingModule
       ),
   },
-  { path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent, canActivate: [authGuardLogin] },
   { path: 'recuperar-senha', component: RecoverPassword },
   { path: 'redefinir-senha', component: ResetPassword },
   { path: 'categoria', component: CategoryCreationComponent },
