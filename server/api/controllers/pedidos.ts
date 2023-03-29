@@ -59,10 +59,6 @@ module.exports = () => {
           }
         ]);
 
-        console.log(filter);
-        console.log(resultado);
-        console.log("\n");
-
         res.json(resultado);
       } catch (err) {
         res.status(500).send(err);
