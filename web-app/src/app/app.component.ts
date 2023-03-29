@@ -8,4 +8,8 @@ import * as Names from './common/global-names';
 })
 export class AppComponent {
   title = Names.appTitle;
+
+  goHome() {
+    window.location.href = 'http://localhost:4200/';
+  }
 }
