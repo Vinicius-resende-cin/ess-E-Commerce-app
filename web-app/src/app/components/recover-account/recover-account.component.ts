@@ -3,8 +3,8 @@ import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-login',
-    templateUrl: './recover-password.component.html',
-    styleUrls: ['./recover-password.component.scss'],
+    templateUrl: './recover-account.component.html',
+    styleUrls: ['./recover-account.component.scss'],
 })
 
 export class RecoverPassword {
@@ -18,20 +18,33 @@ export class RecoverPassword {
         const emailInput = document.getElementById(
             'input-email'
         )! as HTMLInputElement;
+
+        const failedSpan = document.getElementById(
+            'failed-message'
+          )! as HTMLSpanElement;
         
         const reqEmail = emailInput.value;
+        
+        if(reqEmail=="")
+            return;
+
+        failedSpan.classList.add('d-none');
+
         this.authService
         .requestReset(reqEmail)
         .subscribe((resp: any) => {
             console.log(resp);
             if(resp.success){
-                alert('O link de recuperação enviado ao seu email e expira em 10 minutos');
+                failedSpan.classList.remove('d-none');
+                failedSpan.textContent = 'Link de recuperação enviado ao seu email';
             }
             else if(resp.triesExceeded){
-                alert('Limites de tentativas alcançado, tenta mais tarde');
+                failedSpan.classList.remove('d-none');
+                failedSpan.textContent = 'Limites de tentativas excedido. Tente mais tarde';
             }
             else if(!resp.registered){
-                alert('Email não cadastrado');
+                failedSpan.classList.remove('d-none');
+                failedSpan.textContent = 'Email não cadastrado';
             }
         });
     }

@@ -36,13 +36,14 @@
                     <button class="svg-button" (click)="togglePassword()">
                         <img id = "password-eye" src="\assets\images\eye.svg" alt="">
                     </button>
-                  </div>
+                </div>
                 
+                <span class="failed-message w-75 d-inline-block d-none" id="failed-message">Email não registrado</span>
 
-                    <span class="failed-message w-75 d-inline-block d-none" id="failed-message">Email não registrado</span>
+                <a class="link d-inline-block text-end" href="./recuperar-conta">Esqueci minha senha</a>
 
-                    <a class="link d-inline-block text-end" href="./recuperar-senha">Esqueci minha senha</a>
             </div>
+
             <div class="text-center m-auto w-50">
                 <button id="login-button" name="login" class="btn btn-primary m-2 w-75" (click)="login()">
                     Entrar
