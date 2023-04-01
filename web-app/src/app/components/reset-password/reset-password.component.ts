@@ -24,23 +24,30 @@ export class ResetPassword {
 
     togglePassword(event: MouseEvent){
         /**Alterna entre mostrar e ocultar a senha */
-        const togglePasswordBtn = event.target as HTMLButtonElement;
+        const passwordEye = event.target as HTMLImageElement;
+
+        const togglePasswordBtn = passwordEye.parentElement as HTMLButtonElement;
 
         var passwordInput;
-        if(togglePasswordBtn.parentElement!=null){
-            passwordInput = togglePasswordBtn.parentElement.getElementsByTagName("input")[0] as HTMLInputElement;
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                togglePasswordBtn.textContent = "Esconder Senha";
-            } else {
-                passwordInput.type = "password";
-                togglePasswordBtn.textContent = "Mostrar Senha";
-            }
+        passwordInput = togglePasswordBtn.parentElement!
+        .getElementsByTagName("input")[0] as HTMLInputElement;
+    
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordEye.src = '/assets/images/eye-off.svg';
+        } else {
+            passwordInput.type = 'password';
+            passwordEye.src = '/assets/images/eye.svg';
+            
         }
     }
 
     resetPassword(){
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{10,})/;
+        const lengthRegex = /^.{10,}$/;
+        const letterRegex = /[a-zA-Z]/;
+        const specialCharRegex = /[\W_]/;
+
         /**Altera a senha do usuario*/
         const resetButton = document.getElementById(
             'reset-button'
@@ -57,7 +64,8 @@ export class ResetPassword {
         const failedSpan = document.getElementById(
             'failed-message'
         )! as HTMLInputElement;
-
+        
+        //esconde a mensagem de erro
         failedSpan.classList.add("d-none");
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -66,10 +74,29 @@ export class ResetPassword {
         const password = passwordInput.value;
         const passwordRepeat = passwordRepeatInput.value;
 
+        //compara as senhas
         if(password != passwordRepeat){
-            failedSpan.textContent = 'As senhas não são iguais';
+            failedSpan.textContent='As senhas não são iguais';
             failedSpan.classList.remove("d-none");
 
+            return;
+        }
+
+        //checa se a senha atende as regras
+        if(!passwordRegex.test(password)){
+            if (!specialCharRegex.test(password)) {
+                failedSpan.textContent='A senha precisa ter pelo menos um caractere especial';
+            }
+            
+            if (!letterRegex.test(password)) {
+                failedSpan.textContent='A senha precisa ter pelo menos uma letra';
+            }
+            
+            if (!lengthRegex.test(password)) {
+                failedSpan.textContent='A senha precisa ter pelo menos 10 caracteres';
+            }
+
+            failedSpan.classList.remove("d-none");
             return;
         }
 
@@ -77,25 +104,38 @@ export class ResetPassword {
             this.authService
             .changePassword(password, token)
             .subscribe((resp: any) => {
-                console.log(resp);
                 if(resp.success){
-                    alert('Senha alterada com sucesso');
-                    window.location.href = 'http://localhost:4200/';
+                    failedSpan.textContent='Senha alterada com sucesso';
+                    failedSpan.classList.remove("d-none");
+                    resetButton.disabled = true;
+                    
+                    setTimeout(function(){
+                        window.location.href = '/login';
+                    }, 3000); //3 segundos
                 }
                 else if(resp.triesExceeded){
-                    alert('Número de tentativas excedido, tente mais tarde');
+                    failedSpan.textContent='Número de tentativas excedido. Tente mais tarde';
+                    failedSpan.classList.remove("d-none");
                 }
                 else if(!resp.validToken){
-                    alert('Link expirado');
-                    window.location.href = 'http://localhost:4200/';
+                    failedSpan.textContent='Link expirado';
+                    failedSpan.classList.remove("d-none");
+                    resetButton.disabled = true;
+
+                    setTimeout(function(){
+                        window.location.href = '/';
+                    }, 3000); //3 segundos
+                    
                 }
                 else{
-                    alert('Algum erro ocorreu');
+                    failedSpan.textContent='Algo de errado ocorreu';
+                    failedSpan.classList.remove("d-none");
                 }
             });
         }
         catch{
-            console.log('uhh');
+            failedSpan.textContent='Algo de errado ocorreu';
+            failedSpan.classList.remove("d-none");
         }
     }
 
@@ -107,7 +147,6 @@ export class ResetPassword {
             if(resp.loggedIn){
                 window.location.href = 'http://localhost:4200/';
             }
-        
         });
     }
 }

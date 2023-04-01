@@ -66,20 +66,33 @@ module.exports = () => {
       },
 
       changePassword: async (req: any, res: any) => {
-        /** */
+        /**Altera a senha de um usuário se o token for válido*/
         try {
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{10,})/;
+
             const decoded = jwt.verify(req.body.token, token_sk);
             const email = decoded.email;
-            
-            const hash = new Sha256();
-            hash.update(req.body.password);
-            const hashPass = await hash.digest();
-            
-            Cadastro.updateOne({email: email}, { $set: { hash_senha: hashPass}}).exec();
-            
-            res.status(200).json({
-                success: true,
-            });
+            const password = req.body.password;
+
+            //testa se é uma senha válida
+            if(passwordRegex.test(password)){
+                const hash = new Sha256();
+                hash.update(password);
+                const hashPass = await hash.digest();
+                
+                Cadastro.updateOne({email: email}, { $set: { hash_senha: hashPass}}).exec();
+                
+                res.status(200).json({
+                    success: true,
+                });
+            }
+            else{
+                res.status(200).json({
+                    success: false,
+                    validPassword: false
+                });
+            }
+
         } catch (err) {
             if (err.name = 'JsonWebTokenError') {
                 res.status(200).json({
