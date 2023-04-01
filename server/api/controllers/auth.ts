@@ -14,8 +14,7 @@ module.exports = () => {
             success: false,
             registered: true,
             wasLogged: true,
-            triesExceeded: true,
-            message: 'Você já estava logado'
+            triesExceeded: true
           });
         }
         else{
@@ -28,7 +27,6 @@ module.exports = () => {
                   registered: false,
                   wasLogged: false,
                   triesExceeded: false,
-                  message: 'Email não registrado'
               });
           }
           //se esta no BD
@@ -53,7 +51,6 @@ module.exports = () => {
                 registered: true,
                 wasLogged: false,
                 triesExceeded: false,
-                message: 'Login feito',
               });
             }
             //se esta no BD mas senha esta errada
@@ -63,7 +60,6 @@ module.exports = () => {
                   registered: true,
                   wasLogged: false,
                   triesExceeded: false,
-                  message: 'Senha ou email inválidos'
               });
             }
           }
@@ -81,7 +77,6 @@ module.exports = () => {
           req.session.destroy();
           res.status(200).json({
             success: true,
-            message: 'Deslogando'
           });
         }
       }

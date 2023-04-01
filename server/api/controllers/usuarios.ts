@@ -43,15 +43,15 @@ module.exports = () => {
                 let message = {
                     from: senderEmail,
                     to: reqEmail,
-                    subject: 'Email de Recuperação',
-                    text: 'Acesse esse link dentro de 10 minutos para recuperar sua senha: '+ resetUrl
+                    subject: 'Redefinição de senha da conta Commercin',
+                    text: 'Uma requisição de redefinição de sua senha da conta Commercin foit feita.\n\n' +
+                    'Caso não tenha requisitado a redefinição de sua senha ignore este email.\n\n' +
+                    'Acesse o link abaixo dentro de 10 minutos para redefinir sua senha:\n\n' + resetUrl
                 };
                 
                 transporter.sendMail(message, (err: any, info: any) => {
                 if (err) {
                     console.error(err);
-                } else {
-                    console.log('Email sent: ' + info.response);
                 }
                 });
 

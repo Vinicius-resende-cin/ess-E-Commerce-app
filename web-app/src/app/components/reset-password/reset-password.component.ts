@@ -4,10 +4,26 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
     selector: 'app-login',
     templateUrl: './reset-password.component.html',
-    styleUrls: ['./reset-password.component.scss'],
+    styleUrls: ['../../common/login.scss'],
 })
 
 export class ResetPassword {
+    Messages = {
+        CHANGE_SUCCESS: 'Senha alterada com sucesso',
+        DIFF_PASSWORDS: 'As senhas não são iguais',
+        NO_SPECIAL: 'A senha precisa ter pelo menos um caractere especial',
+        NO_LETTERS: 'A senha precisa ter pelo menos uma letra',
+        NOT_ENOUGH_CHARS: 'A senha precisa ter pelo menos 10 caracteres',
+        TOO_MANY_TRIES: 'Número de tentativas excedido. Tente mais tarde',
+        EXPIRED_LINK: 'Link expirado',
+        UNKNOWN_ERROR: 'Algo de errado ocorreu'
+    };
+
+    Images = {
+        EYE_OFF: '/assets/images/eye-off.svg',
+        EYE_ON: '/assets/images/eye.svg'
+    };
+    
     constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
@@ -34,10 +50,10 @@ export class ResetPassword {
     
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
-            passwordEye.src = '/assets/images/eye-off.svg';
+            passwordEye.src = this.Images.EYE_OFF;
         } else {
             passwordInput.type = 'password';
-            passwordEye.src = '/assets/images/eye.svg';
+            passwordEye.src = this.Images.EYE_ON;
             
         }
     }
@@ -76,7 +92,7 @@ export class ResetPassword {
 
         //compara as senhas
         if(password != passwordRepeat){
-            failedSpan.textContent='As senhas não são iguais';
+            failedSpan.textContent = this.Messages.DIFF_PASSWORDS;
             failedSpan.classList.remove("d-none");
 
             return;
@@ -85,15 +101,15 @@ export class ResetPassword {
         //checa se a senha atende as regras
         if(!passwordRegex.test(password)){
             if (!specialCharRegex.test(password)) {
-                failedSpan.textContent='A senha precisa ter pelo menos um caractere especial';
+                failedSpan.textContent = this.Messages.NO_SPECIAL;
             }
             
             if (!letterRegex.test(password)) {
-                failedSpan.textContent='A senha precisa ter pelo menos uma letra';
+                failedSpan.textContent = this.Messages.NO_LETTERS;
             }
             
             if (!lengthRegex.test(password)) {
-                failedSpan.textContent='A senha precisa ter pelo menos 10 caracteres';
+                failedSpan.textContent = this.Messages.NOT_ENOUGH_CHARS;
             }
 
             failedSpan.classList.remove("d-none");
@@ -105,7 +121,7 @@ export class ResetPassword {
             .changePassword(password, token)
             .subscribe((resp: any) => {
                 if(resp.success){
-                    failedSpan.textContent='Senha alterada com sucesso';
+                    failedSpan.textContent = this.Messages.CHANGE_SUCCESS;
                     failedSpan.classList.remove("d-none");
                     resetButton.disabled = true;
                     
@@ -114,11 +130,11 @@ export class ResetPassword {
                     }, 3000); //3 segundos
                 }
                 else if(resp.triesExceeded){
-                    failedSpan.textContent='Número de tentativas excedido. Tente mais tarde';
+                    failedSpan.textContent = this.Messages.TOO_MANY_TRIES;
                     failedSpan.classList.remove("d-none");
                 }
                 else if(!resp.validToken){
-                    failedSpan.textContent='Link expirado';
+                    failedSpan.textContent = this.Messages.EXPIRED_LINK;
                     failedSpan.classList.remove("d-none");
                     resetButton.disabled = true;
 
@@ -128,13 +144,13 @@ export class ResetPassword {
                     
                 }
                 else{
-                    failedSpan.textContent='Algo de errado ocorreu';
+                    failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
                     failedSpan.classList.remove("d-none");
                 }
             });
         }
         catch{
-            failedSpan.textContent='Algo de errado ocorreu';
+            failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
             failedSpan.classList.remove("d-none");
         }
     }
@@ -145,7 +161,7 @@ export class ResetPassword {
         .checkSession()
         .subscribe((resp: any) => {
             if(resp.loggedIn){
-                window.location.href = 'http://localhost:4200/';
+                window.location.href = './home';
             }
         });
     }

@@ -4,11 +4,17 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
     selector: 'app-login',
     templateUrl: './recover-account.component.html',
-    styleUrls: ['./recover-account.component.scss'],
+    styleUrls: ['../../common/login.scss'],
 })
 
 export class RecoverPassword {
     constructor(private authService: AuthService) {}
+
+    Messages = {
+        REQUEST_SUCCESS: 'Link de recuperação enviado ao seu email',
+        TOO_MANY_TRIES: 'Limites de tentativas excedido. Tente mais tarde',
+        EMAIL_NOT_REG: 'Email não cadastrado'
+    };
 
     ngOnInit(): void {
         this.checkSession();
@@ -36,15 +42,15 @@ export class RecoverPassword {
             console.log(resp);
             if(resp.success){
                 failedSpan.classList.remove('d-none');
-                failedSpan.textContent = 'Link de recuperação enviado ao seu email';
+                failedSpan.textContent = this.Messages.REQUEST_SUCCESS;
             }
             else if(resp.triesExceeded){
                 failedSpan.classList.remove('d-none');
-                failedSpan.textContent = 'Limites de tentativas excedido. Tente mais tarde';
+                failedSpan.textContent = this.Messages.TOO_MANY_TRIES;
             }
             else if(!resp.registered){
                 failedSpan.classList.remove('d-none');
-                failedSpan.textContent = 'Email não cadastrado';
+                failedSpan.textContent = this.Messages.EMAIL_NOT_REG;
             }
         });
     }
@@ -55,7 +61,7 @@ export class RecoverPassword {
         .checkSession()
         .subscribe((resp: any) => {
             if(resp.loggedIn){
-                window.location.href = 'http://localhost:4200/';
+                window.location.href = './home';
             }
         
         });

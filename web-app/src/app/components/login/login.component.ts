@@ -4,10 +4,23 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['../../common/login.scss'],
 })
 export class LoginComponent {
   constructor(private authService: AuthService) {}
+
+  Messages = {
+    ALREADY_LOGGED: 'Você já estava logado',
+    EMAIL_NOT_REG: 'Email não cadastrado',
+    WRONG_LOGIN: 'Email e senha não correspondem',
+    TOO_MANY_TRIES: 'Número de tentativas excedido. Tente mais tarde',
+    UNKNOWN_ERROR: 'Algo de errado ocorreu'
+  };
+
+  Images = {
+      EYE_OFF: '/assets/images/eye-off.svg',
+      EYE_ON: '/assets/images/eye.svg'
+  };
 
   enableButton() {
     /**Reativa o botão de login*/
@@ -30,10 +43,10 @@ export class LoginComponent {
 
     if (passwordInput.type === 'password') {
       passwordInput.type = 'text';
-      passwordEye.src = '/assets/images/eye-off.svg';
+      passwordEye.src = this.Images.EYE_OFF;
     } else {
       passwordInput.type = 'password';
-      passwordEye.src = '/assets/images/eye.svg';
+      passwordEye.src = this.Images.EYE_ON;
     }
   }
 
@@ -60,26 +73,35 @@ export class LoginComponent {
       this.authService
         .login(emailInput.value, passwordInput.value)
         .subscribe((resp: any) => {
+          //tentativas excedidas
           if (resp.triesExceeded) {
             failedSpan.classList.remove('d-none');
-            failedSpan.textContent = resp.message;
+            failedSpan.textContent = this.Messages.TOO_MANY_TRIES;
           } 
+          //sucesso
           else if (resp.success || resp.wasLogged) {
-            window.location.href = 'http://localhost:4200/home';
+            window.location.href = './home';
           } 
+          //dados incorretos
           else if (resp.registered) {
             failedSpan.classList.remove('d-none');
-            failedSpan.textContent = resp.message;
+            failedSpan.textContent = this.Messages.WRONG_LOGIN;
             passwordInput.value = '';
             loginButton.disabled = true;
           }
-          else {
+          //email nao registrado
+          else if (!resp.registered){
             failedSpan.classList.remove('d-none');
-            failedSpan.textContent = resp.message;
+            failedSpan.textContent = this.Messages.EMAIL_NOT_REG;
+          }
+          else{
+            failedSpan.classList.remove('d-none');
+            failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
           }
         });
     } catch {
-      console.log('uhh');
+      failedSpan.classList.remove('d-none');
+      failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
     }
   }
 
@@ -87,7 +109,7 @@ export class LoginComponent {
     /**Desloga o usuario*/
     this.authService.logout().subscribe((resp: any) => {
       if (resp.success) {
-        window.location.href = 'http://localhost:4200/login';
+        window.location.href = './login';
       }
     });
   }
