@@ -1,16 +1,18 @@
 <div class="main content-fluid">
     <div class="logo">
-        <img id="logo" src="\assets\images\commercin.png" alt="">
+        <a href="./home">
+            <img id="logo" src="\assets\images\commercin.png" alt="Logo do commercin">
+        </a>
     </div>
     <div class="login-panel m-auto">
         <div class="side-panel">
             <h1 class="login-header fw-bold text-nowrap">Perdeu a senha?</h1>
-            <h3 class="login-header text-end lh-g fw-light">Insira o email da sua conta cadastrada para recuperar sua conta.<br><br>
+            <h3 class="login-header text-center lh-g fw-light">Insira o email da sua conta cadastrada para recuperar sua conta.<br><br>
                 Um link de recuperação será enviado para seu email.</h3>
         </div>
 
         <div class="login-form">
-            <h1 class="login-header">Recuperar senha</h1>
+            <h1 class="login-header">Recuperar conta</h1>
 
             <div class="input-section form-group">
                 <div class="w-25 d-inline-block">
@@ -23,8 +25,6 @@
                 <span class="failed-message w-75 d-inline-block d-none" id="failed-message">Email não registrado</span>
 
             </div>
-
-            
 
             <div class="text-center m-auto w-50">
                 <button id="request-button" class="btn btn-primary m-2 w-75" (click)="requestReset()">
