@@ -7,7 +7,7 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['../../common/login.scss'],
 })
 
-export class RecoverPassword {
+export class RecoverAccountComponent {
     constructor(private authService: AuthService) {}
 
     Messages = {

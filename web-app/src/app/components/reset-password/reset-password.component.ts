@@ -7,7 +7,9 @@ import { AuthService } from 'src/app/services/auth.service';
     styleUrls: ['../../common/login.scss'],
 })
 
-export class ResetPassword {
+export class ResetPasswordComponent {
+    constructor(private authService: AuthService) {}
+
     Messages = {
         CHANGE_SUCCESS: 'Senha alterada com sucesso',
         DIFF_PASSWORDS: 'As senhas não são iguais',
@@ -23,8 +25,6 @@ export class ResetPassword {
         EYE_OFF: '/assets/images/eye-off.svg',
         EYE_ON: '/assets/images/eye.svg'
     };
-    
-    constructor(private authService: AuthService) {}
 
     ngOnInit(): void {
         this.checkSession();
