@@ -1,0 +1,98 @@
+
+.main{
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    background: #2D60E3;
+}
+
+.logo{
+    height: min-content;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.login-panel{
+    position: relative;
+
+    display: flex;
+    width: 60%;
+    height: 80%;
+
+    background: linear-gradient(to top, #FFF 50%, #2F45B9 50%);
+    border-radius: 40px;
+}
+
+.side-panel{
+    position: relative;
+    width: 40%;
+    height: 100%;
+
+    padding: 30px;
+    padding-top: 10%;
+
+    color: #FFFFFF;
+    background: #2F45B9;
+    border-radius: 40px 0px 40px 40px;
+
+    overflow-y: auto;
+    font-family: segoe ui;
+    font-size: 1.7vw !important;
+}
+
+.login-form{
+    box-sizing: border-box;
+
+    position: relative;
+    width: 60%;
+    height: 100%;
+
+    padding: 20px;
+    padding-top: 10%;
+    padding-bottom: 10%;
+
+    background: #FBFBFB;
+    border-radius: 40px 40px 40px 0px;
+
+    overflow-y: auto;
+}
+
+.login-header{
+    width: fit-content;
+    margin-bottom: 15%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.input-section{
+    margin: 20px;
+}
+
+.svg-button {
+    position: absolute;
+    right: 0;
+    transform: translate(-44px,4px);
+    background: #FFFFFF;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.svg-button img {
+    width: 24px;
+    height: 24px;
+}
+
+.link{
+    width: 100%;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.failed-message{
+    margin-top: 12px;
+    margin-left: 26%;
+    font-size: 14px;
+    color: red;
+}

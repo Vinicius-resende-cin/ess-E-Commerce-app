@@ -10,6 +10,7 @@ export class LoginComponent {
   constructor(private authService: AuthService) {}
 
   enableButton() {
+    /**Reativa o botão de login*/
     const loginButton = document.getElementById(
       'login-button'
     )! as HTMLInputElement;
@@ -23,16 +24,16 @@ export class LoginComponent {
       'input-password'
     )! as HTMLInputElement;
 
-    const togglePasswordBtn = document.getElementById(
-      'toggle-password'
+    const passwordEye = document.getElementById(
+      'password-eye'
     )! as HTMLInputElement;
 
     if (passwordInput.type === 'password') {
       passwordInput.type = 'text';
-      togglePasswordBtn.textContent = 'Esconder Senha';
+      passwordEye.src = '/assets/images/eye-off.svg';
     } else {
       passwordInput.type = 'password';
-      togglePasswordBtn.textContent = 'Mostrar Senha';
+      passwordEye.src = '/assets/images/eye.svg';
     }
   }
 
@@ -62,14 +63,17 @@ export class LoginComponent {
           if (resp.triesExceeded) {
             failedSpan.classList.remove('d-none');
             failedSpan.textContent = resp.message;
-          } else if (resp.success || resp.wasLogged) {
+          } 
+          else if (resp.success || resp.wasLogged) {
             window.location.href = 'http://localhost:4200/home';
-          } else if (resp.registered) {
+          } 
+          else if (resp.registered) {
             failedSpan.classList.remove('d-none');
             failedSpan.textContent = resp.message;
             passwordInput.value = '';
             loginButton.disabled = true;
-          } else {
+          }
+          else {
             failedSpan.classList.remove('d-none');
             failedSpan.textContent = resp.message;
           }
