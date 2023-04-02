@@ -1,9 +1,6 @@
 module.exports = () => {
   const express = require("express");
-  const bodyParser = require("body-parser");
   const router = express.Router();
-
-  router.use(bodyParser.json());
 
   // Define as rotas
   const usuarios = require("./routes/usuarios")();
