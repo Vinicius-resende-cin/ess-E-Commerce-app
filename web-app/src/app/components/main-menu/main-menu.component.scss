@@ -1,0 +1,32 @@
+$blue-alt: #2d60e3;
+$black-alt: #363636;
+
+.main-title {
+  user-select: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.page-header {
+  background: $blue-alt;
+  color: $black-alt;
+
+  &button {
+    background: $black-alt;
+  }
+}
+
+.w-66 {
+  width: 66.66%;
+}
+
+.w-33 {
+  width: 33.33%;
+}
+
+.text-dark-alt {
+  color: $black-alt;
+  font-weight: bold;
+}
