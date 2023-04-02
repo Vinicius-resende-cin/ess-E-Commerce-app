@@ -19,7 +19,7 @@
                 <div class="w-25 d-inline-block">
                     <label for="input-email">Email</label>
                 </div>
-                <input name="input-email" id="input-email"
+                <input name="email" id="input-email"
                     type="email" placeholder="Insira seu email"
                     class="form-control d-inline-block w-75">
             </div>
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="password-container d-inline-block w-75">
-                    <input name="input-senha" id="input-password"        
+                    <input name="senha" id="input-password"        
                     type="password" placeholder="Insira sua senha"
                     class="form-control d-inline-block"
                     (input)="enableButton()" (keyup.enter)="login()">
@@ -40,7 +40,7 @@
                     </button>
                 </div>
                 
-                <span class="failed-message w-75 d-inline-block d-none" id="failed-message">Email não registrado</span>
+                <span name="message-span" class="failed-message w-75 d-inline-block d-none" id="message-span">Email não registrado</span>
 
                 <a class="link d-inline-block text-end" href="./recuperar-conta">Esqueci minha senha</a>
 

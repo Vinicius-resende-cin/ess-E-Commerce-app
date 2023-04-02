@@ -91,7 +91,7 @@ module.exports = () => {
       try{
         res.status(200).json({
           success: true,
-          loggedIn: req.session.loggedIn,
+          loggedIn: req.session.loggedIn ? true : false,
         });
         
       }

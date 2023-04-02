@@ -25,8 +25,8 @@ export class RecoverAccountComponent {
             'input-email'
         )! as HTMLInputElement;
 
-        const failedSpan = document.getElementById(
-            'failed-message'
+        const messageSpan = document.getElementById(
+            'message-span'
           )! as HTMLSpanElement;
         
         const reqEmail = emailInput.value;
@@ -34,23 +34,23 @@ export class RecoverAccountComponent {
         if(reqEmail=="")
             return;
 
-        failedSpan.classList.add('d-none');
+        messageSpan.classList.add('d-none');
 
         this.authService
         .requestReset(reqEmail)
         .subscribe((resp: any) => {
             console.log(resp);
             if(resp.success){
-                failedSpan.classList.remove('d-none');
-                failedSpan.textContent = this.Messages.REQUEST_SUCCESS;
+                messageSpan.classList.remove('d-none');
+                messageSpan.textContent = this.Messages.REQUEST_SUCCESS;
             }
             else if(resp.triesExceeded){
-                failedSpan.classList.remove('d-none');
-                failedSpan.textContent = this.Messages.TOO_MANY_TRIES;
+                messageSpan.classList.remove('d-none');
+                messageSpan.textContent = this.Messages.TOO_MANY_TRIES;
             }
             else if(!resp.registered){
-                failedSpan.classList.remove('d-none');
-                failedSpan.textContent = this.Messages.EMAIL_NOT_REG;
+                messageSpan.classList.remove('d-none');
+                messageSpan.textContent = this.Messages.EMAIL_NOT_REG;
             }
         });
     }

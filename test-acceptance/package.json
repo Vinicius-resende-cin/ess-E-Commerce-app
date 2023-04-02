@@ -2,7 +2,7 @@
   "name": "testes-acceptance",
   "description": "Testes de aceitação",
   "scripts": {
-    "tsc": "tsc",
+    "tsc": "node node_modules/typescript/bin/tsc",
     "test": "npm run tsc && protractor typeScript/config/config.js",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start"
@@ -22,6 +22,8 @@
   },
   "dependencies": {
     "cucumber-html-reporter": "^4.0.5",
+    "dotenv": "^16.0.3",
+    "jsonwebtoken": "^9.0.0",
     "protractor": "^5.1.2",
     "ts-node": "^3.1.0"
   }

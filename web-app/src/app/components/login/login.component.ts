@@ -64,19 +64,19 @@ export class LoginComponent {
       'input-password'
     )! as HTMLInputElement;
 
-    const failedSpan = document.getElementById(
-      'failed-message'
+    const messageSpan = document.getElementById(
+      'message-span'
     )! as HTMLSpanElement;
 
-    failedSpan.classList.add('d-none');
+    messageSpan.classList.add('d-none');
     try {
       this.authService
         .login(emailInput.value, passwordInput.value)
         .subscribe((resp: any) => {
           //tentativas excedidas
           if (resp.triesExceeded) {
-            failedSpan.classList.remove('d-none');
-            failedSpan.textContent = this.Messages.TOO_MANY_TRIES;
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.TOO_MANY_TRIES;
           } 
           //sucesso
           else if (resp.success || resp.wasLogged) {
@@ -84,24 +84,24 @@ export class LoginComponent {
           } 
           //dados incorretos
           else if (resp.registered) {
-            failedSpan.classList.remove('d-none');
-            failedSpan.textContent = this.Messages.WRONG_LOGIN;
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.WRONG_LOGIN;
             passwordInput.value = '';
             loginButton.disabled = true;
           }
           //email nao registrado
           else if (!resp.registered){
-            failedSpan.classList.remove('d-none');
-            failedSpan.textContent = this.Messages.EMAIL_NOT_REG;
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.EMAIL_NOT_REG;
           }
           else{
-            failedSpan.classList.remove('d-none');
-            failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
           }
         });
     } catch {
-      failedSpan.classList.remove('d-none');
-      failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
+      messageSpan.classList.remove('d-none');
+      messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
     }
   }
 

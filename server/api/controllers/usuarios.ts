@@ -44,7 +44,7 @@ module.exports = () => {
                     from: senderEmail,
                     to: reqEmail,
                     subject: 'Redefinição de senha da conta Commercin',
-                    text: 'Uma requisição de redefinição de sua senha da conta Commercin foit feita.\n\n' +
+                    text: 'Uma requisição de redefinição de sua senha da conta Commercin foi feita.\n\n' +
                     'Caso não tenha requisitado a redefinição de sua senha ignore este email.\n\n' +
                     'Acesse o link abaixo dentro de 10 minutos para redefinir sua senha:\n\n' + resetUrl
                 };
@@ -81,7 +81,6 @@ module.exports = () => {
                 const hashPass = await hash.digest();
                 
                 Cadastro.updateOne({email: email}, { $set: { hash_senha: hashPass}}).exec();
-                
                 res.status(200).json({
                     success: true,
                 });

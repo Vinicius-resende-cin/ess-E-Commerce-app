@@ -77,12 +77,12 @@ export class ResetPasswordComponent {
             'input-password-repeat'
         )! as HTMLInputElement;
 
-        const failedSpan = document.getElementById(
-            'failed-message'
+        const messageSpan = document.getElementById(
+            'message-span'
         )! as HTMLInputElement;
         
         //esconde a mensagem de erro
-        failedSpan.classList.add("d-none");
+        messageSpan.classList.add("d-none");
 
         const urlParams = new URLSearchParams(window.location.search);
         var token = urlParams.get('token');
@@ -92,8 +92,8 @@ export class ResetPasswordComponent {
 
         //compara as senhas
         if(password != passwordRepeat){
-            failedSpan.textContent = this.Messages.DIFF_PASSWORDS;
-            failedSpan.classList.remove("d-none");
+            messageSpan.textContent = this.Messages.DIFF_PASSWORDS;
+            messageSpan.classList.remove("d-none");
 
             return;
         }
@@ -101,18 +101,18 @@ export class ResetPasswordComponent {
         //checa se a senha atende as regras
         if(!passwordRegex.test(password)){
             if (!specialCharRegex.test(password)) {
-                failedSpan.textContent = this.Messages.NO_SPECIAL;
+                messageSpan.textContent = this.Messages.NO_SPECIAL;
             }
             
             if (!letterRegex.test(password)) {
-                failedSpan.textContent = this.Messages.NO_LETTERS;
+                messageSpan.textContent = this.Messages.NO_LETTERS;
             }
             
             if (!lengthRegex.test(password)) {
-                failedSpan.textContent = this.Messages.NOT_ENOUGH_CHARS;
+                messageSpan.textContent = this.Messages.NOT_ENOUGH_CHARS;
             }
 
-            failedSpan.classList.remove("d-none");
+            messageSpan.classList.remove("d-none");
             return;
         }
 
@@ -121,37 +121,29 @@ export class ResetPasswordComponent {
             .changePassword(password, token)
             .subscribe((resp: any) => {
                 if(resp.success){
-                    failedSpan.textContent = this.Messages.CHANGE_SUCCESS;
-                    failedSpan.classList.remove("d-none");
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.CHANGE_SUCCESS;
                     resetButton.disabled = true;
                     
-                    setTimeout(function(){
-                        window.location.href = '/login';
-                    }, 3000); //3 segundos
                 }
                 else if(resp.triesExceeded){
-                    failedSpan.textContent = this.Messages.TOO_MANY_TRIES;
-                    failedSpan.classList.remove("d-none");
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.TOO_MANY_TRIES;
                 }
                 else if(!resp.validToken){
-                    failedSpan.textContent = this.Messages.EXPIRED_LINK;
-                    failedSpan.classList.remove("d-none");
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.EXPIRED_LINK;
                     resetButton.disabled = true;
-
-                    setTimeout(function(){
-                        window.location.href = '/';
-                    }, 3000); //3 segundos
-                    
                 }
                 else{
-                    failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
-                    failedSpan.classList.remove("d-none");
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
                 }
             });
         }
         catch{
-            failedSpan.textContent = this.Messages.UNKNOWN_ERROR;
-            failedSpan.classList.remove("d-none");
+            messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
+            messageSpan.classList.remove("d-none");
         }
     }
 
