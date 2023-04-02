@@ -1,32 +1,32 @@
-<!-- html (mousemove)="onMove()" -->
 <html>
-
-<table>
-<tr>
-   <td><label>Nome </label></td>
-   <td><input [(ngModel)]="categoria.nome_categoria" name="namebox"></td>
-</tr>
-<tr>
-   <td><label>Descrição </label></td>
-   <td><input [(ngModel)]="categoria.descricao_categoria" name="descbox"></td>
-</tr>
-<tr>
-   <td><button (click)="createCategoria(categoria)">Adicionar</button></td>
-   <td>
-      <app-alert [message]="alertMessage" *ngIf="categoriaDuplicada || nomeInvalido"></app-alert>
-   </td>
-</tr>
-</table>
-
-<table>
-<tr *ngIf="categorias.length > 0">
-   <th>Nome</th>
-   <th>Descrição</th>
-</tr>
-<tr *ngFor="let catg of categorias" name="categorialist">
-   <td name="categorialist">{{catg.nome_categoria}}</td>
-   <td name="categorialist">{{catg.descricao_categoria}}</td>
-</tr>
-</table>
-
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   </head>
+   <body>
+      <div class="container">
+         <div class="row justify-content-center mt-5">
+            <div class="col-md-6">
+               <table class="table">
+                  <tr>
+                     <td><label>Nome:</label></td>
+                     <td><input [(ngModel)]="categoria.nome_categoria" name="namebox" placeholder="Insira o Nome da Categoria" class="form-control"></td>
+                  </tr>
+                  <tr>
+                     <td><label>Descrição:</label></td>
+                     <td><input [(ngModel)]="categoria.descricao_categoria" name="descbox" placeholder="Insira a Descrição da Categoria" class="form-control"></td>
+                  </tr>
+                  <tr>
+                     <td colspan="2">
+                        <button (click)="createCategoria(categoria)" class="btn btn-primary">Adicionar</button>
+                        <br>
+                        <app-alert [message]="alertMessage" *ngIf="categoriaDuplicada || nomeInvalido"></app-alert>
+                     </td>
+                  </tr>
+               </table>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>
