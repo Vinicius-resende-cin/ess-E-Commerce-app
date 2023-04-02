@@ -12,6 +12,7 @@ import { MonthSummaryComponent } from './components/month-summary/month-summary.
 import { LoginComponent } from './components/login/login.component';
 import { MainPageComponent } from './components/main-page/main-page.component';
 import { CategoryCreationComponent } from './components/category-creation/category-creation.component';
+import { CategoryListComponent } from './components/category-list/category-list.component';
 import { AlertComponent } from './components/alert/alert.component';
 
 import ptBr from '@angular/common/locales/pt';
@@ -25,6 +26,7 @@ registerLocaleData(ptBr);
     MonthSummaryComponent,
     LoginComponent,
     CategoryCreationComponent,
+    CategoryListComponent,
     MainPageComponent,
     AlertComponent,
     GeneralMainPageComponent,

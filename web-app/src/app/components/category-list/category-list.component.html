@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <h2>Lista de Categorias</h2>
+        <table class="table mt-4">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Descrição</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let categoria of categorias">
+              <td>{{ categoria.nome_categoria }}</td>
+              <td>{{ categoria.descricao_categoria }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="text-md-end">
+          <button routerLink="/criacao-nova-categoria" class="btn btn-primary">Nova Categoria</button>
+        </div>
+      </div> 
+    </div>
+</div>
