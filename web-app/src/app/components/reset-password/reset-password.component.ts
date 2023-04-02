@@ -26,10 +26,6 @@ export class ResetPasswordComponent {
         EYE_ON: '/assets/images/eye.svg'
     };
 
-    ngOnInit(): void {
-        this.checkSession();
-    }
-
     enableButton(){
         const resetButton = document.getElementById(
             'reset-button'
@@ -145,16 +141,5 @@ export class ResetPasswordComponent {
             messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
             messageSpan.classList.remove("d-none");
         }
-    }
-
-    checkSession(){
-        //**Checa se o usuario ja esta logado*/
-        this.authService
-        .checkSession()
-        .subscribe((resp: any) => {
-            if(resp.loggedIn){
-                window.location.href = './home';
-            }
-        });
     }
 }

@@ -16,10 +16,6 @@ export class RecoverAccountComponent {
         EMAIL_NOT_REG: 'Email não cadastrado'
     };
 
-    ngOnInit(): void {
-        this.checkSession();
-    }
-
     requestReset(){
         const emailInput = document.getElementById(
             'input-email'
@@ -52,18 +48,6 @@ export class RecoverAccountComponent {
                 messageSpan.classList.remove('d-none');
                 messageSpan.textContent = this.Messages.EMAIL_NOT_REG;
             }
-        });
-    }
-
-    checkSession(){
-        //**Checa se o usuario ja esta logado*/
-        this.authService
-        .checkSession()
-        .subscribe((resp: any) => {
-            if(resp.loggedIn){
-                window.location.href = './home';
-            }
-        
         });
     }
 }

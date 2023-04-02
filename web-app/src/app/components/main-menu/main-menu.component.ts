@@ -11,9 +11,35 @@ export class MainMenuComponent {
   title = Names.appTitle;
   isLoggedIn = false;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
+
+  
+  ngOnInit(): void {
+    this.checkSession();
+  }
 
   goHome() {
     window.location.href = 'http://localhost:4200/';
   }
+
+  logout(){
+    /**Desloga o usuario*/
+    this.authService
+    .logout()
+    .subscribe((resp: any) => {
+        if(resp.success){
+            window.location.href = 'http://localhost:4200/';
+        }
+    });
+  }
+
+  checkSession(){
+    //**Checa se o usuario ja esta logado*/
+    this.authService
+    .checkSession()
+    .subscribe((resp: any) => {
+      this.isLoggedIn = resp.loggedIn;
+    });
+  }
+
 }

@@ -20,6 +20,16 @@
         class="nav-link text-dark-alt fs-5"
         >Login</a
       >
+      
+      <a
+        name="Logout"
+        [routerLink]="['/login']"
+        *ngIf="isLoggedIn"
+        class="nav-link text-dark-alt fs-5"
+        (click)="logout()"
+        >Logout</a
+      >
+      
     </div>
   </div>
   <div
@@ -28,5 +38,6 @@
     <a name="categoria" [routerLink]="['/categoria']" class="nav-link"
       >Categoria</a
     >
+    
   </div>
 </div>

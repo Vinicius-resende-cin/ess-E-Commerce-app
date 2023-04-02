@@ -69,6 +69,27 @@ async function checkLogged() {
     return logged;
 }
 
+async function logout() {
+    const cookies = await browser.manage().getCookies();
+    const options = {
+        url: 'http://localhost:3000/api/auth/logout',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Cookie': cookies.map(cookie => `${cookie.name}=${cookie.value}`).join('; ')
+          },
+        withCredentials: true
+    };
+
+    const loggedOut = await new Promise((resolve, reject) => {
+        request(options, function(err: any, resp: any) {
+            resolve(JSON.parse(resp.body).success);
+        });
+    });
+
+    return loggedOut;
+}
+
 async function tryLogin(email: string, password: string, param: string) {
     const data = { password: password, email: email };
     const cookies = await browser.manage().getCookies();
@@ -120,17 +141,15 @@ async function changePassword(email:string, password: string) {
 }
 
 defineSupportCode(function ({Given, When, Then, After}) {
-    //desloga se estievr logado
-    After(async (scenario) => {
+    //desloga se estiver logado
+    After(async () => {
         const logged = await checkLogged();
-
         if(logged){
-            await browser.get(baseUrl + PageUrls.PRINCIPAL);
-            await element(by.name("logout")).click();
+            await logout();
         }
     });
     
-    Given(/^eu estou na página "(.*)"$/, async function (pagina) {
+    Given(/^eu estou na pagina "(.*)"$/, async function (pagina) {
         const expectUrl = PageUrls[(<string> pagina).toUpperCase().replaceAll(" ", "_")];
         await browser.get(baseUrl + expectUrl);
         await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
@@ -182,8 +201,8 @@ defineSupportCode(function ({Given, When, Then, After}) {
         await $("input[name=" + (<string> elemName).toLowerCase().replaceAll(" ", "-") + "]").sendKeys(<string> senha);
     });
 
-    When(/^eu clico em "([^"]*)"$/, async (botao) => {
-        await element(by.buttonText(<string> botao)).click();
+    When(/^eu clico em "([^"]*)"$/, async (elem) => {
+        await element(by.name(<string> elem)).click();
     });
 
     When('eu fecho a minha sessão atual e saio do site', async () => {

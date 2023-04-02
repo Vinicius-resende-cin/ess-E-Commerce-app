@@ -17,8 +17,8 @@ const routes: Routes = [
       ),
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuardLogin] },
-  { path: 'recuperar-conta', component: RecoverAccountComponent },
-  { path: 'redefinir-senha', component: ResetPasswordComponent },
+  { path: 'recuperar-conta', component: RecoverAccountComponent, canActivate: [authGuardLogin] },
+  { path: 'redefinir-senha', component: ResetPasswordComponent, canActivate: [authGuardLogin] },
   { path: 'categoria', component: CategoryCreationComponent },
 ];
 

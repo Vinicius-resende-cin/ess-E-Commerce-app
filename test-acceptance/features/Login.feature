@@ -4,7 +4,7 @@ Feature: Login
 	So that eu possa realizar ações e atividades na plataforma através da minha conta criada
 
 Scenario: Login com dados corretos
-	Given eu estou na página "Login"
+	Given eu estou na pagina "Login"
 	And o email "jvs2@cin.ufpe.br" já foi cadastrado com a senha "#qwe12345678"
 	When eu digito o email "jvs2@cin.ufpe.br" em "Email"
 	And eu digito a senha "#qwe12345678" em "Senha"
@@ -13,7 +13,7 @@ Scenario: Login com dados corretos
 	And eu estou logado no sistema
 
 Scenario: Login com usuário não existente
-	Given eu estou na página "Login"
+	Given eu estou na pagina "Login"
 	And o email "jvs1@cin.ufpe.br" não foi cadastrado no sistema
 	When eu digito o email "jvs1@cin.ufpe.br" em "Email"
 	And eu digito a senha "#qwer12345678" em "Senha"
@@ -23,7 +23,7 @@ Scenario: Login com usuário não existente
 	And eu não estou logado no sistema
 
 Scenario: Login com senha errada
-	Given eu estou na página "Login"
+	Given eu estou na pagina "Login"
 	And o email "jvs2@cin.ufpe.br" já foi cadastrado com a senha "#qwe12345678"
 	When eu digito o email "jvs2@cin.ufpe.br" em "Email"
 	And eu digito a senha "12345678" em "Senha"
@@ -35,7 +35,7 @@ Scenario: Login com senha errada
 	And eu não estou logado no sistema
 
 Scenario: Solicitação de recuperação de conta
-	Given eu estou na página "Recuperar Conta"
+	Given eu estou na pagina "Recuperar Conta"
 	And o email "jvs2@cin.ufpe.br" já foi cadastrado com a senha "#qwe12345678"
 	When eu digito o email "jvs2@cin.ufpe.br" em "Email"
 	And eu clico em "Enviar"
@@ -43,14 +43,14 @@ Scenario: Solicitação de recuperação de conta
 
 Scenario: Deslogar
 	Given eu já estou logado no sistema
-	And eu estou na página "Principal"
+	And eu estou na pagina "Principal"
 	When eu clico em "Logout"
-	Then eu sou redirecionado para a página "Login"
+	Then eu sou redirecionado para a página "Inicial"
 	And eu não estou logado no sistema
 
 Scenario: Sessão atual fechada
 	Given eu já estou logado no sistema
-	And eu estou na página "Principal"
+	And eu estou na pagina "Principal"
 	When eu fecho a minha sessão atual e saio do site
 	Then eu não estou logado no sistema
 
@@ -61,7 +61,7 @@ Scenario: Tentativa de login quando já está logado
 	And eu estou logado no sistema
 
 Scenario: Redefinição de senha 
-	Given eu estou na página "Redefinir Senha"
+	Given eu estou na pagina "Redefinir Senha"
 	And eu tenho um link válido para o email "jvs2@cin.ufpe.br"
 	And eu digito a senha "#qwer87654321" em "Nova Senha"
 	And eu digito a senha "#qwer87654321" em "Repetir Senha"
@@ -71,7 +71,7 @@ Scenario: Redefinição de senha
 
 Scenario: Número de tentativas de login excedidas
 	Given eu já tentei logar com dados errados 10 vezes
-	And eu estou na página "Login"
+	And eu estou na pagina "Login"
 	When eu digito o email "jvs2@cin.ufpe.br" em "Email"
 	And eu digito a senha "12345678" em "Senha"
 	And eu clico em "Entrar"
