@@ -1,14 +1,21 @@
 <app-main-menu></app-main-menu>
-<div class="container-fluid page-header d-inline-flex justify-content-center mb-5">
-  <div
-      class="navbar navbar-expand-lg d-inline-flex w-25 text-light fs-5"
-  >
-      <a name="categoria" [routerLink]="['categoria']" class="nav-link me-3"
-        >Categoria</a
-      >
-      <a name="resumo-mensal" [routerLink]="['resumo-mensal']" class="nav-link"
-        >Resumo Mensal</a
-      >
+<div
+  class="container-fluid page-header d-inline-flex justify-content-center mb-5"
+>
+  <div class="navbar navbar-expand-lg d-inline-flex w-25 text-light fs-5">
+    <a name="categoria" [routerLink]="['categoria']" class="nav-link me-3"
+      >Categoria</a
+    >
+    <a name="resumo-mensal" [routerLink]="['resumo-mensal']" class="nav-link"
+      >Resumo Mensal</a
+    >
+    <a
+      name="historico-pedidos"
+      [routerLink]="['historico-pedidos']"
+      class="nav-link"
+    >
+      Histórico de Pedidos
+    </a>
   </div>
 </div>
 <router-outlet></router-outlet>
