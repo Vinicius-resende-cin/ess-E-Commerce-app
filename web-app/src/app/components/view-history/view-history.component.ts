@@ -11,15 +11,18 @@ type Item = myTypes.Itens;
 @Component({
   selector: 'app-view-history',
   templateUrl: './view-history.component.html',
-  styleUrls: ['./view-history.component.scss']
+  styleUrls: ['./view-history.component.scss'],
 })
-export class ViewHistoryComponent implements OnInit, OnChanges{
+export class ViewHistoryComponent implements OnInit, OnChanges {
   filter: {} = {};
   listaPedidos: Pedido[] = [];
   listaItem: Item[] = [];
 
-
-  constructor(private listaservice: ListService, private router: Router, private itemService: ItemService) {}
+  constructor(
+    private listaservice: ListService,
+    private router: Router,
+    private itemService: ItemService
+  ) {}
 
   ngOnInit() {
     this.atualizarListas();
@@ -31,11 +34,11 @@ export class ViewHistoryComponent implements OnInit, OnChanges{
 
   // Armazenando os pedidos e os itens de cada pedido
   atualizarListaItens(pedido: Pedido): void {
-    for(let item of pedido.id_produto) {
-      if (!this.listaItem.find(a => a.id == item)) {
+    for (let item of pedido.id_produto) {
+      if (!this.listaItem.find((a) => a.id == item)) {
         this.itemService.getAll('/itens/' + item).subscribe((resultado) => {
           this.listaItem.push(resultado as Item);
-        })
+        });
       }
     }
   }
@@ -44,7 +47,7 @@ export class ViewHistoryComponent implements OnInit, OnChanges{
   atualizarListas(): void {
     this.listaservice.getAll('/pedidos').subscribe((result) => {
       var pedidoAdd: Pedido;
-      for(let o of result) {
+      for (let o of result) {
         pedidoAdd = o as Pedido;
         pedidoAdd.data_hora = new Date(pedidoAdd.data_hora);
         this.listaPedidos.push(pedidoAdd);
@@ -54,8 +57,8 @@ export class ViewHistoryComponent implements OnInit, OnChanges{
   }
 
   // Método para descobrir a quantidade em estoque de um produto comprado
-  consultarDisponibilidade(id: String): number{
-    var item = this.listaItem.find((produto) => produto.id == id)
+  consultarDisponibilidade(id: String): number {
+    var item = this.listaItem.find((produto) => produto.id == id);
     if (item) {
       return item.quantidade;
     }
@@ -63,21 +66,20 @@ export class ViewHistoryComponent implements OnInit, OnChanges{
   }
 
   // Método para descobrir o nome de um produto comprado
-  consultarNome(id: String): String{
-      var item = this.listaItem.find((produto) => produto.id == id)
-      if (item) {
-        return item.nome;
-      }
-      return "Desconhecido";
+  consultarNome(id: String): String {
+    var item = this.listaItem.find((produto) => produto.id == id);
+    if (item) {
+      return item.nome;
+    }
+    return 'Desconhecido';
   }
 
   // Método para acessar a página de um produto comprado
   verProduto(id: String): void {
     if (this.consultarDisponibilidade(id) != 0) {
-      this.router.navigate(['/item', id]);
-    }
-    else {
-      alert("Esse produto está indisponível");
+      this.router.navigate(['home/item', id]);
+    } else {
+      alert('Esse produto está indisponível');
     }
   }
 }
