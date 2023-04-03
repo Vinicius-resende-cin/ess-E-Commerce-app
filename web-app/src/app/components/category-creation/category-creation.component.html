@@ -21,7 +21,7 @@
                      <td colspan="2">
                         <button (click)="createCategoria(categoria)" class="btn btn-primary">Adicionar</button>
                         <br>
-                        <app-alert [message]="alertMessage" *ngIf="categoriaDuplicada || nomeInvalido"></app-alert>
+                        <app-alert [message]="alertMessage" *ngIf="alertCategoria"></app-alert>
                      </td>
                   </tr>
                </table>

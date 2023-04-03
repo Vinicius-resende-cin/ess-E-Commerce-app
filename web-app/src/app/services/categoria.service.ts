@@ -15,8 +15,8 @@ export class CategoriaService {
   createCategory(nome: String, descricao: String) {
     const endpointURL = this.apiURL + '/categorias';
     const novaCategoria = { 
-      nome_categoria: nome, 
-      descricao_categoria: descricao
+      "nome_categoria": nome, 
+      "descricao_categoria": descricao
     };
     
     return this.http.post<Object>(endpointURL, novaCategoria); 
