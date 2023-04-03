@@ -1,14 +1,6 @@
 $blue-alt: #2d60e3;
 $black-alt: #363636;
 
-.main-title {
-  user-select: none;
-
-  &:hover {
-    cursor: pointer;
-  }
-}
-
 .page-header {
   background: $blue-alt;
   color: $black-alt;

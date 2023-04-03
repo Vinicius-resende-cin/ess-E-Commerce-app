@@ -1,0 +1,11 @@
+$blue-alt: #2d60e3;
+$black-alt: #363636;
+
+.page-header {
+    background: $blue-alt;
+    color: $black-alt;
+  
+    &button {
+      background: $black-alt;
+    }
+  }
