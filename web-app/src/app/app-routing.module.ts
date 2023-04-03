@@ -31,6 +31,7 @@ const routes: Routes = [
     component: ResetPasswordComponent,
     canActivate: [authGuardLogin],
   },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
