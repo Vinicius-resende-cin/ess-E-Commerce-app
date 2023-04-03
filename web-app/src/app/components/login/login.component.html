@@ -1,34 +1,59 @@
-<div class="content-fluid p-3">
-    <div class="w-50 m-auto">
-        <div class="form-group m-2">
-            <div class="w-25 d-inline-block">
-                <label for="input-email">Email</label>
-            </div>
-            <input name="input-email" id="input-email"
-                type="email" placeholder="Insira seu email"
-                class="form-control d-inline-block w-75">
+<div class="main content-fluid">
+    <div class="logo">
+        <a href="./home">
+            <img id="logo" src="\assets\images\commercin.png" alt="Logo do commercin">
+        </a>
+    </div>
+    <div class="login-panel m-auto">
+        <div class="side-panel">
+            <h1 class="login-header fw-bold text-nowrap">Bem-vindo!</h1>
+            <h3 class="login-header text-center lh-g fw-light">Acesse sua conta para continuar comprando.<br><br>
+                Ou crie uma conta se ainda não tiver uma.<br><br>
+               Seus dados estarão seguros conosco.</h3>
         </div>
 
-        <div class="form-group m-2">
-            <div class="w-25 d-inline-block">
-                <label for="input-password">Senha</label>
+        <div class="login-form">
+            <h1 class="login-header">Login</h1>
+
+            <div class="input-section form-group">
+                <div class="w-25 d-inline-block">
+                    <label for="input-email">Email</label>
+                </div>
+                <input name="email" id="input-email"
+                    type="email" placeholder="Insira seu email"
+                    class="form-control d-inline-block w-75">
             </div>
-            <input name="input-senha" id="input-password"        
-                type="password" placeholder="Insira sua senha"
-                class="form-control d-inline-block w-75" (input)="enableButton()">
 
-                <span class="w-100 d-inline-block d-none" id="failed-message">Email não registrado</span>
+            <div class="input-section form-group">
+                <div class="w-25 d-inline-block">
+                    <label for="input-password">Senha</label>
+                </div>
 
-                <a class="ml-100 w-auto d-inline-block" href="./recuperar-senha">Esqueci minha senha</a>
+                <div class="password-container d-inline-block w-75">
+                    <input name="senha" id="input-password"        
+                    type="password" placeholder="Insira sua senha"
+                    class="form-control d-inline-block"
+                    (input)="enableButton()" (keyup.enter)="login()">
 
-                <button id="toggle-password" name="mostrar-senha" class="btn btn-small" (click)="togglePassword()">
-                    Mostrar senha
+                    <button class="svg-button" (click)="togglePassword()">
+                        <img id = "password-eye" src="\assets\images\eye.svg" alt="">
+                    </button>
+                </div>
+                
+                <span name="message-span" class="failed-message w-75 d-inline-block d-none" id="message-span">Email não registrado</span>
+
+                <a class="link d-inline-block text-end" href="./recuperar-conta">Esqueci minha senha</a>
+
+            </div>
+
+            <div class="text-center m-auto w-50">
+                <button name ="Entrar" id="login-button" class="btn btn-primary m-2 w-75" (click)="login()">
+                    Entrar
                 </button>
-        </div>
-        <div class="text-center m-auto w-25">
-            <button id="login-button" name="login" class="btn btn-primary m-2" (click)="login()">
-                Entrar
-            </button>
+            </div>
+
+            <a class="link d-inline-block text-center" href="./registrar">Não possui conta? Cadastre-se</a>
+            
         </div>
     </div>
 </div>

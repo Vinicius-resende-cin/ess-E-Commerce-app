@@ -4,15 +4,27 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
     selector: 'app-login',
     templateUrl: './reset-password.component.html',
-    styleUrls: ['./reset-password.component.scss'],
+    styleUrls: ['../../common/login.scss'],
 })
 
-export class ResetPassword {
+export class ResetPasswordComponent {
     constructor(private authService: AuthService) {}
 
-    ngOnInit(): void {
-        this.checkSession();
-    }
+    Messages = {
+        CHANGE_SUCCESS: 'Senha alterada com sucesso',
+        DIFF_PASSWORDS: 'As senhas não são iguais',
+        NO_SPECIAL: 'A senha precisa ter pelo menos um caractere especial',
+        NO_LETTERS: 'A senha precisa ter pelo menos uma letra',
+        NOT_ENOUGH_CHARS: 'A senha precisa ter pelo menos 10 caracteres',
+        TOO_MANY_TRIES: 'Número de tentativas excedido. Tente mais tarde',
+        EXPIRED_LINK: 'Link expirado',
+        UNKNOWN_ERROR: 'Algo de errado ocorreu'
+    };
+
+    Images = {
+        EYE_OFF: '/assets/images/eye-off.svg',
+        EYE_ON: '/assets/images/eye.svg'
+    };
 
     enableButton(){
         const resetButton = document.getElementById(
@@ -24,23 +36,30 @@ export class ResetPassword {
 
     togglePassword(event: MouseEvent){
         /**Alterna entre mostrar e ocultar a senha */
-        const togglePasswordBtn = event.target as HTMLButtonElement;
+        const passwordEye = event.target as HTMLImageElement;
+
+        const togglePasswordBtn = passwordEye.parentElement as HTMLButtonElement;
 
         var passwordInput;
-        if(togglePasswordBtn.parentElement!=null){
-            passwordInput = togglePasswordBtn.parentElement.getElementsByTagName("input")[0] as HTMLInputElement;
-
-            if (passwordInput.type === "password") {
-                passwordInput.type = "text";
-                togglePasswordBtn.textContent = "Esconder Senha";
-            } else {
-                passwordInput.type = "password";
-                togglePasswordBtn.textContent = "Mostrar Senha";
-            }
+        passwordInput = togglePasswordBtn.parentElement!
+        .getElementsByTagName("input")[0] as HTMLInputElement;
+    
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            passwordEye.src = this.Images.EYE_OFF;
+        } else {
+            passwordInput.type = 'password';
+            passwordEye.src = this.Images.EYE_ON;
+            
         }
     }
 
     resetPassword(){
+        const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{10,})/;
+        const lengthRegex = /^.{10,}$/;
+        const letterRegex = /[a-zA-Z]/;
+        const specialCharRegex = /[\W_]/;
+
         /**Altera a senha do usuario*/
         const resetButton = document.getElementById(
             'reset-button'
@@ -54,11 +73,12 @@ export class ResetPassword {
             'input-password-repeat'
         )! as HTMLInputElement;
 
-        const failedSpan = document.getElementById(
-            'failed-message'
+        const messageSpan = document.getElementById(
+            'message-span'
         )! as HTMLInputElement;
-
-        failedSpan.classList.add("d-none");
+        
+        //esconde a mensagem de erro
+        messageSpan.classList.add("d-none");
 
         const urlParams = new URLSearchParams(window.location.search);
         var token = urlParams.get('token');
@@ -66,10 +86,29 @@ export class ResetPassword {
         const password = passwordInput.value;
         const passwordRepeat = passwordRepeatInput.value;
 
+        //compara as senhas
         if(password != passwordRepeat){
-            failedSpan.textContent = 'As senhas não são iguais';
-            failedSpan.classList.remove("d-none");
+            messageSpan.textContent = this.Messages.DIFF_PASSWORDS;
+            messageSpan.classList.remove("d-none");
 
+            return;
+        }
+
+        //checa se a senha atende as regras
+        if(!passwordRegex.test(password)){
+            if (!specialCharRegex.test(password)) {
+                messageSpan.textContent = this.Messages.NO_SPECIAL;
+            }
+            
+            if (!letterRegex.test(password)) {
+                messageSpan.textContent = this.Messages.NO_LETTERS;
+            }
+            
+            if (!lengthRegex.test(password)) {
+                messageSpan.textContent = this.Messages.NOT_ENOUGH_CHARS;
+            }
+
+            messageSpan.classList.remove("d-none");
             return;
         }
 
@@ -77,37 +116,30 @@ export class ResetPassword {
             this.authService
             .changePassword(password, token)
             .subscribe((resp: any) => {
-                console.log(resp);
                 if(resp.success){
-                    alert('Senha alterada com sucesso');
-                    window.location.href = 'http://localhost:4200/';
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.CHANGE_SUCCESS;
+                    resetButton.disabled = true;
+                    
                 }
                 else if(resp.triesExceeded){
-                    alert('Número de tentativas excedido, tente mais tarde');
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.TOO_MANY_TRIES;
                 }
                 else if(!resp.validToken){
-                    alert('Link expirado');
-                    window.location.href = 'http://localhost:4200/';
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.EXPIRED_LINK;
+                    resetButton.disabled = true;
                 }
                 else{
-                    alert('Algum erro ocorreu');
+                    messageSpan.classList.remove("d-none");
+                    messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
                 }
             });
         }
         catch{
-            console.log('uhh');
+            messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
+            messageSpan.classList.remove("d-none");
         }
-    }
-
-    checkSession(){
-        //**Checa se o usuario ja esta logado*/
-        this.authService
-        .checkSession()
-        .subscribe((resp: any) => {
-            if(resp.loggedIn){
-                window.location.href = 'http://localhost:4200/';
-            }
-        
-        });
     }
 }

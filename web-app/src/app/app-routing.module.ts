@@ -1,14 +1,19 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GeneralMainPageComponent } from './components/general-main-page/general-main-page.component';
 import { LoginComponent } from './components/login/login.component';
-import { RecoverPassword } from './components/recover-password/recover-password.component';
-import { ResetPassword } from './components/reset-password/reset-password.component';
+import { RecoverAccountComponent} from './components/recover-account/recover-account.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { CategoryCreationComponent } from './components/category-creation/category-creation.component';
-import { authGuardLogin, authGuardMain } from './common/auth.guard';
+import { authGuardLogin } from './common/auth.guard';
 
 const routes: Routes = [
-  { path: '', component: GeneralMainPageComponent, canActivate: [authGuardMain] },
+  { 
+    path: '',
+    loadChildren: () =>
+    import('./modules/main-menu-routing/main-menu-routing.module').then(
+      (m) => m.MainMenuRoutingModule
+    ),
+  },
   {
     path: 'home',
     loadChildren: () =>
@@ -17,9 +22,8 @@ const routes: Routes = [
       ),
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuardLogin] },
-  { path: 'recuperar-senha', component: RecoverPassword },
-  { path: 'redefinir-senha', component: ResetPassword },
-  { path: 'categoria', component: CategoryCreationComponent },
+  { path: 'recuperar-conta', component: RecoverAccountComponent, canActivate: [authGuardLogin] },
+  { path: 'redefinir-senha', component: ResetPasswordComponent, canActivate: [authGuardLogin] },
 ];
 
 @NgModule({

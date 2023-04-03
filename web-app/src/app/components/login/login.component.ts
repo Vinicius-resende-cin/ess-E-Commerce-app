@@ -4,12 +4,26 @@ import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+  styleUrls: ['../../common/login.scss'],
 })
 export class LoginComponent {
   constructor(private authService: AuthService) {}
 
+  Messages = {
+    ALREADY_LOGGED: 'Você já estava logado',
+    EMAIL_NOT_REG: 'Email não cadastrado',
+    WRONG_LOGIN: 'Email e senha não correspondem',
+    TOO_MANY_TRIES: 'Número de tentativas excedido. Tente mais tarde',
+    UNKNOWN_ERROR: 'Algo de errado ocorreu'
+  };
+
+  Images = {
+      EYE_OFF: '/assets/images/eye-off.svg',
+      EYE_ON: '/assets/images/eye.svg'
+  };
+
   enableButton() {
+    /**Reativa o botão de login*/
     const loginButton = document.getElementById(
       'login-button'
     )! as HTMLInputElement;
@@ -23,16 +37,16 @@ export class LoginComponent {
       'input-password'
     )! as HTMLInputElement;
 
-    const togglePasswordBtn = document.getElementById(
-      'toggle-password'
+    const passwordEye = document.getElementById(
+      'password-eye'
     )! as HTMLInputElement;
 
     if (passwordInput.type === 'password') {
       passwordInput.type = 'text';
-      togglePasswordBtn.textContent = 'Esconder Senha';
+      passwordEye.src = this.Images.EYE_OFF;
     } else {
       passwordInput.type = 'password';
-      togglePasswordBtn.textContent = 'Mostrar Senha';
+      passwordEye.src = this.Images.EYE_ON;
     }
   }
 
@@ -50,32 +64,44 @@ export class LoginComponent {
       'input-password'
     )! as HTMLInputElement;
 
-    const failedSpan = document.getElementById(
-      'failed-message'
+    const messageSpan = document.getElementById(
+      'message-span'
     )! as HTMLSpanElement;
 
-    failedSpan.classList.add('d-none');
+    messageSpan.classList.add('d-none');
     try {
       this.authService
         .login(emailInput.value, passwordInput.value)
         .subscribe((resp: any) => {
+          //tentativas excedidas
           if (resp.triesExceeded) {
-            failedSpan.classList.remove('d-none');
-            failedSpan.textContent = resp.message;
-          } else if (resp.success || resp.wasLogged) {
-            window.location.href = 'http://localhost:4200/home';
-          } else if (resp.registered) {
-            failedSpan.classList.remove('d-none');
-            failedSpan.textContent = resp.message;
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.TOO_MANY_TRIES;
+          } 
+          //sucesso
+          else if (resp.success || resp.wasLogged) {
+            window.location.href = './home';
+          } 
+          //dados incorretos
+          else if (resp.registered) {
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.WRONG_LOGIN;
             passwordInput.value = '';
             loginButton.disabled = true;
-          } else {
-            failedSpan.classList.remove('d-none');
-            failedSpan.textContent = resp.message;
+          }
+          //email nao registrado
+          else if (!resp.registered){
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.EMAIL_NOT_REG;
+          }
+          else{
+            messageSpan.classList.remove('d-none');
+            messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
           }
         });
     } catch {
-      console.log('uhh');
+      messageSpan.classList.remove('d-none');
+      messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
     }
   }
 
@@ -83,7 +109,7 @@ export class LoginComponent {
     /**Desloga o usuario*/
     this.authService.logout().subscribe((resp: any) => {
       if (resp.success) {
-        window.location.href = 'http://localhost:4200/login';
+        window.location.href = './login';
       }
     });
   }
