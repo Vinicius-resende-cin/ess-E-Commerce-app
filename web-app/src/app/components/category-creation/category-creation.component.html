@@ -19,7 +19,10 @@
                   </tr>
                   <tr>
                      <td colspan="2">
-                        <button (click)="createCategoria(categoria)" class="btn btn-primary">Adicionar</button>
+                        <div class="d-flex justify-content-between">
+                           <button routerLink="/categoria" class="btn btn-primary">Cancelar</button>
+                           <button (click)="createCategoria(categoria)" class="btn btn-primary">Adicionar</button>
+                        </div>
                         <br>
                         <app-alert [message]="alertMessage" *ngIf="alertCategoria"></app-alert>
                      </td>
