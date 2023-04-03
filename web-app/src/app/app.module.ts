@@ -17,6 +17,8 @@ import { AlertComponent } from './components/alert/alert.component';
 import ptBr from '@angular/common/locales/pt';
 import { GeneralMainPageComponent } from './components/general-main-page/general-main-page.component';
 import { MainMenuComponent } from './components/main-menu/main-menu.component';
+import { ViewHistoryComponent } from './components/view-history/view-history.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -30,6 +32,8 @@ registerLocaleData(ptBr);
     AlertComponent,
     GeneralMainPageComponent,
     MainMenuComponent,
+    ViewHistoryComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@ import { RecoverPassword } from './components/recover-password/recover-password.
 import { ResetPassword } from './components/reset-password/reset-password.component';
 import { CategoryCreationComponent } from './components/category-creation/category-creation.component';
 import { authGuardLogin, authGuardMain } from './common/auth.guard';
+import { ViewHistoryComponent } from './components/view-history/view-history.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 
 const routes: Routes = [
   { path: '', component: GeneralMainPageComponent, canActivate: [authGuardMain] },
@@ -20,6 +22,8 @@ const routes: Routes = [
   { path: 'recuperar-senha', component: RecoverPassword },
   { path: 'redefinir-senha', component: ResetPassword },
   { path: 'categoria', component: CategoryCreationComponent },
+  { path: 'historico-pedidos', component: ViewHistoryComponent},
+  { path: 'item/:id', component: ProductDetailComponent},
 ];
 
 @NgModule({
