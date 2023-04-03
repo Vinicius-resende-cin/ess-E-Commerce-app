@@ -1,0 +1,49 @@
+<br><br>
+<table>
+    <thead id="Tabela-titulos">
+        <th>Id_pedido</th>
+        <th>Produtos</th>
+        <th>Data</th>
+        <th>Valor</th>
+        <th>Status</th>
+        <th>Quantidade</th>
+        <th>Disponibilidade</th>
+    </thead>
+
+
+    <thead id={{p.id_pedido}} *ngFor="let p of listaPedidos">
+    
+        <th id="pedido">{{p.id_pedido}}</th>
+    
+        <th>
+            <span *ngFor="let id of p.id_produto">
+                <button (click)="verProduto(id)">
+                    {{consultarNome(id)}}
+                </button>
+            </span>
+        </th>
+    
+        <!--  Convertendo a data para string        Convertendo a hora para string -->
+        <th>{{p.data_hora.toLocaleDateString()}} {{p.data_hora.toLocaleTimeString()}}</th>
+    
+        <th>{{p.valor}}</th>
+    
+        <th>{{p.status}}</th>
+    
+        <th>
+            <span *ngFor="let quantidade of p.quantidade">
+                {{quantidade}}
+            </span>
+        </th>
+    
+        <th>
+            <span *ngFor="let id of p.id_produto">
+                {{consultarDisponibilidade(id)}}
+            </span>
+        </th>
+    
+        <th><button name="button-{{p.id_pedido}}">Comprar Novamente</button></th>
+    </thead>
+</table>
+
+

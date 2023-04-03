@@ -1,18 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
-import { RecoverAccountComponent} from './components/recover-account/recover-account.component';
+import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
-import { CategoryCreationComponent } from './components/category-creation/category-creation.component';
 import { authGuardLogin } from './common/auth.guard';
 
 const routes: Routes = [
-  { 
+  {
     path: '',
     loadChildren: () =>
-    import('./modules/main-menu-routing/main-menu-routing.module').then(
-      (m) => m.MainMenuRoutingModule
-    ),
+      import('./modules/main-menu-routing/main-menu-routing.module').then(
+        (m) => m.MainMenuRoutingModule
+      ),
   },
   {
     path: 'home',
@@ -22,8 +21,17 @@ const routes: Routes = [
       ),
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuardLogin] },
-  { path: 'recuperar-conta', component: RecoverAccountComponent, canActivate: [authGuardLogin] },
-  { path: 'redefinir-senha', component: ResetPasswordComponent, canActivate: [authGuardLogin] },
+  {
+    path: 'recuperar-conta',
+    component: RecoverAccountComponent,
+    canActivate: [authGuardLogin],
+  },
+  {
+    path: 'redefinir-senha',
+    component: ResetPasswordComponent,
+    canActivate: [authGuardLogin],
+  },
+  { path: '**', redirectTo: '' },
 ];
 
 @NgModule({

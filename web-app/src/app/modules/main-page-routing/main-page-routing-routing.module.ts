@@ -5,6 +5,8 @@ import { GeneralMainPageComponent } from 'src/app/components/general-main-page/g
 import { MainPageComponent } from 'src/app/components/main-page/main-page.component';
 import { authGuard } from '../../common/auth.guard';
 import { CategoryCreationComponent } from 'src/app/components/category-creation/category-creation.component';
+import { ViewHistoryComponent } from 'src/app/components/view-history/view-history.component';
+import { ProductDetailComponent } from 'src/app/components/product-detail/product-detail.component';
 
 const routes: Routes = [
   {
@@ -14,7 +16,9 @@ const routes: Routes = [
     children: [
       { path: '', component: GeneralMainPageComponent },
       { path: 'resumo-mensal', component: MonthSummaryComponent },
-      { path: 'categoria', component: CategoryCreationComponent }
+      { path: 'categoria', component: CategoryCreationComponent },
+      { path: 'historico-pedidos', component: ViewHistoryComponent },
+      { path: 'item/:id', component: ProductDetailComponent },
     ],
   },
 ];

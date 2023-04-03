@@ -1,0 +1,9 @@
+<ul>
+    <li>{{item.id}}</li>
+    <li>{{item.nome}}</li>
+    <li>{{item.descricao}}</li>
+    <li>{{item.quantidade}}</li>
+    <li>{{item.preco}}</li>
+    <li *ngFor="let pagamento of item.forma_pagamento">{{pagamento}}</li>
+    <li *ngFor="let categoria of item.categoria">{{categoria}}</li>
+</ul>
