@@ -5,10 +5,12 @@ module.exports = () => {
 
   // Define um Schema
   const pedidoSchema = new Schema({
-    id_pedido: String,
-    id_produto: String,
+    id_pedido: Number,
+    id_produto: Array<String>,
     data_hora: Date,
-    valor: Number
+    valor: Number,
+    quantidade: Array<String>,
+    status: String,
   });
 
   // Define o modelo

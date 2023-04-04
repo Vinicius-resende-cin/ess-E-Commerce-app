@@ -1,0 +1,50 @@
+<div class="container-fluid page-header d-flex flex-column">
+  <div class="align-self-center mb-2">
+    <a href="./home">
+      <img
+        id="logo"
+        src="\assets\images\commercin.png"
+        alt="Logo do commercin"
+      />
+    </a>
+  </div>
+  <div class="container-fluid d-inline-flex align-items-center mt-1 mb-3">
+    <div class="w-75 d-inline-flex justify-content-end">
+      <form class="w-66 d-inline-flex search-bar" role="search">
+        <input
+          class="form-control"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-dark" type="submit">Search</button>
+      </form>
+    </div>
+    <div class="w-25 px-5 d-inline-flex justify-content-end align-items-center">
+      <a
+        name="login"
+        [routerLink]="['/login']"
+        *ngIf="!isLoggedIn"
+        class="nav-link text-dark-alt fs-5 me-3"
+        >Login</a
+      >
+
+      <a
+        name="Logout"
+        [routerLink]="['/login']"
+        *ngIf="isLoggedIn"
+        class="nav-link text-dark-alt fs-5 me-3"
+        (click)="logout()"
+        >Logout</a
+      >
+      <a
+        name="Cadastro-Usuario"
+        [routerLink]="['/Cadastro-Usuario']"
+        *ngIf="!isLoggedIn"
+        class="nav-link text-dark-alt fs-5 me-3"
+        >Cadastro</a
+      >
+    </div>
+  </div>
+</div>
+<app-general-main-page *ngIf="!isLoggedIn"></app-general-main-page>
