@@ -13,9 +13,7 @@ export class CadastroUserComponent {
   cpfDuplicado: boolean = false;
   user = this.criaUser();
 
-
   constructor(private userservice: UserService){}
-
 
   criaUser(): User{
     let user: User = {
@@ -40,39 +38,77 @@ export class CadastroUserComponent {
   verificaSenha(){
     
     if (this.user.senha == this.user.senhaC){
-        this.passwordDiff = false;
+        this.passwordDiff = true;
       }
     else{
-      this.passwordDiff = true;
+      this.passwordDiff = false;
     }
     
     if(this.user.senha.length >=8 ){
-      this.passwordSize = false;
+      this.passwordSize = true;
     }
     else if(this.user.senha == ""){
       this.passwordSize = false;
     
     }
     else{
-      this.passwordSize = true;
+      this.passwordSize = false;
       
     }
   }
 
   enviaUser(){
-    this.userservice.createUser(this.user).subscribe(
-      (result) => {
-        if(result.success){
-          this.user=this.criaUser()
-          console.log(result)
-        }
-        else{
-          this.cpfDuplicado = true;
-          console.log(this.cpfDuplicado)
-          console.log(result)
-        }
-      } 
-    )
-  }
 
+    if (this.passwordSize && this.passwordDiff){
+      this.userservice.createUser(this.user).subscribe(
+        (result) => {
+          if(result.success){
+            this.user=this.criaUser()
+            console.log(result)
+          }
+          else{
+            this.cpfDuplicado = true;
+            alert("CPF ou email Duplicado")
+            this.user.email = '';
+            this.user.emailC = '';
+            this.user.cpf = ''
+          }
+        } 
+      )
+    }
+
+    else if(this.user.nomeCompleto == "" ||
+            this.user.cpf == "" ||
+            this.user.celular == "" ||
+            this.user.dataNasci == "" ||
+            this.user.email == "" ||
+            this.user.emailC == "" ||
+            this.user.senha == "" ||
+            this.user.senhaC == "" ||
+            this.user.endereco == "" ||
+            this.user.complemento == "" ||
+            this.user.cep == "" ||
+            this.user.estado == "" ||
+            this.user.cidade == ""){
+              alert("Há campos vazios no cadastro")
+    }
+
+    else if (this.passwordSize && !this.passwordDiff){
+      alert("As senhas informadas não são iguais")
+      this.user.senha = '';
+      this.user.senhaC = '';
+    }
+    else if(!this.passwordSize && this.passwordDiff){
+      alert("As senhas informadas não possuem 8 caracteres")
+      this.user.senha = '';
+      this.user.senhaC = '';
+    }
+    
+    else{
+      alert("A senha informada não possui 8 caracteres nem é igual a de confirmação")
+      this.user.senha = '';
+      this.user.senhaC = '';
+    }
+    
+  }
 }
