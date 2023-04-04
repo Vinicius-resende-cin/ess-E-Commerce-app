@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { retry, map } from 'rxjs/operators';
 
 import * as Names from 'src/app/common/global-names'
+import * as Types from 'src/app/common/global-types'
 
 @Injectable({
     providedIn: 'root',
@@ -16,5 +17,10 @@ import * as Names from 'src/app/common/global-names'
     getAll(apiEndpoint: string): Observable<Object> {
       const endpointURL = this.apiURL + apiEndpoint;
       return this.http.get<Object>(endpointURL);
+    }
+
+    createItem(newItem: Types.Itens) {
+      const endpointURL = this.apiURL + '/itens';
+      return this.http.post<Object>(endpointURL, newItem); 
     }
   }
