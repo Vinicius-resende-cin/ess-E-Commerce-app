@@ -1,5 +1,4 @@
-import { Sha256 } from '@aws-crypto/sha256-js';
-
+//modelo temporário para testar login, substituir pelo modelo de cadastro final
 module.exports = () => {
     const mongoose = require("mongoose");
   

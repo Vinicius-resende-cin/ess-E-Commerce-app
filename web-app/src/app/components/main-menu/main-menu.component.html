@@ -4,16 +4,16 @@
         <img id="logo" src="\assets\images\commercin.png" alt="Logo do commercin">
     </a>
   </div>
-  <div class="container-fluid d-inline-flex align-items-center mt-1 mb-3">
+  <div class="container-fluid d-inline-flex align-items-center mt-1 mb-4">
     <div class="w-75 d-inline-flex justify-content-end">
       <form class="w-66 d-inline-flex search-bar" role="search">
         <input
           class="form-control"
           type="search"
-          placeholder="Search"
+          placeholder="Pesquisar"
           aria-label="Search"
         />
-        <button class="btn btn-dark" type="submit">Search</button>
+        <button class="btn btn-dark" type="submit">Pesquisar</button>
       </form>
     </div>
     <div class="w-25 px-5 d-inline-flex justify-content-end align-items-center">
@@ -27,7 +27,7 @@
       
       <a
         name="Logout"
-        [routerLink]="['/login']"
+        [routerLink]="['/']"
         *ngIf="isLoggedIn"
         class="nav-link text-dark-alt fs-5"
         (click)="logout()"
