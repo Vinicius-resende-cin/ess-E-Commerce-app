@@ -16,8 +16,6 @@ export class UserService {
 
     createUser(user: {}){
         
-        const params = new HttpParams({ fromObject: user });
-        console.log(params.get('map'))
         return this.http.post<any>(this.apiURL + "/users", user, {headers: this.headers})
     }
 }

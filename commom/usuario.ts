@@ -1,5 +1,6 @@
 export type User = {
     nomeCompleto: String;
+    cpf: String;
     celular: String;
     dataNasci: String;
     email: String;

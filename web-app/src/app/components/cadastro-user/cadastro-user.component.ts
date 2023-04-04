@@ -10,13 +10,17 @@ import { UserService } from 'src/app/services/user.service';
 export class CadastroUserComponent {
   passwordSize: boolean = false;
   passwordDiff: boolean = false;
+  erroCad: boolean = false;
   user = this.criaUser();
 
+
   constructor(private userservice: UserService){}
+
 
   criaUser(): User{
     let user: User = {
       nomeCompleto: "",
+      cpf: "",
       celular: "",
       dataNasci: "",
       email: "",
@@ -38,10 +42,9 @@ export class CadastroUserComponent {
     if (this.user.senha == this.user.senhaC){
         this.passwordDiff = false;
       }
-      else{
-        this.passwordDiff = true;
+    else{
+      this.passwordDiff = true;
     }
-    
     
     if(this.user.senha.length >=8 ){
       this.passwordSize = false;
@@ -58,10 +61,17 @@ export class CadastroUserComponent {
 
   enviaUser(){
     this.userservice.createUser(this.user).subscribe(
-      (result) => {console.log(result)
-      this.user=this.criaUser()} 
+      (result) => {
+        if(result.success){
+          this.user=this.criaUser()
+          console.log(result)
+        }
+        else{
+          this.erroCad = true;
+          console.log(result)
+        }
+      } 
     )
   }
 
-  
 }

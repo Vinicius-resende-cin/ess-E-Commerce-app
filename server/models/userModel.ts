@@ -6,6 +6,7 @@ module.exports = () => {
     // Define um Schema
     const userschema = new Schema({
         nomeCompleto: String,
+        cpf: String,
         celular: String,
         dataNasci: String,
         email: String,
