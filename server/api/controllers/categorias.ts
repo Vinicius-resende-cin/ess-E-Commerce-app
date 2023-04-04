@@ -6,8 +6,17 @@ module.exports = () => {
             console.log(`POST`);
             /* Cria uma nova categoria */
             try {
-                const novaCategoria = await Categoria.create(req.body)
-                res.status(200).json(novaCategoria);
+                //const {nome, descricao} = req.body;
+                const nome = req.body.nome_categoria;
+                const categoriaDuplicada = await Categoria.findOne({ nome_categoria: nome });
+                if (!nome || nome === "") {
+                    res.status(400).json({ message: "A categoria precisa de um nome" });
+                } else if (categoriaDuplicada) {
+                    res.status(400).json({ message: "Já existe uma Categoria com esse nome" });
+                } else {
+                    const novaCategoria = await Categoria.create(req.body);
+                    res.status(200).json(novaCategoria);
+                }
             } catch (err) {
                 res.status(500).send(err);
             }
