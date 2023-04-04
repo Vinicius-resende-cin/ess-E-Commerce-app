@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RecoverAccountComponent } from './components/recover-account/recover-account.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { authGuardLogin } from './common/auth.guard';
+import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,11 @@ const routes: Routes = [
       import('./modules/main-page-routing/main-page-routing.module').then(
         (m) => m.MainPageRoutingModule
       ),
+  },
+  {
+    path: 'Cadastro-Usuario',
+    component: CadastroUserComponent,
+    canActivate: [authGuardLogin],
   },
   { path: 'login', component: LoginComponent, canActivate: [authGuardLogin] },
   {

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,19 +8,19 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['../../common/login.scss'],
 })
 export class LoginComponent {
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   Messages = {
     ALREADY_LOGGED: 'Você já estava logado',
     EMAIL_NOT_REG: 'Email não cadastrado',
     WRONG_LOGIN: 'Email e senha não correspondem',
     TOO_MANY_TRIES: 'Número de tentativas excedido. Tente mais tarde',
-    UNKNOWN_ERROR: 'Algo de errado ocorreu'
+    UNKNOWN_ERROR: 'Algo de errado ocorreu',
   };
 
   Images = {
-      EYE_OFF: '/assets/images/eye-off.svg',
-      EYE_ON: '/assets/images/eye.svg'
+    EYE_OFF: '/assets/images/eye-off.svg',
+    EYE_ON: '/assets/images/eye.svg',
   };
 
   enableButton() {
@@ -77,11 +78,11 @@ export class LoginComponent {
           if (resp.triesExceeded) {
             messageSpan.classList.remove('d-none');
             messageSpan.textContent = this.Messages.TOO_MANY_TRIES;
-          } 
+          }
           //sucesso
           else if (resp.success || resp.wasLogged) {
-            window.location.href = './home';
-          } 
+            this.router.navigate(['/home']);
+          }
           //dados incorretos
           else if (resp.registered) {
             messageSpan.classList.remove('d-none');
@@ -90,11 +91,10 @@ export class LoginComponent {
             loginButton.disabled = true;
           }
           //email nao registrado
-          else if (!resp.registered){
+          else if (!resp.registered) {
             messageSpan.classList.remove('d-none');
             messageSpan.textContent = this.Messages.EMAIL_NOT_REG;
-          }
-          else{
+          } else {
             messageSpan.classList.remove('d-none');
             messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
           }
@@ -109,7 +109,7 @@ export class LoginComponent {
     /**Desloga o usuario*/
     this.authService.logout().subscribe((resp: any) => {
       if (resp.success) {
-        window.location.href = './login';
+        this.router.navigate(['/login']);
       }
     });
   }

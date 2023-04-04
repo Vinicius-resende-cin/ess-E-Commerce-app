@@ -25,7 +25,7 @@
         name="login"
         [routerLink]="['/login']"
         *ngIf="!isLoggedIn"
-        class="nav-link text-dark-alt fs-5"
+        class="nav-link text-dark-alt fs-5 me-3"
         >Login</a
       >
 
@@ -33,9 +33,16 @@
         name="Logout"
         [routerLink]="['/login']"
         *ngIf="isLoggedIn"
-        class="nav-link text-dark-alt fs-5"
+        class="nav-link text-dark-alt fs-5 me-3"
         (click)="logout()"
         >Logout</a
+      >
+      <a
+        name="Cadastro-Usuario"
+        [routerLink]="['/Cadastro-Usuario']"
+        *ngIf="!isLoggedIn"
+        class="nav-link text-dark-alt fs-5 me-3"
+        >Cadastro</a
       >
     </div>
   </div>
