@@ -10,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
 export class CadastroUserComponent {
   passwordSize: boolean = false;
   passwordDiff: boolean = false;
-  erroCad: boolean = false;
+  cpfDuplicado: boolean = false;
   user = this.criaUser();
 
 
@@ -67,7 +67,8 @@ export class CadastroUserComponent {
           console.log(result)
         }
         else{
-          this.erroCad = true;
+          this.cpfDuplicado = true;
+          console.log(this.cpfDuplicado)
           console.log(result)
         }
       } 
