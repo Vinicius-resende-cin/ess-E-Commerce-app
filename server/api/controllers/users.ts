@@ -1,4 +1,5 @@
 import { User } from '../../../commom/usuario'
+import { Sha256 } from '@aws-crypto/sha256-js';
 
 module.exports = () => {
     const userModel = require("../../models/userModel")();
@@ -42,6 +43,13 @@ module.exports = () => {
                 console.log(cpfExist);
                 console.log(emailExist);
                 if(cpfExist.length === 0 && emailExist.length === 0){
+                    //Realiza o hash da senha
+                    const hash = new Sha256();
+                    hash.update(user.senha);
+                    const hashPass = await hash.digest();
+                    user.senha = hashPass
+                    user.senhaC = hashPass
+
                     await userModel.create(user);
                     res.send({"success": "O User foi inserido com sucesso"});
                 }

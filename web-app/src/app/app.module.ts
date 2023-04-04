@@ -21,7 +21,6 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
 
 import ptBr from '@angular/common/locales/pt';
-import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
 registerLocaleData(ptBr);
 
 @NgModule({
