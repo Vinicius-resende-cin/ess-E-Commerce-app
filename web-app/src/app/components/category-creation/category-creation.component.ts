@@ -1,53 +1,69 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/services/categoria.service';
 
 import { Categoria } from 'src/app/common/global-types';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-category-creation',
   templateUrl: './category-creation.component.html',
-  styleUrls: ['./category-creation.component.scss']
+  styleUrls: ['./category-creation.component.scss'],
 })
 //export class CategoryCreationComponent implements OnInit {
-export class CategoryCreationComponent{
-  constructor(private categoriaService: CategoriaService) {}
+export class CategoryCreationComponent {
+  constructor(
+    private categoriaService: CategoriaService,
+    private router: Router
+  ) {}
 
   categoria: Categoria = {
-    nome_categoria: "",
-    descricao_categoria: ""
+    nome_categoria: '',
+    descricao_categoria: '',
   };
   categorias: Categoria[] = [];
-  categoriaDuplicada: boolean = false;
-  nomeInvalido: boolean = false;
-  alertMessage: string = "";
+  alertCategoria: boolean = false;
+  alertMessage: string = '';
 
-  createCategoria(categoria: Categoria): void {
-    
-    if (!(this.categorias.find(ctg => ctg.nome_categoria === categoria.nome_categoria))) {
-      if (categoria.nome_categoria != "") {
-        this.categoriaService.createCategory(categoria.nome_categoria, categoria.descricao_categoria);
-        this.categorias.push(this.cloneCategoria(categoria));
-        this.clear_categoria();
-      }
-      else {
-        this.alertMessage = "ERRO, NOME NECESSÁRIO!!!";
-        this.nomeInvalido = true;
-      }
-    }
-    else {
-      this.alertMessage = "ERRO, CATEGORIA JÁ EXISTE!!!";
-      this.categoriaDuplicada = true;
+  createCategoria(categoria: Categoria) {
+    if (!categoria.nome_categoria || categoria.nome_categoria.trim() === '') {
+      this.alertMessage = 'Nome necessário';
+      this.alertCategoria = true;
+    } else {
+      this.categoriaService
+        .createCategory(categoria.nome_categoria, categoria.descricao_categoria)
+        .subscribe(
+          (novaCategoria) => {
+            console.log(novaCategoria);
+            this.alertMessage = 'Categoria criada com sucesso';
+            this.alertCategoria = true;
+            this.clearCategoria();
+          },
+          (erro) => {
+            if (erro.error.message === 'A categoria precisa de um nome') {
+              this.alertMessage = 'Nome necessário';
+              this.alertCategoria = true;
+            } else if (
+              erro.error.message === 'Já existe uma Categoria com esse nome'
+            ) {
+              this.alertMessage = 'Categoria existente';
+              this.alertCategoria = true;
+            } else {
+              this.alertMessage = 'Erro ao criar categoria';
+              this.alertCategoria = true;
+            }
+          }
+        );
     }
   }
 
-  /*onMove(): void {
-    this.clearErros();
-  }*/
+  sairDaCriacao() {
+    this.router.navigate(['home', 'categoria']);
+  }
 
-  clear_categoria(): void {
-   this.categoria.nome_categoria = "";
-   this.categoria.descricao_categoria = "";
+  clearCategoria(): void {
+    this.categoria.nome_categoria = '';
+    this.categoria.descricao_categoria = '';
   }
 
   cloneCategoria(categoria: Categoria): Categoria {
@@ -55,7 +71,6 @@ export class CategoryCreationComponent{
   }
 
   clearErros(): void {
-    this.categoriaDuplicada = false;
-    this.nomeInvalido = false;
+    this.alertCategoria = false;
   }
 }

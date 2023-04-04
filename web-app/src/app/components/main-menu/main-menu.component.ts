@@ -9,11 +9,10 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class MainMenuComponent {
   title = Names.appTitle;
-  isLoggedIn = false;
+  isLoggedIn = true;
 
   constructor(private authService: AuthService) {}
 
-  
   ngOnInit(): void {
     this.checkSession();
   }
@@ -22,24 +21,19 @@ export class MainMenuComponent {
     window.location.href = 'http://localhost:4200/';
   }
 
-  logout(){
+  logout() {
     /**Desloga o usuario*/
-    this.authService
-    .logout()
-    .subscribe((resp: any) => {
-        if(resp.success){
-            window.location.href = 'http://localhost:4200/';
-        }
+    this.authService.logout().subscribe((resp: any) => {
+      if (resp.success) {
+        window.location.href = 'http://localhost:4200/';
+      }
     });
   }
 
-  checkSession(){
+  checkSession() {
     //**Checa se o usuario ja esta logado*/
-    this.authService
-    .checkSession()
-    .subscribe((resp: any) => {
+    this.authService.checkSession().subscribe((resp: any) => {
       this.isLoggedIn = resp.loggedIn;
     });
   }
-
 }

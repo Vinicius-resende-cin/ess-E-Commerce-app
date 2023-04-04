@@ -1,7 +1,11 @@
 <div class="container-fluid page-header d-flex flex-column">
   <div class="align-self-center mb-2">
     <a href="./home">
-        <img id="logo" src="\assets\images\commercin.png" alt="Logo do commercin">
+      <img
+        id="logo"
+        src="\assets\images\commercin.png"
+        alt="Logo do commercin"
+      />
     </a>
   </div>
   <div class="container-fluid d-inline-flex align-items-center mt-1 mb-4">
@@ -24,7 +28,7 @@
         class="nav-link text-dark-alt fs-5"
         >Login</a
       >
-      
+
       <a
         name="Logout"
         [routerLink]="['/']"
@@ -33,7 +37,7 @@
         (click)="logout()"
         >Logout</a
       >
-      
     </div>
   </div>
 </div>
+<app-general-main-page *ngIf="!isLoggedIn"></app-general-main-page>
