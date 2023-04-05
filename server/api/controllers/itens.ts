@@ -26,8 +26,7 @@ module.exports = () => {
             });
             
             if (faltaInfo) {
-              console.log('Preencha todas as informações');
-              res.status(400).json({message: "Preencha todos os campos!"});
+              res.status(400).json({message: "Preencha todos os campos corretamente!"});
 
             } else if (itemDuplicado) {
               res.status(400).json({ message: "Já existe um Item com esse titulo" });

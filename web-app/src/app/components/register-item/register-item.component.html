@@ -1,6 +1,6 @@
 <form (submit)="cadastrarItem(item)">
   <div>
-    <label for="nome">ID: </label>
+    <label for="nome">ID:</label>
     <input type="text" id="id" name="id" [(ngModel)]="item.id">
   </div>
     <div>
@@ -10,6 +10,10 @@
     <div>
       <label for="descricao">Descrição:</label>
       <input type="text" id="descricao" name="descricao" [(ngModel)]="item.descricao">
+    </div>
+    <div>
+      <label for="imagem">Imagem: </label>
+      <input type="file" name="imagem" id="imagem" accept="image/*" class="picture_image" [(ngModel)]="item.imagem">
     </div>
     <div>
       <label for="quantidade">Quantidade:</label>
@@ -29,7 +33,7 @@
       </select>
     </div>
     <div>
-      <label for="categoria">Categorias:</label>
+      <label for="categoria">Categorias: </label>
       <select id="categoria" name="categoria" multiple [(ngModel)]="item.categoria">
         <option value="alimentos">Alimentos</option>
         <option value="vestuario">Vestuário</option>
