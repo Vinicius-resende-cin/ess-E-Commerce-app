@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class CadastroUserComponent {
   passwordSize: boolean = false;
   passwordDiff: boolean = false;
+  passwordChar: boolean = false;
+  passwordEspecial: boolean = false;
   cpfDuplicado: boolean = false;
   user = this.criaUser();
 
@@ -37,35 +39,59 @@ export class CadastroUserComponent {
   }
 
   verificaSenha() {
-    if (this.user.senha == this.user.senhaC) {
+
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{8,})/;
+    const lengthRegex = /^.{8,}$/;
+    const letterRegex = /[a-zA-Z]/;
+    const specialCharRegex = /[\W_]/;
+
+    let password: string = this.user.senha.toString();
+
+    if (this.user.senha == this.user.senhaC && lengthRegex.test(password)) {
       this.passwordDiff = true;
     } else {
       this.passwordDiff = false;
     }
 
-    if (this.user.senha.length >= 8) {
+    if (lengthRegex.test(password)) {
       this.passwordSize = true;
-    } else if (this.user.senha == '') {
+    }  
+    else{
       this.passwordSize = false;
-    } else {
-      this.passwordSize = false;
+    }
+    if(letterRegex.test(password)) {
+      this.passwordChar = true;
+    }
+    else{
+      this.passwordChar = false;
+    }
+    if(specialCharRegex.test(password)){
+      this.passwordEspecial = true;
+    }
+    else{
+      this.passwordEspecial = false;
     }
   }
 
-  enviaUser() {
+
+  enviaUser(){
     if (this.passwordSize && this.passwordDiff) {
       this.userservice.createUser(this.user).subscribe((result) => {
         if (result.success) {
           this.user = this.criaUser();
           console.log(result);
           this.router.navigate(['/login']);
-        } else {
-          this.cpfDuplicado = true;
-          alert('CPF ou email Duplicado');
+        } else if(result.CPF){
+          alert("O CPF a ser cadastrado já existe no sistema");
+          this.user.cpf = '';
+        } else if(result.EMAIL){
+          alert('O E-mail a ser cadastrado já existe no sistema');
           this.user.email = '';
           this.user.emailC = '';
-          this.user.cpf = '';
+        }else{
+          alert('Houve um erro inesperado, tente novamente')
         }
+
       });
     } else if (
       this.user.nomeCompleto == '' ||
@@ -88,7 +114,7 @@ export class CadastroUserComponent {
       this.user.senha = '';
       this.user.senhaC = '';
     } else if (!this.passwordSize && this.passwordDiff) {
-      alert('As senhas informadas não possuem 8 caracteres');
+      alert('As senhas informadas não segue as regras de possui 8 caracters, sendo 1 letra e 1 caractere especial');
       this.user.senha = '';
       this.user.senhaC = '';
     } else {

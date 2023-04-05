@@ -35,6 +35,7 @@
     "jasmine": "^2.8.0",
     "jasmine-promises": "^0.4.1",
     "request-promise": "^4.2.2",
-    "typescript": "4.8.2"
+    "typescript": "4.8.2",
+    "@types/node": "^18.14.0"
   }
 }
