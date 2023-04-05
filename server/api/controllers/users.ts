@@ -1,4 +1,4 @@
-import { User } from '../../../commom/usuario'
+import { User } from '../../../common/usuario'
 
 module.exports = () => {
     const userModel = require("../../models/userModel")();

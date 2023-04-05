@@ -38,7 +38,7 @@ const Messages = {
     DIFF_PASSWORDS: 'As senhas não são iguais',
     NO_SPECIAL: 'A senha precisa ter pelo menos um caractere especial',
     NO_LETTERS: 'A senha precisa ter pelo menos uma letra',
-    NOT_ENOUGH_CHARS: 'A senha precisa ter pelo menos 10 caracteres',
+    NOT_ENOUGH_CHARS: 'A senha precisa ter pelo menos 8 caracteres',
     EXPIRED_LINK: 'Link expirado',
     TOO_MANY_TRIES: 'Número de tentativas excedido. Tente mais tarde',
     UNKNOWN_ERROR: 'Algo de errado ocorreu'
