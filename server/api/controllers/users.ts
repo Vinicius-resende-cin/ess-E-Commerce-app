@@ -51,8 +51,14 @@ module.exports = () => {
                     await userModel.create(user);
                     res.send({"success": "O User foi inserido com sucesso"});
                 }
+                else if(!(cpfExist.length === 0) && emailExist.length === 0){
+                    res.send({"CPF": "O CPF a ser cadastrado já existe no sistema"});
+                }
+                else if (cpfExist.length === 0 && !(emailExist.length === 0)){
+                    res.send({"EMAIL": "O E-mail a ser cadastrado já existe no sistema"});
+                }
                 else{
-                    res.send({"failure": "O User não pode ser inserido, CPF ou Email repetido"});
+                    res.send({"failure": "O User não pode ser inserido"});
                 }
             }
             catch(RR){

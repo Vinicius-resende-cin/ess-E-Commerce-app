@@ -28,10 +28,15 @@
         <input [(ngModel)]="user.emailC" class="form-control" type="email">
 
         <label class="text-sub input-group pt-2">Senha</label>
-        <input [(ngModel)]="user.senha" class="form-control" type="password">
+        <input [(ngModel)]="user.senha" (keyup)="verificaSenha()" class="form-control" type="password">
 
         <label class="text-sub input-group pt-2">Confirmação Senha</label> 
-        <input [(ngModel)]="user.senhaC" class="form-control" type="password">
+        <input [(ngModel)]="user.senhaC" (keyup)="verificaSenha()" class="form-control" type="password">
+
+        <p class="pt-2" [class.text-danger] = "!passwordSize" [class.text-success] = "passwordSize">A Senha deve possuir 8 caracteres</p>
+        <p [class.text-danger] = "!passwordDiff" [class.text-success] = "passwordDiff">As senhas devem ser iguais</p>
+        <p [class.text-danger] = "!passwordChar" [class.text-success] = "passwordChar">A senha deve possuir ao menos uma letra</p>
+        <p [class.text-danger] = "!passwordEspecial" [class.text-success] = "passwordEspecial">A senha deve possuir ao menos um caracter especial</p>
       </div>
 
       <div class="container-fluid">

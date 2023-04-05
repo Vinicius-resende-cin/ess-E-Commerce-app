@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class CadastroUserComponent {
   passwordSize: boolean = false;
   passwordDiff: boolean = false;
+  passwordChar: boolean = false;
+  passwordEspecial: boolean = false;
   cpfDuplicado: boolean = false;
   user = this.criaUser();
 
@@ -45,33 +47,51 @@ export class CadastroUserComponent {
 
     let password: string = this.user.senha.toString();
 
-    if (this.user.senha == this.user.senhaC) {
+    if (this.user.senha == this.user.senhaC && lengthRegex.test(password)) {
       this.passwordDiff = true;
     } else {
       this.passwordDiff = false;
     }
 
-    if (passwordRegex.test(password)) {
+    if (lengthRegex.test(password)) {
       this.passwordSize = true;
     }  
+    else{
+      this.passwordSize = false;
+    }
+    if(letterRegex.test(password)) {
+      this.passwordChar = true;
+    }
+    else{
+      this.passwordChar = false;
+    }
+    if(specialCharRegex.test(password)){
+      this.passwordEspecial = true;
+    }
+    else{
+      this.passwordEspecial = false;
+    }
   }
 
 
   enviaUser(){
-    this.verificaSenha()
     if (this.passwordSize && this.passwordDiff) {
       this.userservice.createUser(this.user).subscribe((result) => {
         if (result.success) {
           this.user = this.criaUser();
           console.log(result);
           this.router.navigate(['/login']);
-        } else {
-          this.cpfDuplicado = true;
-          alert('CPF ou email Duplicado');
+        } else if(result.CPF){
+          alert("O CPF a ser cadastrado já existe no sistema");
+          this.user.cpf = '';
+        } else if(result.EMAIL){
+          alert('O E-mail a ser cadastrado já existe no sistema');
           this.user.email = '';
           this.user.emailC = '';
-          this.user.cpf = '';
+        }else{
+          alert('Houve um erro inesperado, tente novamente')
         }
+
       });
     } else if (
       this.user.nomeCompleto == '' ||
