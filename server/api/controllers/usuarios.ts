@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 const nodemailer = require('nodemailer'); 
-const Cadastro = require("../../models/cadastroModel")();
+const userModel = require("../../models/userModel")();
 const app = require("../../config/express")();
 const jwt = require('jsonwebtoken');
 const email_psw = app.get("email_psw");
@@ -14,7 +14,7 @@ module.exports = () => {
         /** */
         try {
             const reqEmail = req.params.id;
-            const foundUser = await Cadastro.findOne({email: reqEmail}, { _id: false, _v: false }).exec();
+            const foundUser = await userModel.findOne({email: reqEmail}, { _id: false, _v: false }).exec();
 
             //se email nao estiver no BD
             if(!foundUser){
@@ -26,7 +26,7 @@ module.exports = () => {
             //se esta no BD
             else{
                 const token = jwt.sign({ email: reqEmail }, token_sk, { expiresIn: '10m' });
-                const resetUrl = 'http://localhost:4200/redefinir-senha?token='+token;
+                const resetUrl = 'http://localhost:4200/redefinir-senha?token=' + token;
                 const senderEmail = 'ecommercin@gmail.com';
                 const senderPass = email_psw;
 
@@ -80,7 +80,7 @@ module.exports = () => {
                 hash.update(password);
                 const hashPass = await hash.digest();
                 
-                Cadastro.updateOne({email: email}, { $set: { hash_senha: hashPass}}).exec();
+                userModel.updateOne({email: email}, { $set: { senha: hashPass, senhaC: hashPass}}).exec();
                 res.status(200).json({
                     success: true,
                 });

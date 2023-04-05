@@ -21,10 +21,14 @@ export class ResetPasswordComponent {
         UNKNOWN_ERROR: 'Algo de errado ocorreu'
     };
 
-    Images = {
-        EYE_OFF: '/assets/images/eye-off.svg',
-        EYE_ON: '/assets/images/eye.svg'
-    };
+    imgEyeOn = new Image();
+    imgEyeOff = new Image();
+
+    //inicializa imagens
+    ngOnInit(): void {
+        this.imgEyeOn.src = '/assets/images/eye.svg';
+        this.imgEyeOff.src = '/assets/images/eye-off.svg';
+    }
 
     enableButton(){
         const resetButton = document.getElementById(
@@ -46,10 +50,10 @@ export class ResetPasswordComponent {
     
         if (passwordInput.type === 'password') {
             passwordInput.type = 'text';
-            passwordEye.src = this.Images.EYE_OFF;
+            passwordEye.src = this.imgEyeOff.src;
         } else {
             passwordInput.type = 'password';
-            passwordEye.src = this.Images.EYE_ON;
+            passwordEye.src = this.imgEyeOn.src;
             
         }
     }
