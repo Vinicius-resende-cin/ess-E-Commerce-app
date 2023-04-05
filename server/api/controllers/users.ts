@@ -16,9 +16,7 @@ module.exports = () => {
                     celular: "$celular",
                     dataNasci: "$dataNasci",
                     email: "$email",
-                    emailC: "$emailC",
                     senha: "$senha",
-                    senhaC: "$senhaC",
                     endereco: "$endereco",
                     complemento: "$complemento",
                     cep: "$cep",
@@ -37,7 +35,8 @@ module.exports = () => {
         sendUser : async (req:any, res:any) => {
             try{
                 let user = req.body //Recebe os valores do put
-                
+                delete user.senhaC
+                delete user.emailC
                 let cpfExist: any = await controller.verifyExist({'cpf': user.cpf});
                 let emailExist: any = await controller.verifyExist({'email': user.email});
                 console.log(cpfExist);
@@ -48,7 +47,6 @@ module.exports = () => {
                     hash.update(user.senha);
                     const hashPass = await hash.digest();
                     user.senha = hashPass
-                    user.senhaC = hashPass
 
                     await userModel.create(user);
                     res.send({"success": "O User foi inserido com sucesso"});
