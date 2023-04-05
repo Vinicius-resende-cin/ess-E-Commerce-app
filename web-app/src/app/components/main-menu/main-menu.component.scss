@@ -1,5 +1,10 @@
 $blue-alt: #2d60e3;
-$black-alt: #363636;
+$black-alt: #333333;
+
+#logo:active {
+  transform: scale(0.98);
+  transition: all 0.3s ease;
+}
 
 .page-header {
   background: $blue-alt;
@@ -21,4 +26,12 @@ $black-alt: #363636;
 .text-dark-alt {
   color: $black-alt;
   font-weight: bold;
+}
+
+.search-bar input {
+  border-radius: 20px 0px 0px 20px;
+}
+
+.search-bar button {
+  border-radius: 0px 20px 20px 0px;
 }
