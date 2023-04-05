@@ -17,19 +17,36 @@ module.exports = () => {
         try {
             const nome = req.body.nome;
             const itemDuplicado = await Item.findOne({ nome: nome });
+            let faltaInfo = false;
 
-            if (!nome || nome === "") {
-                res.status(400).json({ message: "O item precisa de um titulo" });
+            Object.keys(req.body).forEach((item) => {
+              if (!req.body[item] || req.body[item] === ""){
+                faltaInfo = true;
+              }
+            });
+            
+            if (faltaInfo) {
+              console.log('Preencha todas as informações');
+              res.status(400).json({message: "Preencha todos os campos!"});
+
             } else if (itemDuplicado) {
-                res.status(400).json({ message: "Já existe um Item com esse titulo" });
+              res.status(400).json({ message: "Já existe um Item com esse titulo" });
+
             } else {
-                const newItem = await Item.create(req.body);
-                res.status(200).json(newItem);
+              console.log('Dados enviados!')
+              const newItem = await Item.create(req.body);
+              res.status(200).json(newItem);
+
             }
+
+            faltaInfo = false;
         } catch (err) {
             res.status(500).send(err);
         }
     }
+
+    //FAZER O DELETEITEM
+    
     };
   
     return controller;
