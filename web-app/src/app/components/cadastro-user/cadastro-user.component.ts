@@ -37,22 +37,28 @@ export class CadastroUserComponent {
   }
 
   verificaSenha() {
+
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{8,})/;
+    const lengthRegex = /^.{8,}$/;
+    const letterRegex = /[a-zA-Z]/;
+    const specialCharRegex = /[\W_]/;
+
+    let password: string = this.user.senha.toString();
+
     if (this.user.senha == this.user.senhaC) {
       this.passwordDiff = true;
     } else {
       this.passwordDiff = false;
     }
 
-    if (this.user.senha.length >= 8) {
+    if (passwordRegex.test(password)) {
       this.passwordSize = true;
-    } else if (this.user.senha == '') {
-      this.passwordSize = false;
-    } else {
-      this.passwordSize = false;
-    }
+    }  
   }
 
-  enviaUser() {
+
+  enviaUser(){
+    this.verificaSenha()
     if (this.passwordSize && this.passwordDiff) {
       this.userservice.createUser(this.user).subscribe((result) => {
         if (result.success) {
@@ -88,7 +94,7 @@ export class CadastroUserComponent {
       this.user.senha = '';
       this.user.senhaC = '';
     } else if (!this.passwordSize && this.passwordDiff) {
-      alert('As senhas informadas não possuem 8 caracteres');
+      alert('As senhas informadas não segue as regras de possui 8 caracters, sendo 1 letra e 1 caractere especial');
       this.user.senha = '';
       this.user.senhaC = '';
     } else {
