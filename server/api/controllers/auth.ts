@@ -1,5 +1,5 @@
 import { Sha256 } from '@aws-crypto/sha256-js';
-const Cadastro = require("../../models/cadastroModel")();
+const userModel = require("../../models/userModel")();
 
 module.exports = () => {
   const controller = {
@@ -18,7 +18,7 @@ module.exports = () => {
           });
         }
         else{
-          const foundUser = await Cadastro.findOne({email: params.email}, { _id: false, _v: false }).exec();
+          const foundUser = await userModel.findOne({email: params.email}, { _id: false, _v: false }).exec();
           
           //se email nao estiver no BD
           if(!foundUser){
@@ -37,9 +37,9 @@ module.exports = () => {
             const hashPass = await hash.digest();
 
             //se email esta no BD e senha esta correta
-            if (foundUser.hash_senha == hashPass){
+            if (foundUser.senha == hashPass){
               req.session.loggedIn = true;
-              req.session.user_id = foundUser.id_usuario;
+              req.session.user_email = foundUser.email;
 
               req.session.save(function (err: any) {
                 if (err)
