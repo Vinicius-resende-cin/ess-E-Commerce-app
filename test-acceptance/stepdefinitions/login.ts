@@ -8,6 +8,7 @@ import {
   by,
   ElementFinder
 } from "protractor";
+import Messages from '../../common/messages';
 
 let chai = require("chai").use(require("chai-as-promised"));
 let expect = chai.expect;
@@ -17,7 +18,7 @@ const jwt = require('jsonwebtoken');
 const { setDefaultTimeout } = require('cucumber');
 setDefaultTimeout(10000);
 
-require("dotenv").config({ path: "server/config/.env" });
+require("dotenv").config({ path: "../server/config/.env" });
 
 const baseUrl = "http://localhost:4200/";
 
@@ -29,23 +30,8 @@ const PageUrls = {
     RECUPERAR_CONTA: "recuperar-conta",
 };
 
-const Messages = {
-    ALREADY_LOGGED: 'Você já estava logado',
-    EMAIL_NOT_REG: 'Email não cadastrado',
-    WRONG_LOGIN: 'Email e senha não correspondem',
-    REQUEST_SUCCESS: 'Link de recuperação enviado ao seu email',
-    CHANGE_SUCCESS: 'Senha alterada com sucesso',
-    DIFF_PASSWORDS: 'As senhas não são iguais',
-    NO_SPECIAL: 'A senha precisa ter pelo menos um caractere especial',
-    NO_LETTERS: 'A senha precisa ter pelo menos uma letra',
-    NOT_ENOUGH_CHARS: 'A senha precisa ter pelo menos 8 caracteres',
-    EXPIRED_LINK: 'Link expirado',
-    TOO_MANY_TRIES: 'Número de tentativas excedido. Tente mais tarde',
-    UNKNOWN_ERROR: 'Algo de errado ocorreu'
-};
-
 async function getToken(email: string){
-    return jwt.sign({ email: email }, "k8JF9upql53mJ8eA", { expiresIn: '10m' });
+    return jwt.sign({ email: email }, process.env.TOKEN_SK, { expiresIn: '10m' });
 }
 
 async function checkLogged() {
