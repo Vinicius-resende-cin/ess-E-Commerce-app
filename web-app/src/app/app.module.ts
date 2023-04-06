@@ -36,7 +36,7 @@ registerLocaleData(ptBr);
     AlertComponent,
     GeneralMainPageComponent,
     MainMenuComponent,
-    ViewHistoryComponent,
+    //ViewHistoryComponent,
     ProductDetailComponent,
     RegisterItemComponent,
   ],

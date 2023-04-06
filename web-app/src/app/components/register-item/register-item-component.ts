@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
 
-import { Itens } from 'src/app/common/global-types';
+import { Categoria, Itens } from 'src/app/common/global-types';
+import { Router } from '@angular/router';
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 
 @Component({
@@ -11,11 +13,12 @@ import { Itens } from 'src/app/common/global-types';
 })
 
 export class RegisterItemComponent {
-    constructor(private itemservice: ItemService) { 
+    category_list!: Categoria[];
+    constructor(private itemservice: ItemService, private router: Router, private categoriaService: CategoriaService) { 
     }
 
     item: Itens = {
-      id: '',
+      _id: null,
       nome: '',
       descricao: '',
       imagem: null,
@@ -34,4 +37,20 @@ export class RegisterItemComponent {
           }
         )
     }
+
+    ngOnInit(): void {
+      this.getCategory();
+    }
+  
+    ngOnChanges(): void {
+      this.getCategory();
+    }
+  
+    getCategory(): void {
+      this.categoriaService.getCategories().subscribe((result) => {
+        this.category_list = result as Categoria[];
+      });
+    }
+    
+
 }
