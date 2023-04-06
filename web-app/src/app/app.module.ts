@@ -21,6 +21,7 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
 
 import ptBr from '@angular/common/locales/pt';
+import { CategoryUpdateComponent } from './components/category-update/category-update.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -38,6 +39,7 @@ registerLocaleData(ptBr);
     ViewHistoryComponent,
     ProductDetailComponent,
     CadastroUserComponent,
+    CategoryUpdateComponent,
   ],
   imports: [
     BrowserModule,

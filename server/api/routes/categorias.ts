@@ -8,7 +8,7 @@ module.exports = () => {
   router.post("/", controller.createCategory);
   router.get("/criar-categoria", controller.createCategory);
 
-  router.put("/:id", controller.updateCategory);
+  router.put("/:nome", controller.updateCategory);
 
   return router;
 };

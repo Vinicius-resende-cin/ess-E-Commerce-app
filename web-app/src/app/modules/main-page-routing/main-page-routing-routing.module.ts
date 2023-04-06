@@ -8,6 +8,7 @@ import { CategoryCreationComponent } from 'src/app/components/category-creation/
 import { ViewHistoryComponent } from 'src/app/components/view-history/view-history.component';
 import { ProductDetailComponent } from 'src/app/components/product-detail/product-detail.component';
 import { CategoryListComponent } from 'src/app/components/category-list/category-list.component';
+import { CategoryUpdateComponent } from 'src/app/components/category-update/category-update.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,7 @@ const routes: Routes = [
       { path: 'resumo-mensal', component: MonthSummaryComponent },
       { path: 'categoria', component: CategoryListComponent },
       { path: 'criacao-nova-categoria', component: CategoryCreationComponent },
+      { path: 'categoria/:id', component: CategoryUpdateComponent},
       { path: 'historico-pedidos', component: ViewHistoryComponent },
       { path: 'item/:id', component: ProductDetailComponent },
     ],
