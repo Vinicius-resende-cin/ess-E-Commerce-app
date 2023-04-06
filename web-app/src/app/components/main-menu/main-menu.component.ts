@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as Names from '../../common/global-names';
 import { AuthService } from 'src/app/services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main-menu',
@@ -11,10 +12,13 @@ export class MainMenuComponent {
   title = Names.appTitle;
   isLoggedIn = true;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.checkSession();
+    if (this.isLoggedIn && this.router.url == '') {
+      this.router.navigate(['/home']);
+    }
   }
 
   goHome() {
