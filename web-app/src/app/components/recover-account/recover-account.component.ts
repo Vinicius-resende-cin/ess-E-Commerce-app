@@ -13,10 +13,29 @@ export class RecoverAccountComponent {
     Messages = {
         REQUEST_SUCCESS: 'Link de recuperação enviado ao seu email',
         TOO_MANY_TRIES: 'Limites de tentativas excedido. Tente mais tarde',
-        EMAIL_NOT_REG: 'Email não cadastrado'
+        EMAIL_NOT_REG: 'Email não cadastrado',
+        UNKNOWN_ERROR: 'Algo de errado ocorreu'
     };
 
+    enableButton() {
+        /**Reativa o botão de login*/
+        const emailInput = document.getElementById(
+          'input-email'
+        )! as HTMLInputElement;
+    
+        const requestButton = document.getElementById(
+          'request-button'
+        )! as HTMLInputElement;
+        
+        const isButtonDisabled = emailInput.value == "";
+        requestButton.disabled = isButtonDisabled;
+      }
+
     requestReset(){
+        const requestButton = document.getElementById(
+            'request-button'
+          )! as HTMLInputElement;
+
         const emailInput = document.getElementById(
             'input-email'
         )! as HTMLInputElement;
@@ -35,7 +54,7 @@ export class RecoverAccountComponent {
         this.authService
         .requestReset(reqEmail)
         .subscribe((resp: any) => {
-            console.log(resp);
+            requestButton.disabled = true;
             if(resp.success){
                 messageSpan.classList.remove('d-none');
                 messageSpan.textContent = this.Messages.REQUEST_SUCCESS;
@@ -47,6 +66,10 @@ export class RecoverAccountComponent {
             else if(!resp.registered){
                 messageSpan.classList.remove('d-none');
                 messageSpan.textContent = this.Messages.EMAIL_NOT_REG;
+            }
+            else{
+                messageSpan.classList.remove('d-none');
+                messageSpan.textContent = this.Messages.UNKNOWN_ERROR;
             }
         });
     }

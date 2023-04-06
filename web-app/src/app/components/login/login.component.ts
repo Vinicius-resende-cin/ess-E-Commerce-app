@@ -29,11 +29,20 @@ export class LoginComponent {
 
   enableButton() {
     /**Reativa o botão de login*/
+    const emailInput = document.getElementById(
+      'input-email'
+    )! as HTMLInputElement;
+
+    const passwordInput = document.getElementById(
+      'input-password'
+    )! as HTMLInputElement;
+
     const loginButton = document.getElementById(
       'login-button'
     )! as HTMLInputElement;
-
-    loginButton.disabled = false;
+    
+    const isButtonDisabled = emailInput.value == "" || passwordInput.value == "";
+    loginButton.disabled = isButtonDisabled;
   }
 
   togglePassword() {

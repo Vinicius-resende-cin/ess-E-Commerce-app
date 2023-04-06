@@ -35,7 +35,16 @@ export class ResetPasswordComponent {
             'reset-button'
         )! as HTMLInputElement;
 
-        resetButton.disabled = false;
+        const passwordInput = document.getElementById(
+            'input-password'
+          )! as HTMLInputElement;
+      
+        const passwordRepeatInput = document.getElementById(
+            'input-password-repeat'
+        )! as HTMLInputElement;
+          
+          const isButtonDisabled = passwordRepeatInput.value == "" || passwordInput.value == "";
+          resetButton.disabled = isButtonDisabled;
     }
 
     togglePassword(event: MouseEvent){

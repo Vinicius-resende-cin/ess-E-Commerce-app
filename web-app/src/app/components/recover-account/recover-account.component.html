@@ -20,7 +20,8 @@
                 </div>
                 <input name="email" id="input-email"
                     type="email" placeholder="Insira seu email"
-                    class="form-control d-inline-block w-75">
+                    class="form-control d-inline-block w-75"
+                    (input)="enableButton()" (keyup.enter)="requestReset()">
 
                 <span name="message-span" class="failed-message w-75 d-inline-block d-none" id="message-span">Email não registrado</span>
 
@@ -32,7 +33,7 @@
                 </button>
             </div>
             
-            <a class="link d-inline-block text-center" href="./login">Voltar para página de login</a>
+            <div class="link text-center"><a href="./login">Voltar para página de login</a></div>
             
         </div>
     </div>
