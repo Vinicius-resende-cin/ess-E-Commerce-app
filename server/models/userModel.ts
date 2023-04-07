@@ -16,7 +16,8 @@ module.exports = () => {
       complemento: String,
       cep: String,
       estado: String,
-      cidade: String
+      cidade: String,
+      permissao: Number 
     });
 
     // Define o modelo
