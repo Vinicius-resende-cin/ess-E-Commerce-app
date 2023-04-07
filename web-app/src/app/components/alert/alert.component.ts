@@ -16,7 +16,14 @@ export class AlertComponent {
   constructor(private categoryCreation: CategoryCreationComponent) {
     this.message = "";
   }
+
+    close(): void {
+    this.show = false;
+    this.categoryCreation.clearErros();
+    this.categoryCreation.sairDaCriacao();
+  }
   */
+
 
   constructor(private categoryUpdate: CategoryUpdateComponent) {
     this.message = "";
@@ -24,9 +31,10 @@ export class AlertComponent {
 
   close(): void {
     this.show = false;
-    //this.categoryCreation.clearErros();
     this.categoryUpdate.clearErros();
+    this.categoryUpdate.sairDaCriacao();
   }
+
 
   get_show(): boolean {
     return this.show;
