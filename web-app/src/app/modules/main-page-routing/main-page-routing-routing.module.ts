@@ -12,6 +12,7 @@ import { CategoryUpdateComponent } from 'src/app/components/category-update/cate
 import { RegisterItemComponent } from 'src/app/components/register-item/register-item-component';
 import { PerfilUserComponent } from 'src/app/components/perfil-user/perfil-user.component';
 import { AdminPainelComponent } from 'src/app/components/admin-painel/admin-painel.component';
+import { CartComponent } from 'src/app/components/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'item', component: RegisterItemComponent },
       { path: 'perfil-user', component: PerfilUserComponent },
       { path: 'admin-painel', component: AdminPainelComponent },
+      { path: 'cart', component: CartComponent },
     ],
   },
 ];

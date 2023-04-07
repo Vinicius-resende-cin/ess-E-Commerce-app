@@ -1,14 +1,14 @@
 import { ObjectId } from 'mongodb';
 
 export type Pedido = {
-  id_pedido: String;
+  id_pedido: Number;
   id_produto: String[];
   nome_produto: String[];
   quantidade_produto: number[];
   data_hora: Date;
   valor: number;
   status: String;
-  quantidade: String[];
+  quantidade: number[];
 };
 
 export type Categoria = {
@@ -25,4 +25,9 @@ export type Itens = {
   preco: number;
   forma_pagamento: String[];
   categoria: String[];
-}
+};
+
+export type dataSharing = {
+  item: Itens[];
+  quantidade: number[];
+};
