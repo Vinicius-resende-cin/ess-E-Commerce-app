@@ -9,6 +9,7 @@ import { ViewHistoryComponent } from 'src/app/components/view-history/view-histo
 import { ProductDetailComponent } from 'src/app/components/product-detail/product-detail.component';
 import { CategoryListComponent } from 'src/app/components/category-list/category-list.component';
 import { CategoryUpdateComponent } from 'src/app/components/category-update/category-update.component';
+import { RegisterItemComponent } from 'src/app/components/register-item/register-item-component';
 
 const routes: Routes = [
   {
@@ -20,9 +21,10 @@ const routes: Routes = [
       { path: 'resumo-mensal', component: MonthSummaryComponent },
       { path: 'categoria', component: CategoryListComponent },
       { path: 'criacao-nova-categoria', component: CategoryCreationComponent },
-      { path: 'categoria/:id', component: CategoryUpdateComponent},
+      { path: 'categoria/:id', component: CategoryUpdateComponent },
       { path: 'historico-pedidos', component: ViewHistoryComponent },
       { path: 'item/:id', component: ProductDetailComponent },
+      { path: 'item', component: RegisterItemComponent },
     ],
   },
 ];
