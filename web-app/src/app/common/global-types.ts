@@ -1,3 +1,5 @@
+import { ObjectId } from 'mongodb';
+
 export type Pedido = {
   id_pedido: String;
   id_produto: String[];
@@ -15,9 +17,10 @@ export type Categoria = {
 };
 
 export type Itens = {
-  id: String;
+  _id: ObjectId | null;
   nome: String;
   descricao: String;
+  imagem: File | null;
   quantidade: number;
   preco: number;
   forma_pagamento: String[];

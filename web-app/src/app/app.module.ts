@@ -20,6 +20,7 @@ import { ViewHistoryComponent } from './components/view-history/view-history.com
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
 import { CategoryUpdateComponent } from './components/category-update/category-update.component';
+import { RegisterItemComponent } from './components/register-item/register-item-component';
 
 import ptBr from '@angular/common/locales/pt';
 registerLocaleData(ptBr);
@@ -40,6 +41,7 @@ registerLocaleData(ptBr);
     ProductDetailComponent,
     CadastroUserComponent,
     CategoryUpdateComponent,
+    RegisterItemComponent,
   ],
   imports: [
     BrowserModule,

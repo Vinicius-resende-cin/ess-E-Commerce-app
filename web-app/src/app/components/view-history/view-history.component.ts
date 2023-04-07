@@ -35,7 +35,7 @@ export class ViewHistoryComponent implements OnInit, OnChanges {
   // Armazenando os pedidos e os itens de cada pedido
   atualizarListaItens(pedido: Pedido): void {
     for (let item of pedido.id_produto) {
-      if (!this.listaItem.find((a) => a.id == item)) {
+      if (!this.listaItem.find((a) => a._id?.toString() == item)) {
         this.itemService.getAll('/itens/' + item).subscribe((resultado) => {
           this.listaItem.push(resultado as Item);
         });
@@ -58,7 +58,7 @@ export class ViewHistoryComponent implements OnInit, OnChanges {
 
   // Método para descobrir a quantidade em estoque de um produto comprado
   consultarDisponibilidade(id: String): number {
-    var item = this.listaItem.find((produto) => produto.id == id);
+    var item = this.listaItem.find((produto) => produto._id?.toString() == id);
     if (item) {
       return item.quantidade;
     }
@@ -67,7 +67,7 @@ export class ViewHistoryComponent implements OnInit, OnChanges {
 
   // Método para descobrir o nome de um produto comprado
   consultarNome(id: String): String {
-    var item = this.listaItem.find((produto) => produto.id == id);
+    var item = this.listaItem.find((produto) => produto._id?.toString() == id);
     if (item) {
       return item.nome;
     }
