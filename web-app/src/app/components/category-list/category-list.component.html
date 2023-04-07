@@ -1,18 +1,24 @@
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
-      <h2>Lista de Categorias</h2>
+      <h1 class="text-center">Lista de Categorias</h1>
       <table class="table mt-4">
         <thead>
           <tr>
             <th>Nome</th>
             <th>Descrição</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let categoria of categorias">
             <td>{{ categoria.nome_categoria }}</td>
             <td>{{ categoria.descricao_categoria }}</td>
+            <td>
+              <button (click)="editarCategoria(categoria.nome_categoria)" class="btn btn-primary">
+                Editar
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>
