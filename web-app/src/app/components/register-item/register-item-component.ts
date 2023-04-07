@@ -52,5 +52,19 @@ export class RegisterItemComponent {
       });
     }
     
+    validarCadastro(): boolean {
+      const quantidade = (<HTMLInputElement>document.getElementById('input-quantidade')).value;
+      const preco = (<HTMLInputElement>document.getElementById('input-preco')).value;
+      const forma_pagamento = (<HTMLInputElement>document.getElementById('input-pagamento')).value;
+      const categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value;
+      const titulo = (<HTMLInputElement>document.getElementById('input-nome')).value;
+      const descricao = (<HTMLInputElement>document.getElementById('input-desc')).value;
+      const imagem = (<HTMLInputElement>document.getElementById('input-image')).value;
+  
+      if (quantidade && preco && forma_pagamento && categoria && titulo && descricao && imagem) {
+        return true;
+      }
+      return false;
+    }
 
 }
