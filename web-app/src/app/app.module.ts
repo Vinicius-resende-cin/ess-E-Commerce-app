@@ -23,6 +23,7 @@ import { CategoryUpdateComponent } from './components/category-update/category-u
 import { RegisterItemComponent } from './components/register-item/register-item-component';
 
 import ptBr from '@angular/common/locales/pt';
+import { CartComponent } from './components/cart/cart.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -42,6 +43,7 @@ registerLocaleData(ptBr);
     CadastroUserComponent,
     CategoryUpdateComponent,
     RegisterItemComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

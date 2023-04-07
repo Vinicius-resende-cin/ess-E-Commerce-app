@@ -10,6 +10,7 @@ import { ProductDetailComponent } from 'src/app/components/product-detail/produc
 import { CategoryListComponent } from 'src/app/components/category-list/category-list.component';
 import { CategoryUpdateComponent } from 'src/app/components/category-update/category-update.component';
 import { RegisterItemComponent } from 'src/app/components/register-item/register-item-component';
+import { CartComponent } from 'src/app/components/cart/cart.component';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
       { path: 'historico-pedidos', component: ViewHistoryComponent },
       { path: 'item/:id', component: ProductDetailComponent },
       { path: 'item', component: RegisterItemComponent },
+      { path: 'cart', component: CartComponent},
     ],
   },
 ];
