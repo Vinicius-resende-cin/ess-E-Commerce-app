@@ -33,8 +33,11 @@ export class CategoryUpdateComponent {
           this.clearCategoria();
         },
         (erro) => {
-          if (erro.error.message === 'Essa categoria não existe no sistema') {
-            this.alertMessage = 'Categoria inexisente';
+          if (erro.error.message === 'Mesma descricao') {
+            this.alertMessage = 'Descrição não pode ser a mesma';
+            this.alertCategoria = true;
+          } else if (erro.error.message === "Categoria inexistente") {
+            this.alertMessage = 'Categoria não existe';
             this.alertCategoria = true;
           }
         }
