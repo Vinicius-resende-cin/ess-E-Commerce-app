@@ -28,15 +28,16 @@ export class CategoryUpdateComponent {
       .editCategory(categoria.nome_categoria, categoria.descricao_categoria)
       .subscribe(
         (categoriaEditada) => {
-          console.log(categoriaEditada);
-          this.alertMessage = 'Descrição editada com sucesso';
+          this.alertMessage = 'Descrição alterada com sucesso';
           this.alertCategoria = true;
           this.clearCategoria();
-          this.router.navigate(['home', 'categoria']);
         },
         (erro) => {
-          if (erro.error.message === 'Essa categoria não existe no sistema') {
-            this.alertMessage = 'Categoria inexisente';
+          if (erro.error.message === 'Mesma descricao') {
+            this.alertMessage = 'Descrição não pode ser a mesma';
+            this.alertCategoria = true;
+          } else if (erro.error.message === "Categoria inexistente") {
+            this.alertMessage = 'Categoria não existe';
             this.alertCategoria = true;
           }
         }

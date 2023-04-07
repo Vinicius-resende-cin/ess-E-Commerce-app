@@ -43,11 +43,16 @@ module.exports = () => {
                 const categoria = await Categoria.findOne({ nome_categoria: nome });
                 const idAux = categoria._id;
                 const id = idAux.toString();
-                await Categoria.findByIdAndUpdate(id, req.body);
-                res.status(200).json({ message: "Categoria atualizada"});
+                const descricao = req.body.descricao_categoria;
+                if (categoria.descricao_categoria != descricao) {
+                    await Categoria.findByIdAndUpdate(id, req.body);
+                    res.status(200).json({ message: "Categoria atualizada"});
+                } else {
+                    res.status(400).json({ message: "Mesma descricao"});
+                }
             }
             catch (err) {
-                res.status(500).send({ message: "Essa categoria não existe no sistema"});
+                res.status(500).send({ message: "Categoria inexistente"});
             }
         },
     };
