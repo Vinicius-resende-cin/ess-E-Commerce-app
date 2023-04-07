@@ -1,13 +1,13 @@
 <div class="container-fluid">
   <div class="row">
-    <h2 class="p-6">Admin Name</h2>
+    <h2 class="p-6">{{ userLogged.nomeCompleto }}</h2>
     <div class="col-md-15">
       <div class="p-5 container-fluid">
         <p class="d-inline-block pl-6">Nome</p>
         <p class="d-inline-block pl-7">CPF</p>
         <p class="d-inline-block pl-7">E-mail</p>
         <p class="d-inline-block pl-7">Remove</p>
-        <p class="d-inline-block pl-7">Promote</p>
+        <p class="d-inline-block pl-7">Permissão</p>
         <hr class="my-4 ml-8">
         <div class="m-9 pt-3">
           <input class="form-control input-group-lg " type="search" placeholder="Search" aria-label="Search"/>
@@ -24,7 +24,7 @@
                     <button class="btn btn-danger text-column p-2" (click)="delteUser(u)">X</button>
                   </td>
                   <td class="admin">
-                    <button class="btn btn-primary text-column">Admin</button>
+                    <button class="btn text-column" (click)="changePermission(u)" [class.btn-1] = "u.permissao == 0" [class.btn-2] = "u.permissao == 1">{{ u.permissao == 0 ? 'Usuário' : 'Admin' }}</button>
                   </td>
               </tr>
             </tbody>

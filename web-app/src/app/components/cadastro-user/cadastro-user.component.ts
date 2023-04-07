@@ -33,6 +33,7 @@ export class CadastroUserComponent {
       cep: '',
       estado: '',
       cidade: '',
+      permissao: 0
     };
 
     return user;
