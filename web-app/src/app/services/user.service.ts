@@ -20,11 +20,15 @@ export class UserService {
     }
 
     gelAllUsers(){
-        return this.http.get<User[]>(this.apiURL + "/users")
+        return this.http.get<User[]>(this.apiURL + "/users", {withCredentials: true})
     }
 
     deleteUser(user: User, passorwdTest:string){
         console.log(user)
-        return this.http.delete<any>(this.apiURL + "/users/" + user.cpf + '/' + passorwdTest, {headers: this.headers})
+        return this.http.delete<any>(this.apiURL + "/users/" + user.cpf + '/' + passorwdTest, {headers: this.headers, withCredentials: true})
+    }
+
+    getCurrentUser(){
+        return this.http.get<User[]>(this.apiURL + "/users/session", {withCredentials: true})
     }
 }
