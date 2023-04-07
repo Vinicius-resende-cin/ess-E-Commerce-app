@@ -5,9 +5,10 @@ module.exports = () => {
 
     //Definindo Schema
     const itemScema = new Schema({
-        id: String,
+        id_user: String,
         nome: String,
         descricao: String,
+        //imagem: File,
         quantidade: Number,
         preco: Number,
         forma_pagamento: Array<String>,

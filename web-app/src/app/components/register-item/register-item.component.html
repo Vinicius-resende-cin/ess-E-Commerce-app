@@ -2,7 +2,7 @@
     <div class="mid">
       <h4> Anunciando Produto </h4>
     </div>
-    <form (submit)="cadastrarItem(item)" class="form">
+    <form #myForm (submit)="cadastrarItem(item)" class="form">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="input-nome" class="label">Nome</label>
@@ -42,7 +42,9 @@
             </select>
           </div>
         </div>
-        <button class ="button" id="button-next-2" 
+        <button 
+          class ="button" 
+          id="button-next-2" 
           type="submit"
           [disabled]="!validarCadastro()"
           [ngStyle]="{'background-color': !validarCadastro() ? '#D9D9D9' : 'blue', 

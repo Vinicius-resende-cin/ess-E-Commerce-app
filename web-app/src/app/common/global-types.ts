@@ -18,6 +18,7 @@ export type Categoria = {
 
 export type Itens = {
   _id: ObjectId | null;
+  id_user: String;
   nome: String;
   descricao: String;
   imagem: File | null;

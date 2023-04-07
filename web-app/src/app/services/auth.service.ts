@@ -8,6 +8,7 @@ import * as Names from 'src/app/common/global-names';
 })
 export class AuthService {
   private apiURL = Names.apiURL;
+  private user_email: string = '';
 
   constructor(private http: HttpClient) {}
 
@@ -24,6 +25,7 @@ export class AuthService {
     const endpointURL = this.apiURL + loginUrl;
     const body = { email, password };
     const options = { withCredentials: true };
+    this.user_email = email;
 
     return this.http.post<Object>(endpointURL, body, options);
   }
@@ -33,6 +35,7 @@ export class AuthService {
     const endpointURL = this.apiURL + logoutUrl;
     const body = {};
     const options = { withCredentials: true };
+    this.user_email = '';
 
     return this.http.post<Object>(endpointURL, body, options);
   }
@@ -54,4 +57,9 @@ export class AuthService {
 
     return this.http.put<Object>(endpointURL, body, options);
   }
+
+  getEmail(): string {
+    return this.user_email;
+  }
+
 }

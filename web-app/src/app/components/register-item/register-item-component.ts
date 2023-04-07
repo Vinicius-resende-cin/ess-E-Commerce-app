@@ -1,10 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
-
+import * as fs from 'fs';
 import { Categoria, Itens } from 'src/app/common/global-types';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/services/categoria.service';
-
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-register-item',
@@ -14,11 +14,12 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 
 export class RegisterItemComponent {
     category_list!: Categoria[];
-    constructor(private itemservice: ItemService, private router: Router, private categoriaService: CategoriaService) { 
+    constructor(private itemservice: ItemService, private categoriaService: CategoriaService,  private authService: AuthService) { 
     }
 
     item: Itens = {
       _id: null,
+      id_user: '',
       nome: '',
       descricao: '',
       imagem: null,
@@ -29,6 +30,8 @@ export class RegisterItemComponent {
     };
 
     cadastrarItem(newItem: Itens) {
+        newItem.id_user = this.authService.getEmail();
+
         this.itemservice
         .createItem(newItem)
         .subscribe(
@@ -66,5 +69,4 @@ export class RegisterItemComponent {
       }
       return false;
     }
-
 }

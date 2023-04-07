@@ -19,6 +19,11 @@ import * as Types from 'src/app/common/global-types'
       return this.http.get<Object>(endpointURL);
     }
 
+    getAllItens() {
+      const endpointURL = this.apiURL + '/itens';
+      return this.http.get<Object>(endpointURL); 
+    }
+
     createItem(newItem: Types.Itens) {
       const endpointURL = this.apiURL + '/itens';
       return this.http.post<Object>(endpointURL, newItem); 

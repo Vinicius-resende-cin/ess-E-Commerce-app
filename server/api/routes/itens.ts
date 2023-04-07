@@ -4,6 +4,7 @@ module.exports = () => {
     const controller = require("../controllers/itens")();
 
     router.get("/:id", controller.listProducts);
+    router.get("/", controller.getAllItens);
     router.post("/", controller.createItem);
 
     return router;

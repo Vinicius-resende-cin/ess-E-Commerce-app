@@ -25,6 +25,7 @@ import { RegisterItemComponent } from './components/register-item/register-item-
 import ptBr from '@angular/common/locales/pt';
 import { PerfilUserComponent } from './components/perfil-user/perfil-user.component';
 import { AdminPainelComponent } from './components/admin-painel/admin-painel.component';
+import { ViewItensComponent } from './components/view-itens/view-itens.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -46,6 +47,7 @@ registerLocaleData(ptBr);
     RegisterItemComponent,
     PerfilUserComponent,
     AdminPainelComponent,
+    ViewItensComponent,
   ],
   imports: [
     BrowserModule,
