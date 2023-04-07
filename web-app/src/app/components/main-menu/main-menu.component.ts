@@ -15,6 +15,11 @@ export class MainMenuComponent {
 
   ngOnInit(): void {
     this.checkSession();
+
+    document.querySelector(".hamburger")?.addEventListener("click", () => {
+      document.querySelector(".option")?.classList.toggle("show-menu");
+      document.querySelector(".sidebar")?.classList.toggle("show-menu");
+    });
   }
 
   goHome() {
