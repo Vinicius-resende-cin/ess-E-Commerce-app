@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MonthSummaryComponent } from 'src/app/components/month-summary/month-summary.component';
 import { GeneralMainPageComponent } from 'src/app/components/general-main-page/general-main-page.component';
@@ -10,6 +10,8 @@ import { ProductDetailComponent } from 'src/app/components/product-detail/produc
 import { CategoryListComponent } from 'src/app/components/category-list/category-list.component';
 import { CategoryUpdateComponent } from 'src/app/components/category-update/category-update.component';
 import { RegisterItemComponent } from 'src/app/components/register-item/register-item-component';
+import { PerfilUserComponent } from 'src/app/components/perfil-user/perfil-user.component';
+import { AdminPainelComponent } from 'src/app/components/admin-painel/admin-painel.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,8 @@ const routes: Routes = [
       { path: 'historico-pedidos', component: ViewHistoryComponent },
       { path: 'item/:id', component: ProductDetailComponent },
       { path: 'item', component: RegisterItemComponent },
+      { path: 'perfil-user', component: PerfilUserComponent },
+      { path: 'admin-painel', component: AdminPainelComponent },
     ],
   },
 ];

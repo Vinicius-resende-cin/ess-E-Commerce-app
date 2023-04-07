@@ -86,7 +86,7 @@ export class LoginComponent {
           //sucesso
           else if (resp.success || resp.wasLogged) {
             await new Promise((f) => {
-              setTimeout(f, 300);
+              setTimeout(f, 500);
             });
             this.router.navigate(['/home']);
           }
