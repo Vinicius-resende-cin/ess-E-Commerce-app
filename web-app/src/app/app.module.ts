@@ -21,6 +21,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
 import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
 
 import ptBr from '@angular/common/locales/pt';
+import { PerfilUserComponent } from './components/perfil-user/perfil-user.component';
+import { AdminPainelComponent } from './components/admin-painel/admin-painel.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -38,6 +40,8 @@ registerLocaleData(ptBr);
     ViewHistoryComponent,
     ProductDetailComponent,
     CadastroUserComponent,
+    PerfilUserComponent,
+    AdminPainelComponent,
   ],
   imports: [
     BrowserModule,

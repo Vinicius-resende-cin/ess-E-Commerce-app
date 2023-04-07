@@ -5,19 +5,25 @@
   <div
     class="navbar navbar-expand-lg d-inline-flex justify-content-between w-25 text-light fs-5"
   >
-    <a name="categoria" [routerLink]="['categoria']" class="nav-link"
+    <a name="categoria" [routerLink]="['categoria']" class="nav-link pl-3"
       >Categorias</a
     >
-    <a name="resumo-mensal" [routerLink]="['resumo-mensal']" class="nav-link"
+    <a name="resumo-mensal" [routerLink]="['resumo-mensal']" class="nav-link pl-3"
       >Resumo Mensal</a
     >
     <a
       name="historico-pedidos"
       [routerLink]="['historico-pedidos']"
-      class="nav-link"
+      class="nav-link pl-3"
     >
       Histórico de Pedidos
     </a>
+
+    <a name="perfil-user" [routerLink]="['perfil-user']" class="nav-link pl-3"
+    >Perfil do Usuário</a>
+
+    <a name="admin-painel" [routerLink]="['admin-painel']" class="nav-link pl-3"
+    >Admin Painel</a>
   </div>
 </div>
 <router-outlet></router-outlet>
