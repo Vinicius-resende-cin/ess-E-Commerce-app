@@ -77,7 +77,7 @@ export class LoginComponent {
     try {
       this.authService
         .login(emailInput.value, passwordInput.value)
-        .subscribe((resp: any) => {
+        .subscribe(async (resp: any) => {
           //tentativas excedidas
           if (resp.triesExceeded) {
             messageSpan.classList.remove('d-none');
@@ -85,6 +85,9 @@ export class LoginComponent {
           }
           //sucesso
           else if (resp.success || resp.wasLogged) {
+            await new Promise((f) => {
+              setTimeout(f, 300);
+            });
             this.router.navigate(['/home']);
           }
           //dados incorretos
