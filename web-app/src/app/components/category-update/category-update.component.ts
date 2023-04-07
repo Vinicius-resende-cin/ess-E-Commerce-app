@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-category-update',
   templateUrl: './category-update.component.html',
-  styleUrls: ['./category-update.component.scss']
+  styleUrls: ['./category-update.component.scss'],
 })
 export class CategoryUpdateComponent {
   constructor(
@@ -32,6 +32,7 @@ export class CategoryUpdateComponent {
           this.alertMessage = 'Descrição editada com sucesso';
           this.alertCategoria = true;
           this.clearCategoria();
+          this.router.navigate(['home', 'categoria']);
         },
         (erro) => {
           if (erro.error.message === 'Essa categoria não existe no sistema') {
@@ -41,7 +42,7 @@ export class CategoryUpdateComponent {
         }
       );
   }
-  
+
   sairDaCriacao() {
     this.router.navigate(['home', 'categoria']);
   }
