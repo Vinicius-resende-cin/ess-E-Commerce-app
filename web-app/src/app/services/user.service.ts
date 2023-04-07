@@ -31,4 +31,8 @@ export class UserService {
     getCurrentUser(){
         return this.http.get<User[]>(this.apiURL + "/users/session", {withCredentials: true})
     }
+
+    updateUserPermission(user:User, passorwdTest:string){
+        return this.http.put<any>(this.apiURL + "/users/" + passorwdTest, user, {headers: this.headers, withCredentials: true})
+    }
 }

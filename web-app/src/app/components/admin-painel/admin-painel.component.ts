@@ -30,6 +30,7 @@ export class AdminPainelComponent {
       cep: '',
       estado: '',
       cidade: '',
+      permissao: 0
     };
 
     return user;
@@ -59,6 +60,22 @@ export class AdminPainelComponent {
     this.userservice.deleteUser(user, this.passorwdTest).subscribe((result) => {
       if (result.Sucess) {
         alert('Usuário Removido com sucesso');
+      } else {
+        alert('Senha informada está errada');
+      }
+    });
+  }
+
+  changePermission(user:User):void {
+    var confirmPassword;
+    confirmPassword = prompt(
+      `Tornar o usuário ${user.nomeCompleto} administrador?\nEmail: ${user.email}\nCPF: ${user.cpf}\n\nSenha:`
+    );
+    this.passorwdTest = confirmPassword;
+
+    this.userservice.updateUserPermission(user, this.passorwdTest).subscribe((result) => {
+      if (result.Sucess) {
+        alert('Usuário Teve a permissão alterada com sucesso');
       } else {
         alert('Senha informada está errada');
       }
