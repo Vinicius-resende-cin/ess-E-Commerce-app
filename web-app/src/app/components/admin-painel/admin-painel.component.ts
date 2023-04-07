@@ -30,19 +30,17 @@ export class AdminPainelComponent {
       cep: '',
       estado: '',
       cidade: '',
-      permissao: 0
+      permissao: 0,
     };
 
     return user;
   }
 
   ngOnInit(): void {
-    this.userservice.getCurrentUser().subscribe(
-      (result) => {
-        this.userLogged = result[0];
-        console.log(this.userLogged.nomeCompleto)
-      }
-    )
+    this.userservice.getCurrentUser().subscribe((result) => {
+      this.userLogged = result[0];
+      console.log(this.userLogged.nomeCompleto);
+    });
 
     this.userservice.gelAllUsers().subscribe((result) => {
       this.listaUsers = result;
@@ -66,19 +64,22 @@ export class AdminPainelComponent {
     });
   }
 
-  changePermission(user:User):void {
+  changePermission(user: User): void {
     var confirmPassword;
     confirmPassword = prompt(
       `Tornar o usuário ${user.nomeCompleto} administrador?\nEmail: ${user.email}\nCPF: ${user.cpf}\n\nSenha:`
     );
     this.passorwdTest = confirmPassword;
 
-    this.userservice.updateUserPermission(user, this.passorwdTest).subscribe((result) => {
-      if (result.Sucess) {
-        alert('Usuário Teve a permissão alterada com sucesso');
-      } else {
-        alert('Senha informada está errada');
-      }
-    });
+    this.userservice
+      .updateUserPermission(user, this.passorwdTest)
+      .subscribe((result) => {
+        if (result.Sucess) {
+          alert('Usuário Teve a permissão alterada com sucesso');
+          window.location.reload();
+        } else {
+          alert('Senha informada está errada');
+        }
+      });
   }
 }

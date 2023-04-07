@@ -6,8 +6,20 @@
     <a name="categoria" [routerLink]="['/home']" class="nav-link pl-3">
       Home
     </a>
-    <a name="item" [routerLink]="['item']" class="nav-link pl-3"> Itens </a>
-    <a name="categoria" [routerLink]="['categoria']" class="nav-link pl-3">
+    <a
+      name="item"
+      [routerLink]="['item']"
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao"
+    >
+      Itens
+    </a>
+    <a
+      name="categoria"
+      [routerLink]="['categoria']"
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao"
+    >
       Categorias
     </a>
     <a
@@ -25,13 +37,23 @@
       Histórico de Pedidos
     </a>
 
-    <a name="perfil-user" [routerLink]="['perfil-user']" class="nav-link pl-3"
-      >Perfil do Usuário</a
+    <a
+      name="perfil-user"
+      [routerLink]="['perfil-user']"
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao"
     >
+      Perfil do Usuário
+    </a>
 
-    <a name="admin-painel" [routerLink]="['admin-painel']" class="nav-link pl-3"
-      >Admin Painel</a
+    <a
+      name="admin-painel"
+      [routerLink]="['admin-painel']"
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao == 2"
     >
+      Admin Painel
+    </a>
   </div>
 </div>
 <router-outlet></router-outlet>
