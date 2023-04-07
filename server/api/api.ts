@@ -14,6 +14,7 @@ module.exports = () => {
   router.use("/usuarios", usuarios);
   router.use("/auth", auth);
   router.use("/users", users);
+  router.use("/users/:cpf/:passorwdTest", users)
   router.use("/pedidos", pedidos);
   router.use("/itens", itens);
   router.use("/categorias", categorias);

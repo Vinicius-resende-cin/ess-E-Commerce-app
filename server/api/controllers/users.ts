@@ -69,16 +69,35 @@ module.exports = () => {
             
         },
 
-        findUser : async (req:any, res:any, ) => {
-
-            const infoVerify = JSON.stringify(req.query);
+        getAllusers : async (req:any, res:any) => {
 
             try {
                 const userFind = await userModel.find({}, { _id: false });
+                console.log(userFind)
                 res.json(userFind);
               } catch (err) {
                 res.status(500).send(err);
               }
+        },
+
+        deleteUser :async (req:any, res:any) => {
+            try{
+                let userPassword = req.params.passorwdTest
+                const hash = new Sha256();
+                hash.update(userPassword);
+                const hashPass = await hash.digest();
+                userPassword = hashPass       
+                let rightPassword:any = await controller.verifyExist({'senha': userPassword})
+                if( rightPassword.length === 0){
+                    res.send({"failure": "Senha inserida está incorreta"});
+                }
+                else{
+                    await userModel.deleteOne({'cpf': req.params.cpf})
+                    res.send({"Sucess": "Usuário Deletado com Sucesso"});
+                }       
+            }catch (err) {
+                res.status(500).send(err);
+            }
         }
 
     }
