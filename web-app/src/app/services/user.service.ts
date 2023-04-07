@@ -18,4 +18,13 @@ export class UserService {
         
         return this.http.post<any>(this.apiURL + "/users", user, {headers: this.headers})
     }
+
+    gelAllUsers(){
+        return this.http.get<User[]>(this.apiURL + "/users")
+    }
+
+    deleteUser(user: User, passorwdTest:string){
+        console.log(user)
+        return this.http.delete<any>(this.apiURL + "/users/" + user.cpf + '/' + passorwdTest, {headers: this.headers})
+    }
 }

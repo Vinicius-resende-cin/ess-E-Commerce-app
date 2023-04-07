@@ -23,6 +23,8 @@ import { CategoryUpdateComponent } from './components/category-update/category-u
 import { RegisterItemComponent } from './components/register-item/register-item-component';
 
 import ptBr from '@angular/common/locales/pt';
+import { PerfilUserComponent } from './components/perfil-user/perfil-user.component';
+import { AdminPainelComponent } from './components/admin-painel/admin-painel.component';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -42,6 +44,8 @@ registerLocaleData(ptBr);
     CadastroUserComponent,
     CategoryUpdateComponent,
     RegisterItemComponent,
+    PerfilUserComponent,
+    AdminPainelComponent,
   ],
   imports: [
     BrowserModule,
