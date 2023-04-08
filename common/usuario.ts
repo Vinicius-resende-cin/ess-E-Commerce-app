@@ -12,4 +12,5 @@ export type User = {
     cep: String;
     estado: String;
     cidade: String;
+    permissao: number;
 }

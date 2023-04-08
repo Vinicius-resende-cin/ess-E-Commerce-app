@@ -1,0 +1,42 @@
+.modal {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-dialog {
+    width: 80%;
+  }
+  
+  .modal-content {
+    background-color: #ffffff;
+    border-radius: 0.25rem;
+  }
+  
+  .modal-header {
+    padding: 1rem;
+  }
+  
+  .modal-title {
+    margin: 0;
+  }
+
+  .modal-body h4 {
+    color: #dc3545;
+  }
+  
+  .modal-footer {
+    padding: 1rem;
+  }
+  
+  //Estilos para alterar a cor do botão de fechar
+  .btn-close {
+    color: #ffffff;
+    opacity: 1;
+  }
+  
+  //Estilos para alterar a cor do botão de confirmação
+  .btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+  }

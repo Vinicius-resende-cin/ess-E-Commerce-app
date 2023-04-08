@@ -16,9 +16,6 @@ export class MainMenuComponent {
 
   ngOnInit(): void {
     this.checkSession();
-    if (this.isLoggedIn && this.router.url == '') {
-      this.router.navigate(['/home']);
-    }
   }
 
   goHome() {

@@ -33,6 +33,7 @@ module.exports = () => {
         let user = req.body; //Recebe os valores do put
         delete user.senhaC;
         delete user.emailC;
+        user.permissao = 0; //Garantir a segurança do sistema
         let cpfExist: any = await controller.verifyExist({ cpf: user.cpf });
         let emailExist: any = await controller.verifyExist({ email: user.email });
         console.log(cpfExist);
@@ -58,16 +59,85 @@ module.exports = () => {
       }
     },
 
-    findUser: async (req: any, res: any) => {
-      const infoVerify = JSON.stringify(req.query);
-
+    getAllusers: async (req: any, res: any) => {
       try {
-        const userFind = await userModel.find({}, { _id: false });
+        const userFind = await userModel.find({ $or: [{ permissao: 0 }, { permissao: 1 }] });
         res.json(userFind);
       } catch (err) {
         res.status(500).send(err);
       }
-    }
+    },
+
+    getCurrentUser:async (req: any, res: any) => {
+      try{
+        let userFind = await userModel.find({email: req.session.user_email})
+        res.send(userFind)
+
+      }catch (err) {
+        return err
+      }
+    },
+
+    deleteUser: async (req: any, res: any) => {
+      try {
+        //Recebe a tentativa do usuário
+        let userPassword = req.params.passorwdTest;
+        const hash = new Sha256();
+        hash.update(userPassword);
+        const hashPass = await hash.digest();
+        var passString : string = hashPass.toString();
+        
+        //Pega a senha do usuário no BD
+        let user = await userModel.find({email: req.session.user_email})
+   
+        //Verifica se a senha informada está correta
+        if (user[0].senha == passString) {
+          await userModel.deleteOne({ cpf: req.params.cpf });
+          res.send({ Sucess: "Usuário Deletado com Sucesso" });
+          
+        } else {
+          res.send({ failure: "Senha inserida está incorreta" });
+        }
+        
+      } catch (err) {
+        res.status(500).send(err);
+      }
+    },
+
+    updateUserPermission: async (req: any, res: any) => {
+
+      try{
+        let userUpdate = req.body
+
+        let userPassword = req.params.passorwdTest;
+        const hash = new Sha256();
+        hash.update(userPassword);
+        const hashPass = await hash.digest();
+        var passString : string = hashPass.toString();
+        
+        //Pega a senha do usuário no BD
+        let userAdmin = await userModel.find({email: req.session.user_email})
+        console.log(userUpdate.permissao)
+        
+        if (userAdmin[0].senha == passString) {
+          if (userUpdate.permissao == 0){
+            userModel.updateOne({cpf: userUpdate.cpf}, { $set: { permissao: 1}}).exec();
+            res.send({ Sucess: "Permissão do Usuário foi alterada com Sucesso" });
+          }
+          else if(userUpdate.permissao == 1){
+            userModel.updateOne({cpf: userUpdate.cpf}, { $set: { permissao: 0}}).exec();
+            res.send({ Sucess: "Permissão do Usuário foi alterada com Sucesso" });
+          }
+          else{
+            res.send({ failure: "Senha inserida está incorreta" });
+          }
+        }else{
+          res.send({ failure: "Senha inserida está incorreta" });
+        }
+      }catch (err) {
+        res.status(500).send(err);
+      }
+    }    
   };
 
   return controller;

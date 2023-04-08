@@ -19,8 +19,15 @@ import { MainMenuComponent } from './components/main-menu/main-menu.component';
 import { ViewHistoryComponent } from './components/view-history/view-history.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
-
+import { CategoryUpdateComponent } from './components/category-update/category-update.component';
+import { RegisterItemComponent } from './components/register-item/register-item-component';
+import { PerfilUserComponent } from './components/perfil-user/perfil-user.component';
+import { AdminPainelComponent } from './components/admin-painel/admin-painel.component';
+import { CartComponent } from './components/cart/cart.component';
+import { ViewItensComponent } from './components/view-itens/view-itens.component';
+import { EditItemComponent } from './components/edit-item/edit-item.component';
 import ptBr from '@angular/common/locales/pt';
+
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -38,6 +45,13 @@ registerLocaleData(ptBr);
     ViewHistoryComponent,
     ProductDetailComponent,
     CadastroUserComponent,
+    CategoryUpdateComponent,
+    RegisterItemComponent,
+    PerfilUserComponent,
+    AdminPainelComponent,
+    CartComponent,
+    ViewItensComponent,
+    EditItemComponent,
   ],
   imports: [
     BrowserModule,

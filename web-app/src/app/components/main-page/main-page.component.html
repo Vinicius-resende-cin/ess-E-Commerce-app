@@ -1,25 +1,58 @@
 <app-main-menu></app-main-menu>
 <div class="mb-5">
   <div
-      class="navbar navbar-expand-lg justify-content-center d-inline-flex w-100 text-light fs-5"
+    class="navbar navbar-expand-lg justify-content-center d-inline-flex w-100 text-light fs-5"
   >
+    <a name="categoria" [routerLink]="['/home']" class="nav-link pl-3">
+      Home
+    </a>
+    <a
+      name="item"
+      [routerLink]="['item']"
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao"
+    >
+      Itens
+    </a>
     <a
       name="categoria"
       [routerLink]="['categoria']"
-      class="nav-link">
-      Categoria
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao"
+    >
+      Categorias
     </a>
     <a
       name="resumo-mensal"
       [routerLink]="['resumo-mensal']"
-      class="nav-link">
+      class="nav-link pl-3"
+    >
       Resumo Mensal
     </a>
     <a
       name="historico-pedidos"
       [routerLink]="['historico-pedidos']"
-      class="nav-link">
+      class="nav-link pl-3"
+    >
       Histórico de Pedidos
+    </a>
+
+    <a
+      name="perfil-user"
+      [routerLink]="['perfil-user']"
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao"
+    >
+      Perfil do Usuário
+    </a>
+
+    <a
+      name="admin-painel"
+      [routerLink]="['admin-painel']"
+      class="nav-link pl-3"
+      *ngIf="userLogged.permissao == 2"
+    >
+      Admin Painel
     </a>
   </div>
 </div>

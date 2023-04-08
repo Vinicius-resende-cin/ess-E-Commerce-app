@@ -29,6 +29,14 @@ export class CategoryListComponent {
     this.router.navigate(['home', 'criacao-nova-categoria']);
   }
 
+  verifyCategoria(id: String): void {
+  }
+
+  editarCategoria(id: String) {
+    this.categoriaService.setName(id);
+    this.router.navigate(['home', 'categoria', id]); //Colocar aqui a rota da edição de categoria
+  }
+
   getCategorias(): void {
     this.categoriaService.getCategories().subscribe((data) => {
       this.categorias = data as Categoria[];
