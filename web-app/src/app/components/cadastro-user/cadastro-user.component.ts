@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { User } from '../../../../../common/usuario';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2'
 
 @Component({
   selector: 'app-cadastro-user',
@@ -80,17 +81,32 @@ export class CadastroUserComponent {
       this.userservice.createUser(this.user).subscribe((result) => {
         if (result.success) {
           this.user = this.criaUser();
-          console.log(result);
+          Swal.fire({
+            icon: 'success',
+            title: 'Usuário Cadastrado no Sistema',
+          })
           this.router.navigate(['/login']);
         } else if(result.CPF){
-          alert("O CPF a ser cadastrado já existe no sistema");
+          Swal.fire({
+            icon: 'error',
+            title: 'CPF inválido',
+            text: 'O CPF a ser cadastrado já existe no sistema',
+          })
           this.user.cpf = '';
         } else if(result.EMAIL){
-          alert('O E-mail a ser cadastrado já existe no sistema');
+          Swal.fire({
+            icon: 'error',
+            title: 'E-mail inválido',
+            text: 'O E-mail a ser cadastrado já existe no sistema',
+          })
           this.user.email = '';
           this.user.emailC = '';
         }else{
-          alert('Houve um erro inesperado, tente novamente')
+          Swal.fire({
+            icon: 'error',
+            title: 'Houve um erro inesperado, tente novamente',
+          })
+
         }
 
       });
@@ -109,19 +125,32 @@ export class CadastroUserComponent {
       this.user.estado == '' ||
       this.user.cidade == ''
     ) {
-      alert('Há campos vazios no cadastro');
+      Swal.fire({
+        icon: 'error',
+        title: 'Há campos vazios no cadastro',
+      })
     } else if (this.passwordSize && !this.passwordDiff) {
-      alert('As senhas informadas não são iguais');
+      Swal.fire({
+        icon: 'error',
+        title: 'Senha Inválida',
+        text: 'As senhas inseridas não são iguais',
+      })
       this.user.senha = '';
       this.user.senhaC = '';
     } else if (!this.passwordSize && this.passwordDiff) {
-      alert('As senhas informadas não segue as regras de possui 8 caracters, sendo 1 letra e 1 caractere especial');
+      Swal.fire({
+        icon: 'error',
+        title: 'Senha Inválida',
+        text: 'As senhas informadas não segue as regras de possui 8 caracters, sendo 1 letra e 1 caractere especial',
+      })
       this.user.senha = '';
       this.user.senhaC = '';
     } else {
-      alert(
-        'A senha informada não possui 8 caracteres nem é igual a de confirmação'
-      );
+      Swal.fire({
+        icon: 'error',
+        title: 'Senha Inválida',
+        text: 'A senha informada não possui 8 caracteres nem é igual a de confirmação',
+      })
       this.user.senha = '';
       this.user.senhaC = '';
     }
