@@ -25,14 +25,14 @@ module.exports = () => {
     
     },
 
-    /*getCurrentUser: async (req: any, res: any) => {
+    getEmailUser: async (req: any, res: any) => {
       try {
-        res.send({email: req.session.user_email});
+        res.json({email: req.session.user_email});
       } catch (err) {
         res.status(500).send(err);
       }
     
-    },*/
+    },
 
     createItem: async (req: any, res: any) => {
       try {

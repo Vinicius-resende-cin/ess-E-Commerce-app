@@ -31,9 +31,9 @@ export class RegisterItemComponent {
     };
 
     cadastrarItem(newItem: Itens) {
-        /*this.itemservice.getCurrentUser().subscribe((result) => {
+        this.itemservice.getEmailUser().subscribe((result) => {
           newItem.id_user = result.email;
-        }),*/
+        }),
 
         this.itemservice
         .createItem(newItem)

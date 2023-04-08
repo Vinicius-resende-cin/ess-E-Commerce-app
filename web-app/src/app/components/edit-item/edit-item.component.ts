@@ -4,6 +4,7 @@ import { Itens, Categoria } from 'src/app/common/global-types';
 import { ItemService } from 'src/app/services/item.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { ObjectId } from 'mongodb';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-edit-item',
@@ -16,7 +17,7 @@ export class EditItemComponent implements OnInit {
   itemModifiqued!: Itens;
   category_list! : Categoria[];
 
-  constructor(private itemservice: ItemService, private route: ActivatedRoute, private categoriaService: CategoriaService) { }
+  constructor(private itemservice: ItemService, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router) { }
 
   ngOnInit(): void {
     const id = this.route.snapshot.paramMap.get('id');
@@ -47,7 +48,7 @@ export class EditItemComponent implements OnInit {
     this.itemModifiqued.categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value.split(",");
 
     this.itemservice.editItem('/itens/' + id, this.itemModifiqued).subscribe((result) => {
-      alert(result as String);
+      this.router.navigate(['home', 'view-itens']);
     });
   }
   

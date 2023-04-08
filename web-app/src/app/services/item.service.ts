@@ -30,10 +30,10 @@ import { User } from '../../../../common/usuario';
       return this.http.post<Object>(endpointURL, newItem); 
     }
 
-    /*getCurrentUser(){
-      const endpointURL = this.apiURL + '/itens';
+    getEmailUser(){
+      const endpointURL = this.apiURL + '/email';
       return this.http.get<User>(endpointURL);
-    }*/
+    }
 
     editItem(apiEndpoint: string, item: Types.Itens) {
       const endpointURL = this.apiURL + apiEndpoint;

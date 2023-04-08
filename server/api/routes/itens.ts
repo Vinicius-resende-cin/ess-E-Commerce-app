@@ -4,7 +4,7 @@ module.exports = () => {
     const controller = require("../controllers/itens")();
 
     //deveria retornar o email
-    //router.get("/", controller.getCurrentUser);
+    router.get("/email", controller.getEmailUser);
 
     //retorna apenas um item
     router.get("/:id", controller.listProducts);
