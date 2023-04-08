@@ -74,7 +74,7 @@ export class LoginComponent {
     try {
       this.authService
         .login(this.emailInput.value, this.passwordInput.value)
-        .subscribe((resp: any) => {
+        .subscribe(async (resp: any) => {
           //tentativas excedidas
           if (resp.triesExceeded) {
             this.messageSpan.classList.remove('d-none');
