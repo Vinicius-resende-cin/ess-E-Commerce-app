@@ -25,14 +25,14 @@ import { User } from '../../../../common/usuario';
       return this.http.get<Object>(endpointURL); 
     }
 
+    getAllItensUser() {
+      const endpointURL = this.apiURL + '/itens/user';
+      return this.http.get<Object>(endpointURL, {withCredentials: true}); 
+    }
+
     createItem(newItem: Types.Itens) {
       const endpointURL = this.apiURL + '/itens';
       return this.http.post<Object>(endpointURL, newItem); 
-    }
-
-    getEmailUser(){
-      const endpointURL = this.apiURL + '/email';
-      return this.http.get<User>(endpointURL);
     }
 
     editItem(apiEndpoint: string, item: Types.Itens) {

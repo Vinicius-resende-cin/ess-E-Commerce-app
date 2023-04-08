@@ -25,9 +25,10 @@ module.exports = () => {
     
     },
 
-    getEmailUser: async (req: any, res: any) => {
+    getAllItensUser: async (req: any, res: any) => {
       try {
-        res.json({email: req.session.user_email});
+        const itens = await Item.find({ id_user: req.session.user_email });
+        res.json(itens);
       } catch (err) {
         res.status(500).send(err);
       }
@@ -36,14 +37,13 @@ module.exports = () => {
 
     createItem: async (req: any, res: any) => {
       try {
-        const nome = req.body.nome;
-        const itemDuplicado = await Item.findOne({ nome: nome });
+        const itemDuplicado = await Item.findOne({ id_user: req.session.user_email, nome: req.body.nome });
 
-       if (itemDuplicado) {
-          res.status(400).json({ message: "Já existe um Item com esse titulo" });
+        if (itemDuplicado) {
+            res.status(400).json({ message: "Já existe um produto com esse titulo em sua loja" });
         } else {
-          const newItem = await Item.create(req.body);
-          res.status(200).json(newItem);
+            const newItem = await Item.create(req.body);
+            res.status(200).json(newItem);
         }
 
       } catch (err) {
