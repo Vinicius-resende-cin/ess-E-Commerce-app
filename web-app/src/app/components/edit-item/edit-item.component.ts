@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Itens, Categoria } from 'src/app/common/global-types';
 import { ItemService } from 'src/app/services/item.service';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { ObjectId } from 'mongodb';
 
 @Component({
   selector: 'app-edit-item',
@@ -18,31 +19,34 @@ export class EditItemComponent implements OnInit {
   constructor(private itemservice: ItemService, private route: ActivatedRoute, private categoriaService: CategoriaService) { }
 
   ngOnInit(): void {
-    this.getCategory();
     const id = this.route.snapshot.paramMap.get('id');
 
     this.itemservice.getAll('/itens/' + id).subscribe((resultado) => {
       this.item = resultado as Itens;
-    })
-  }
+      this.itemModifiqued = {...this.item};
 
-  getCategory(): void {
-      this.categoriaService.getCategories().subscribe((result) => {
+    })
+
+    this.categoriaService.getCategories().subscribe((result) => {
       this.category_list = result as Categoria[];
     });
   }
 
   updateItem() {
-    let id = ''
+    let id = '';
 
-    if (this.item._id){
-      id = this.item._id.toString()
+    if (this.item._id) {
+      id = this.item._id.toString();
     }
     
+    this.itemModifiqued.nome = "Mudado";
+
     this.itemservice.editItem('/itens/' + id, this.itemModifiqued).subscribe((result) => {
-      // Lógica de redirecionamento para a página de visualização de itens após atualização do item
+      alert(result as String);
     });
   }
+  
+  
 
   validarEdicao(): boolean {
     const quantidade = (<HTMLInputElement>document.getElementById('input-quantidade')).value;

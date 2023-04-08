@@ -14,7 +14,7 @@ module.exports = () => {
 
     //cria, atualiza e deleta item
     router.post("/", controller.createItem);
-    router.put("/", controller.editItem);
+    router.put("/:id", controller.editItem);
     router.delete("/:id", controller.deleteItem);
 
     return router;

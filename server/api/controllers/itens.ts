@@ -60,12 +60,11 @@ module.exports = () => {
         }
         
         const item = await Item.findOne({ _id: id });
-
+        
         if (item) {
-          console.log("UPDATOU")
           const updates = req.body;
           const result = await Item.findByIdAndUpdate(id, updates);
-          res.status(200).json({ message: "Categoria atualizada"});
+          res.status(200).json({ message: "Item atualizado"});
         }
     
         
