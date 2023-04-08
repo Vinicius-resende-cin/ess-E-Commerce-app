@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { User } from '../../../../common/usuario';
 
 export type Pedido = {
   id_pedido: Number;
@@ -18,6 +19,7 @@ export type Categoria = {
 
 export type Itens = {
   _id: ObjectId | null;
+  id_user: String;
   nome: String;
   descricao: String;
   imagem: File | null;
