@@ -44,6 +44,36 @@ export class PerfilUserComponent {
     });
   }
 
+  alertError(msg: string){
+    const error = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+    
+    error.fire({
+      icon: 'error',
+      title: msg
+    })
+  };
+
+  alertAcept(msg: string){
+    const sucess = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+    
+    sucess.fire({
+      icon: 'success',
+      title: msg
+    })
+  };
+
   async recivePassword(){
     const { value: formValues }  = await Swal.fire({
       title: 'Troca de Senha',
@@ -67,37 +97,16 @@ export class PerfilUserComponent {
     this.passValues = formValues
     if(this.passValues[0] != ''  && this.passValues[1] != '' && this.passValues[2] != ''){
       if(this.passValues[1] == this.passValues[2]){
-        console.log("Passei aqui")
         this.changePasword()
+
       }else{
-        const error = Swal.mixin({
-          toast: true,
-          position: 'bottom-end',
-          showConfirmButton: false,
-          timer: 3000,
-          timerProgressBar: true,
-        })
-        
-        error.fire({
-          icon: 'error',
-          title: 'Os campos Nova senha e confirmação de senha não são iguais'
-        })
+        this.alertError('Os campos Nova senha e confirmação de senha não são iguais')
       }
     }
     else{
-      const error = Swal.mixin({
-        toast: true,
-        position: 'bottom-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-      })
-      
-      error.fire({
-        icon: 'error',
-        title: 'Restaram campos em branco'
-      })
+      this.alertError('Restaram campos em branco')
     }
+
   }
   async reciveAdrress(){
     const { value: formValues }  = await Swal.fire({
@@ -128,52 +137,18 @@ export class PerfilUserComponent {
     if(this.passValues[0] != '' && this.passValues[1] != '' && this.passValues[2] != '' && this.passValues[3] != '' && this.passValues[4] != '') {
       this.changeAddress();
     }else{
-      const error = Swal.mixin({
-        toast: true,
-        position: 'bottom-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-      })
-      
-      error.fire({
-        icon: 'error',
-        title: 'Restaram campos em branco'
-      })
+      this.alertError('Restaram campos em branco')
     }
-
   }
 
   changePasword(){
     this.userservice.updatePassword(this.userLogged, this.passValues).subscribe(
       (result)=>{
         if (result.Sucess){
-          const error = Swal.mixin({
-            toast: true,
-            position: 'bottom-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-          })
-          
-          error.fire({
-            icon: 'success',
-            title: 'Senha foi alterada com sucesso'
-          })
+          this.alertAcept('Senha foi alterada com sucesso')
         }
         else{
-          const error = Swal.mixin({
-            toast: true,
-            position: 'bottom-end',
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-          })
-          
-          error.fire({
-            icon: 'error',
-            title: 'Senha atual informada está errada'
-          })
+          this.alertError('Senha atual informada está errada')
         }
       }
     )
@@ -201,10 +176,13 @@ export class PerfilUserComponent {
     
     this.userservice.updateAddress(this.userLogged, this.passValues, this.passwordTest).subscribe(
       (result) => {
-        console.log(result);
-        //window.location.reload();
+        if(result.Sucess){
+          this.alertAcept('As informações do endereço foi alterada com sucesso')
+          window.location.reload();
+        }else{
+          this.alertError('Senha atual informada está errada')
+        }    
       }
     );
-  
   }
 }
