@@ -5,6 +5,7 @@ import { retry, map } from 'rxjs/operators';
 
 import * as Names from 'src/app/common/global-names'
 import * as Types from 'src/app/common/global-types'
+import { User } from '../../../../common/usuario';
 
 @Injectable({
     providedIn: 'root',
@@ -19,8 +20,28 @@ import * as Types from 'src/app/common/global-types'
       return this.http.get<Object>(endpointURL);
     }
 
+    getAllItens() {
+      const endpointURL = this.apiURL + '/itens';
+      return this.http.get<Object>(endpointURL); 
+    }
+
     createItem(newItem: Types.Itens) {
       const endpointURL = this.apiURL + '/itens';
       return this.http.post<Object>(endpointURL, newItem); 
+    }
+
+    getEmailUser(){
+      const endpointURL = this.apiURL + '/email';
+      return this.http.get<User>(endpointURL);
+    }
+
+    editItem(apiEndpoint: string, item: Types.Itens) {
+      const endpointURL = this.apiURL + apiEndpoint;
+      return this.http.put<Object>(endpointURL, item);
+    }
+
+    deleteItem(apiEndpoint: string) {
+      const endpointURL = this.apiURL + apiEndpoint;
+      return this.http.delete<Object>(endpointURL);
     }
   }

@@ -1,0 +1,40 @@
+<section class="py-3">
+  <div class="container px-lg-5 my-5">
+    <div class="text-left text-black">
+      <h1 class="display-4 pb-3 fw-bolder">Sua Loja</h1>
+    </div>
+    <button [routerLink]="['/home/create-item']">Adicionar</button>
+  </div>
+  <div class="container py-1 px-4 px-lg-5 mt-5">
+    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3">
+      <div class="col mb-5 py-4 px-5" *ngFor="let item of itens_list">
+        <div class="text-right">
+          <button (click)="editItemPage(item)">
+            <img src="https://i.imgur.com/4IbDU4L.png" />
+          </button>
+          <button (click)="deleteItem(item)">
+            <img src="https://i.imgur.com/MtUgGPM.png" />
+          </button>
+        </div>
+        <div class="card h-100">
+          <!--<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />-->
+          <div class="card-body p-4">
+            <div class="text-center pt-5">
+              <h5 class="fw-bolder">{{ item.nome }}</h5>
+              R${{ item.preco }}
+            </div>
+          </div>
+          <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+            <div class="text-center">
+              <a
+                class="btn btn-outline-dark mt-auto"
+                href="http://localhost:4200/home/item/{{ item._id }}"
+                >View full</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

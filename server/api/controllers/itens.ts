@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose";
+import { ObjectId } from "mongodb";
 
 module.exports = () => {
   const Item = require("../../models/itemModel")();
@@ -15,37 +15,86 @@ module.exports = () => {
       }
     },
 
+    getAllItens: async (req: any, res: any) => {
+      try {
+        const itens = await Item.find({});
+        res.json(itens);
+      } catch (err) {
+        res.status(500).send(err);
+      }
+    
+    },
+
+    getEmailUser: async (req: any, res: any) => {
+      try {
+        res.json({email: req.session.user_email});
+      } catch (err) {
+        res.status(500).send(err);
+      }
+    
+    },
+
     createItem: async (req: any, res: any) => {
       try {
         const nome = req.body.nome;
         const itemDuplicado = await Item.findOne({ nome: nome });
-        let faltaInfo = false;
 
-        Object.keys(req.body).forEach((item) => {
-          if (
-            (!req.body[item] || req.body[item] === "") &&
-            req.body[item] != req.body._id
-          ) {
-            faltaInfo = true;
-          }
-        });
-
-        if (faltaInfo) {
-          res.status(400).json({ message: "Preencha todos os campos corretamente!" });
-        } else if (itemDuplicado) {
+       if (itemDuplicado) {
           res.status(400).json({ message: "Já existe um Item com esse titulo" });
         } else {
           const newItem = await Item.create(req.body);
           res.status(200).json(newItem);
         }
 
-        faltaInfo = false;
+      } catch (err) {
+        res.status(500).send(err);
+      }
+    },
+
+    editItem: async (req: any, res: any) => {
+      try {
+        const id = req.params.id;
+
+        if (!ObjectId.isValid(id)) {
+          res.status(400).json({ message: "ID inválido" });
+        }
+        
+        const item = await Item.findOne({ _id: id });
+        
+        if (item) {
+          const updates = req.body;
+          const result = await Item.findByIdAndUpdate(id, updates);
+          res.status(200).json({ message: "Item atualizado"});
+        }
+    
+        
+      } catch (err) {
+        res.status(500).send(err);
+      }
+    },
+
+    deleteItem: async (req: any, res: any) => {
+      try {
+        const id = req.params.id;
+
+        if (!ObjectId.isValid(id)) {
+          res.status(400).json({ message: "ID inválido" });
+        }
+        
+        const item = await Item.findOne({ _id: id });
+
+       if (item) {
+          const itemRemoved = await Item.findByIdAndDelete(id);
+          res.status(200).json(itemRemoved);
+
+        } else {
+          res.status(400).json({ message: "Não há um Item com esse titulo" });
+        }
+
       } catch (err) {
         res.status(500).send(err);
       }
     }
-
-    //FAZER O DELETEITEM
   };
 
   return controller;
