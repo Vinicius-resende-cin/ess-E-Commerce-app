@@ -143,7 +143,7 @@ async function changePassword(email: string, password: string) {
 async function registerUser(email: string, password: string) {
   let user = {
     nomeCompleto: '',
-    cpf: '1234567890',
+    cpf: Math.floor(Math.random() * 1000000000),
     celular: '',
     dataNasci: '',
     email: email,
@@ -173,7 +173,6 @@ async function registerUser(email: string, password: string) {
 
   const success = await new Promise((resolve, reject) => {
     request(options, function (err: any, resp: any) {
-      console.log(resp.body);
       const respObj = JSON.parse(resp.body);
       const success = respObj.success != undefined || respObj.CPF != undefined || respObj.EMAIL != undefined;
       
