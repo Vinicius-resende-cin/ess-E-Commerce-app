@@ -40,6 +40,22 @@ export class CadastroUserComponent {
     return user;
   }
 
+  alertError(msg: string, msgInfo: string){
+    Swal.fire({
+      icon: 'error',
+      title: msg,
+      text: msgInfo
+    })
+  };
+
+  alertAccept(msg: string, msgInfo: string){
+    Swal.fire({
+      icon: 'success',
+      title: msg,
+      text: msgInfo
+    })
+  };
+
   verificaSenha() {
 
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{8,})/;
@@ -81,32 +97,20 @@ export class CadastroUserComponent {
       this.userservice.createUser(this.user).subscribe((result) => {
         if (result.success) {
           this.user = this.criaUser();
-          Swal.fire({
-            icon: 'success',
-            title: 'Usuário Cadastrado no Sistema',
-          })
+          this.alertAccept('Usuário Cadastrado no Sistema', '');
           this.router.navigate(['/login']);
+    
         } else if(result.CPF){
-          Swal.fire({
-            icon: 'error',
-            title: 'CPF inválido',
-            text: 'O CPF a ser cadastrado já existe no sistema',
-          })
+          this.alertError('CPF inválido', 'O CPF a ser cadastrado já existe no sistema');
           this.user.cpf = '';
+
         } else if(result.EMAIL){
-          Swal.fire({
-            icon: 'error',
-            title: 'E-mail inválido',
-            text: 'O E-mail a ser cadastrado já existe no sistema',
-          })
+          this.alertError('E-mail inválido', 'O E-mail a ser cadastrado já existe no sistema');
           this.user.email = '';
           this.user.emailC = '';
-        }else{
-          Swal.fire({
-            icon: 'error',
-            title: 'Houve um erro inesperado, tente novamente',
-          })
 
+        }else{
+          this.alertError('Houve um erro inesperado, tente novamente', '');
         }
 
       });
@@ -125,34 +129,23 @@ export class CadastroUserComponent {
       this.user.estado == '' ||
       this.user.cidade == ''
     ) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Há campos vazios no cadastro',
-      })
+      this.alertError('Há campos vazios no cadastro', '');
+
     } else if (this.passwordSize && !this.passwordDiff) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Senha Inválida',
-        text: 'As senhas inseridas não são iguais',
-      })
+      this.alertError('Senha Inválida', 'As senhas inseridas não são iguais');
       this.user.senha = '';
       this.user.senhaC = '';
+
     } else if (!this.passwordSize && this.passwordDiff) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Senha Inválida',
-        text: 'As senhas informadas não segue as regras de possui 8 caracters, sendo 1 letra e 1 caractere especial',
-      })
+      this.alertError('Senha Inválida', 'As senhas informadas não segue as regras de possui 8 caracters, sendo 1 letra e 1 caractere especial');
       this.user.senha = '';
       this.user.senhaC = '';
+
     } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Senha Inválida',
-        text: 'A senha informada não possui 8 caracteres nem é igual a de confirmação',
-      })
+      this.alertError('Senha Inválida', 'A senha informada não possui 8 caracteres nem é igual a de confirmação');
       this.user.senha = '';
       this.user.senhaC = '';
+      
     }
   }
 }
