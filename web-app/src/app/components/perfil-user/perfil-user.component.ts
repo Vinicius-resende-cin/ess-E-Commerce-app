@@ -75,6 +75,8 @@ export class PerfilUserComponent {
   };
 
   async recivePassword(){
+    const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{8,})/;
+
     const { value: formValues }  = await Swal.fire({
       title: 'Troca de Senha',
       html:
@@ -97,7 +99,12 @@ export class PerfilUserComponent {
     this.passValues = formValues
     if(this.passValues[0] != ''  && this.passValues[1] != '' && this.passValues[2] != ''){
       if(this.passValues[1] == this.passValues[2]){
-        this.changePasword()
+        if(passwordRegex.test(this.passValues[1])){
+          this.changePasword()
+        }else{
+          this.alertError('A nova senha não segue as regras para criação de senha')
+        }
+        
 
       }else{
         this.alertError('Os campos Nova senha e confirmação de senha não são iguais')
@@ -148,7 +155,7 @@ export class PerfilUserComponent {
           this.alertAcept('Senha foi alterada com sucesso')
         }
         else{
-          this.alertError('Senha atual informada está errada')
+          this.alertError(result.failure)
         }
       }
     )
@@ -178,9 +185,8 @@ export class PerfilUserComponent {
       (result) => {
         if(result.Sucess){
           this.alertAcept('As informações do endereço foi alterada com sucesso')
-          window.location.reload();
         }else{
-          this.alertError('Senha atual informada está errada')
+          this.alertError(result.failure)
         }    
       }
     );
