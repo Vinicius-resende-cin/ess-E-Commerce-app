@@ -31,29 +31,29 @@
     </div>
 
     <div class="row p-2 bg-light border text-center" *ngFor="let p of listaPedidos">
-        <div class="col">{{p.id_pedido}}</div>
+        <div id="id-{{p.id_pedido}}" class="col">{{p.id_pedido}}</div>
         <div class="col">
             <div class="row" *ngFor="let id of p.id_produto">
-                <button type="button" class="list-group-item list-group-item-action" (click)="verProduto(id)" aria-current="true">
+                <button id="btn-{{p.id_pedido}}-{{id}}" type="button" class="list-group-item list-group-item-action" (click)="verProduto(id)" aria-current="true">
                     {{listaItem.get(id)?.nome}}
                 </button>
             </div>
         </div>
-        <div class="col">{{p.data_hora.toLocaleDateString()}} {{p.data_hora.toLocaleTimeString()}}</div>
-        <div class="col">{{p.valor}}</div>
-        <div class="col">{{p.status}}</div>
+        <div id="hora-{{p.id_pedido}}" class="col">{{p.data_hora.toLocaleDateString()}} {{p.data_hora.toLocaleTimeString()}}</div>
+        <div id="valor-{{p.id_pedido}}" class="col">{{p.valor}}</div>
+        <div id="status-{{p.id_pedido}}" class="col">{{p.status}}</div>
         <div class="col">
-            <div class="row justify-content-center" *ngFor="let quantidade of p.quantidade">
+            <div id="quantidade-{{p.id_pedido}}-{{p.id_produto[i]}}" class="row justify-content-center" *ngFor="let quantidade of p.quantidade; let i = index">
                 {{quantidade}}
             </div>
         </div>
         <div class="col">
-            <div class="row justify-content-center" *ngFor="let id of p.id_produto">
+            <div id="estoque-{{p.id_pedido}}-{{id}}" class="row justify-content-center" *ngFor="let id of p.id_produto">
                 {{listaItem.get(id)?.quantidade}}
             </div>
         </div>
         <div class="col">
-            <button type="button" class="btn btn-primary" name="button-{{p.id_pedido}}" (click)="comprar(p)">
+            <button id="btn-{{p.id_pedido}}" type="button" class="btn btn-primary" name="button-{{p.id_pedido}}" (click)="comprar(p)">
                 Comprar Novamente
             </button>
         </div>
