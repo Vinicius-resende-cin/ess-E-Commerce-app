@@ -5,6 +5,7 @@ import { RecoverAccountComponent } from './components/recover-account/recover-ac
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { authGuardLogin } from './common/auth.guard';
 import { CadastroUserComponent } from './components/cadastro-user/cadastro-user.component';
+import { GenerateLinkComponent } from './components/generate-link/generate-link.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
     path: 'redefinir-senha',
     component: ResetPasswordComponent,
     canActivate: [authGuardLogin],
+  },
+  {
+    path: 'gerar-link',
+    component: GenerateLinkComponent,
   },
   { path: '**', redirectTo: '' },
 ];

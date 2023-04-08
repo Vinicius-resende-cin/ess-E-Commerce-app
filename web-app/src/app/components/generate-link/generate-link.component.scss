@@ -1,0 +1,73 @@
+$blue-alt: #2d60e3;
+$black-alt: #363636;
+$faded-alt: #000000bf;
+$dashed-alt: #ccc;
+$white-alt: #fff;
+
+button {
+  padding: 15px 30px;
+  background-color: $blue-alt;
+  font-size: 14px;
+  border: 0;
+  border-radius: 5px;
+  margin-right: 20px;
+  color: $white-alt;
+  cursor: pointer;
+}
+
+.gl-modal {
+  position: fixed;
+  background: $faded-alt;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.gl-m-content {
+  background: $white-alt;
+  width: 50%;
+  margin: 3% auto;
+  border-radius: 5px;
+}
+
+.gl-m-header {
+  padding: 20px;
+  background: $blue-alt;
+  color: $white-alt;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  position: relative;
+}
+
+.gl-m-header .fechar {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: $white-alt;
+}
+
+.gl-m-header h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.gl-m-body {
+  padding: 20px;
+  min-width: 200px;
+}
+
+.gl-m-footer {
+  padding: 20px;
+  border-top: 1px dashed $dashed-alt;
+  text-align: right;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.gl-m-footer button {
+  margin-left: 20px;
+  margin-right: 0;
+}
