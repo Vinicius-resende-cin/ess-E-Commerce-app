@@ -39,7 +39,12 @@ export class EditItemComponent implements OnInit {
       id = this.item._id.toString();
     }
     
-    this.itemModifiqued.nome = "Mudado";
+    this.itemModifiqued.nome = (<HTMLInputElement>document.getElementById('input-nome')).value;
+    this.itemModifiqued.descricao = (<HTMLInputElement>document.getElementById('input-desc')).value;
+    this.itemModifiqued.quantidade = Number((<HTMLInputElement>document.getElementById('input-quantidade')).value);
+    this.itemModifiqued.preco = Number((<HTMLInputElement>document.getElementById('input-preco')).value);
+    this.itemModifiqued.forma_pagamento = (<HTMLInputElement>document.getElementById('input-pagamento')).value.split(",");
+    this.itemModifiqued.categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value.split(",");
 
     this.itemservice.editItem('/itens/' + id, this.itemModifiqued).subscribe((result) => {
       alert(result as String);
