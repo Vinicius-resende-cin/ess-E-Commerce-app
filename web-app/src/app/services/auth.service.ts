@@ -57,9 +57,4 @@ export class AuthService {
 
     return this.http.put<Object>(endpointURL, body, options);
   }
-
-  getEmail(): string {
-    return this.user_email;
-  }
-
 }

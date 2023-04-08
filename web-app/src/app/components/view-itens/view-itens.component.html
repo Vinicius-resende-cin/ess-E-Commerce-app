@@ -5,6 +5,12 @@
         <table class="table mt-4">
           <tbody>
             <tr *ngFor="let item of itens_list">
+              <td>
+                <button id="btn-edit" style="background-color: green;" (click)="editItemPage(item)">Editar</button>
+              </td>
+              <td>
+                <button id="btn-remove" style="background-color: red;" (click)="deleteItem(item)">Remover</button>
+              </td>
               <td>{{ item._id }}</td>
               <td>{{ item.id_user }}</td>
               <td>{{ item.nome }}</td>

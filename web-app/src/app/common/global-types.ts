@@ -1,4 +1,5 @@
 import { ObjectId } from 'mongodb';
+import { User } from '../../../../common/usuario';
 
 export type Pedido = {
   id_pedido: String;

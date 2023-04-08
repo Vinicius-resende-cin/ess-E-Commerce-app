@@ -1,0 +1,61 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Itens, Categoria } from 'src/app/common/global-types';
+import { ItemService } from 'src/app/services/item.service';
+import { CategoriaService } from 'src/app/services/categoria.service';
+
+@Component({
+  selector: 'app-edit-item',
+  templateUrl: './edit-item.component.html',
+  styleUrls: ['./edit-item.component.scss']
+})
+
+export class EditItemComponent implements OnInit {
+  item!: Itens;
+  itemModifiqued!: Itens;
+  category_list! : Categoria[];
+
+  constructor(private itemservice: ItemService, private route: ActivatedRoute, private categoriaService: CategoriaService) { }
+
+  ngOnInit(): void {
+    this.getCategory();
+    const id = this.route.snapshot.paramMap.get('id');
+
+    this.itemservice.getAll('/itens/' + id).subscribe((resultado) => {
+      this.item = resultado as Itens;
+    })
+  }
+
+  getCategory(): void {
+      this.categoriaService.getCategories().subscribe((result) => {
+      this.category_list = result as Categoria[];
+    });
+  }
+
+  updateItem() {
+    let id = ''
+
+    if (this.item._id){
+      id = this.item._id.toString()
+    }
+    
+    this.itemservice.editItem('/itens/' + id, this.itemModifiqued).subscribe((result) => {
+      // Lógica de redirecionamento para a página de visualização de itens após atualização do item
+    });
+  }
+
+  validarEdicao(): boolean {
+    const quantidade = (<HTMLInputElement>document.getElementById('input-quantidade')).value;
+    const preco = (<HTMLInputElement>document.getElementById('input-preco')).value;
+    const forma_pagamento = (<HTMLInputElement>document.getElementById('input-pagamento')).value;
+    const categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value;
+    const titulo = (<HTMLInputElement>document.getElementById('input-nome')).value;
+    const descricao = (<HTMLInputElement>document.getElementById('input-desc')).value;
+    //const imagem = (<HTMLInputElement>document.getElementById('input-image')).value;
+
+    if (quantidade && preco && forma_pagamento && categoria && titulo && descricao) {
+      return true;
+    }
+    return false;
+  }
+}

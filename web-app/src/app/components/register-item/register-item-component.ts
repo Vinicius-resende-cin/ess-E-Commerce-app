@@ -5,6 +5,7 @@ import { Categoria, Itens } from 'src/app/common/global-types';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { User } from '../../../../../common/usuario';
 
 @Component({
   selector: 'app-register-item',
@@ -30,7 +31,9 @@ export class RegisterItemComponent {
     };
 
     cadastrarItem(newItem: Itens) {
-        newItem.id_user = this.authService.getEmail();
+        /*this.itemservice.getCurrentUser().subscribe((result) => {
+          newItem.id_user = result.email;
+        }),*/
 
         this.itemservice
         .createItem(newItem)
