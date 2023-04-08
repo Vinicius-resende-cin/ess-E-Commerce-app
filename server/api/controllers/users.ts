@@ -117,7 +117,6 @@ module.exports = () => {
         
         //Pega a senha do usuário no BD
         let userAdmin = await userModel.find({email: req.session.user_email})
-        console.log(userUpdate.permissao)
         
         if (userAdmin[0].senha == passString) {
           if (userUpdate.permissao == 0){

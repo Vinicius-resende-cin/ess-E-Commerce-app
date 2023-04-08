@@ -58,6 +58,7 @@ export class AdminPainelComponent {
     this.userservice.deleteUser(user, this.passorwdTest).subscribe((result) => {
       if (result.Sucess) {
         alert('Usuário Removido com sucesso');
+        window.location.reload();
       } else {
         alert('Senha informada está errada');
       }
