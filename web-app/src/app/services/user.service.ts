@@ -35,4 +35,18 @@ export class UserService {
     updateUserPermission(user:User, passorwdTest:string){
         return this.http.put<any>(this.apiURL + "/users/" + passorwdTest, user, {headers: this.headers, withCredentials: true})
     }
+
+    updatePassword(user:User, listPassword:any){
+        return this.http.put<any>(this.apiURL + "/users/upassword/" + listPassword[0] + '/' + listPassword[1] , user, {headers: this.headers, withCredentials: true})
+    }
+
+    updateAddress(user:User, addres:any, passorwdTest:string){
+        user.endereco = addres[0]
+        user.complemento = addres[1]
+        user.cep = addres[2]
+        user.cidade = addres[3]
+        user.estado = addres[4]
+
+        return this.http.put<any>(this.apiURL + "/users/uaddress/" + passorwdTest, user, {headers: this.headers, withCredentials: true})
+    }
 }

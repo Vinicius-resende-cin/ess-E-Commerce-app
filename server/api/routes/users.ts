@@ -8,6 +8,8 @@ module.exports = () => {
     router.delete("/:cpf/:passorwdTest", controller.deleteUser);
     router.get("/session", controller.getCurrentUser);
     router.put("/:passorwdTest", controller.updateUserPermission);
+    router.put("/upassword/:actuaPassword/:newPassword", controller.updatePassword);
+    router.put("/uaddress/:passorwdTest", controller.updateAddress)
   
     return router;
   };
