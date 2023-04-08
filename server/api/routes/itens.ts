@@ -3,9 +3,9 @@ module.exports = () => {
     const router = express.Router();
     const controller = require("../controllers/itens")();
 
-    //deveria retornar o email
-    router.get("/email", controller.getEmailUser);
-
+    //retorna todos os itens do user
+    router.get("/user", controller.getAllItensUser);
+ 
     //retorna apenas um item
     router.get("/:id", controller.listProducts);
 

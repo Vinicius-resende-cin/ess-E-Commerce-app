@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../../../../../common/usuario';
+import { Itens } from 'src/app/common/global-types';
+import { ItemService } from 'src/app/services/item.service';
 
 @Component({
   selector: 'app-main-page',
@@ -28,7 +30,8 @@ export class MainPageComponent {
 
   constructor(
     private authService: AuthService,
-    private userservice: UserService
+    private userservice: UserService,
+    private itemservice: ItemService
   ) {}
 
   ngOnInit() {

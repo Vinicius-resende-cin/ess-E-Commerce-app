@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { User } from '../../../../../common/usuario';
+import { UserService } from 'src/app/services/user.service';
+
 
 @Component({
   selector: 'app-register-item',
@@ -15,7 +17,8 @@ import { User } from '../../../../../common/usuario';
 
 export class RegisterItemComponent {
     category_list!: Categoria[];
-    constructor(private itemservice: ItemService, private categoriaService: CategoriaService,  private authService: AuthService) { 
+    email!: String;
+    constructor(private itemservice: ItemService, private categoriaService: CategoriaService,  private userservice: UserService, private router: Router) { 
     }
 
     item: Itens = {
@@ -31,21 +34,19 @@ export class RegisterItemComponent {
     };
 
     cadastrarItem(newItem: Itens) {
-        this.itemservice.getEmailUser().subscribe((result) => {
-          newItem.id_user = result.email;
-        }),
-
+        newItem.id_user = this.email;
         this.itemservice
         .createItem(newItem)
         .subscribe(
           (newItem) => {
-            console.log(newItem);
+            this.router.navigate(['home', 'view-itens']);
           }
-        )
+        );
     }
 
     ngOnInit(): void {
       this.getCategory();
+      this.getEmail();
     }
   
     ngOnChanges(): void {
@@ -55,6 +56,12 @@ export class RegisterItemComponent {
     getCategory(): void {
       this.categoriaService.getCategories().subscribe((result) => {
         this.category_list = result as Categoria[];
+      });
+    }
+
+    getEmail(){
+      this.userservice.getCurrentUser().subscribe((result) => {
+        this.email = result[0].email;
       });
     }
     

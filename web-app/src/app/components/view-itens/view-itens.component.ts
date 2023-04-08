@@ -14,15 +14,15 @@ export class ViewItensComponent {
   constructor(private itemservice: ItemService,  private router: Router) { }
 
   ngOnInit(): void {
-    this.getAllItens();
+    this.getAllItensUser();
   }
 
   ngOnChanges(): void {
-    this.getAllItens();
+    this.getAllItensUser();
   }
 
-  getAllItens(){
-    this.itemservice.getAllItens().subscribe((result) => {
+  getAllItensUser(){
+    this.itemservice.getAllItensUser().subscribe((result) => {
       this.itens_list = result as Itens[];
     });
   }
@@ -45,7 +45,7 @@ export class ViewItensComponent {
     
 
     this.itemservice.deleteItem('/itens/' + id).subscribe(() => {
-      this.getAllItens();
+      this.getAllItensUser();
     });
   }
 }
