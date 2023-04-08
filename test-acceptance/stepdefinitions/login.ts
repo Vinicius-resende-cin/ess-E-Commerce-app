@@ -140,6 +140,51 @@ async function changePassword(email: string, password: string) {
   return success;
 }
 
+async function registerUser(email: string, password: string) {
+  let user = {
+    nomeCompleto: '',
+    cpf: '1234567890',
+    celular: '',
+    dataNasci: '',
+    email: email,
+    emailC: '',
+    senha: password,
+    senhaC: '',
+    endereco: '',
+    complemento: '',
+    cep: '',
+    estado: '',
+    cidade: '',
+    permissao: 0
+  };
+
+  const cookies = await browser.manage().getCookies();
+
+  const options = {
+    url: "http://localhost:3000/api/users/",
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookies.map((cookie) => `${cookie.name}=${cookie.value}`).join("; ")
+    },
+    body: JSON.stringify(user),
+    withCredentials: true
+  };
+
+  const success = await new Promise((resolve, reject) => {
+    request(options, function (err: any, resp: any) {
+      console.log(resp.body);
+      const respObj = JSON.parse(resp.body);
+      const success = respObj.success != undefined || respObj.CPF != undefined || respObj.EMAIL != undefined;
+      
+      resolve(success);
+    });
+  });
+
+  return success;
+}
+
+
 defineSupportCode(function ({ Given, When, Then, Before, After }) {
   //reseta tentativas de login
   Before(async () => {
@@ -163,9 +208,7 @@ defineSupportCode(function ({ Given, When, Then, Before, After }) {
     /^o email "([^"]*)" já foi cadastrado com a senha "([^"]*)"$/,
     async (email, senha) => {
       await changePassword(<string>email, <string>senha);
-      await expect(tryLogin(<string>email, <string>senha, "success")).to.eventually.equal(
-        true
-      );
+      await expect(registerUser(<string>email, <string>senha)).to.eventually.equal(true);
     }
   );
 
