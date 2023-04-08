@@ -99,6 +99,22 @@ async function tryLogin(email: string, password: string, param: string) {
   return result;
 }
 
+async function resetTries() {
+  const cookies = await browser.manage().getCookies();
+  const options = {
+    url: "http://localhost:3000/api/auth/resetTries",
+    method: "GET",
+    withCredentials: true
+  };
+
+  await new Promise((resolve, reject) => {
+    request(options, function (err: any, resp: any) {
+      resolve(resp.body);
+    });
+  });
+
+}
+
 async function changePassword(email: string, password: string) {
   const token = await getToken(email);
   const data = { password: password, email: email, token: token };
@@ -117,15 +133,19 @@ async function changePassword(email: string, password: string) {
 
   const success = await new Promise((resolve, reject) => {
     request(options, function (err: any, resp: any) {
-      resolve(JSON.parse(resp.body).success);
+      resolve(resp.body);
     });
   });
 
   return success;
 }
 
-defineSupportCode(function ({ Given, When, Then, After }) {
-  //desloga se estiver logado
+defineSupportCode(function ({ Given, When, Then, Before, After }) {
+  //reseta tentativas de login
+  Before(async () => {
+    await resetTries();
+  });
+  //desloga se estiver logado e 
   After(async () => {
     const logged = await checkLogged();
     if (logged) {
