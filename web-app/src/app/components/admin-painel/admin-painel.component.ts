@@ -3,6 +3,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../../../../common/usuario';
 import Swal from 'sweetalert2'
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-admin-painel',
@@ -64,8 +65,8 @@ export class AdminPainelComponent {
     })
   };
 
-  alertAcept(msg: string){
-    const sucess = Swal.mixin({
+  async alertAcept(msg: string){
+     const sucess = Swal.mixin({
       toast: true,
       position: 'bottom-end',
       showConfirmButton: false,
@@ -73,19 +74,17 @@ export class AdminPainelComponent {
       timerProgressBar: true,
     })
     
-    sucess.fire({
+    await sucess.fire({
       icon: 'success',
       title: msg
     })
+    
     window.location.reload();
   };
 
-  
-
-  async delteUser(user: User) {
-
+  async alertSenha(msg: string, user:User){
     const { value: formValues }  = await Swal.fire({
-      title: `Deletar o Usuário ${user.nomeCompleto}?\nEmail: ${user.email}\nCPF: ${user.cpf}`,
+      title: `${msg} ${user.nomeCompleto}?\nEmail: ${user.email}\nCPF: ${user.cpf}`,
       html:
         '<label>Senha do Admin</label><input id="swal-input1" class="swal2-input" type="password">',
       focusConfirm: false,
@@ -99,14 +98,16 @@ export class AdminPainelComponent {
         ];
       }
     });
-    
-    this.passorwdTest = formValues;
 
-  
+    this.passorwdTest = formValues;
+  };
+
+  async delteUser(user: User) {
+    
+    await this.alertSenha('Deletar o Usuário', user);
     this.userservice.deleteUser(user, this.passorwdTest[0]).subscribe((result) => {
       if (result.Sucess) {
         this.alertAcept('Usuário Removido com sucesso');
-        
       } else {
         this.alertError('Senha informada está errada');
       }
@@ -114,29 +115,14 @@ export class AdminPainelComponent {
   }
 
   async changePermission(user: User) {
-    const { value: formValues }  = await Swal.fire({
-      title: `Trocar a permissão do ${user.nomeCompleto}?\nEmail: ${user.email}\nCPF: ${user.cpf}`,
-      html:
-        '<label>Senha do Admin</label><input id="swal-input1" class="swal2-input" type="password">',
-      focusConfirm: false,
-      showCancelButton: true,
-      preConfirm: () => {
-        const val1 = (document.getElementById(
-          'swal-input1'
-        ) as HTMLInputElement).value;
-        return [
-          (document.getElementById('swal-input1') as HTMLInputElement).value,
-        ];
-      }
-    });
-
-    this.passorwdTest = formValues;
+    await this.alertSenha('Trocar a permissão do', user)
 
     this.userservice
       .updateUserPermission(user, this.passorwdTest)
       .subscribe((result) => {
         if (result.Sucess) {
           this.alertAcept('Usuário Teve a permissão alterada com sucesso');
+          
         } else {
           this.alertError('Senha informada está errada');
         }
