@@ -15,6 +15,7 @@ import { AdminPainelComponent } from 'src/app/components/admin-painel/admin-pain
 import { CartComponent } from 'src/app/components/cart/cart.component';
 import { EditItemComponent } from 'src/app/components/edit-item/edit-item.component';
 import { ViewItensComponent } from 'src/app/components/view-itens/view-itens.component';
+import { PasswordConfirmationComponent } from 'src/app/components/password-confirmation/password-confirmation.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'perfil-user', component: PerfilUserComponent },
       { path: 'admin-painel', component: AdminPainelComponent },
       { path: 'cart', component: CartComponent },
+      { path: 'password-confirmation/:id', component: PasswordConfirmationComponent },
     ],
   },
 ];

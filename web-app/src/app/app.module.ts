@@ -27,6 +27,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { ViewItensComponent } from './components/view-itens/view-itens.component';
 import { EditItemComponent } from './components/edit-item/edit-item.component';
 import ptBr from '@angular/common/locales/pt';
+import { PasswordConfirmationComponent } from './components/password-confirmation/password-confirmation.component';
 
 registerLocaleData(ptBr);
 
@@ -52,6 +53,7 @@ registerLocaleData(ptBr);
     CartComponent,
     ViewItensComponent,
     EditItemComponent,
+    PasswordConfirmationComponent,
   ],
   imports: [
     BrowserModule,
