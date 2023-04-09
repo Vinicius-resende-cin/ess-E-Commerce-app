@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Itens } from 'src/app/common/global-types';
 import { ItemService } from 'src/app/services/item.service';
 import { Router } from '@angular/router';
+import { DataSharingService } from 'src/app/services/datasharing.service';
 
 @Component({
   selector: 'app-view-itens',
@@ -10,19 +11,21 @@ import { Router } from '@angular/router';
 })
 export class ViewItensComponent {
   itens_list!: Itens[];
+  confirmPassword!: boolean;
 
-  constructor(private itemservice: ItemService,  private router: Router) { }
+  constructor(private itemservice: ItemService,  private router: Router, private sharedService: DataSharingService) { }
 
   ngOnInit(): void {
-    this.getAllItens();
+    this.getAllItensUser();
   }
 
   ngOnChanges(): void {
-    this.getAllItens();
+    this.getAllItensUser();
+    //this.updateSharedVariable();
   }
 
-  getAllItens(){
-    this.itemservice.getAllItens().subscribe((result) => {
+  getAllItensUser(){
+    this.itemservice.getAllItensUser().subscribe((result) => {
       this.itens_list = result as Itens[];
     });
   }
@@ -42,10 +45,17 @@ export class ViewItensComponent {
     if (item._id){
       id = item._id.toString()
     }
-    
 
-    this.itemservice.deleteItem('/itens/' + id).subscribe(() => {
-      this.getAllItens();
-    });
+    this.router.navigate(['home', 'password-confirmation', id]);
+    
+    /*if (this.confirmPassword) {
+      this.itemservice.deleteItem('/itens/' + id).subscribe(() => {
+        this.getAllItensUser();
+      });
+    }*/
   }
+
+  /*updateSharedVariable() {
+    this.confirmPassword =  this.sharedService.confirmPassword;
+  }*/
 }
