@@ -26,11 +26,11 @@ Feature: Calcular Total de pedidos no Mês
     Given o email "vrb@cin.ufpe.br" já foi cadastrado com a senha "@a12345678" 
     And eu já estou logado no sistema como "vrb@cin.ufpe.br" com a senha "@a12345678"
     And eu estou na pagina "Resumo mensal"
-    And no período de "12/2022" até "12/2023" houveram "5" pedidos, de valor total igual a "R$475,00"
+    And no período de "12/2022" até "12/2023" houveram "7" pedidos, de valor total igual a "R$519,80"
     When eu filtro os pedidos sem adicionar um período
-    Then eu posso ver o "quantidade total" dos pedidos igual a "5"
-    And eu posso ver o "valor total" dos pedidos igual a "R$475,00"
-    And eu posso ver o "média do valor" dos pedidos igual a "R$95,00"
+    Then eu posso ver o "quantidade total" dos pedidos igual a "7"
+    And eu posso ver o "valor total" dos pedidos igual a "R$519,80"
+    And eu posso ver o "média do valor" dos pedidos igual a "R$74,26"
     And eu posso ver a lista de pedidos do período
 
   Scenario: Filtrar apenas o valor total dos pedidos do período
