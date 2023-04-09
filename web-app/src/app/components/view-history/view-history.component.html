@@ -18,7 +18,7 @@
     </form>
 </div>
 
-<div class="container text-center">
+<div name="historicoList" class="container text-center">
     <div class="row p-2 text-center text-bg-primary rounded">
         <div class="col p-2">Id_pedido</div>
         <div class="col p-2">Produtos</div>
@@ -30,30 +30,30 @@
         <div class="col p-2"></div>
     </div>
 
-    <div class="row p-2 bg-light border text-center" *ngFor="let p of listaPedidos">
-        <div id="id-{{p.id_pedido}}" class="col">{{p.id_pedido}}</div>
+    <div name="pedidosList" class="row p-2 bg-light border text-center" *ngFor="let p of listaPedidos">
+        <div name="id" id="id-{{p.id_pedido}}" class="col">{{p.id_pedido}}</div>
         <div class="col">
-            <div class="row" *ngFor="let id of p.id_produto">
-                <button id="btn-{{p.id_pedido}}-{{id}}" type="button" class="list-group-item list-group-item-action" (click)="verProduto(id)" aria-current="true">
+            <div name="itemList" class="row" *ngFor="let id of p.id_produto">
+                <button name="item" id="btn-{{p.id_pedido}}-{{listaItem.get(id)?.nome}}" type="button" class="list-group-item list-group-item-action" (click)="verProduto(id)" aria-current="true">
                     {{listaItem.get(id)?.nome}}
                 </button>
             </div>
         </div>
-        <div id="hora-{{p.id_pedido}}" class="col">{{p.data_hora.toLocaleDateString()}} {{p.data_hora.toLocaleTimeString()}}</div>
-        <div id="valor-{{p.id_pedido}}" class="col">{{p.valor}}</div>
-        <div id="status-{{p.id_pedido}}" class="col">{{p.status}}</div>
+        <div name="hora" id="hora-{{p.id_pedido}}" class="col">{{p.data_hora.toLocaleDateString()}} {{p.data_hora.toLocaleTimeString()}}</div>
+        <div name="valor" id="valor-{{p.id_pedido}}" class="col">{{p.valor}}</div>
+        <div name="status" id="status-{{p.id_pedido}}" class="col">{{p.status}}</div>
         <div class="col">
-            <div id="quantidade-{{p.id_pedido}}-{{p.id_produto[i]}}" class="row justify-content-center" *ngFor="let quantidade of p.quantidade; let i = index">
+            <div name="quantidade" id="quantidade-{{p.id_pedido}}-{{listaItem.get(p.id_produto[i])?.nome}}" class="row justify-content-center" *ngFor="let quantidade of p.quantidade; let i = index">
                 {{quantidade}}
             </div>
         </div>
-        <div class="col">
-            <div id="estoque-{{p.id_pedido}}-{{id}}" class="row justify-content-center" *ngFor="let id of p.id_produto">
+        <div name="estoqueList" class="col">
+            <div name="estoque" id="estoque-{{p.id_pedido}}-{{listaItem.get(id)?.nome}}" class="row justify-content-center" *ngFor="let id of p.id_produto">
                 {{listaItem.get(id)?.quantidade}}
             </div>
         </div>
-        <div class="col">
-            <button id="btn-{{p.id_pedido}}" type="button" class="btn btn-primary" name="button-{{p.id_pedido}}" (click)="comprar(p)">
+        <div name="comprarList" class="col">
+            <button name="comprar" id="btn-{{p.id_pedido}}" type="button" class="btn btn-primary" (click)="comprar(p)">
                 Comprar Novamente
             </button>
         </div>
