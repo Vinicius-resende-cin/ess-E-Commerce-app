@@ -59,7 +59,7 @@ export class AdminPainelComponent {
       timerProgressBar: true,
     })
     
-    error.fire({
+      error.fire({
       icon: 'error',
       title: msg
     })
@@ -74,19 +74,17 @@ export class AdminPainelComponent {
       timerProgressBar: true,
     })
     
-    await sucess.fire({
+     sucess.fire({
       icon: 'success',
       title: msg
     })
-    
-    window.location.reload();
   };
 
   async alertSenha(msg: string, user:User){
     const { value: formValues }  = await Swal.fire({
       title: `${msg} ${user.nomeCompleto}?\nEmail: ${user.email}\nCPF: ${user.cpf}`,
       html:
-        '<label>Senha do Admin</label><input id="swal-input1" class="swal2-input" type="password">',
+        '<label>Senha do Admin</label><input id="swal-input1" class="swal2-input" type="password" name="Senha">',
       focusConfirm: false,
       showCancelButton: true,
       preConfirm: () => {
@@ -109,7 +107,7 @@ export class AdminPainelComponent {
       if (result.Sucess) {
         this.alertAcept('Usuário Removido com sucesso');
       } else {
-        this.alertError('Senha informada está errada');
+        this.alertError('Senha inserida está incorreta');
       }
     });  
   }
@@ -122,9 +120,8 @@ export class AdminPainelComponent {
       .subscribe((result) => {
         if (result.Sucess) {
           this.alertAcept('Usuário Teve a permissão alterada com sucesso');
-          
         } else {
-          this.alertError('Senha informada está errada');
+          this.alertError('Senha inserida está incorreta');
         }
       });
   }

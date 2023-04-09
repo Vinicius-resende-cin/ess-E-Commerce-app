@@ -4,125 +4,238 @@ Feature: Gerenciar as contas de usuários
     So that Usuários podem ser cadastrados e gerenciados
 
 Scenario: Cadastrar um novo Usuário
-    Given Eu estou na página de "Cadastrar novo Cliente"
-    When Escrevo "Guilherme Maciel de Melo" em "Nome"
-    And Escrevo "gmm7@cin.ufpe.br" em "e-mail"
-    And Escrevo "123456Gui" em "Senha"
-    And Escrevo "123.456.789-10" em "CPF"
-    And Escrevo "99999-9999" em "Telefone"
-    And Escrevo "PE" em "estado"
-    And Escrevo "Recife" em "Cidade"
-    And Escrevo "345" em "numero"
-    And Escrevo "Rua General Vargas" em "Endereço"
-    And Escrevo "Casa" em "Complemento"
-    And Clico em "Cadastrar"
-    Then Eu recebo uma mensagem de cadastro realizado 
-
-Scenario: Usuário, já logado no sistema, deseja mudar sua senha
-    Given Eu estou na página de "Informações do Cliente"
-    And Eu estou logado com o email "gmm7@cin.ufpe.br" e senha  "123456Gui"
-    When Eu clico na opção "Alterar Senha"
-    And Escrevo "123456Gui" em "Senha Atual"
-    And Escrevo "98765Gui" em "Nova Senha"
-    And Escrevo "98765Gui" em "Confirmar Senha"
-    And Clico em "Confirmar"
-    Then Eu recebo uma mensagem de Senha alterada com Sucesso
-
-Scenario: Administrador deseja remover um usuário do sistema 
-    Given Eu estou na página de "Painel Admin"
-    And Eu estou logado com a conta de administrador default de email  "admin@hotmail.com" e senha  "adminadmin"
-    And Vejo uma tabela com os usuários do sistema
-    And Eu vejo o usuário de "nome"  "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail"
-    When Eu clico no Botão "X" no usuário "Guilherme Maciel de Melo"
-    And Escrevo  "adminadmin" em "Senha"
-    And Clico em "confirmar"
-    Then Eu recebo uma mensagem de que o usuário foi excluído
-    And Verifico que o usuário "Guilherme Maciel de Melo" não consta mais na tabela
-
-Scenario: Administrador quer promover um usuário a administrador
-    Given Eu estou na página de "Painel Admin"
-    And Eu estou logado com a conta de administrador default de email  "admin@hotmail.com” e senha  "adminadmin"
-    And Vejo uma tabela com os usuários do sistema
-    And Eu vejo o usuário de "nome"  "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail"
-    When Eu clico no botão "Admin" no usuário "Guilherme Maciel de Melo"
-    And Escrevo  "adminadmin" em "Senha"
-    And Clico em "confirmar"
-    Then Eu recebo uma mensagem de que o usuário virou administrador
-
-Scenario: Administrador default deseja remover outro administrador do sistema
-    Given Eu estou na página de "Painel Admin"
-    And Eu estou logado com a conta de administrador default de email  "admin@hotmail.com" e senha  "adminadmin"
-    And Vejo uma tabela com os usuários do sistema
-    And Eu vejo o usuário de "nome"  "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail"
-    And Eu vejo que esse usuário já é um administrador
-    When Eu clico no botão "X" no usuário "Guilherme Maciel de Melo"
-    And Escrevo  "adminadmin" em "Senha"
-    And Clico em "confirmar"
-    Then Eu recebo uma mensagem de que o usuário foi removido do sisema
+    Given eu estou na pagina "Cadastro_Usuario"
+    When Escrevo "Guilherme Maciel de Melo" em "nomecompleto" 
+    And Escrevo "gmm7@cin.ufpe.br" em "e-mail" 
+    And Escrevo "gmm7@cin.ufpe.br" em "confirmacaoe-mail" 
+    And Escrevo "123456Gui@" em "senha" 
+    And Escrevo "123456Gui@" em "confirmacaosenha" 
+    And Escrevo "123.456.789-10" em "CPF" 
+    And Escrevo "99999-9999" em "celular" 
+    And Escrevo "07/02/2002" em "data de nascimento" 
+    And Escrevo "PE" em "estado" 
+    And Escrevo "Recife" em "cidade" 
+    And Escrevo "Rua General Vargas" em "endereco" 
+    And Escrevo "Casa" em "Complemento" 
+    And Escrevo "45989-485" em "CEP" 
+    And Clico em "FinalizarCadastro"
+    Then Eu recebo uma mensagem de cadastro realizado
 
 Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, senha com menos de 8 dígitos 
-    Given Eu estou na página de "Cadastrar novo Cliente"
-    When Escrevo "Guilherme Maciel de Melo" em "Nome"
-    And Escrevo "gmm7@cin.ufpe.br" em "e-mail"
-    And Escrevo "1234Gui" em "Senha"
-    And Escrevo "123.456.789-10" em "CPF"
-    And Escrevo "99999-9999" em "Telefone"
-    And Escrevo "PE" em "estado"
-    And Escrevo "Recife" em "Cidade"
-    And Escrevo "345" em "numero"
-    And Escrevo "Rua General Vargas" em "Endereço"
-    And Escrevo "Casa" em "Complemento"
-    And Clico em "Cadastrar"
-    Then Eu recebo uma mensagem de Erro do cadastro  
+    Given eu estou na pagina "Cadastro_Usuario"
+    When Escrevo "Joaquim Maria Machado de Assis" em "nomecompleto" 
+    And Escrevo "jmma@cin.ufpe.br" em "e-mail" 
+    And Escrevo "jmma@cin.ufpe.br" em "confirmacaoe-mail" 
+    And Escrevo "123jm@" em "senha" 
+    And Escrevo "123jm@" em "confirmacaosenha" 
+    And Escrevo "093.459.090-79" em "CPF" 
+    And Escrevo "21 2572-55949" em "celular" 
+    And Escrevo "21/06/1908" em "data de nascimento" 
+    And Escrevo "RJ" em "estado" 
+    And Escrevo "Rio de Janeiro" em "cidade" 
+    And Escrevo "Rua Rubens Pinto" em "endereco" 
+    And Escrevo "Casa" em "Complemento" 
+    And Escrevo "78085-730" em "CEP" 
+    And Clico em "FinalizarCadastro"
+    Then Eu recebo uma mensagem de senha erro no cadastro, senha com menos que 8 dígitos
 
-Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer promover um usuário a administrador V
-    Given Eu estou na página de "Painel Admin"
-    And Eu estou logado com a conta de administrador default de email  "admin@hotmail.com" e senha  "adminadmin"
-    And Vejo uma tabela com os usuários do sistema
-    And Eu vejo o usuário de "nome"  "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail"
-    When Eu clico no botão "Admin" no usuário "Guilherme Maciel de Melo"
-    And Escrevo  "admin" em "Senha"
-    And Clico em "confirmar"
-    Then Eu recebo uma mensagem de que a senha está incorreta
+Scenario: Cadastrar um novo Usuário
+    Given eu estou na pagina "Cadastro_Usuario"
+    When Escrevo "Joaquim Maria Machado de Assis" em "nomecompleto" 
+    And Escrevo "jmma@cin.ufpe.br" em "e-mail" 
+    And Escrevo "jmma@cin.ufpe.br" em "confirmacaoe-mail" 
+    And Escrevo "12356jm@" em "senha" 
+    And Escrevo "12356jm@" em "confirmacaosenha" 
+    And Escrevo "093.459.090-79" em "CPF" 
+    And Escrevo "21 2572-55949" em "celular" 
+    And Escrevo "21/06/1908" em "data de nascimento" 
+    And Escrevo "RJ" em "estado" 
+    And Escrevo "Rio de Janeiro" em "cidade" 
+    And Escrevo "Rua Rubens Pinto" em "endereco" 
+    And Escrevo "Casa" em "Complemento" 
+    And Escrevo "78085-730" em "CEP" 
+    And Clico em "FinalizarCadastro"
+    Then Eu recebo uma mensagem de cadastro realizado
 
-Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, e-mail já utilizado V
-    Given Eu estou na página de "Cadastrar novo Cliente"
+ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, e-mail já utilizado 
+    Given eu estou na pagina "Cadastro_Usuario"
     And O sistema já possui "e-mail" "gmm7@cin.ufpe.br" já cadastrado
-    When Escrevo "Guilherme Maciel de Melo" em "Nome"
-    And Escrevo "gmm7@cin.ufpe.br" em "e-mail"
-    And Escrevo "123456Gui" em "Senha"
-    And Escrevo "123.456.789-10" em "CPF"
-    And Escrevo "99999-9999" em "Telefone"
-    And Escrevo "PE" em "estado"
-    And Escrevo "Recife" em "Cidade"
-    And Escrevo "345" em "numero"
-    And Escrevo "Rua General Vargas" em "Endereço"
-    And Escrevo "Casa" em "Complemento"
-    And Clico em "Cadastrar"
+    When Escrevo "Gustavo Marcílio de Melo" em "nomecompleto" 
+    And Escrevo "gmm7@cin.ufpe.br" em "e-mail" 
+    And Escrevo "gmm7@cin.ufpe.br" em "confirmacaoe-mail" 
+    And Escrevo "987654I@" em "senha" 
+    And Escrevo "987654I@" em "confirmacaosenha" 
+    And Escrevo "226.285.440-83" em "CPF" 
+    And Escrevo "67 97152-4116" em "celular" 
+    And Escrevo "01/04/1999" em "data de nascimento" 
+    And Escrevo "MA" em "estado" 
+    And Escrevo "São Luís" em "cidade" 
+    And Escrevo "Rua Doutor Dino Silva" em "endereco" 
+    And Escrevo "Número 5" em "Complemento" 
+    And Escrevo "65060-352" em "CEP" 
+    And Clico em "FinalizarCadastro"
     Then Eu recebo uma mensagem de Erro do cadastro, e-mail já utilizado
 
-Scenario: Erro ao Cadastrar um novo Usuário, CPF já utilizado
-    Given Eu estou na página de "Cadastrar novo Cliente"
+ Scenario: Cadastrar um novo Usuário
+    Given eu estou na pagina "Cadastro_Usuario"
+    When Escrevo "Gustavo Marcílio de Melo" em "nomecompleto" 
+    And Escrevo "gmm8@cin.ufpe.br" em "e-mail" 
+    And Escrevo "gmm8@cin.ufpe.br" em "confirmacaoe-mail" 
+    And Escrevo "987654I@" em "senha" 
+    And Escrevo "987654I@" em "confirmacaosenha" 
+    And Escrevo "226.285.440-83" em "CPF" 
+    And Escrevo "67 97152-4116" em "celular" 
+    And Escrevo "01/04/1999" em "data de nascimento" 
+    And Escrevo "MA" em "estado" 
+    And Escrevo "São Luís" em "cidade" 
+    And Escrevo "Rua Doutor Dino Silva" em "endereco" 
+    And Escrevo "Número 5" em "Complemento" 
+    And Escrevo "65060-352" em "CEP" 
+    And Clico em "FinalizarCadastro"
+    Then Eu recebo uma mensagem de cadastro realizado
+
+Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, CPF já utilizado
+    Given eu estou na pagina "Cadastro_Usuario"
     And O sistema já possui "CPF" "123.456.789-10" já cadastrado
-    When Escrevo "Guilherme Maciel de Melo" em "Nome"
-    And Escrevo "gmm7@cin.ufpe.br" em "e-mail"
-    And Escrevo "123456Gui" em "Senha"
-    And Escrevo "123.456.789-10" em "CPF"
-    And Escrevo "99999-9999" em "Telefone"
-    And Escrevo "PE" em "estado"
-    And Escrevo "Recife" em "Cidade"
-    And Escrevo "345" em "numero"
-    And Escrevo "Rua General Vargas" em "Endereço"
-    And Escrevo "Casa" em "Complemento"
-    And Clico em "Cadastrar"
+    When Escrevo "Gabriel Maciel Marcedo" em "nomecompleto" 
+    And Escrevo "gabrielmm@cin.ufpe.br" em "e-mail" 
+    And Escrevo "gabrielmm@cin.ufpe.br" em "confirmacaoe-mail" 
+    And Escrevo "987654G@" em "senha" 
+    And Escrevo "987654G@" em "confirmacaosenha" 
+    And Escrevo "123.456.789-10" em "CPF" 
+    And Escrevo "35 96862-0431" em "celular" 
+    And Escrevo "08/02/2000" em "data de nascimento" 
+    And Escrevo "AL" em "estado" 
+    And Escrevo "Maceió" em "cidade" 
+    And Escrevo "5ª Travessa Antônio Sabino de Sá" em "endereco" 
+    And Escrevo "Apto101" em "Complemento" 
+    And Escrevo "57039-889" em "CEP" 
+    And Clico em "FinalizarCadastro"
     Then Eu recebo uma mensagem de Erro do cadastro, CPF já utilizado
 
-Scenario: Erro Usuário, já logado no sistema tenta trocar sua senha, erra sua senha atual
-    Given Eu estou na página de "Informações do Cliente"
-    And Eu estou logado com o email "gmm7@cin.ufpe.br" e senha  "123456Gui"
-    When Eu clico na opção "Alterar Senha"
-    And Escrevo "3456Gui" em "Senha Atual"
-    And Escrevo "98765Gui" em "Nova Senha"
-    And Escrevo "98765Gui" em "Confirmar Senha"
-    And Clico em "Confirmar"
+Scenario: Usuário, já logado no sistema, deseja mudar sua senha
+    Given eu já estou logado no sistema como "gmm7@cin.ufpe.br" com a senha "123456Gui@"
+    And eu estou na pagina "Perfil do Usuario"
+    When Clico em "alterar-senha"
+    And Escrevo "123456Gui@" em "Senha-Atual"
+    And Escrevo "98765Gui@" em "Nova-Senha"
+    And Escrevo "98765Gui@" em "Confirmar-Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de Senha alterada com Sucesso
+
+Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, erra sua senha atual
+    Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
+    And eu estou na pagina "Perfil do Usuario"
+    When Clico em "alterar-senha"
+    And Escrevo "12356jm" em "Senha-Atual"
+    And Escrevo "987654jm@" em "Nova-Senha"
+    And Escrevo "987654jm@" em "Confirmar-Senha"
+    And Clico na opcao "OK"
     Then Eu recebo uma mensagem de erro, senha atual errada
+
+Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, coloca uma senha invállida
+    Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
+    And eu estou na pagina "Perfil do Usuario"
+    When Clico em "alterar-senha"
+    And Escrevo "12356jm@" em "Senha-Atual"
+    And Escrevo "987654Jm" em "Nova-Senha"
+    And Escrevo "987654Jm" em "Confirmar-Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de erro, nova senha invállida
+
+Scenario: Usuário, já logado no sistema, deseja mudar seu endereço
+    Given eu já estou logado no sistema como "gmm8@cin.ufpe.br" com a senha "987654I@"
+    And eu estou na pagina "Perfil do Usuario"
+    When Clico em "alterar-endereco"
+    And Escrevo "CE" em "estado" 
+    And Escrevo "Fortaleza" em "cidade" 
+    And Escrevo "Travessa Argila" em "endereco" 
+    And Escrevo "Casa 404" em "Complemento" 
+    And Escrevo "60540-471" em "CEP"
+    And Clico na opcao "OK"
+    And Escrevo "987654I@" em "senha-atual"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de endereço alterado com Sucesso
+
+Scenario: Usuário, já logado no sistema, deseja mudar seu endereço, mas insere sua senha errada
+    Given eu já estou logado no sistema como "gmm8@cin.ufpe.br" com a senha "987654I@"
+    And eu estou na pagina "Perfil do Usuario"
+    When Clico em "alterar-endereco"
+    And Escrevo "CE" em "estado" 
+    And Escrevo "Fortaleza" em "cidade" 
+    And Escrevo "Travessa Argila" em "endereco" 
+    And Escrevo "Casa 404" em "Complemento" 
+    And Escrevo "60540-471" em "CEP"
+    And Clico na opcao "OK"
+    And Escrevo "987654I" em "senha-atual"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de erro, senha atual errada
+
+Scenario: Administrador deseja remover um usuário do sistema 
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Gustavo Marcílio de Melo", "226.285.440-83" em "CPF", "gmm8@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    When Eu clico no Botão "X" do usuário "226.285.440-83"
+    And Escrevo "comercio2023@" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de que o usuário foi excluído
+
+Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer remover um usuário do sistema
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    When Eu clico no Botão "X" do usuário "123.456.789-10"
+    And Escrevo "comercio2023" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de erro, senha atual errada
+
+Scenario: Administrador deseja Promover um usuário do sistema 
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuario"
+    When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
+    And Escrevo "comercio2023@" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de que o usuário teve sua permissao alterada
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "admin"
+
+Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer rebaixar um administrador a usuário
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "admin"
+    When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
+    And Escrevo "comercio2023" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de erro, senha atual errada
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "admin"
+
+
+Scenario: Administrador deseja rebaixar um administrador do sistema 
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "admin"
+    When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
+    And Escrevo "comercio2023@" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de que o usuário teve sua permissao alterada
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuario"
+
+
+Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer promover um usuário a administrador
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuário"
+    When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
+    And Escrevo "comercio2023" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de erro, senha atual errada
+    And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuário"
+
+
+
+
+

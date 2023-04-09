@@ -24,8 +24,11 @@
   "dependencies": {
     "cucumber-html-reporter": "^4.0.5",
     "dotenv": "^16.0.3",
+    "install": "^0.13.0",
     "jsonwebtoken": "^9.0.0",
+    "npm": "^9.6.4",
     "protractor": "^5.1.2",
+    "sweetalert2": "^11.7.3",
     "ts-node": "^3.1.0"
   }
 }

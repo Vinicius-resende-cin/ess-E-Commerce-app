@@ -28,7 +28,9 @@ const PageUrls = {
   LOGIN: "login",
   REDEFINIR_SENHA: "redefinir-senha",
   RECUPERAR_CONTA: "recuperar-conta",
-  RESUMO_MENSAL: "home/resumo-mensal",
+  CADASTRO_USUARIO: "Cadastro-Usuario",
+  PERFIL_DO_USUARIO: "home/perfil-user",
+  ADMIN_PAINEL: "home/admin-painel",
   GERENCIAR_CATEGORIAS: "home/categoria",
   CATEGORIA_ESPORTES: "home/categoria/Esportes"
 };
@@ -215,7 +217,7 @@ defineSupportCode(function ({ Given, When, Then, Before, After }) {
     }
   );
 
-  Given(/^o email "([^"]*)" não foi cadastrado no sistema$/, async (email) => {
+  Given(/^o email "(.+)" não foi cadastrado no sistema$/, async (email) => {
     await expect(tryLogin(<string>email, "", "registered")).to.eventually.equal(false);
   });
 
