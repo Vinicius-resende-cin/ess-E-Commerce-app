@@ -7,6 +7,7 @@ module.exports = () => {
     router.get("/", controller.getAllusers);
     router.delete("/:cpf/:passorwdTest", controller.deleteUser);
     router.get("/session", controller.getCurrentUser);
+    router.get("/verify/:info", controller.getVerifyCad);
     router.put("/:passorwdTest", controller.updateUserPermission);
     router.put("/upassword/:actuaPassword/:newPassword", controller.updatePassword);
     router.put("/uaddress/:passorwdTest", controller.updateAddress)

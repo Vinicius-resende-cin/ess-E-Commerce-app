@@ -28,6 +28,21 @@ module.exports = () => {
       return userFind;
     },
 
+    getVerifyCad :async (req: any, res: any) => {
+      console.log("Passei no getVerify")
+      let info:string = req.params.info;
+      let infoFind:string = ''
+      if (info.indexOf('@') !== -1){
+        infoFind = await userModel.find({email: info});
+      }
+      else{
+        infoFind = await userModel.find({cpf: info});
+        
+      }
+
+      res.send(infoFind);
+    },
+
     sendUser: async (req: any, res: any) => {
       try {
         let user = req.body; //Recebe os valores do put
