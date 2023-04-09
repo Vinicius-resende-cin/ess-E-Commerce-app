@@ -51,10 +51,10 @@ Then Eu vejo uma mensagem dizendo que "Os itens Top Amarela estão indisponívei
 And Eu vejo que o produto "Saia Laranja" esta no carrinho de compras
 And Eu vejo que o produto "Top Amarelo" não esta no carrinho de compras
 
-# Scenario: Filtrando o histórico de compras para ver apenas as compras de abril de 2023
-# Given eu já estou logado no sistema como "aqrs@cin.ufpe.br" com a senha "posso@cess@r?"
-# And Estou vendo o histórico de pedidos da minha conta
-# And Vejo que apenas o pedido de id "6" foi feito em "abril" de "2023"
-# When Eu seleciono "2023" no filtro
-# And Seleciono "abril" no filtro
-# Then Eu vejo todas as compras que foram feitas no mês de março do ano de 2022
+Scenario: Filtrando o histórico de compras para ver apenas as compras de abril de 2023
+Given eu já estou logado no sistema como "aqrs@cin.ufpe.br" com a senha "posso@cess@r?"
+And Estou vendo o histórico de pedidos da minha conta
+And Vejo que em "04/2023" houveram "2" pedidos
+When Eu seleciono "04/2023" nos campos do filtro do histórico
+Then Eu vejo que há apenas "2" pedidos no histórico
+And Vejo que os pedidos foram feitos em "04/2023"

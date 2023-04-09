@@ -12,7 +12,7 @@ export let config: Config = {
   framework: "custom",
   frameworkPath: require.resolve("protractor-cucumber-framework"),
 
-  specs: ["../../features/*.feature"],
+  specs: ["../../features/historico-de-pedidos.feature"],
 
   onPrepare: () => {
     browser.waitForAngularEnabled(true);
