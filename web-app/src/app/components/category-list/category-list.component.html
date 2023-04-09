@@ -12,10 +12,10 @@
         </thead>
         <tbody>
           <tr *ngFor="let categoria of categorias">
-            <td>{{ categoria.nome_categoria }}</td>
-            <td>{{ categoria.descricao_categoria }}</td>
+            <td class="nome-categoria">{{ categoria.nome_categoria }}</td>
+            <td class="descricao-categoria">{{ categoria.descricao_categoria }}</td>
             <td>
-              <button (click)="editarCategoria(categoria.nome_categoria)" class="btn btn-primary">
+              <button (click)="editarCategoria(categoria.nome_categoria, categoria.descricao_categoria)" class="btn btn-primary">
                 Editar
               </button>
             </td>
@@ -23,7 +23,7 @@
         </tbody>
       </table>
       <div class="text-md-end">
-        <button (click)="abrirCriacaoCategoria()" class="btn btn-primary">
+        <button (click)="abrirCriacaoCategoria()" class="btn btn-primary" name="Nova Categoria">
           Nova Categoria
         </button>
       </div>
