@@ -29,6 +29,7 @@ import { EditItemComponent } from './components/edit-item/edit-item.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import ptBr from '@angular/common/locales/pt';
+import { PasswordConfirmationComponent } from './components/password-confirmation/password-confirmation.component';
 
 registerLocaleData(ptBr);
 
@@ -54,6 +55,7 @@ registerLocaleData(ptBr);
     CartComponent,
     ViewItensComponent,
     EditItemComponent,
+    PasswordConfirmationComponent,
   ],
   imports: [
     BrowserModule,
