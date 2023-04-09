@@ -29,6 +29,15 @@ export class AuthService {
 
     return this.http.post<Object>(endpointURL, body, options);
   }
+
+  confirmPassword(password: string){
+    const loginUrl = '/auth/confirmPassword';
+    const endpointURL = this.apiURL + loginUrl;
+    const body = { password };
+    const options = { withCredentials: true };
+
+    return this.http.post<Object>(endpointURL, body, options);
+  }
   
   logout(){
     const logoutUrl = '/auth/logout';

@@ -20,6 +20,7 @@ module.exports = () => {
     });
 
     router.post("/login", loginLimiter, controller.tryLogin);
+    router.post("/confirmPassword", loginLimiter, controller.confirmPassword);
     router.get("/session", controller.checkSession);
     router.post("/logout", controller.logout);
     router.get('/resetTries', (req:any, res:any, next:any) => {
