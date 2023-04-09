@@ -1,18 +1,14 @@
-<div>
-  <button (click)="toggle()">Gerar Link</button>
-
-  <div class="gl-modal" *ngIf="showModal === true">
-    <div class="gl-m-content">
-      <div class="gl-m-header">
-        <h4>Link de Compartilhamento</h4>
-        <div class="fechar" (click)="toggle()">fechar</div>
-      </div>
-      <div class="gl-m-body">
-        <input type="text" #inputElement placeholder="Nome do link">
-      </div>
-      <div class="gl-m-footer">
-        <button (click)="copyToClipboard(inputElement)">Gerar</button>
-      </div>
+<div class="gl">
+  <div class="gl-content">
+    <div class="gl-header">
+      <h4>Link de Compartilhamento</h4>
+      <div class="voltar" (click)="goBack()">voltar</div>
+    </div>
+    <div class="gl-body">
+      <input type="text" #inputElement style="border-radius: 5px;" placeholder="Nome do link">
+    </div>
+    <div class="gl-footer">
+      <button (click)="copyToClipboard(inputElement)">Gerar</button>
     </div>
   </div>
 </div>

@@ -6,14 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./generate-link.component.scss']
 })
 export class GenerateLinkComponent {
-  showModal = false;
-
   constructor() {}
 
   ngOnInit() {}
 
-  toggle() {
-    this.showModal = !this.showModal;
+  goBack() {
+    window.history.back();
   }
 
   copyToClipboard(inputElement: HTMLInputElement) {

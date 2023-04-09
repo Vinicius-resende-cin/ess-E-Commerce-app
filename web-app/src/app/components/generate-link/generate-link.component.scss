@@ -1,6 +1,5 @@
 $blue-alt: #2d60e3;
 $black-alt: #363636;
-$faded-alt: #000000bf;
 $dashed-alt: #ccc;
 $white-alt: #fff;
 
@@ -15,32 +14,36 @@ button {
   cursor: pointer;
 }
 
-.gl-modal {
+.gl {
   position: fixed;
-  background: $faded-alt;
+  background: $blue-alt;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
 }
 
-.gl-m-content {
+.gl-content {
+  position: absolute;
   background: $white-alt;
+  top: 40%;
+  left: 50%;
   width: 50%;
   margin: 3% auto;
   border-radius: 5px;
+  transform: translate(-50%, -50%);
 }
 
-.gl-m-header {
+.gl-header {
   padding: 20px;
-  background: $blue-alt;
+  background: $black-alt;
   color: $white-alt;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
   position: relative;
 }
 
-.gl-m-header .fechar {
+.gl-header .voltar {
   cursor: pointer;
   position: absolute;
   right: 10px;
@@ -48,18 +51,18 @@ button {
   color: $white-alt;
 }
 
-.gl-m-header h4 {
+.gl-header h4 {
   margin: 0;
   font-size: 20px;
   font-weight: 400;
 }
 
-.gl-m-body {
+.gl-body {
   padding: 20px;
   min-width: 200px;
 }
 
-.gl-m-footer {
+.gl-footer {
   padding: 20px;
   border-top: 1px dashed $dashed-alt;
   text-align: right;
@@ -67,7 +70,7 @@ button {
   border-bottom-right-radius: 5px;
 }
 
-.gl-m-footer button {
+.gl-footer button {
   margin-left: 20px;
   margin-right: 0;
 }
