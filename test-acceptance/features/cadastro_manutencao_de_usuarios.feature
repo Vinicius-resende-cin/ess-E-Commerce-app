@@ -4,17 +4,20 @@ Feature: Gerenciar as contas de usuários
     So that Usuários podem ser cadastrados e gerenciados
 
 Scenario: Cadastrar um novo Usuário
-    Given Eu estou na página de "Cadastrar novo Cliente"
-    When Escrevo "Guilherme Maciel de Melo" em "Nome"
-    And Escrevo "gmm7@cin.ufpe.br" em "e-mail"
-    And Escrevo "123456Gui" em "Senha"
-    And Escrevo "123.456.789-10" em "CPF"
-    And Escrevo "99999-9999" em "Telefone"
-    And Escrevo "PE" em "estado"
-    And Escrevo "Recife" em "Cidade"
-    And Escrevo "345" em "numero"
-    And Escrevo "Rua General Vargas" em "Endereço"
-    And Escrevo "Casa" em "Complemento"
+    Given eu estou na pagina "Cadastro-Usuario"
+    When Escrevo "Guilherme Maciel de Melo" em "nome completo" /
+    And Escrevo "gmm7@cin.ufpe.br" em "e-mail" /
+    And escrevo "gmm7@cin.ufpe.br" em "confirmacao e-mail" /
+    And Escrevo "123456Gui" em "senha" /
+    And Escrevo "123456Gui" em "confirmacao senha" /
+    And Escrevo "123.456.789-10" em "CPF" / 
+    And Escrevo "99999-9999" em "celular" /
+    And Escrevo "07/02/2002" em "data de nascimento" /
+    And Escrevo "PE" em "estado" /
+    And Escrevo "Recife" em "Cidade" /
+    And Escrevo "Rua General Vargas" em "endereco" /
+    And Escrevo "Casa" em "Complemento" /
+    And Escrevo "45989-485" em "CEP" /
     And Clico em "Cadastrar"
     Then Eu recebo uma mensagem de cadastro realizado 
 
@@ -126,3 +129,13 @@ Scenario: Erro Usuário, já logado no sistema tenta trocar sua senha, erra sua 
     And Escrevo "98765Gui" em "Confirmar Senha"
     And Clico em "Confirmar"
     Then Eu recebo uma mensagem de erro, senha atual errada
+
+Scenario: Usuário, já logado no sistema, deseja mudar seu endereço
+    Given Eu estou na página de "Informações do Cliente"
+    And Eu estou logado com o email "gmm7@cin.ufpe.br" e senha  "123456Gui"
+    When Eu clico na opção "Alterar Endereço"
+    And Escrevo "123456Gui" em "Senha Atual"
+    And Escrevo "98765Gui" em "Nova Senha"
+    And Escrevo "98765Gui" em "Confirmar Senha"
+    And Clico em "Confirmar"
+    Then Eu recebo uma mensagem de Senha alterada com Sucesso

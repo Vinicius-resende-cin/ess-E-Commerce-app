@@ -82,7 +82,7 @@ export class PerfilUserComponent {
       html:
         '<label>Senha Atual</label><input id="swal-input1" class="swal2-input" type="password">'+
         '<label>Nova Senha</label><input id="swal-input2" class="swal2-input" type="password">' +
-        '<label>Confirmação Nova Senha</label><input id="swal-input3" class="swal2-input" type="password">',
+        '<label>Confirma Nova Senha</label><input id="swal-input3" class="swal2-input" type="password">',
       focusConfirm: false,
       showCancelButton: true,
       preConfirm: () => {

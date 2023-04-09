@@ -163,7 +163,7 @@ defineSupportCode(function ({ Given, When, Then, After }) {
     }
   );
 
-  Given(/^o email "([^"]*)" não foi cadastrado no sistema$/, async (email) => {
+  Given(/^o email "(.+)" não foi cadastrado no sistema$/, async (email) => {
     await expect(tryLogin(<string>email, "", "registered")).to.eventually.equal(false);
   });
 
