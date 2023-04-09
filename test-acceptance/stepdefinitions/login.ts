@@ -27,7 +27,9 @@ const PageUrls = {
   LOGIN: "login",
   REDEFINIR_SENHA: "redefinir-senha",
   RECUPERAR_CONTA: "recuperar-conta",
-  RESUMO_MENSAL: "home/resumo-mensal"
+  RESUMO_MENSAL: "home/resumo-mensal",
+  GERENCIAR_CATEGORIAS: "home/categoria",
+  CATEGORIA_ESPORTES: "home/categoria/Esportes"
 };
 
 const Messages = {
