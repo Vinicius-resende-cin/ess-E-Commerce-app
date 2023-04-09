@@ -14,18 +14,18 @@
         </div>
     </div>
     <div class="row bg-light border text-center" *ngFor="let item of listaItem; let i = index">
-        <div class="col btn-primary">
+        <div name="item" id="nome-{{item.nome}}" class="col btn-primary">
             {{item.nome}}
         </div>
-        <div class="col">
+        <div name="quant" id="quant-{{item.nome}}" class="col">
             {{quant[i]}}
         </div>
-        <div class="col">
+        <div name="preco" id="preco-{{item.nome}}" class="col">
             {{item.preco}}
         </div>
     </div>
 
-    <div class="row p-2 btn-primary justify-content-center">
+    <div name="total" class="row p-2 btn-primary justify-content-center">
         Preço Total: {{preco}}
     </div>
 
