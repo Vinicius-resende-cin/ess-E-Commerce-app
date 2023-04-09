@@ -7,7 +7,7 @@
           <td>
             <input
               [(ngModel)]="categoria.nome_categoria"
-              name="namebox"
+              name="name-box"
               placeholder="Insira o Nome da Categoria"
               class="form-control"
             />
@@ -18,7 +18,7 @@
           <td>
             <input
               [(ngModel)]="categoria.descricao_categoria"
-              name="descbox"
+              name="desc-box"
               placeholder="Insira a Descrição da Categoria"
               class="form-control"
             />
@@ -27,10 +27,10 @@
         <tr>
           <td colspan="2">
             <div class="d-flex justify-content-between">
-              <button (click)="sairDaCriacao()" class="btn btn-primary">
+              <button (click)="sairDaCriacao()" class="btn btn-primary" name="Cancelar">
                 Cancelar
               </button>
-              <button (click)="createCategoria(categoria)" class="btn btn-primary">
+              <button (click)="createCategoria(categoria)" class="btn btn-primary" name="Adicionar">
                 Adicionar
               </button>
             </div>

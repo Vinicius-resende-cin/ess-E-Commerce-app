@@ -8,7 +8,7 @@ import {
   by,
   ElementFinder
 } from "protractor";
-import Messages from '../../common/messages';
+import Messages from "../../common/messages";
 
 let chai = require("chai").use(require("chai-as-promised"));
 let expect = chai.expect;
@@ -28,11 +28,13 @@ const PageUrls = {
   LOGIN: "login",
   REDEFINIR_SENHA: "redefinir-senha",
   RECUPERAR_CONTA: "recuperar-conta",
-  RESUMO_MENSAL: "home/resumo-mensal"
+  RESUMO_MENSAL: "home/resumo-mensal",
+  GERENCIAR_CATEGORIAS: "home/categoria",
+  CATEGORIA_ESPORTES: "home/categoria/Esportes"
 };
 
-async function getToken(email: string){
-    return jwt.sign({ email: email }, process.env.TOKEN_SK, { expiresIn: '10m' });
+async function getToken(email: string) {
+  return jwt.sign({ email: email }, process.env.TOKEN_SK, { expiresIn: "10m" });
 }
 
 async function checkLogged() {
@@ -113,7 +115,6 @@ async function resetTries() {
       resolve(resp.body);
     });
   });
-
 }
 
 async function changePassword(email: string, password: string) {
@@ -143,19 +144,19 @@ async function changePassword(email: string, password: string) {
 
 async function registerUser(email: string, password: string) {
   let user = {
-    nomeCompleto: '',
+    nomeCompleto: "",
     cpf: Math.floor(Math.random() * 1000000000),
-    celular: '',
-    dataNasci: '',
+    celular: "",
+    dataNasci: "",
     email: email,
-    emailC: '',
+    emailC: "",
     senha: password,
-    senhaC: '',
-    endereco: '',
-    complemento: '',
-    cep: '',
-    estado: '',
-    cidade: '',
+    senhaC: "",
+    endereco: "",
+    complemento: "",
+    cep: "",
+    estado: "",
+    cidade: "",
     permissao: 0
   };
 
@@ -175,8 +176,11 @@ async function registerUser(email: string, password: string) {
   const success = await new Promise((resolve, reject) => {
     request(options, function (err: any, resp: any) {
       const respObj = JSON.parse(resp.body);
-      const success = respObj.success != undefined || respObj.CPF != undefined || respObj.EMAIL != undefined;
-      
+      const success =
+        respObj.success != undefined ||
+        respObj.CPF != undefined ||
+        respObj.EMAIL != undefined;
+
       resolve(success);
     });
   });
@@ -184,13 +188,12 @@ async function registerUser(email: string, password: string) {
   return success;
 }
 
-
 defineSupportCode(function ({ Given, When, Then, Before, After }) {
   //reseta tentativas de login
-  Before(async () => {
-    await resetTries();
-  });
-  //desloga se estiver logado e 
+  // Before(async () => {
+  //   await resetTries();
+  // });
+  //desloga se estiver logado e
   After(async () => {
     const logged = await checkLogged();
     if (logged) {
@@ -218,8 +221,8 @@ defineSupportCode(function ({ Given, When, Then, Before, After }) {
 
   Given("eu já estou logado no sistema", async function () {
     await browser.get(baseUrl + "login");
-    await $("input[name=email]").sendKeys("jvs2@cin.ufpe.br");
-    await $("input[name=senha]").sendKeys("#qwe12345678");
+    await $("input[name=email]").sendKeys("ecommercin@gmail.com");
+    await $("input[name=senha]").sendKeys("comercio2023@");
     await element(by.buttonText("Entrar")).click();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await expect(checkLogged()).to.eventually.equal(true);

@@ -4,8 +4,8 @@ Feature: Calcular Total de pedidos no Mês
     So that eu possa analisar o meu comportamento de compras no último mês
 
   Scenario: Cálculo bem sucedido de pedidos do último mês
-    Given o email "vrb@cin.ufpe.br" já foi cadastrado com a senha "@a12345678" 
-    And eu já estou logado no sistema como "vrb@cin.ufpe.br" com a senha "@a12345678"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Resumo mensal"
     And no período de "12/2022" até "12/2022" houveram "3" pedidos, de valor total igual a "R$275,00"
     When eu seleciono o período do cálculo de "12/2022" até "12/2022"
@@ -15,16 +15,16 @@ Feature: Calcular Total de pedidos no Mês
     And eu posso ver a lista de pedidos do período
 
   Scenario: Tentativa de cálculo quando não há nenhum pedido no período
-    Given o email "vrb@cin.ufpe.br" já foi cadastrado com a senha "@a12345678" 
-    And eu já estou logado no sistema como "vrb@cin.ufpe.br" com a senha "@a12345678"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Resumo mensal"
     And no período de "01/2022" até "01/2022" houveram "0" pedidos, de valor total igual a "R$0,00"
     When eu seleciono o período do cálculo de "01/2022" até "01/2022"
     Then eu vejo uma mensagem do tipo "falha" por conta de "Não há pedidos no período!"
 
   Scenario: Cálculo de todos os pedidos já feitos
-    Given o email "vrb@cin.ufpe.br" já foi cadastrado com a senha "@a12345678" 
-    And eu já estou logado no sistema como "vrb@cin.ufpe.br" com a senha "@a12345678"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Resumo mensal"
     And no período de "12/2022" até "12/2023" houveram "7" pedidos, de valor total igual a "R$519,80"
     When eu filtro os pedidos sem adicionar um período
@@ -34,8 +34,8 @@ Feature: Calcular Total de pedidos no Mês
     And eu posso ver a lista de pedidos do período
 
   Scenario: Filtrar apenas o valor total dos pedidos do período
-    Given o email "vrb@cin.ufpe.br" já foi cadastrado com a senha "@a12345678" 
-    And eu já estou logado no sistema como "vrb@cin.ufpe.br" com a senha "@a12345678"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Resumo mensal"
     And no período de "12/2022" até "12/2022" houveram "3" pedidos, de valor total igual a "R$275,00"
     When eu seleciono o período do cálculo de "12/2022" até "12/2022"
