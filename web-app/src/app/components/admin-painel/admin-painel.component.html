@@ -4,8 +4,8 @@
         <p class="col p-6">Nome</p>
         <p class="col pl-3">CPF</p>
         <p class="col pl-3">E-mail</p>
-        <p class="col pl-3">Remove</p>
-        <p class="col pl-3">Permissão</p>
+        <p class="col pl-1">Remove</p>
+        <p class="col pl-1">Permissão</p>
         <div class="pt-3 container-fluid pl-4 pr-4">
         <hr class="my-4">
         </div>
@@ -15,12 +15,12 @@
             <div class="bg-white rounded-3 container-fluid border row pl-7 ">
               <td class="col text-column pt-2 d-flex flex-column justify-content-center"> {{ u.nomeCompleto }} </td>
               <td class="col text-column pt-2 pl-2 d-flex flex-column justify-content-center"> {{ u.cpf }} </td>
-              <td class="col text-column pt-2 pl-2 d-flex flex-column justify-content-center"> {{ u.email }} </td>
-              <td class="col d-flex flex-column justify-content-center">
-                <button class="btn btn-danger text-column btn-config text-center" (click)="delteUser(u)">X</button>
+              <td class="col text-column pt-2 pl-4 d-flex flex-column justify-content-center"> {{ u.email }} </td>
+              <td class="col d-flex flex-column justify-content-center pl-5">
+                <button class="btn btn-danger text-column btn-config text-center" (click)="delteUser(u)" id="btn-{{u.cpf}}" name="X" >X</button>
               </td>
-              <td class="col d-flex flex-column justify-content-center pl-1">
-                <button class="btn text-column btn-config text-center" (click)="changePermission(u)" [class.btn-1] = "u.permissao == 0" [class.btn-2] = "u.permissao == 1">{{ u.permissao == 0 ? 'Usuário' : 'Admin' }}</button>
+              <td class="col d-flex flex-column justify-content-center pl-4">
+                <button name="admin/usuario" id="btn-{{u.cpf}}" class="btn text-column btn-config text-center" (click)="changePermission(u)" [class.btn-1] = "u.permissao == 0" [class.btn-2] = "u.permissao == 1">{{ u.permissao == 0 ? 'Usuário' : 'Admin' }}</button>
               </td>
           </div>
         </tr>

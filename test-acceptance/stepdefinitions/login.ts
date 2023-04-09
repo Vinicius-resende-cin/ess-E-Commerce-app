@@ -26,7 +26,10 @@ const PageUrls = {
   PRINCIPAL: "home",
   LOGIN: "login",
   REDEFINIR_SENHA: "redefinir-senha",
-  RECUPERAR_CONTA: "recuperar-conta"
+  RECUPERAR_CONTA: "recuperar-conta",
+  CADASTRO_USUARIO: "Cadastro-Usuario",
+  PERFIL_DO_USUARIO: "home/perfil-user",
+  ADMIN_PAINEL: "home/admin-painel"
 };
 
 const Messages = {

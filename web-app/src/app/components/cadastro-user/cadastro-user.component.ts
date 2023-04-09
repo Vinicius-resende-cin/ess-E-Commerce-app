@@ -117,19 +117,19 @@ export class CadastroUserComponent {
 
       });
     } else if (
-      this.user.nomeCompleto == '' ||
-      this.user.cpf == '' ||
-      this.user.celular == '' ||
-      this.user.dataNasci == '' ||
-      this.user.email == '' ||
-      this.user.emailC == '' ||
-      this.user.senha == '' ||
-      this.user.senhaC == '' ||
-      this.user.endereco == '' ||
-      this.user.complemento == '' ||
-      this.user.cep == '' ||
-      this.user.estado == '' ||
-      this.user.cidade == ''
+      this.user.nomeCompleto == '' || 
+      this.user.cpf == '' || 
+      this.user.celular == '' || 
+      this.user.dataNasci == '' || 
+      this.user.email == '' || 
+      this.user.emailC == '' || 
+      this.user.senha == '' || 
+      this.user.senhaC == '' || 
+      this.user.endereco == '' || 
+      this.user.complemento == '' || 
+      this.user.cep == '' || 
+      this.user.estado == '' || 
+      this.user.cidade == '' 
     ) {
       this.alertError('Há campos vazios no cadastro', '');
 

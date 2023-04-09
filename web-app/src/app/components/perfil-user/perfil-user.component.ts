@@ -80,9 +80,9 @@ export class PerfilUserComponent {
     const { value: formValues }  = await Swal.fire({
       title: 'Troca de Senha',
       html:
-        '<label>Senha Atual</label><input id="swal-input1" class="swal2-input" type="password">'+
-        '<label>Nova Senha</label><input id="swal-input2" class="swal2-input" type="password">' +
-        '<label>Confirma Nova Senha</label><input id="swal-input3" class="swal2-input" type="password">',
+        '<label>Senha Atual</label><input id="swal-input1" class="swal2-input" type="password" name="Senha-Atual">'+
+        '<label>Nova Senha</label><input id="swal-input2" class="swal2-input" type="password" name="Nova-Senha">' +
+        '<label>Confirma Nova Senha</label><input id="swal-input3" class="swal2-input" type="password" name="Confirmar-Senha">',
       focusConfirm: false,
       showCancelButton: true,
       preConfirm: () => {
@@ -119,11 +119,11 @@ export class PerfilUserComponent {
     const { value: formValues }  = await Swal.fire({
       title: 'Troca de Endereço',
       html:
-        '<label>Endereço</label><input id="swal-input1" class="swal2-input" type="text">'+
-        '<label>Complemento</label><input id="swal-input2" class="swal2-input" type="text">' +
-        '<label>CEP</label><input id="swal-input3" class="swal2-input" type="text">' + 
-        '<label>Cidade</label><input id="swal-input4" class="swal2-input" type="text">' +
-        '<label>Estado</label><input id="swal-input5" class="swal2-input" type="text">',
+        '<label>Endereço</label><input id="swal-input1" class="swal2-input" type="text" name="endereco">'+
+        '<label>Complemento</label><input id="swal-input2" class="swal2-input" type="text" name="Complemento">' +
+        '<label>CEP</label><input id="swal-input3" class="swal2-input" type="text" name="CEP">' + 
+        '<label>Cidade</label><input id="swal-input4" class="swal2-input" type="text" name="cidade">' +
+        '<label>Estado</label><input id="swal-input5" class="swal2-input" type="text" name="estado">',
       focusConfirm: false,
       showCancelButton: true,
       preConfirm: () => {
@@ -165,7 +165,7 @@ export class PerfilUserComponent {
     const { value: formValues }  = await Swal.fire({
       title: 'Troca de Endereço',
       html:
-        '<label>Senha Atual</label><input id="swal-input1" class="swal2-input" type="password">',
+        '<label>Senha Atual</label><input id="swal-input1" class="swal2-input" type="password" name="senha-atual">',
       focusConfirm: false,
       showCancelButton: true,
       preConfirm: () => {

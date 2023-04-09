@@ -14,7 +14,7 @@
           [(ngModel)]="user.nomeCompleto"
           class="form-control"
           type="text"
-          name="nome completo"
+          name="nomecompleto"
         />
 
         <label class="text-sub pt-2 input-group">CPF</label>
@@ -30,7 +30,7 @@
         <input [(ngModel)]="user.celular" class="form-control" type="text" name="celular"/>
 
         <label class="text-sub pt-2 input-group">Data de Nascimento</label>
-        <input [(ngModel)]="user.dataNasci" class="form-control" type="date" name="data de nascimento"/>
+        <input [(ngModel)]="user.dataNasci" class="form-control" type="date" name="dt-nascimento"/>
       </div>
 
       <div class="container-fluid">
@@ -40,7 +40,7 @@
         <input [(ngModel)]="user.email" class="form-control" type="email" name="e-mail"/>
 
         <label class="text-sub input-group pt-2">Confirmação do E-mail</label>
-        <input [(ngModel)]="user.emailC" class="form-control" type="email" name="confirmacao e-mail"/>
+        <input [(ngModel)]="user.emailC" class="form-control" type="email" name="confirmacaoe-mail"/>
 
         <label class="text-sub input-group pt-2">Senha</label>
         <input
@@ -57,7 +57,7 @@
           (keyup)="verificaSenha()"
           class="form-control"
           type="password"
-          name="confirmacao senha"
+          name="confirmacaosenha"
         />
 
         <p
@@ -114,6 +114,7 @@
         (click)="enviaUser()"
         type="submit"
         class="btn btn-lg btn-dark-pj mt-5 d-flex ms-auto text-center w-25 d-flex justify-content-center"
+        name="FinalizarCadastro"
       >
         Finalizar Cadastro
       </button>
