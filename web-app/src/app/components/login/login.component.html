@@ -21,7 +21,8 @@
                 </div>
                 <input name="email" id="input-email"
                     type="email" placeholder="Insira seu email"
-                    class="form-control d-inline-block w-75">
+                    class="form-control d-inline-block w-75"
+                    (input)="enableButton()">
             </div>
 
             <div class="input-section form-group">
@@ -42,17 +43,17 @@
                 
                 <span name="message-span" class="failed-message w-75 d-inline-block d-none" id="message-span">Email não registrado</span>
 
-                <a class="link d-inline-block text-end" href="./recuperar-conta">Esqueci minha senha</a>
+                <div class="link text-right"><a href="./recuperar-conta">Esqueci minha senha</a></div>
 
             </div>
 
             <div class="text-center m-auto w-50">
-                <button name ="Entrar" id="login-button" class="btn btn-primary button m-2 w-75" (click)="login()">
+                <button name ="Entrar" id="login-button" class="btn btn-primary button m-2 w-75" disabled="true" (click)="login()">
                     Entrar
                 </button>
             </div>
 
-            <a class="link d-inline-block text-center" href="./Cadastro-Usuario">Não possui conta? Cadastre-se</a>
+            <div class="link text-center"><a href="./Cadastro-Usuario">Não possui conta? Cadastre-se</a></div>
             
         </div>
     </div>

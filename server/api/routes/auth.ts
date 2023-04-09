@@ -22,7 +22,10 @@ module.exports = () => {
     router.post("/login", loginLimiter, controller.tryLogin);
     router.get("/session", controller.checkSession);
     router.post("/logout", controller.logout);
-
+    router.get('/resetTries', (req:any, res:any, next:any) => {
+      loginLimiter.resetKey('::ffff:127.0.0.1');
+      res.send("resetado");
+    });
     return router;
   };
   
