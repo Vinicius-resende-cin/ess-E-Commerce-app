@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
+import Messages from '../../../../../common/messages';
 
 @Component({
     selector: 'app-login',
@@ -8,45 +9,58 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 
 export class RecoverAccountComponent {
+    emailInput!: HTMLInputElement;
+    requestButton!: HTMLButtonElement;
+    messageSpan!: HTMLSpanElement;
+
     constructor(private authService: AuthService) {}
 
-    Messages = {
-        REQUEST_SUCCESS: 'Link de recuperação enviado ao seu email',
-        TOO_MANY_TRIES: 'Limites de tentativas excedido. Tente mais tarde',
-        EMAIL_NOT_REG: 'Email não cadastrado'
-    };
-
-    requestReset(){
-        const emailInput = document.getElementById(
+    ngAfterViewInit(){
+        this.emailInput = document.getElementById(
             'input-email'
         )! as HTMLInputElement;
+    
+        this.requestButton = document.getElementById(
+            'request-button'
+        )! as HTMLButtonElement;
 
-        const messageSpan = document.getElementById(
+        this.messageSpan = document.getElementById(
             'message-span'
-          )! as HTMLSpanElement;
-        
-        const reqEmail = emailInput.value;
+        )! as HTMLSpanElement;
+    }
+
+    enableButton() {
+        const isButtonDisabled = this.emailInput.value == "";
+        this.requestButton.disabled = isButtonDisabled;
+      }
+
+    requestReset(){
+        const reqEmail = this.emailInput.value;
         
         if(reqEmail=="")
             return;
 
-        messageSpan.classList.add('d-none');
+        this.messageSpan.classList.add('d-none');
 
         this.authService
         .requestReset(reqEmail)
         .subscribe((resp: any) => {
-            console.log(resp);
+            this.requestButton.disabled = true;
             if(resp.success){
-                messageSpan.classList.remove('d-none');
-                messageSpan.textContent = this.Messages.REQUEST_SUCCESS;
+                this.messageSpan.classList.remove('d-none');
+                this.messageSpan.textContent = Messages.REQUEST_SUCCESS;
             }
             else if(resp.triesExceeded){
-                messageSpan.classList.remove('d-none');
-                messageSpan.textContent = this.Messages.TOO_MANY_TRIES;
+                this.messageSpan.classList.remove('d-none');
+                this.messageSpan.textContent = Messages.TOO_MANY_TRIES;
             }
             else if(!resp.registered){
-                messageSpan.classList.remove('d-none');
-                messageSpan.textContent = this.Messages.EMAIL_NOT_REG;
+                this.messageSpan.classList.remove('d-none');
+                this.messageSpan.textContent = Messages.EMAIL_NOT_REG;
+            }
+            else{
+                this.messageSpan.classList.remove('d-none');
+                this.messageSpan.textContent = Messages.UNKNOWN_ERROR;
             }
         });
     }
