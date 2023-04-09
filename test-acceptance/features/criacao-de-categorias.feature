@@ -4,8 +4,8 @@ Feature: Criação de categorias de itens
     So that Itens podem ser categorizados
 
 Scenario: Criar uma nova categoria
-    Given o email "fbm3@cin.ufpe.br" já foi cadastrado com a senha "e-commercin123"
-    And eu já estou logado no sistema como "fbm3@cin.ufpe.br" com a senha "e-commercin123"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Gerenciar categorias"
     And eu não vejo nenhuma categoria de "Esportes" cadastrada no sistema
     When eu seleciono a opção "Nova Categoria"
@@ -17,8 +17,8 @@ Scenario: Criar uma nova categoria
     And eu vejo uma categoria de "Esportes" cadastrada no sistema
 
 Scenario: Erro ao tentar criar uma categoria já existente
-    Given o email "fbm3@cin.ufpe.br" já foi cadastrado com a senha "e-commercin123"
-    And eu já estou logado no sistema como "fbm3@cin.ufpe.br" com a senha "e-commercin123"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Gerenciar categorias"
     And eu vejo uma categoria de "Esportes" cadastrada no sistema
     When eu seleciono a opção "Nova Categoria"
@@ -29,8 +29,8 @@ Scenario: Erro ao tentar criar uma categoria já existente
     And eu estou na pagina "Gerenciar categorias"
 
 Scenario: Erro ao tentar criar uma nova categoria sem nome
-    Given o email "fbm3@cin.ufpe.br" já foi cadastrado com a senha "e-commercin123"
-    And eu já estou logado no sistema como "fbm3@cin.ufpe.br" com a senha "e-commercin123"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Gerenciar categorias"
     When eu seleciono a opção "Nova Categoria"
     And eu tento adicionar uma nova categoria sem nenhum nome
@@ -40,8 +40,8 @@ Scenario: Erro ao tentar criar uma nova categoria sem nome
     And eu estou na pagina "Gerenciar categorias"
 
 Scenario: Cancelar a adição de uma nova categoria
-    Given o email "fbm3@cin.ufpe.br" já foi cadastrado com a senha "e-commercin123"
-    And eu já estou logado no sistema como "fbm3@cin.ufpe.br" com a senha "e-commercin123"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na pagina "Gerenciar categorias"
     And eu não vejo nenhuma categoria de "Joias" cadastrada no sistema
     When eu seleciono a opção "Nova Categoria"
@@ -51,8 +51,8 @@ Scenario: Cancelar a adição de uma nova categoria
     And eu não vejo nenhuma categoria de "Joias" cadastrada no sistema
 
 Scenario: Editar a descrição de uma categoria
-    Given o email "fbm3@cin.ufpe.br" já foi cadastrado com a senha "e-commercin123"
-    And eu já estou logado no sistema como "fbm3@cin.ufpe.br" com a senha "e-commercin123"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na página da categoria "Esportes"
     And eu vejo que a categoria "Esportes" possui a descrição "Itens para práticas esportivas"
     When eu altero a informação para "Itens utilizados durante a prática de atividades físicas"
@@ -63,8 +63,8 @@ Scenario: Editar a descrição de uma categoria
     And eu vejo a descrição "Itens utilizados durante a prática de atividades físicas" na categoria "Esportes"
 
 Scenario: Erro ao tentar editar a descrição de uma categoria sem alterar suas informações
-    Given o email "fbm3@cin.ufpe.br" já foi cadastrado com a senha "e-commercin123"
-    And eu já estou logado no sistema como "fbm3@cin.ufpe.br" com a senha "e-commercin123"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na página da categoria "Esportes"
     And eu vejo que a categoria "Esportes" possui a descrição "Itens utilizados durante a prática de atividades físicas"
     And eu seleciono a opção "Confirmar"
@@ -74,8 +74,8 @@ Scenario: Erro ao tentar editar a descrição de uma categoria sem alterar suas 
     And eu vejo a descrição "Itens utilizados durante a prática de atividades físicas" na categoria "Esportes"
 
 Scenario: Cancelar a edição da descrição de uma categoria
-    Given o email "fbm3@cin.ufpe.br" já foi cadastrado com a senha "e-commercin123"
-    And eu já estou logado no sistema como "fbm3@cin.ufpe.br" com a senha "e-commercin123"
+    Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 
+    And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
     And eu estou na página da categoria "Esportes"
     And eu vejo que a categoria "Esportes" possui a descrição "Itens utilizados durante a prática de atividades físicas"
     And eu seleciono a opção "Cancelar"

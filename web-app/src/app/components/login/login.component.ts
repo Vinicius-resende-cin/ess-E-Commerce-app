@@ -8,7 +8,6 @@ import Messages from '../../../../../common/messages';
   templateUrl: './login.component.html',
   styleUrls: ['../../common/login.scss'],
 })
-
 export class LoginComponent {
   emailInput!: HTMLInputElement;
   passwordInput!: HTMLInputElement;
@@ -19,7 +18,7 @@ export class LoginComponent {
   imgEyeOn = new Image();
   imgEyeOff = new Image();
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngAfterViewInit() {
     this.emailInput = document.getElementById(
@@ -51,7 +50,8 @@ export class LoginComponent {
 
   enableButton() {
     /**Reativa o botão de login*/
-    const isButtonDisabled = this.emailInput.value == "" || this.passwordInput.value == "";
+    const isButtonDisabled =
+      this.emailInput.value == '' || this.passwordInput.value == '';
     this.loginButton.disabled = isButtonDisabled;
   }
 
@@ -60,8 +60,7 @@ export class LoginComponent {
     if (this.passwordInput.type === 'password') {
       this.passwordInput.type = 'text';
       this.passwordEye.src = this.imgEyeOff.src;
-    }
-    else {
+    } else {
       this.passwordInput.type = 'password';
       this.passwordEye.src = this.imgEyeOn.src;
     }
@@ -75,8 +74,13 @@ export class LoginComponent {
       this.authService
         .login(this.emailInput.value, this.passwordInput.value)
         .subscribe(async (resp: any) => {
+          //email nao registrado
+          if (!resp.registered) {
+            this.messageSpan.classList.remove('d-none');
+            this.messageSpan.textContent = Messages.EMAIL_NOT_REG;
+          }
           //tentativas excedidas
-          if (resp.triesExceeded) {
+          else if (resp.triesExceeded) {
             this.messageSpan.classList.remove('d-none');
             this.messageSpan.textContent = Messages.TOO_MANY_TRIES;
           }
@@ -93,11 +97,6 @@ export class LoginComponent {
             this.messageSpan.textContent = Messages.WRONG_LOGIN;
             this.passwordInput.value = '';
             this.loginButton.disabled = true;
-          }
-          //email nao registrado
-          else if (!resp.registered) {
-            this.messageSpan.classList.remove('d-none');
-            this.messageSpan.textContent = Messages.EMAIL_NOT_REG;
           } else {
             this.messageSpan.classList.remove('d-none');
             this.messageSpan.textContent = Messages.UNKNOWN_ERROR;
