@@ -7,10 +7,15 @@ import { ItemService } from 'src/app/services/item.service';
 @Component({
   selector: 'app-password-confirmation',
   templateUrl: './password-confirmation.component.html',
-  styleUrls: ['./password-confirmation.component.scss']
+  styleUrls: ['./password-confirmation.component.scss'],
 })
 export class PasswordConfirmationComponent {
-  constructor(private authService: AuthService, private itemservice: ItemService, private router: Router, private route: ActivatedRoute) {}
+  constructor(
+    private authService: AuthService,
+    private itemservice: ItemService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   imgEyeOn = new Image();
   imgEyeOff = new Image();
@@ -26,7 +31,7 @@ export class PasswordConfirmationComponent {
     this.imgEyeOn.src = '/assets/images/eye.svg';
     this.imgEyeOff.src = '/assets/images/eye-off.svg';
   }
-  
+
   enableButton() {
     /**Reativa o botão de login*/
     const loginButton = document.getElementById(
@@ -70,7 +75,7 @@ export class PasswordConfirmationComponent {
     )! as HTMLSpanElement;
 
     messageSpan.classList.add('d-none');
-    alert(passwordInput.value)
+    // alert(passwordInput.value)
     try {
       this.authService
         .confirmPassword(passwordInput.value)
@@ -89,10 +94,9 @@ export class PasswordConfirmationComponent {
 
             const id = this.route.snapshot.paramMap.get('id');
 
-            if (id){
+            if (id) {
               this.deleteItem(id);
             }
-
           }
 
           //dados incorretos
@@ -102,7 +106,6 @@ export class PasswordConfirmationComponent {
             passwordInput.value = '';
             loginButton.disabled = true;
           }
-
         });
     } catch {
       messageSpan.classList.remove('d-none');
@@ -110,7 +113,7 @@ export class PasswordConfirmationComponent {
     }
   }
 
-  deleteItem(id: string){
+  deleteItem(id: string) {
     this.itemservice.deleteItem('/itens/' + id).subscribe(() => {
       this.router.navigate(['home', 'view-itens']);
     });
