@@ -7,7 +7,7 @@ let assert = chai.assert;
 defineSupportCode(function ({ Given, When, Then }) {
   Given(/^eu estou na página "(.*)"$/, async function (pagina) {
     await browser.get("http://localhost:4200/");
-    await expect(browser.getTitle()).to.eventually.equal("E-commerCin");
+    await expect(browser.getTitle()).to.eventually.equal("CommerCin");
     await element(by.name((<string>pagina).toLowerCase().replaceAll(" ", "-"))).click();
   });
 
