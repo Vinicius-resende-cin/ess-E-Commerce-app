@@ -31,21 +31,34 @@ export class GenerateLinkComponent {
     return hash >>> 0;
   }
 
-  // Obtém o nome do link base e do link personalizado a partir dos elementos de
-  // entrada HTML, gera o link personalizado e copia para a área de transferência
-  copyToClipboard(input1: HTMLInputElement, input2: HTMLInputElement) {
+  // Obtém o nome do link original e do link personalizado a partir dos elementos de
+  // entrada HTML e gera um link personalizado
+  private generateCustomLink(input1: HTMLInputElement, input2: HTMLInputElement): { id: number, url: string } | void {
     input1.select();
     input2.select();
 
-    if (input2.value.length == 0) {
+    const linkOriginal = input1.value.slice(7); // O slice serve para retirar a parte 'http://'
+    const nomeLink = input2.value;
+
+    if (nomeLink.length == 0) {
       alert('Erro: O nome do link não pode ser vazio.');
-    } else if (input2.value.length < 8) {
+    } else if (nomeLink.length < 8) {
       alert('Erro: O nome do link deve ter 8 caracteres no mínimo.');
-    } else if (input2.value.length > 15) {
+    } else if (nomeLink.length > 15) {
       alert('Erro: O nome do link pode ter 15 caracteres no máximo.');
     } else {
-      const id: number = this.hash(input2.value); // Usa a função hash para gerar o id do link
-      const url: string = `http://commerCin-${input2.value}.${input1.value.slice(7)}`; // composição do link personalizado
+      const id: number = this.hash(nomeLink); // Usa a função hash para gerar o id do link
+      const url: string = `http://commerCin-${nomeLink}.${linkOriginal}`; // composição do link personalizado
+
+      return {id, url};
+    }
+  }
+
+  // Gera um link personalizado a partir dos elementos de entrada HTML e copia para a área de transferência
+  generateAndCopyCustomLink(input1: HTMLInputElement, input2: HTMLInputElement) {
+    const ret = this.generateCustomLink(input1, input2);
+    if (ret) {
+      const { id, url } = ret;
 
       this.customLinksService.generateCustomLink(id, url).subscribe(
         (response) => { // Requisição bem-sucedida
