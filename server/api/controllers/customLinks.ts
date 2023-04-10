@@ -2,6 +2,7 @@ module.exports = () => {
   const CustomLink = require("../../models/customLinkModel")();
 
   const controller = {
+    // Insere um link personalizado e seu id no modelo 'CustomLink' (backend)
     generateCustomLink: async (req: any, res: any) => {
       try {
         const { id, currentUrl } = req.body;
@@ -19,6 +20,7 @@ module.exports = () => {
       }
     },
 
+    // Retorna todos os links personalizados e seus ids (backend)
     getAllCustomLinks: async (req: any, res: any) => {
       try {
         const customLinks = await CustomLink.find({}, { _id: false });
@@ -28,6 +30,7 @@ module.exports = () => {
       }
     },
 
+    // Retorna um link personalizado associado ao id passado como parâmetro (backend)
     getCustomLink: async (req: any, res: any) => {
       try {
         const { id } = req.params;
