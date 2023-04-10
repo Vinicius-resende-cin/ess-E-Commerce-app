@@ -5,10 +5,11 @@
       <div class="voltar" (click)="goBack()">voltar</div>
     </div>
     <div class="gl-body">
-      <input type="text" #inputElement style="border-radius: 5px;" placeholder="Nome do link">
+      <input type="text" #input1 style="border-radius: 5px;" placeholder="Link original">
+      <input type="text" #input2 style="border-radius: 5px;" placeholder="Nome do novo link">
     </div>
     <div class="gl-footer">
-      <button (click)="copyToClipboard(inputElement)">Gerar</button>
+      <button (click)="copyToClipboard(input1, input2)">Gerar</button>
     </div>
   </div>
 </div>
