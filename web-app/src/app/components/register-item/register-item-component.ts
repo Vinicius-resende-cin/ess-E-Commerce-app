@@ -1,9 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild  } from '@angular/core';
 import { ItemService } from 'src/app/services/item.service';
-
+import * as fs from 'fs';
 import { Categoria, Itens } from 'src/app/common/global-types';
 import { Router } from '@angular/router';
 import { CategoriaService } from 'src/app/services/categoria.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { User } from '../../../../../common/usuario';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -14,11 +17,13 @@ import { CategoriaService } from 'src/app/services/categoria.service';
 
 export class RegisterItemComponent {
     category_list!: Categoria[];
-    constructor(private itemservice: ItemService, private router: Router, private categoriaService: CategoriaService) { 
+    email!: String;
+    constructor(private itemservice: ItemService, private categoriaService: CategoriaService,  private userservice: UserService, private router: Router) { 
     }
 
     item: Itens = {
       _id: null,
+      id_user: '',
       nome: '',
       descricao: '',
       imagem: null,
@@ -29,17 +34,19 @@ export class RegisterItemComponent {
     };
 
     cadastrarItem(newItem: Itens) {
+        newItem.id_user = this.email;
         this.itemservice
         .createItem(newItem)
         .subscribe(
           (newItem) => {
-            console.log(newItem);
+            this.router.navigate(['home', 'view-itens']);
           }
-        )
+        );
     }
 
     ngOnInit(): void {
       this.getCategory();
+      this.getEmail();
     }
   
     ngOnChanges(): void {
@@ -51,6 +58,25 @@ export class RegisterItemComponent {
         this.category_list = result as Categoria[];
       });
     }
-    
 
+    getEmail(){
+      this.userservice.getCurrentUser().subscribe((result) => {
+        this.email = result[0].email;
+      });
+    }
+    
+    validarCadastro(): boolean {
+      const quantidade = (<HTMLInputElement>document.getElementById('input-quantidade')).value;
+      const preco = (<HTMLInputElement>document.getElementById('input-preco')).value;
+      const forma_pagamento = (<HTMLInputElement>document.getElementById('input-pagamento')).value;
+      const categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value;
+      const titulo = (<HTMLInputElement>document.getElementById('input-nome')).value;
+      const descricao = (<HTMLInputElement>document.getElementById('input-desc')).value;
+      const imagem = (<HTMLInputElement>document.getElementById('input-image')).value;
+  
+      if (quantidade && preco && forma_pagamento && categoria && titulo && descricao && imagem) {
+        return true;
+      }
+      return false;
+    }
 }

@@ -10,6 +10,7 @@ type data = Types.dataSharing;
 })
 export class DataSharingService {
   private dataArray = new BehaviorSubject<data>({"item":[],"quantidade":[]});
+  confirmPassword!: boolean;
 
   atualDataArray = this.dataArray.asObservable();
 
@@ -18,4 +19,6 @@ export class DataSharingService {
   updateDataArray(data: data) {
     this.dataArray.next(data);
   }
+
+
 }

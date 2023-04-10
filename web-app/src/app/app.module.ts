@@ -24,8 +24,13 @@ import { RegisterItemComponent } from './components/register-item/register-item-
 import { PerfilUserComponent } from './components/perfil-user/perfil-user.component';
 import { AdminPainelComponent } from './components/admin-painel/admin-painel.component';
 import { CartComponent } from './components/cart/cart.component';
+import { ViewItensComponent } from './components/view-itens/view-itens.component';
+import { EditItemComponent } from './components/edit-item/edit-item.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import ptBr from '@angular/common/locales/pt';
+import { PasswordConfirmationComponent } from './components/password-confirmation/password-confirmation.component';
+
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -48,6 +53,9 @@ registerLocaleData(ptBr);
     PerfilUserComponent,
     AdminPainelComponent,
     CartComponent,
+    ViewItensComponent,
+    EditItemComponent,
+    PasswordConfirmationComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +63,8 @@ registerLocaleData(ptBr);
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    SweetAlert2Module,
+    SweetAlert2Module.forRoot(),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'pt-BR' }],
   bootstrap: [AppComponent],

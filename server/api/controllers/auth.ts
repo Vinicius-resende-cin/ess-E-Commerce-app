@@ -3,6 +3,7 @@ const userModel = require("../../models/userModel")();
 
 module.exports = () => {
   const controller = {
+
     tryLogin: async (req: any, res: any) => {
       /** Compara email e senha forneciddos com o BD para logar o usuário */
       try {
@@ -99,10 +100,49 @@ module.exports = () => {
         console.log(err);
         res.status(500).send(err);
       }
+    },
+
+    confirmPassword: async (req: any, res: any) => {
+      try {
+        const params = req.body;
+        const foundUser = await userModel.findOne({email: req.session.user_email}, { _id: false, _v: false }).exec();
+          
+        //faz hash na senha para comparar no BD
+        const hash = new Sha256();
+        hash.update(params.password);
+        const hashPass = await hash.digest();
+
+        //se email esta no BD e senha esta correta
+        if (foundUser.senha == hashPass){
+          req.session.loggedIn = true;
+
+          req.session.save(function (err: any) {
+            if (err)
+              res.redirect('/');
+          })
+
+          res.status(200).json({
+            success: true,
+            registered: true,
+            wasLogged: false,
+            triesExceeded: false,
+          });
+        }
+        //se esta no BD mas senha esta errada
+        else{
+          res.status(200).json({
+            success: false,
+            registered: true,
+            wasLogged: false,
+            triesExceeded: false,
+          });
+        }
+      } catch (err) {
+          console.log(err);
+          res.status(500).send(err);
+      }
     }
-
   }
-
   return controller;
-  };
+};
   

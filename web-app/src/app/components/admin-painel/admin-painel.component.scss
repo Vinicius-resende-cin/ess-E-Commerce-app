@@ -1,5 +1,8 @@
+body{
+    overflow-y: auto;
+}
+
 .p-6{
-    padding-top: 2rem;
     padding-left: 15rem;
 }
 
@@ -7,7 +10,7 @@
     padding-left: 23rem;
 }
 .pl-7{
-    padding-left: 12rem;
+    padding-left: 13rem;
 }
 
 .pl-8{
@@ -15,7 +18,7 @@
 }
 
 .pl-9{
-    padding-left: 3.5rem;
+    padding-left: 9rem;
 }
 .ml-8{
     margin-left: 15rem;
@@ -35,19 +38,11 @@
 .text-column{
     font-size: 18px;
     font-family: 'Anek Devanagari', sans-serif;
-    width: 18%;
-}
-.cpf{
-    width: 10%;
-}
-.email{
-    padding-left: 5.5rem;
-    width: 18%;
 }
 
-.x{
-    padding-left: 4.5rem;
-    width: 20%;
+.btn-config{
+    height: 70%;
+    width: 50%;
 }
 
 .btn-1{

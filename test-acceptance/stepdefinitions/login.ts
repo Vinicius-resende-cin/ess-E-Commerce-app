@@ -8,6 +8,7 @@ import {
   by,
   ElementFinder
 } from "protractor";
+import Messages from "../../common/messages";
 
 let chai = require("chai").use(require("chai-as-promised"));
 let expect = chai.expect;
@@ -17,7 +18,7 @@ const jwt = require("jsonwebtoken");
 const { setDefaultTimeout } = require("cucumber");
 setDefaultTimeout(10000);
 
-require("dotenv").config({ path: "server/config/.env" });
+require("dotenv").config({ path: "../server/config/.env" });
 
 const baseUrl = "http://localhost:4200/";
 
@@ -26,26 +27,16 @@ const PageUrls = {
   PRINCIPAL: "home",
   LOGIN: "login",
   REDEFINIR_SENHA: "redefinir-senha",
-  RECUPERAR_CONTA: "recuperar-conta"
-};
-
-const Messages = {
-  ALREADY_LOGGED: "Você já estava logado",
-  EMAIL_NOT_REG: "Email não cadastrado",
-  WRONG_LOGIN: "Email e senha não correspondem",
-  REQUEST_SUCCESS: "Link de recuperação enviado ao seu email",
-  CHANGE_SUCCESS: "Senha alterada com sucesso",
-  DIFF_PASSWORDS: "As senhas não são iguais",
-  NO_SPECIAL: "A senha precisa ter pelo menos um caractere especial",
-  NO_LETTERS: "A senha precisa ter pelo menos uma letra",
-  NOT_ENOUGH_CHARS: "A senha precisa ter pelo menos 8 caracteres",
-  EXPIRED_LINK: "Link expirado",
-  TOO_MANY_TRIES: "Número de tentativas excedido. Tente mais tarde",
-  UNKNOWN_ERROR: "Algo de errado ocorreu"
+  RECUPERAR_CONTA: "recuperar-conta",
+  CADASTRO_USUARIO: "Cadastro-Usuario",
+  PERFIL_DO_USUARIO: "home/perfil-user",
+  ADMIN_PAINEL: "home/admin-painel",
+  GERENCIAR_CATEGORIAS: "home/categoria",
+  CATEGORIA_ESPORTES: "home/categoria/Esportes"
 };
 
 async function getToken(email: string) {
-  return jwt.sign({ email: email }, "k8JF9upql53mJ8eA", { expiresIn: "10m" });
+  return jwt.sign({ email: email }, process.env.TOKEN_SK, { expiresIn: "10m" });
 }
 
 async function checkLogged() {
@@ -113,6 +104,21 @@ async function tryLogin(email: string, password: string, param: string) {
   return result;
 }
 
+async function resetTries() {
+  const cookies = await browser.manage().getCookies();
+  const options = {
+    url: "http://localhost:3000/api/auth/resetTries",
+    method: "GET",
+    withCredentials: true
+  };
+
+  await new Promise((resolve, reject) => {
+    request(options, function (err: any, resp: any) {
+      resolve(resp.body);
+    });
+  });
+}
+
 async function changePassword(email: string, password: string) {
   const token = await getToken(email);
   const data = { password: password, email: email, token: token };
@@ -131,15 +137,65 @@ async function changePassword(email: string, password: string) {
 
   const success = await new Promise((resolve, reject) => {
     request(options, function (err: any, resp: any) {
-      resolve(JSON.parse(resp.body).success);
+      resolve(resp.body);
     });
   });
 
   return success;
 }
 
-defineSupportCode(function ({ Given, When, Then, After }) {
-  //desloga se estiver logado
+async function registerUser(email: string, password: string) {
+  let user = {
+    nomeCompleto: "",
+    cpf: Math.floor(Math.random() * 1000000000),
+    celular: "",
+    dataNasci: "",
+    email: email,
+    emailC: "",
+    senha: password,
+    senhaC: "",
+    endereco: "",
+    complemento: "",
+    cep: "",
+    estado: "",
+    cidade: "",
+    permissao: 0
+  };
+
+  const cookies = await browser.manage().getCookies();
+
+  const options = {
+    url: "http://localhost:3000/api/users/",
+    method: "post",
+    headers: {
+      "Content-Type": "application/json",
+      Cookie: cookies.map((cookie) => `${cookie.name}=${cookie.value}`).join("; ")
+    },
+    body: JSON.stringify(user),
+    withCredentials: true
+  };
+
+  const success = await new Promise((resolve, reject) => {
+    request(options, function (err: any, resp: any) {
+      const respObj = JSON.parse(resp.body);
+      const success =
+        respObj.success != undefined ||
+        respObj.CPF != undefined ||
+        respObj.EMAIL != undefined;
+
+      resolve(success);
+    });
+  });
+
+  return success;
+}
+
+defineSupportCode(function ({ Given, When, Then, Before, After }) {
+  //reseta tentativas de login
+  // Before(async () => {
+  //   await resetTries();
+  // });
+  //desloga se estiver logado e
   After(async () => {
     const logged = await checkLogged();
     if (logged) {
@@ -157,20 +213,18 @@ defineSupportCode(function ({ Given, When, Then, After }) {
     /^o email "([^"]*)" já foi cadastrado com a senha "([^"]*)"$/,
     async (email, senha) => {
       await changePassword(<string>email, <string>senha);
-      await expect(tryLogin(<string>email, <string>senha, "success")).to.eventually.equal(
-        true
-      );
+      await expect(registerUser(<string>email, <string>senha)).to.eventually.equal(true);
     }
   );
 
-  Given(/^o email "([^"]*)" não foi cadastrado no sistema$/, async (email) => {
+  Given(/^o email "(.+)" não foi cadastrado no sistema$/, async (email) => {
     await expect(tryLogin(<string>email, "", "registered")).to.eventually.equal(false);
   });
 
   Given("eu já estou logado no sistema", async function () {
     await browser.get(baseUrl + "login");
-    await $("input[name=email]").sendKeys("jvs2@cin.ufpe.br");
-    await $("input[name=senha]").sendKeys("#qwe12345678");
+    await $("input[name=email]").sendKeys("ecommercin@gmail.com");
+    await $("input[name=senha]").sendKeys("comercio2023@");
     await element(by.buttonText("Entrar")).click();
     await new Promise((resolve) => setTimeout(resolve, 1000));
     await expect(checkLogged()).to.eventually.equal(true);

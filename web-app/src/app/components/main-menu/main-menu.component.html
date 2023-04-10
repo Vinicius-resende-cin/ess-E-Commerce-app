@@ -1,10 +1,11 @@
 <div class="container-fluid page-header d-flex flex-column">
-  <div class="align-self-center mb-2">
+  <div class="align-self-center text-center m-2 w-25">
     <a href="./home">
       <img
         id="logo"
         src="\assets\images\commercin.png"
         alt="Logo do commercin"
+        class="w-75"
       />
     </a>
   </div>
@@ -47,4 +48,4 @@
     </div>
   </div>
 </div>
-<app-general-main-page *ngIf="!isLoggedIn"></app-general-main-page>
+<router-outlet *ngIf="!isLoggedIn"></router-outlet>

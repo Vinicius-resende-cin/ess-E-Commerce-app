@@ -37,13 +37,19 @@ export class CategoriaService {
     return this.http.put<Object>(endpointURL, categoria);
   }
 
-  //Salva o nome da categoria que vai ser editada
-  nome_categoria: String = '';
-  setName(name: String) {
-    this.nome_categoria = name;
+  //Salva informaões da categoria que vai ser editada
+  nomeCategoria: String = '';
+  descricaoCategoria: String = '';
+  setInfo(name: String, descricao: String) {
+    this.nomeCategoria = name;
+    this.descricaoCategoria = descricao;
   }  
 
   getName() {
-    return this.nome_categoria;
+    return this.nomeCategoria;
+  }
+
+  getDescription() {
+    return this.descricaoCategoria;
   }
 }

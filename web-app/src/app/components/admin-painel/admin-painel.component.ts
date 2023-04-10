@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
 import { User } from '../../../../../common/usuario';
+import Swal from 'sweetalert2'
+import { from } from 'rxjs';
 
 @Component({
   selector: 'app-admin-painel',
@@ -48,37 +50,78 @@ export class AdminPainelComponent {
     });
   }
 
-  delteUser(user: User): void {
-    var confirmPassword;
-    confirmPassword = prompt(
-      `Tornar o usuário ${user.nomeCompleto} administrador?\nEmail: ${user.email}\nCPF: ${user.cpf}\n\nSenha:`
-    );
-    this.passorwdTest = confirmPassword;
+  alertError(msg: string){
+    const error = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+    
+      error.fire({
+      icon: 'error',
+      title: msg
+    })
+  };
 
-    this.userservice.deleteUser(user, this.passorwdTest).subscribe((result) => {
-      if (result.Sucess) {
-        alert('Usuário Removido com sucesso');
-      } else {
-        alert('Senha informada está errada');
+  async alertAcept(msg: string){
+     const sucess = Swal.mixin({
+      toast: true,
+      position: 'bottom-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+    })
+    
+     sucess.fire({
+      icon: 'success',
+      title: msg
+    })
+  };
+
+  async alertSenha(msg: string, user:User){
+    const { value: formValues }  = await Swal.fire({
+      title: `${msg} ${user.nomeCompleto}?\nEmail: ${user.email}\nCPF: ${user.cpf}`,
+      html:
+        '<label>Senha do Admin</label><input id="swal-input1" class="swal2-input" type="password" name="Senha">',
+      focusConfirm: false,
+      showCancelButton: true,
+      preConfirm: () => {
+        const val1 = (document.getElementById(
+          'swal-input1'
+        ) as HTMLInputElement).value;
+        return [
+          (document.getElementById('swal-input1') as HTMLInputElement).value,
+        ];
       }
     });
+
+    this.passorwdTest = formValues;
+  };
+
+  async delteUser(user: User) {
+    
+    await this.alertSenha('Deletar o Usuário', user);
+    this.userservice.deleteUser(user, this.passorwdTest[0]).subscribe((result) => {
+      if (result.Sucess) {
+        this.alertAcept('Usuário Removido com sucesso');
+      } else {
+        this.alertError('Senha inserida está incorreta');
+      }
+    });  
   }
 
-  changePermission(user: User): void {
-    var confirmPassword;
-    confirmPassword = prompt(
-      `Tornar o usuário ${user.nomeCompleto} administrador?\nEmail: ${user.email}\nCPF: ${user.cpf}\n\nSenha:`
-    );
-    this.passorwdTest = confirmPassword;
+  async changePermission(user: User) {
+    await this.alertSenha('Trocar a permissão do', user)
 
     this.userservice
       .updateUserPermission(user, this.passorwdTest)
       .subscribe((result) => {
         if (result.Sucess) {
-          alert('Usuário Teve a permissão alterada com sucesso');
-          window.location.reload();
+          this.alertAcept('Usuário Teve a permissão alterada com sucesso');
         } else {
-          alert('Senha informada está errada');
+          this.alertError('Senha inserida está incorreta');
         }
       });
   }

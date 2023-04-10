@@ -32,9 +32,9 @@ export class CategoryListComponent {
   verifyCategoria(id: String): void {
   }
 
-  editarCategoria(id: String) {
-    this.categoriaService.setName(id);
-    this.router.navigate(['home', 'categoria', id]); //Colocar aqui a rota da edição de categoria
+  editarCategoria(id: String, descricao: String) {
+    this.categoriaService.setInfo(id, descricao);
+    this.router.navigate(['home', 'categoria', id]);
   }
 
   getCategorias(): void {

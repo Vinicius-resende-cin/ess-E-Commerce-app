@@ -18,7 +18,7 @@ export class CategoryUpdateComponent {
 
   categoria: Categoria = {
     nome_categoria: this.categoriaService.getName(),
-    descricao_categoria: '',
+    descricao_categoria: this.categoriaService.getDescription(),
   };
   alertCategoria: boolean = false;
   alertMessage: string = '';
