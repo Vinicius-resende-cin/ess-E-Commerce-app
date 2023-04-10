@@ -48,7 +48,7 @@ Scenario: Cancelar a adição de uma nova categoria
     And eu adiciono uma categoria de "Joias" com descrição "Joias"
     And eu seleciono a opção "Cancelar"
     Then eu estou na pagina "Gerenciar categorias"
-    And eu não vejo nenhuma categoria de "Joias" cadastrada no sistema
+    And eu vejo que a categoria de "Joias" ainda não está cadastrada no sistema
 
 Scenario: Editar a descrição de uma categoria
     Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@" 

@@ -4,11 +4,13 @@ module.exports = () => {
   const router = express.Router();
 
   router.get("/", controller.getAllCategories);
-
-  router.post("/", controller.createCategory);
   router.get("/criar-categoria", controller.createCategory);
 
+  router.post("/", controller.createCategory);
+
   router.put("/:nome", controller.updateCategory);
+
+  router.delete("/:nome", controller.deleteCategory);
 
   return router;
 };

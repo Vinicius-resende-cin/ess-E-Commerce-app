@@ -9,15 +9,22 @@ import {
   ElementFinder
 } from "protractor";
 let chai = require("chai").use(require("chai-as-promised"));
+const request = require('request');
 let expect = chai.expect;
 let assert = chai.assert;
 
 const baseUrl = "http://localhost:4200/home/categoria";
+const serverUrl = "http://localhost:3000/api/categorias";
 
 defineSupportCode(function ({ Given, When, Then }) {
   Given(
     /^eu não vejo nenhuma categoria de "([^"]*)" cadastrada no sistema$/,
     async (nomeCategoria: string) => {
+      const endpointURL = serverUrl + "/" + nomeCategoria;
+      await request.del(endpointURL, null);
+      await browser.refresh();
+      
+
       const categoria = await element(by.cssContainingText('.nome-categoria', nomeCategoria));
   
       expect(await categoria.isPresent()).to.be.false;
@@ -82,6 +89,14 @@ defineSupportCode(function ({ Given, When, Then }) {
         const msg = await element(by.cssContainingText('[id=message]', mensagem));
     
         expect(await msg.isPresent()).to.be.true;
+    });
+
+    Then(
+      /^eu vejo que a categoria de "([^"]*)" ainda não está cadastrada no sistema$/,
+      async (nomeCategoria: string) => {
+        const categoria = await element(by.cssContainingText('.nome-categoria', nomeCategoria));
+    
+        expect(await categoria.isPresent()).to.be.false;
     });
 
     Then(

@@ -55,6 +55,20 @@ module.exports = () => {
                 res.status(500).send({ message: "Categoria inexistente"});
             }
         },
+
+        deleteCategory: async (req: any, res: any) => {
+            try {
+                const { nome } = req.params;
+                const categoria = await Categoria.findOne({ nome_categoria: nome });
+                const idAux = categoria._id;
+                const id = idAux.toString();
+
+                await Categoria.findByIdAndDelete(id);
+                res.status(200).json({ message: "Categoria removida"});
+            } catch (error) {
+                res.status(500).send({ message: "Categoria inexistente"});
+            }
+        },
     };
 
     return controller;
