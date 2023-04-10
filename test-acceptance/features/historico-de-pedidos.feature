@@ -52,7 +52,7 @@ And Eu vejo que o produto "Saia Laranja" esta no carrinho de compras
 And Eu vejo que o produto "Top Amarelo" não esta no carrinho de compras
 
 Scenario: Filtrando o histórico de compras para ver apenas as compras de abril de 2023
-Given eu já estou logado no sistema como "aqrs@cin.ufpe.br" com a senha "posso@cess@r?"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 And Estou vendo o histórico de pedidos da minha conta
 And Vejo que em "04/2023" houveram "2" pedidos
 When Eu seleciono "04/2023" nos campos do filtro do histórico

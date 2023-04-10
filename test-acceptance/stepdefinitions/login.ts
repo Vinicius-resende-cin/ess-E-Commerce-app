@@ -32,7 +32,8 @@ const PageUrls = {
   PERFIL_DO_USUARIO: "home/perfil-user",
   ADMIN_PAINEL: "home/admin-painel",
   GERENCIAR_CATEGORIAS: "home/categoria",
-  CATEGORIA_ESPORTES: "home/categoria/Esportes"
+  CATEGORIA_ESPORTES: "home/categoria/Esportes",
+  RESUMO_MENSAL: "home/resumo-mensal"
 };
 
 async function getToken(email: string) {
