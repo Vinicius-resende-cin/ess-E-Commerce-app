@@ -51,6 +51,21 @@ And eu clico em "Itens"
 And eu sou redirecionado para a página "Minha Loja"
 And eu vejo que o produto com nome "Calca legging" nao esta na loja
 
+Scenario: Tentativa mal-sucedida de cadastro de novo produto com campos negativos
+Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+When eu estou na pagina "Cadastrar Produto"
+And eu digito "Casaco de veludo" em "Nome"
+And eu digito "Casaco elegante com disponbilidade de varias cores" em "Descricao"
+And eu digito "-3" em "Preco"
+And eu digito "-19" em "Quantidade"
+And eu escolho "Transferencia bancaria" em "Formas de pagamento"
+And eu escolho "Roupas" em "Categorias"
+And eu clico em "Cadastrar"
+Then eu vejo na tela uma mensagem de erro "Valores negativos não são permitidos"
+And eu clico em "Itens"
+And eu sou redirecionado para a página "Minha Loja"
+And eu vejo que o produto com nome "Casaco de veludo" nao esta na loja
+
 Scenario: Atualizando um produto
 Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
 And eu estou na pagina "Minha Loja"

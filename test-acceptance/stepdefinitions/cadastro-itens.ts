@@ -41,9 +41,9 @@ const PageUrls = {
 defineSupportCode(function ({ Given, When, Then }) { 
 
     When(/^eu digito "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {
-        await $(
-          "input[name=" + (<string>elemName).toLowerCase().replaceAll(" ", "-") + "]"
-        ).sendKeys(<string>value);
+        const element = await $("input[name=" + (<string>elemName).toLowerCase().replaceAll(" ", "-") + "]");
+        await element.clear();
+        await element.sendKeys(<string>value);
     });
 
     When(/^eu escolho "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {

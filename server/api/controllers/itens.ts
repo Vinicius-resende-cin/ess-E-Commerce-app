@@ -42,7 +42,7 @@ module.exports = () => {
         if (itemDuplicado) {
             res.status(400).json({ message: "Já existe um produto com esse titulo em sua loja" });
         } else if (req.body.quantidade < 0 || req.body.preco < 0) {
-            res.status(400).json({ message: "Valores negativos não são permitdos" });
+            res.status(400).json({ message: "Valores negativos não são permitidos" });
         } else {
             const newItem = await Item.create(req.body);
             res.status(200).json(newItem);
@@ -62,7 +62,7 @@ module.exports = () => {
         if (itemDuplicado && itemDuplicado._id != id){
           res.status(400).json({ message: "Já existe um produto com esse titulo em sua loja" });
         } else if (req.body.quantidade < 0 || req.body.preco < 0) {
-          res.status(400).json({ message: "Valores negativos não são permitdos" });
+          res.status(400).json({ message: "Valores negativos não são permitidos" });
         } else {
           const updates = req.body;
           const result = await Item.findByIdAndUpdate(id, updates);
