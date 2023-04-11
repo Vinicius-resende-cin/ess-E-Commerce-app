@@ -21,46 +21,43 @@ const formatDateToInput = (dt: string): string => {
     return split_dt[1] + "-" + split_dt[0];
 };
 
-function filtrarPorId(str:string, elemento: ElementArrayFinder) {
-    return elemento.filter(elem => (elem.getAttribute('id')
+function filtrarPorId(name:string, str:string) {
+    var allElements = element.all(by.name(name));
+    return allElements.filter(elem => (elem.getAttribute('id')
     .then(ids => ids === str)));
+}
+
+async function testarQuantidade(name:string, quantidade, strId:string) {
+    var elem = filtrarPorId(name, strId).first();
+
+    return expect(Promise.resolve(elem.getText())).to.eventually.equal(quantidade);;
+};
+
+async function testarItem(name:string, quantidade: number, strId: string) {
+    await filtrarPorId(name, strId).then
+        (elemento => expect(Promise.resolve(elemento.length)).to.eventually.equal(quantidade));
 }
 
 defineSupportCode(function({Given, When, Then}) {
     Given(/^Estou vendo o histórico de pedidos da minha conta$/, async() => {
         await browser.get(baseUrl + "home/historico-pedidos");
+        // await browser.sleep(1000);
     });
 
     Given(/^Estou vendo o item "(.*)" do pedido "(\d*)" no histórico$/, async(item, pedido) => {
-        await browser.sleep(3000);
-        var allItens = element.all(by.name('item'));
-
-        await filtrarPorId('btn-' + pedido + '-' + item, allItens).then
-        (elemento => expect(Promise.resolve(elemento.length)).to.eventually.equal(1));
+        await testarItem('item', 1, 'btn-' + pedido + '-' + item);
     });
 
     Given(/^Vejo que o produto "(.*)" do pedido "(\d*)" ainda tem "(\d*)" em estoque no sistema$/, async(item, pedido, quant) => {
-        var allQuantidade = element.all(by.name('estoque'));
-
-        var elem = filtrarPorId('estoque-' + pedido + '-' + item, allQuantidade).first();
-
-        await expect(Promise.resolve(elem.getText())).to.eventually.equal(quant);
+        await testarQuantidade('estoque', quant, 'estoque-' + pedido + '-' + item);
     });
 
     Given(/^Vejo que o produto "(.*)" do pedido "(\d*)" não está em estoque no sistema$/, async(item, pedido) => {
-        var allQuantidade = element.all(by.name('estoque'));
-
-        var elem = filtrarPorId('estoque-' + pedido + '-' + item, allQuantidade).first();
-
-        await expect(Promise.resolve(elem.getText())).to.eventually.equal('0');
+        await testarQuantidade('estoque', '0', 'estoque-' + pedido + '-' + item);
     });
 
     Given(/^foram compradas "(\d*)" "(.*)" no pedido "(\d*)"$/, async(quant, item, pedido) => {
-        var allQuantidade = element.all(by.name('quantidade'));
-
-        var elem = filtrarPorId('quantidade-' + pedido + '-' + item, allQuantidade).first();
-
-        await expect(Promise.resolve(elem.getText())).to.eventually.equal(quant);
+        await testarQuantidade('quantidade', quant, 'quantidade-' + pedido + '-' + item);
     });
 
     Given(/^Vejo que em "(.*)" houveram "(\d*)" pedidos$/, async(data, quantidade) => {
@@ -74,17 +71,13 @@ defineSupportCode(function({Given, When, Then}) {
     });
 
     When(/^Eu seleciono o produto "(.*)" do pedido "(\d*)"$/, async(item, pedido) => {
-        var allItens = element.all(by.name('item'));
-
-        var elem = filtrarPorId('btn-' + pedido + '-' + item, allItens).first();
+        var elem = filtrarPorId('item', 'btn-' + pedido + '-' + item).first();
 
         await elem.click();
     });
 
-    When (/^Eu seleciono "(.*)" no pedido "(\d*)"$/, async(nome, pedido) => {
-        var allComprar = element.all(by.name('comprar'));
-
-        var elem = filtrarPorId('btn-' + pedido, allComprar).first();
+    When (/^Eu seleciono comprar novamente no pedido "(\d*)"$/, async(pedido) => {
+        var elem = filtrarPorId('comprar', 'btn-' + pedido).first();
 
         await elem.click();
     });
@@ -115,25 +108,15 @@ defineSupportCode(function({Given, When, Then}) {
     });
 
     Then(/^Eu vejo que o produto "(.*)" esta no carrinho de compras$/, async(item) => {
-        var allItens = element.all(by.name('item'));
-
-        await filtrarPorId('nome-' + item, allItens).then
-            (elemento => expect(Promise.resolve(elemento.length)).to.eventually.equal(1));
+        await testarItem('item', 1, 'nome-' + item);
     });
 
     Then(/^Eu vejo que o produto "(.*)" não esta no carrinho de compras$/, async(item) => {
-        var allItens = element.all(by.name('item'));
-
-        await filtrarPorId('nome-' + item, allItens).then
-            (elemento => expect(Promise.resolve(elemento.length)).to.eventually.equal(0))
+        await testarItem('item', 0, 'nome-' + item);
     });
 
     Then(/^Eu vejo que "(\d*)" unidades do item "(.*)" estão no carrinho de compras$/, async(quant, item) => {
-        var allItens = element.all(by.name('quant'));
-
-        var elem = filtrarPorId('quant-' + item, allItens).first();
-
-        await expect(Promise.resolve(elem.getText())).to.eventually.equal(quant);
+        await testarQuantidade('quant', quant, 'quant-' + item);
     });
 
     Then(/^Eu vejo que há apenas "(\d*)" pedidos no histórico$/, async(quant) => {
