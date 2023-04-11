@@ -125,11 +125,11 @@ export class PerfilUserComponent {
     const { value: formValues } = await Swal.fire({
       title: 'Troca de Endereço',
       html:
-        '<label>Endereço</label><input id="swal-input1" class="swal2-input" type="text" name="endereco">' +
-        '<label>Complemento</label><input id="swal-input2" class="swal2-input" type="text" name="Complemento">' +
-        '<label>CEP</label><input id="swal-input3" class="swal2-input" type="text" name="CEP">' +
-        '<label>Cidade</label><input id="swal-input4" class="swal2-input" type="text" name="cidade">' +
-        '<label>Estado</label><input id="swal-input5" class="swal2-input" type="text" name="estado">',
+        '<label>Endereço</label><input id="swal-input1" class="swal2-input" type="text" name="endereco">  <br>'+
+        '<label>Compleme.</label><input id="swal-input2" class="swal2-input" type="text" name="Complemento">  <br>' +
+        '<label>CEP</label><input id="swal-input3" class="swal2-input" type="text" name="CEP">  <br>' +
+        '<label>Cidade</label><input id="swal-input4" class="swal2-input" type="text" name="cidade">  <br>' +
+        '<label>Estado</label><input id="swal-input5" class="swal2-input" type="text" name="estado">  <br>',
       focusConfirm: false,
       showCancelButton: true,
       preConfirm: () => {
