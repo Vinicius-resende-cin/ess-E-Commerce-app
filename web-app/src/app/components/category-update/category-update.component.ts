@@ -1,9 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/app/services/categoria.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Categoria } from 'src/app/common/global-types';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 @Component({
   selector: 'app-category-update',
@@ -23,36 +22,26 @@ export class CategoryUpdateComponent {
   alertCategoria: boolean = false;
   alertMessage: string = '';
 
-  editCategoria(categoria: Categoria) {
+  editCategoria(categoria: Categoria): void {
     this.categoriaService
       .editCategory(categoria.nome_categoria, categoria.descricao_categoria)
       .subscribe(
         (categoriaEditada) => {
           this.alertMessage = 'Descrição alterada com sucesso';
           this.alertCategoria = true;
-          this.clearCategoria();
         },
         (erro) => {
           if (erro.error.message === 'Mesma descricao') {
             this.alertMessage = 'Descrição não pode ser a mesma';
-            this.alertCategoria = true;
           } else if (erro.error.message === "Categoria inexistente") {
             this.alertMessage = 'Categoria não existe';
-            this.alertCategoria = true;
           }
+          this.alertCategoria = true;
         }
       );
   }
 
-  sairDaCriacao() {
+  sairDaCriacao(): void {
     this.router.navigate(['home', 'categoria']);
-  }
-
-  clearCategoria(): void {
-    this.categoria.descricao_categoria = '';
-  }
-
-  clearErros(): void {
-    this.alertCategoria = false;
   }
 }

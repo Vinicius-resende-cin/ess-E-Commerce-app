@@ -1,8 +1,4 @@
 import { Component, Input } from '@angular/core';
-
-import { CategoryCreationComponent } from '../category-creation/category-creation.component';
-import { CategoryUpdateComponent } from '../category-update/category-update.component';
-
 import { Router } from '@angular/router';
 
 @Component({
@@ -15,15 +11,11 @@ export class AlertComponent {
   show = true;
 
   constructor(private router: Router) {
-      this.message = "";
+    this.message = "";
   }
 
   close(): void {
     this.show = false;
     this.router.navigate(['home', 'categoria']);
-  }
-
-  get_show(): boolean {
-    return this.show;
   }
 }

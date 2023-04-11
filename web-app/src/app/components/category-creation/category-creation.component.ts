@@ -1,16 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoriaService } from 'src/app/services/categoria.service';
+import { Router } from '@angular/router';
 
 import { Categoria } from 'src/app/common/global-types';
-import { Observable } from 'rxjs';
-import { Router } from '@angular/router';
+import { CategoriaService } from 'src/app/services/categoria.service';
 
 @Component({
   selector: 'app-category-creation',
   templateUrl: './category-creation.component.html',
   styleUrls: ['./category-creation.component.scss'],
 })
-//export class CategoryCreationComponent implements OnInit {
 export class CategoryCreationComponent {
   constructor(
     private categoriaService: CategoriaService,
@@ -21,11 +19,10 @@ export class CategoryCreationComponent {
     nome_categoria: '',
     descricao_categoria: '',
   };
-  categorias: Categoria[] = [];
   alertCategoria: boolean = false;
   alertMessage: string = '';
 
-  createCategoria(categoria: Categoria) {
+  createCategoria(categoria: Categoria): void {
     if (!categoria.nome_categoria || categoria.nome_categoria.trim() === '') {
       this.alertMessage = 'Nome necessário';
       this.alertCategoria = true;
@@ -36,38 +33,22 @@ export class CategoryCreationComponent {
           (novaCategoria) => {
             this.alertMessage = 'Categoria criada com sucesso';
             this.alertCategoria = true;
-            this.clearCategoria();
           },
           (erro) => {
             if (erro.error.message === 'A categoria precisa de um nome') {
               this.alertMessage = 'Nome necessário';
-              this.alertCategoria = true;
             } else if (erro.error.message === 'Já existe uma Categoria com esse nome') {
               this.alertMessage = 'Categoria já existe';
-              this.alertCategoria = true;
             } else {
               this.alertMessage = 'Erro ao criar categoria';
-              this.alertCategoria = true;
             }
+            this.alertCategoria = true;
           }
         );
     }
   }
 
-  sairDaCriacao() {
+  sairDaCriacao(): void {
     this.router.navigate(['home', 'categoria']);
-  }
-
-  clearCategoria(): void {
-    this.categoria.nome_categoria = '';
-    this.categoria.descricao_categoria = '';
-  }
-
-  cloneCategoria(categoria: Categoria): Categoria {
-    return Object.assign({}, categoria);
-  }
-
-  clearErros(): void {
-    this.alertCategoria = false;
   }
 }
