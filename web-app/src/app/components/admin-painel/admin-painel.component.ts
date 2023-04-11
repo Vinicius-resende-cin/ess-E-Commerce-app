@@ -38,18 +38,18 @@ export class AdminPainelComponent {
     return user;
   }
 
+  //Método responsável por pegar as informações do usuário da secção e realiza o request dos usuários que irão aparecer na tabela
   ngOnInit(): void {
     this.userservice.getCurrentUser().subscribe((result) => {
       this.userLogged = result[0];
-      console.log(this.userLogged.nomeCompleto);
     });
 
     this.userservice.gelAllUsers().subscribe((result) => {
       this.listaUsers = result;
-      console.log(this.listaUsers);
     });
   }
 
+  //Método que cria o alert de Erro
   alertError(msg: string){
     const error = Swal.mixin({
       toast: true,
@@ -65,6 +65,7 @@ export class AdminPainelComponent {
     })
   };
 
+  //Método que cria o alert de Sucesso
   async alertAcept(msg: string){
      const sucess = Swal.mixin({
       toast: true,
@@ -80,6 +81,7 @@ export class AdminPainelComponent {
     })
   };
 
+  //Método que cria o alert para receber a senha do usuário para validação das mudanças a serem realizadas
   async alertSenha(msg: string, user:User){
     const { value: formValues }  = await Swal.fire({
       title: `${msg} ${user.nomeCompleto}?\nEmail: ${user.email}\nCPF: ${user.cpf}`,
@@ -100,6 +102,7 @@ export class AdminPainelComponent {
     this.passorwdTest = formValues;
   };
 
+  //Método que realiza a requisição de delete usuário no servidor
   async delteUser(user: User) {
     
     await this.alertSenha('Deletar o Usuário', user);
@@ -112,6 +115,7 @@ export class AdminPainelComponent {
     });  
   }
 
+  //Método que realiza a requisição de mudança de permissão ao servidor usuário no servidor
   async changePermission(user: User) {
     await this.alertSenha('Trocar a permissão do', user)
 

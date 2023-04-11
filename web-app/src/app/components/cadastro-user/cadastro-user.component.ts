@@ -40,6 +40,7 @@ export class CadastroUserComponent {
     return user;
   }
 
+  //Método que cria o alert de Erro no cadastro
   alertError(msg: string, msgInfo: string){
     Swal.fire({
       icon: 'error',
@@ -48,6 +49,7 @@ export class CadastroUserComponent {
     })
   };
 
+  //Método que cria o alert de sucesso no cadastro
   async alertAccept(msg: string, msgInfo: string){
     await Swal.fire({
       icon: 'success',
@@ -58,8 +60,8 @@ export class CadastroUserComponent {
     this.router.navigate(['/login']);
   };
 
+  //Método responsável por verificicar se a senha informada pelo usuário é válida
   verificaSenha() {
-
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{8,})/;
     const lengthRegex = /^.{8,}$/;
     const letterRegex = /[a-zA-Z]/;
@@ -93,7 +95,8 @@ export class CadastroUserComponent {
     }
   }
 
-
+  //Método responsável por enviar o usuário para o servidor
+  //Apesar de ser um método grande, não vi a necessidade de quebra-lo, pois somente verificações são feitas e o código não é repetitivo
   enviaUser(){
     if (this.passwordSize && this.passwordDiff) {
       this.userservice.createUser(this.user).subscribe((result) => {
@@ -139,11 +142,20 @@ export class CadastroUserComponent {
       this.user.senhaC = '';
 
     } else if (!this.passwordSize && this.passwordDiff) {
-      this.alertError('Senha Inválida', 'As senhas informadas não segue as regras de possui 8 caracters, sendo 1 letra e 1 caractere especial');
+      this.alertError('Senha Inválida', 'As senhas informadas não segue as regras de possui oito caracters, sendo um letra e um caractere especial');
       this.user.senha = '';
       this.user.senhaC = '';
 
-    } else {
+    } else if(!this.passwordChar){
+      this.alertError('Senha Inválida', 'A senha informadas não possui uma caractere especial');
+      this.user.senha = '';
+      this.user.senhaC = '';
+    } else if(!this.passwordEspecial){
+      this.alertError('Senha Inválida', 'A senha informadas não possui um caractere especial');
+      this.user.senha = '';
+      this.user.senhaC = '';
+    }
+    else {
       this.alertError('Senha Inválida', 'A senha informada não possui 8 caracteres nem é igual a de confirmação');
       this.user.senha = '';
       this.user.senhaC = '';

@@ -32,13 +32,14 @@ export class PerfilUserComponent {
 
   constructor(private userservice: UserService, private router: Router) {}
 
+  //Método que pega as informações do usuário logado
   ngOnInit() {
     this.userservice.getCurrentUser().subscribe((result) => {
       this.userLogged = result[0];
-      console.log(this.userLogged.nomeCompleto);
     });
   }
 
+  //Método que cria o alert de Erro
   alertError(msg: string) {
     const error = Swal.mixin({
       toast: true,
@@ -54,6 +55,7 @@ export class PerfilUserComponent {
     });
   }
 
+   //Método que cria o alert de Sucesso
   alertAcept(msg: string) {
     const sucess = Swal.mixin({
       toast: true,
@@ -69,6 +71,7 @@ export class PerfilUserComponent {
     });
   }
 
+  //Método que cria o alert para o recebimento da nova senha
   async recivePassword() {
     const passwordRegex = /^(?=.*[a-zA-Z])(?=.*[\W_])(?=.{8,})/;
 
@@ -91,6 +94,8 @@ export class PerfilUserComponent {
         ];
       },
     });
+
+    //Verificação se a senha segue as regras de negócio
     this.passValues = formValues;
     if (
       this.passValues[0] != '' &&
@@ -114,6 +119,8 @@ export class PerfilUserComponent {
       this.alertError('Restaram campos em branco');
     }
   }
+
+   //Método que cria o alert para o do novo endereço
   async reciveAdrress() {
     const { value: formValues } = await Swal.fire({
       title: 'Troca de Endereço',
@@ -153,6 +160,7 @@ export class PerfilUserComponent {
     }
   }
 
+  //Método que faz a requisição para trocar a senha do usuário
   changePasword() {
     this.userservice
       .updatePassword(this.userLogged, this.passValues)
@@ -165,6 +173,7 @@ export class PerfilUserComponent {
       });
   }
 
+  //Método que faz a requisição para trocar o endereço do usuário
   async changeAddress() {
     const { value: formValues } = await Swal.fire({
       title: 'Troca de Endereço',

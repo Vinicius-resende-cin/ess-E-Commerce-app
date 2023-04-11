@@ -2,36 +2,13 @@ import { Sha256 } from "@aws-crypto/sha256-js";
 
 module.exports = () => {
   const userModel = require("../../models/userModel")();
-  //const userFind = await userModel.find({}, { _id: false }); // Retorna tudo
   const controller = {
-    verifyExist: async (obj: any) => {
-      let filter: any = obj;
-      const userFind = await userModel.aggregate([
-        { $match: filter },
-        {
-          $project: {
-            nomeCompleto: "$nomeCompleto",
-            cpf: "$cpf",
-            celular: "$celular",
-            dataNasci: "$dataNasci",
-            email: "$email",
-            senha: "$senha",
-            endereco: "$endereco",
-            complemento: "$complemento",
-            cep: "$cep",
-            estado: "$estado",
-            cidade: "$cidade"
-          }
-        }
-      ]);
 
-      return userFind;
-    },
-
+    //Método utilizada nos testes para verificar que não há o usuário cadastrado no sistema
     getVerifyCad :async (req: any, res: any) => {
-      console.log("Passei no getVerify")
       let info:string = req.params.info;
       let infoFind:string = ''
+      //Condicional para verificar se o parâmetro passado é um email ou um CPF
       if (info.indexOf('@') !== -1){
         infoFind = await userModel.find({email: info});
       }
@@ -43,34 +20,44 @@ module.exports = () => {
       res.send(infoFind);
     },
 
+    //Método responsável por criptografar a senha informada pelo usuário
+    async hashPassword(UserPass: string){
+      const hash = new Sha256();
+      hash.update(UserPass);
+      const hashPass = await hash.digest();
+      return hashPass
+    },
+
+    //Método responsável por cadastrar um novo usuário no banco de dados
     sendUser: async (req: any, res: any) => {
       try {
-        let user = req.body; //Recebe os valores do put
+        let user = req.body; 
+        //Deletando informações desnecessárias 
         delete user.senhaC;
         delete user.emailC;
-        user.permissao = 0; //Garantir a segurança do sistema
-        let cpfExist: any = await controller.verifyExist({ cpf: user.cpf });
-        let emailExist: any = await controller.verifyExist({ email: user.email });
-        // console.log(cpfExist);
-        // console.log(emailExist);
+        user.permissao = 0; //Garantir que todos os usuários terão permissão zero
+        let cpfExist: any = await userModel.find({ cpf: user.cpf });
+        let emailExist: any = await userModel.find({ email: user.email });
+        
+        //Condicional que verifica que não há nenhum usuário no sistema com o mesmo CPF ou com o mesmo EMAIL
         if (cpfExist.length === 0 && emailExist.length === 0) {
           //Realiza o hash da senha
-          const hash = new Sha256();
-          hash.update(user.senha);
-          const hashPass = await hash.digest();
-          user.senha = hashPass;
-
+          user.senha = await await controller.hashPassword(user.senha);
           await userModel.create(user);
           res.send({ success: "O User foi inserido com sucesso" });
+
         } else if (!(cpfExist.length === 0) && emailExist.length === 0) {
           res.send({ CPF: "O CPF a ser cadastrado já existe no sistema" });
+
         } else if (cpfExist.length === 0 && !(emailExist.length === 0)) {
           res.send({ EMAIL: "O E-mail a ser cadastrado já existe no sistema" });
+
         } else if (!(cpfExist.length === 0) && !(emailExist.length === 0)) {
           res.send({
             EMAIL: "O E-mail a ser cadastrado já existe no sistema",
             CPF: "O CPF a ser cadastrado já existe no sistema"
           });
+
         } else {
           res.send({ failure: "O User não pode ser inserido" });
         }
@@ -79,6 +66,7 @@ module.exports = () => {
       }
     },
 
+    //Método que retorna todos os usuários do sistema com permissão == 0 ou == 1 
     getAllusers: async (req: any, res: any) => {
       try {
         const userFind = await userModel.find({
@@ -90,27 +78,24 @@ module.exports = () => {
       }
     },
 
+    //Método que retorna as informações do usuário logado no sistema
     getCurrentUser: async (req: any, res: any) => {
       try {
         let userFind = await userModel.find({ email: req.session.user_email });
         res.send(userFind);
       } catch (err) {
-        return err;
+        res.send(err);
       }
     },
 
+    //Método responsável por deletar um usuário no Painel do ADM
     deleteUser: async (req: any, res: any) => {
       try {
-        //Recebe a tentativa do usuário
         let userPassword = req.params.passorwdTest;
-        const hash = new Sha256();
-        hash.update(userPassword);
-        const hashPass = await hash.digest();
-        var passString: string = hashPass.toString();
+        var passString:any = await controller.hashPassword(userPassword);
+        var passString = passString.toString();
 
-        //Pega a senha do usuário no BD
         let user = await userModel.find({ email: req.session.user_email });
-
         //Verifica se a senha informada está correta
         if (user[0].senha == passString) {
           await userModel.deleteOne({ cpf: req.params.cpf });
@@ -123,19 +108,17 @@ module.exports = () => {
       }
     },
 
+    //Método responsável por altertar a permissão um usuário no Painel do ADM
     updateUserPermission: async (req: any, res: any) => {
       try {
         let userUpdate = req.body;
 
         let userPassword = req.params.passorwdTest;
-        const hash = new Sha256();
-        hash.update(userPassword);
-        const hashPass = await hash.digest();
-        var passString: string = hashPass.toString();
+        var passString:any = await controller.hashPassword(userPassword);
+        var passString = passString.toString();
 
-        //Pega a senha do usuário no BD
+
         let userAdmin = await userModel.find({ email: req.session.user_email });
-
         if (userAdmin[0].senha == passString) {
           if (userUpdate.permissao == 0) {
             userModel
@@ -158,24 +141,16 @@ module.exports = () => {
       }
     },
 
+    //Método responsável por alterar a senha de um usuário
     updatePassword: async (req: any, res: any) => {
       let userUpdate = req.body;
-      console.log(userUpdate);
-      console.log(req.params.actuaPassword);
-      console.log(req.params.newPassword);
+      var passString:any = await controller.hashPassword(req.params.actuaPassword);
+      var passString = passString.toString();
 
-      const hash = new Sha256();
-      hash.update(req.params.actuaPassword);
-      const hashPass = await hash.digest();
-      var passString: string = hashPass.toString();
-
-      //Pega a senha do usuário no BD
       let userAdmin = await userModel.find({ email: req.session.user_email });
-
       if (userAdmin[0].senha == passString) {
-        const hash = new Sha256();
-        hash.update(req.params.newPassword);
-        const hashPass = await hash.digest();
+        const hashPass = await controller.hashPassword(req.params.newPassword);
+
         userModel
           .updateOne({ cpf: userAdmin[0].cpf }, { $set: { senha: hashPass } })
           .exec();
@@ -185,18 +160,13 @@ module.exports = () => {
       }
     },
 
+     //Método responsável por alterar o endereço de um usuário
     updateAddress: async (req: any, res: any) => {
-      console.log("Passei aqui");
-
       let userUpdate = req.body;
       let userAdmin = await userModel.find({ email: req.session.user_email });
-      console.log(userUpdate);
-      console.log(userAdmin);
 
-      const hash = new Sha256();
-      hash.update(req.params.passorwdTest);
-      const hashPass = await hash.digest();
-      var passString: string = hashPass.toString();
+      var passString:any = await controller.hashPassword(req.params.passorwdTest);
+      var passString = passString.toString();
 
       if (userAdmin[0].senha == passString) {
         userModel
