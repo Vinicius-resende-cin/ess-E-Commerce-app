@@ -1,0 +1,76 @@
+$blue-alt: #2d60e3;
+$black-alt: #333333;
+$dashed-alt: #ccc;
+$white-alt: #fff;
+
+button {
+  padding: 15px 30px;
+  background-color: $blue-alt;
+  font-size: 14px;
+  border: 0;
+  border-radius: 5px;
+  margin-right: 20px;
+  color: $white-alt;
+  cursor: pointer;
+}
+
+.gl {
+  position: fixed;
+  background: $blue-alt;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.gl-content {
+  position: absolute;
+  background: $white-alt;
+  top: 40%;
+  left: 50%;
+  width: 50%;
+  margin: 3% auto;
+  border-radius: 5px;
+  transform: translate(-50%, -50%);
+}
+
+.gl-header {
+  padding: 20px;
+  background: $black-alt;
+  color: $white-alt;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  position: relative;
+}
+
+.gl-header .voltar {
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: $white-alt;
+}
+
+.gl-header h4 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.gl-body {
+  padding: 20px;
+  min-width: 200px;
+}
+
+.gl-footer {
+  padding: 20px;
+  border-top: 1px dashed $dashed-alt;
+  text-align: right;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.gl-footer button {
+  margin-left: 20px;
+  margin-right: 0;
+}

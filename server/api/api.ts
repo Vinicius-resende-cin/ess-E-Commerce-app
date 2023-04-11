@@ -9,7 +9,7 @@ module.exports = () => {
   const pedidos = require("./routes/pedidos")();
   const itens = require("./routes/itens")();
   const categorias = require("./routes/categorias")();
-  // const links = require("./routes/links")();
+  const customLinks = require("./routes/customLinks")();
 
   router.use("/usuarios", usuarios);
   router.use("/auth", auth);
@@ -17,7 +17,7 @@ module.exports = () => {
   router.use("/pedidos", pedidos);
   router.use("/itens", itens);
   router.use("/categorias", categorias);
-  // router.use("/links", links);
+  router.use("/customLinks", customLinks);
 
   return router;
 };
