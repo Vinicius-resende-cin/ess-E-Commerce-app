@@ -19,7 +19,7 @@ Scenario: Cadastrar um novo Usuário
     And Escrevo "Casa" em "Complemento" 
     And Escrevo "45989-485" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de cadastro realizado
+    Then Eu recebo uma mensagem de sucesso, "Usuário Cadastrado no Sistema"
 
 Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, senha com menos de 8 dígitos 
     Given eu estou na pagina "Cadastro_Usuario"
@@ -37,7 +37,7 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, senha com menos de
     And Escrevo "Casa" em "Complemento" 
     And Escrevo "78085-730" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de senha erro no cadastro, senha com menos que 8 dígitos
+    Then Eu recebo uma mensagem de erro, "Senha Inválida"
 
 Scenario: Cadastrar um novo Usuário
     Given eu estou na pagina "Cadastro_Usuario"
@@ -55,7 +55,7 @@ Scenario: Cadastrar um novo Usuário
     And Escrevo "Casa" em "Complemento" 
     And Escrevo "78085-730" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de cadastro realizado
+    Then Eu recebo uma mensagem de sucesso, "Usuário Cadastrado no Sistema"
 
  Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, e-mail já utilizado 
     Given eu estou na pagina "Cadastro_Usuario"
@@ -74,7 +74,7 @@ Scenario: Cadastrar um novo Usuário
     And Escrevo "Número 5" em "Complemento" 
     And Escrevo "65060-352" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de Erro do cadastro, e-mail já utilizado
+    Then Eu recebo uma mensagem de erro, "E-mail inválido"
 
  Scenario: Cadastrar um novo Usuário
     Given eu estou na pagina "Cadastro_Usuario"
@@ -92,7 +92,7 @@ Scenario: Cadastrar um novo Usuário
     And Escrevo "Número 5" em "Complemento" 
     And Escrevo "65060-352" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de cadastro realizado
+    Then Eu recebo uma mensagem de sucesso, "Usuário Cadastrado no Sistema"
 
 Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, CPF já utilizado
     Given eu estou na pagina "Cadastro_Usuario"
@@ -111,7 +111,7 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, CPF já utilizado
     And Escrevo "Apto101" em "Complemento" 
     And Escrevo "57039-889" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de Erro do cadastro, CPF já utilizado
+    Then Eu recebo uma mensagem de erro, "CPF inválido"
 
 Scenario: Usuário, já logado no sistema, deseja mudar sua senha
     Given eu já estou logado no sistema como "gmm7@cin.ufpe.br" com a senha "123456Gui@"
@@ -121,7 +121,7 @@ Scenario: Usuário, já logado no sistema, deseja mudar sua senha
     And Escrevo "98765Gui@" em "Nova-Senha"
     And Escrevo "98765Gui@" em "Confirmar-Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de Senha alterada com Sucesso
+    Then Eu recebo uma mensagem de sucesso, "Senha foi alterada com sucesso"
 
 Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, erra sua senha atual
     Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
@@ -131,7 +131,7 @@ Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar s
     And Escrevo "987654jm@" em "Nova-Senha"
     And Escrevo "987654jm@" em "Confirmar-Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de erro, senha atual errada
+    Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
 
 Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, coloca uma senha invállida
     Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
@@ -141,8 +141,8 @@ Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar s
     And Escrevo "987654Jm" em "Nova-Senha"
     And Escrevo "987654Jm" em "Confirmar-Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de erro, nova senha invállida
-
+    Then Eu recebo uma mensagem de erro, "A nova senha não segue as regras para criação de senha"
+    
 Scenario: Usuário, já logado no sistema, deseja mudar seu endereço
     Given eu já estou logado no sistema como "gmm8@cin.ufpe.br" com a senha "987654I@"
     And eu estou na pagina "Perfil do Usuario"
@@ -155,7 +155,7 @@ Scenario: Usuário, já logado no sistema, deseja mudar seu endereço
     And Clico na opcao "OK"
     And Escrevo "987654I@" em "senha-atual"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de endereço alterado com Sucesso
+    Then Eu recebo uma mensagem de sucesso, "As informações do endereço foi alterada com sucesso"
 
 Scenario: Usuário, já logado no sistema, deseja mudar seu endereço, mas insere sua senha errada
     Given eu já estou logado no sistema como "gmm8@cin.ufpe.br" com a senha "987654I@"
@@ -169,7 +169,8 @@ Scenario: Usuário, já logado no sistema, deseja mudar seu endereço, mas inser
     And Clico na opcao "OK"
     And Escrevo "987654I" em "senha-atual"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de erro, senha atual errada
+    Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
+   
 
 Scenario: Administrador deseja remover um usuário do sistema 
     Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
@@ -178,7 +179,7 @@ Scenario: Administrador deseja remover um usuário do sistema
     When Eu clico no Botão "X" do usuário "226.285.440-83"
     And Escrevo "comercio2023@" em "Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de que o usuário foi excluído
+    Then Eu recebo uma mensagem de sucesso, "Usuário Removido com sucesso"
 
 Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer remover um usuário do sistema
     Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
@@ -187,7 +188,7 @@ Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer
     When Eu clico no Botão "X" do usuário "123.456.789-10"
     And Escrevo "comercio2023" em "Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de erro, senha atual errada
+    Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
 
 Scenario: Administrador deseja Promover um usuário do sistema 
     Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
@@ -197,7 +198,7 @@ Scenario: Administrador deseja Promover um usuário do sistema
     When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
     And Escrevo "comercio2023@" em "Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de que o usuário teve sua permissao alterada
+    Then Eu recebo uma mensagem de sucesso, "Usuário Teve a permissão alterada com sucesso"
     And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "admin"
 
 Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer rebaixar um administrador a usuário
@@ -208,7 +209,7 @@ Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer
     When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
     And Escrevo "comercio2023" em "Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de erro, senha atual errada
+    Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
     And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "admin"
 
 
@@ -220,7 +221,7 @@ Scenario: Administrador deseja rebaixar um administrador do sistema
     When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
     And Escrevo "comercio2023@" em "Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de que o usuário teve sua permissao alterada
+    Then Eu recebo uma mensagem de sucesso, "Usuário Teve a permissão alterada com sucesso"
     And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuario"
 
 
@@ -232,7 +233,7 @@ Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer
     When Eu clico no Botão "admin/usuario" do usuário "123.456.789-10"
     And Escrevo "comercio2023" em "Senha"
     And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de erro, senha atual errada
+    Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
     And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuário"
 
 

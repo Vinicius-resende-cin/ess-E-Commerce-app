@@ -15,19 +15,6 @@ const request = require("request");
 let expect = chai.expect;
 let assert = chai.assert;
 
-const Messages = {
-  SUCCESSFUL_CAD: "Usuário Cadastrado no Sistema",
-  SUCCESSFUL_CHANGE_PASS: "Senha foi alterada com sucesso",
-  SUCCESSFUL_CHANGE_ADR: "As informações do endereço foi alterada com sucesso",
-  SUCCESSFUL_DELETE_USER: "Usuário Removido com sucesso",
-  SUCCESSFUL_CHANGE_PERMI: "Usuário Teve a permissão alterada com sucesso",
-  ERRO_SIZE_PASSWORD: "Senha Inválida",
-  ERRO_REPEATED_EMAIL: "E-mail inválido",
-  ERRO_REPEATED_CPF: "CPF inválido",
-  ERRO_ACTUAL_PASS: "Senha inserida está incorreta",
-  ERRO_NEW_PASS: "A nova senha não segue as regras para criação de senha"
-};
-
 async function getTitleAlert(){
    // Obter a lista de janelas abertas pelo navegador
    const handles = await browser.getAllWindowHandles();
@@ -121,63 +108,16 @@ defineSupportCode(function ({ Given, When, Then }) {
 
     });
 
-    Then(/^Eu recebo uma mensagem de cadastro realizado$/,async () => {
-       const title = await getTitleAlert()
-      expect(title).to.equal(Messages.SUCCESSFUL_CAD);
-      
-    });
-
-    Then(/^Eu recebo uma mensagem de senha erro no cadastro, senha com menos que 8 dígitos$/,async () => {
+    Then(/^Eu recebo uma mensagem de sucesso, "([^\"]*)"$/,async (msg: string) => {
       const title = await getTitleAlert()
-      expect(title).to.equal(Messages.ERRO_SIZE_PASSWORD);
+      expect(title).to.equal(msg);
      
    });
 
-    Then(/^Eu recebo uma mensagem de Erro do cadastro, e-mail já utilizado$/,async () => {
+    Then(/^Eu recebo uma mensagem de erro, "([^\"]*)"$/,async (msg: string) => {
       const title = await getTitleAlert()
-      expect(title).to.equal(Messages.ERRO_REPEATED_EMAIL);
+      expect(title).to.equal(msg);
 
-    });
-
-    Then(/^Eu recebo uma mensagem de Erro do cadastro, CPF já utilizado$/,async () => {
-      const title = await getTitleAlert()
-      expect(title).to.equal(Messages.ERRO_REPEATED_CPF);
-
-    });
-
-    Then(/^Eu recebo uma mensagem de Senha alterada com Sucesso$/,async () => {
-      const title = await getTitleAlert()
-      expect(title).to.equal(Messages.SUCCESSFUL_CHANGE_PASS);
-
-    });
-
-    Then(/^Eu recebo uma mensagem de erro, senha atual errada$/,async () => {
-      const title = await getTitleAlert()
-      expect(title).to.equal(Messages.ERRO_ACTUAL_PASS);
-
-    });
-
-    Then(/^Eu recebo uma mensagem de erro, nova senha invállida$/,async () => {
-      const title = await getTitleAlert()
-      expect(title).to.equal(Messages.ERRO_NEW_PASS);
-
-    });
-    
-    Then(/^Eu recebo uma mensagem de endereço alterado com Sucesso$/,async () => {
-      const title = await getTitleAlert()
-      expect(title).to.equal(Messages.SUCCESSFUL_CHANGE_ADR);
-
-    });
-
-    Then(/^Eu recebo uma mensagem de que o usuário foi excluído$/,async () => {
-      const title = await getTitleAlert()
-      expect(title).to.equal(Messages.SUCCESSFUL_DELETE_USER);
-
-    });
-
-    Then(/^Eu recebo uma mensagem de que o usuário teve sua permissao alterada$/,async () => {
-      const title = await getTitleAlert()
-      expect(title).to.equal(Messages.SUCCESSFUL_CHANGE_PERMI);
     });
 
     Then(/^Verifico que este usuário de "([^\"]*)" "([^\"]*)" possui a permissao de "([^\"]*)"$/,async (cpfCampo:string, cpf:string, permissao:string) => {
@@ -186,6 +126,6 @@ defineSupportCode(function ({ Given, When, Then }) {
         valuePermissao = 1;
 
         let exist: any = await checkPermission(cpf);
-      (elems => expect(Promise.resolve(exist)).to.eventually.equal(valuePermissao));
+        (elems => expect(Promise.resolve(exist)).to.eventually.equal(valuePermissao));
     });
 });
