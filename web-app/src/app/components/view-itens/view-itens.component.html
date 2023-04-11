@@ -9,10 +9,10 @@
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3">
       <div class="col mb-5 py-4 px-5" *ngFor="let item of itens_list">
         <div class="text-right">
-          <button (click)="editItemPage(item)">
+          <button (click)="editItemPage(item)" name="edit-{{item.nome}}">
             <img src="https://i.imgur.com/4IbDU4L.png" />
           </button>
-          <button (click)="deleteItem(item)">
+          <button (click)="deleteItem(item)" name="delete-{{item.nome}}">
             <img src="https://i.imgur.com/MtUgGPM.png" />
           </button>
         </div>
@@ -20,7 +20,7 @@
           <!--<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />-->
           <div class="card-body p-4">
             <div class="text-center pt-5">
-              <h5 class="fw-bolder">{{ item.nome }}</h5>
+              <h5 class="fw-bolder" id="{{ item._id }}">{{ item.nome }}</h5>
               R${{ item.preco }}
             </div>
           </div>
@@ -28,8 +28,9 @@
             <div class="text-center">
               <a
                 class="btn btn-outline-dark mt-auto"
+                name="Ver tudo"
                 href="http://localhost:4200/home/item/{{ item._id }}"
-                >View full</a
+                >Ver tudo</a
               >
             </div>
           </div>

@@ -18,6 +18,8 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterItemComponent {
     category_list!: Categoria[];
     email!: String;
+    errorMsg!: string;
+
     constructor(private itemservice: ItemService, private categoriaService: CategoriaService,  private userservice: UserService, private router: Router) { 
     }
 
@@ -39,7 +41,11 @@ export class RegisterItemComponent {
         .createItem(newItem)
         .subscribe(
           (newItem) => {
+            this.errorMsg = '';
             this.router.navigate(['home', 'view-itens']);
+          },
+          (erro) => {
+            this.errorMsg = erro.error.message;
           }
         );
     }
@@ -56,6 +62,7 @@ export class RegisterItemComponent {
     getCategory(): void {
       this.categoriaService.getCategories().subscribe((result) => {
         this.category_list = result as Categoria[];
+        console.log(this.category_list)
       });
     }
 
@@ -72,11 +79,11 @@ export class RegisterItemComponent {
       const categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value;
       const titulo = (<HTMLInputElement>document.getElementById('input-nome')).value;
       const descricao = (<HTMLInputElement>document.getElementById('input-desc')).value;
-      const imagem = (<HTMLInputElement>document.getElementById('input-image')).value;
   
-      if (quantidade && preco && forma_pagamento && categoria && titulo && descricao && imagem) {
+      if (quantidade && preco && forma_pagamento && categoria && titulo && descricao) {
         return true;
       }
       return false;
     }
+
 }

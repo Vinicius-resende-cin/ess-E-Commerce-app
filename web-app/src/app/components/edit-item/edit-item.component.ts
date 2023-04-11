@@ -16,6 +16,7 @@ export class EditItemComponent implements OnInit {
   item!: Itens;
   itemModifiqued!: Itens;
   category_list! : Categoria[];
+  errorMsg!: string;
 
   constructor(private itemservice: ItemService, private route: ActivatedRoute, private categoriaService: CategoriaService, private router: Router) { }
 
@@ -47,9 +48,15 @@ export class EditItemComponent implements OnInit {
     this.itemModifiqued.forma_pagamento = (<HTMLInputElement>document.getElementById('input-pagamento')).value.split(",");
     this.itemModifiqued.categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value.split(",");
 
-    this.itemservice.editItem('/itens/' + id, this.itemModifiqued).subscribe((result) => {
-      this.router.navigate(['home', 'view-itens']);
-    });
+    this.itemservice.editItem('/itens/' + id, this.itemModifiqued).subscribe(
+      (result) => {
+        this.errorMsg = ''
+        this.router.navigate(['home', 'view-itens']);
+      },
+      (erro) => {
+        this.errorMsg = erro.error.message;
+      }
+    );
   }
   
   
