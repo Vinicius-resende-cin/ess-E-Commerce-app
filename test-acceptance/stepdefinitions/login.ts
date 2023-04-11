@@ -36,7 +36,7 @@ const PageUrls = {
   RESUMO_MENSAL: "home/resumo-mensal",
   CADASTRAR_PRODUTO: "home/create-item",	
   MINHA_LOJA: "home/view-itens",	
-  VIEW_FULL: "home/item/:id"
+  VIEW_FULL: "home/item/:id",
 
 };
 

@@ -15,3 +15,18 @@ And eu escolho "Roupas" em "Categorias"
 And eu clico em "Cadastrar"
 Then eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo" na loja
+
+Scenario: Atualizando um produto
+Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+And eu estou na pagina "Minha Loja"
+And eu clico no icone que indica "Atualizar produto" do produto com nome "Camisa polo"
+When eu altero "Nome" para "Camisa polo azul bebe"
+And eu altero "Formas de pagamento" para "Boleto bancario"
+And eu altero "Categorias" para "Corrida"
+And eu clico em "Atualizar"
+Then eu sou redirecionado para a página "Minha Loja"
+And eu vejo o produto com nome "Camisa polo azul bebe" na loja
+And eu clico em "Ver tudo"
+And eu sou redirecionado para a página do produto com nome "Camisa polo azul bebe"
+And eu vejo "Boleto bancario" em "Formas de pagamento"
+And eu vejo "Corrida" em "Categorias"
