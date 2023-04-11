@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CategoriaService } from 'src/app/services/categoria.service';
 import { Router } from '@angular/router';
 import { Categoria } from 'src/app/common/global-types';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-category-list',
@@ -15,21 +14,14 @@ export class CategoryListComponent {
     private router: Router
   ) {}
 
-  categoria: Categoria = {
-    nome_categoria: '',
-    descricao_categoria: '',
-  };
   categorias: Categoria[] = [];
 
   ngOnInit(): void {
     this.getCategorias();
   }
 
-  abrirCriacaoCategoria() {
+  criarCategoria() {
     this.router.navigate(['home', 'criacao-nova-categoria']);
-  }
-
-  verifyCategoria(id: String): void {
   }
 
   editarCategoria(id: String, descricao: String) {
