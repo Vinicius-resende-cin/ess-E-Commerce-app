@@ -37,10 +37,12 @@ module.exports = () => {
 
     createItem: async (req: any, res: any) => {
       try {
-        const itemDuplicado = await Item.findOne({ id_user: req.session.user_email, nome: req.body.nome });
+        const itemDuplicado = await Item.findOne({ nome: req.body.nome, id_user: req.session.user_email });
 
         if (itemDuplicado) {
             res.status(400).json({ message: "Já existe um produto com esse titulo em sua loja" });
+        } else if (req.body.quantidade < 0 || req.body.preco < 0) {
+            res.status(400).json({ message: "Valores negativos não são permitdos" });
         } else {
             const newItem = await Item.create(req.body);
             res.status(200).json(newItem);

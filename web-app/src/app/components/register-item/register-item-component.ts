@@ -18,6 +18,8 @@ import { UserService } from 'src/app/services/user.service';
 export class RegisterItemComponent {
     category_list!: Categoria[];
     email!: String;
+    errorMsg!: string;
+
     constructor(private itemservice: ItemService, private categoriaService: CategoriaService,  private userservice: UserService, private router: Router) { 
     }
 
@@ -39,9 +41,13 @@ export class RegisterItemComponent {
         .createItem(newItem)
         .subscribe(
           (newItem) => {
+            this.errorMsg = '';
             this.router.navigate(['home', 'view-itens']);
+          },
+          (erro) => {
+            alert(erro.error.message);
+            this.errorMsg = erro.error.message;
           }
-          
         );
     }
 

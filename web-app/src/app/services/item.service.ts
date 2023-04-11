@@ -32,12 +32,12 @@ import { User } from '../../../../common/usuario';
 
     createItem(newItem: Types.Itens) {
       const endpointURL = this.apiURL + '/itens';
-      return this.http.post<Object>(endpointURL, newItem); 
+      return this.http.post<Object>(endpointURL, newItem, {withCredentials: true}); 
     }
 
     editItem(apiEndpoint: string, item: Types.Itens) {
       const endpointURL = this.apiURL + apiEndpoint;
-      return this.http.put<Object>(endpointURL, item);
+      return this.http.put<Object>(endpointURL, item, {withCredentials: true});
     }
 
     deleteItem(apiEndpoint: string) {
