@@ -19,6 +19,7 @@ export class PasswordConfirmationComponent {
 
   imgEyeOn = new Image();
   imgEyeOff = new Image();
+  id!: string | null;
 
   Messages = {
     WRONG_LOGIN: 'A senha está incorreta',
@@ -30,6 +31,7 @@ export class PasswordConfirmationComponent {
   ngOnInit(): void {
     this.imgEyeOn.src = '/assets/images/eye.svg';
     this.imgEyeOff.src = '/assets/images/eye-off.svg';
+    this.id = this.route.snapshot.paramMap.get('id');
   }
 
   enableButton() {
@@ -92,10 +94,9 @@ export class PasswordConfirmationComponent {
               setTimeout(f, 500);
             });
 
-            const id = this.route.snapshot.paramMap.get('id');
-
-            if (id) {
-              this.deleteItem(id);
+            
+            if (this.id) {
+              this.deleteItem(this.id);
             }
           }
 

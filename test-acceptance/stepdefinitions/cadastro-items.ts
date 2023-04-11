@@ -155,18 +155,13 @@ defineSupportCode(function ({ Given, When, Then }) {
         }
     });
 
-    Then(/^eu sou redirecionado para a página de confirmacao de senha do produto com nome "(.*)"$/, async (nome_expected) => {
-        const elem = element(by.name('nome'));
-        const nome = await elem.getText();
-        const id =  element(by.name('nome')).getText();
+    Then(/^eu sou redirecionado para a página de confirmacao de senha$/, async () => {
+        const id: string = await element(by.name('Confirmar')).getAttribute('id');
 
-
-        if (nome === nome_expected){
-            const expectUrl = 'home/password-confirmation/' + id;
-            await new Promise((resolve) => setTimeout(resolve, 2000));
-            await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
-        }
-        
+        const expectUrl = 'home/password-confirmation/' + id;
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+        await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
+    
     });
 
     //eu vejo o produto com nome "Camisa polo azul bebe" foi excluido da loja

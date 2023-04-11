@@ -30,3 +30,13 @@ And eu clico em "Ver tudo"
 And eu sou redirecionado para a página do produto com nome "Camisa polo azul bebe"
 And eu vejo "Boleto bancario" em "Formas de pagamento"
 And eu vejo "Corrida" em "Categorias"
+
+Scenario: Removendo um produto
+Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+And eu estou na pagina "Minha Loja"
+When eu clico no icone que indica "Remover produto" do produto com nome "Camisa polo azul bebe"
+Then eu sou redirecionado para a página de confirmacao de senha
+And eu digito "13032003jR!" em "Senha"
+And eu clico em "Confirmar"
+Then eu sou redirecionado para a página "Minha Loja"
+And eu vejo que o produto com nome "Camisa polo azul bebe" foi excluido da loja

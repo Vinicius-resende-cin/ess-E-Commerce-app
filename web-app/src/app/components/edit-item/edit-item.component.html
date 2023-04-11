@@ -5,11 +5,11 @@
       <form (submit)="updateItem()">
         <div class="form-group">
           <label for="input-nome">Nome:</label>
-          <input type="text" class="form-control" id="input-nome" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.nome" value="{{ item.nome }}">
+          <input type="text" class="form-control" id="input-nome" name="nome" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.nome" value="{{ item.nome }}">
         </div>
         <div class="form-group">
           <label for="input-desc">Descrição:</label>
-          <input type="text" class="form-control" id="input-desc" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.descricao" value="{{ item.descricao }}">
+          <input type="text" class="form-control" id="input-desc" name="descricao" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.descricao" value="{{ item.descricao }}">
         </div>
         <!--<div class="form-group">
           <label for="imagem">Imagem:</label>
@@ -17,30 +17,30 @@
         </div>-->
         <div class="form-group">
           <label for="input-quantidade">Quantidade:</label>
-          <input type="number" class="form-control" id="input-quantidade" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.quantidade" value="{{ item.quantidade }}">
+          <input type="number" class="form-control" id="input-quantidade" name="quantidade" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.quantidade" value="{{ item.quantidade }}">
         </div>
         <div class="form-group">
           <label for="input-preco">Preço:</label>
-          <input type="number" class="form-control" id="input-preco" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.preco" value="{{ item.preco }}">
+          <input type="number" class="form-control" id="input-preco" name="preco" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.preco" value="{{ item.preco }}">
         </div>
         <div class="form-group">
           <label for="input-pagamento" class="label">Formas de pagamento:</label>
-          <select id="input-pagamento" class="custom-select" name="input-pagamento" (input)="validarEdicao()"  [(ngModel)]="itemModifiqued.forma_pagamento" multiple>
-            <option value="cartao">Cartão de crédito</option>
-            <option value="boleto">Boleto bancário</option>
-            <option value="transferencia">Transferência bancária</option>
-            <option value="dinheiro">Dinheiro</option>
+          <select id="input-pagamento" class="custom-select" name="formas-de-pagamento" (input)="validarEdicao()"  [(ngModel)]="itemModifiqued.forma_pagamento" multiple>
+            <option value="cartao" name="cartao-de-credito">Cartao de credito</option>
+            <option value="boleto" name="boleto-bancario">Boleto bancario</option>
+            <option value="transferencia" name="transferencia-bancaria">Transferencia bancaria</option>
           </select>
         </div>
         <div class="form-group">
           <label for="input-categoria" class="label">Categorias:</label>
-          <select id="input-categoria" class="custom-select" name="input-categoria" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.categoria" multiple>
+          <select id="input-categoria" class="custom-select" name="categorias" (input)="validarEdicao()" [(ngModel)]="itemModifiqued.categoria" multiple>
             <option *ngFor="let categoria of category_list">{{categoria.nome_categoria}}</option>
           </select>
         </div>       
         <button
         class="btn btn-primary" 
         type = "submit"
+        name="Atualizar"
         >
           Atualizar</button>
       </form>

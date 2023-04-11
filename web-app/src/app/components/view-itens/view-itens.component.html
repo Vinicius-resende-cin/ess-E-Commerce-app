@@ -20,7 +20,7 @@
           <!--<img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />-->
           <div class="card-body p-4">
             <div class="text-center pt-5">
-              <h5 class="fw-bolder">{{ item.nome }}</h5>
+              <h5 class="fw-bolder" id="{{ item._id }}">{{ item.nome }}</h5>
               R${{ item.preco }}
             </div>
           </div>
@@ -28,8 +28,9 @@
             <div class="text-center">
               <a
                 class="btn btn-outline-dark mt-auto"
+                name="Ver tudo"
                 href="http://localhost:4200/home/item/{{ item._id }}"
-                >View full</a
+                >Ver tudo</a
               >
             </div>
           </div>
