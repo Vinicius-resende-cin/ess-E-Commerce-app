@@ -55,7 +55,7 @@ export class PerfilUserComponent {
     });
   }
 
-   //Método que cria o alert de Sucesso
+  //Método que cria o alert de Sucesso
   alertAcept(msg: string) {
     const sucess = Swal.mixin({
       toast: true,
@@ -120,18 +120,19 @@ export class PerfilUserComponent {
     }
   }
 
-   //Método que cria o alert para o do novo endereço
+  //Método que cria o alert para o do novo endereço
   async reciveAdrress() {
     const { value: formValues } = await Swal.fire({
       title: 'Troca de Endereço',
       html:
-        '<label>Endereço</label><input id="swal-input1" class="swal2-input" type="text" name="endereco">  <br>'+
-        '<label>Compleme.</label><input id="swal-input2" class="swal2-input" type="text" name="Complemento">  <br>' +
+        '<label>Endereço</label><input id="swal-input1" class="swal2-input" type="text" name="endereco">  <br>' +
+        '<label>Complemento</label><input id="swal-input2" class="swal2-input" type="text" name="Complemento">  <br>' +
         '<label>CEP</label><input id="swal-input3" class="swal2-input" type="text" name="CEP">  <br>' +
         '<label>Cidade</label><input id="swal-input4" class="swal2-input" type="text" name="cidade">  <br>' +
         '<label>Estado</label><input id="swal-input5" class="swal2-input" type="text" name="estado">  <br>',
       focusConfirm: false,
       showCancelButton: true,
+      width: '35%',
       preConfirm: () => {
         const val1 = (
           document.getElementById('swal-input1') as HTMLInputElement

@@ -21,49 +21,36 @@
         <button class="btn btn-dark" type="submit">Pesquisar</button>
       </form>
     </div>
-    <div class="option">
-      <div class="hamburger">
-        <div class="line" id="line1"></div>
-        <div class="line" id="line2"></div>
-        <div class="line" id="line3"></div>
-      </div>
-      <div class="sidebar">
-        <ul class="menu">
-          <li class="menu-item" *ngIf="!isLoggedIn">
-            <a
-              name="Login"
-              [routerLink]="['/login']"
-              class="menu-link"
-              >Login</a
-            >
-          </li>
-          <li class="menu-item" *ngIf="isLoggedIn">
-            <a
-              name="Logout"
-              [routerLink]="['/login']"
-              class="menu-link"
-              (click)="logout()"
-              >Logout</a
-            >
-          </li>
-          <li class="menu-item" *ngIf="!isLoggedIn">
-            <a
-              name="Cadastro-Usuario"
-              [routerLink]="['/Cadastro-Usuario']"
-              class="menu-link"
-              >Cadastro</a
-            >
-          </li>
-          <li class="menu-item" *ngIf="isLoggedIn">
-            <a
-              name="Gerar-Link"
-              [routerLink]="['/gerar-link']"
-              class="menu-link"
-              >Gerar Link</a
-            >
-          </li>
-        </ul>
-      </div>
+    <div class="w-25 px-5 d-inline-flex justify-content-end align-items-center">
+      <a
+        name="login"
+        [routerLink]="['/login']"
+        *ngIf="!isLoggedIn"
+        class="nav-link text-dark-alt fs-5 me-3"
+        >Login</a
+      >
+
+      <a
+        name="Logout"
+        [routerLink]="['/']"
+        *ngIf="isLoggedIn"
+        class="nav-link text-dark-alt fs-5 me-3"
+        (click)="logout()"
+        >Logout</a
+      >
+      <a
+        name="Cadastro-Usuario"
+        [routerLink]="['/Cadastro-Usuario']"
+        *ngIf="!isLoggedIn"
+        class="nav-link text-dark-alt fs-5 me-3"
+        >Cadastro</a
+      >
+      <a
+        name="Gerar-Link"
+        [routerLink]="['/gerar-link']"
+        class="nav-link text-dark-alt fs-5 me-3"
+        >Gerar Link</a
+      >
     </div>
   </div>
 </div>
