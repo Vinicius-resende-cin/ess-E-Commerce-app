@@ -9,10 +9,10 @@
     <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-3">
       <div class="col mb-5 py-4 px-5" *ngFor="let item of itens_list">
         <div class="text-right">
-          <button (click)="editItemPage(item)">
+          <button (click)="editItemPage(item)" name="edit-{{item.nome}}">
             <img src="https://i.imgur.com/4IbDU4L.png" />
           </button>
-          <button (click)="deleteItem(item)">
+          <button (click)="deleteItem(item)" name="delete-{{item.nome}}">
             <img src="https://i.imgur.com/MtUgGPM.png" />
           </button>
         </div>

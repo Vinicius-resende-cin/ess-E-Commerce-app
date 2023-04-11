@@ -27,8 +27,8 @@
     "install": "^0.13.0",
     "jsonwebtoken": "^9.0.0",
     "npm": "^9.6.4",
-    "protractor": "^5.1.2",
-    "sweetalert2": "^11.7.3",
+    "protractor": "^7.0.0",
+    "sweetalert2": "^11.4.8",
     "ts-node": "^3.1.0"
   }
 }
