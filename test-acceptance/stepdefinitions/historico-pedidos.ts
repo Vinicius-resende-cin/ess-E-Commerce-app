@@ -41,7 +41,6 @@ async function testarItem(name:string, quantidade: number, strId: string) {
 defineSupportCode(function({Given, When, Then}) {
     Given(/^Estou vendo o histórico de pedidos da minha conta$/, async() => {
         await browser.get(baseUrl + "home/historico-pedidos");
-        // await browser.sleep(1000);
     });
 
     Given(/^Estou vendo o item "(.*)" do pedido "(\d*)" no histórico$/, async(item, pedido) => {
