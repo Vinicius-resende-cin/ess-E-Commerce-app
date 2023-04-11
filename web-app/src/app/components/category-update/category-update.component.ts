@@ -22,7 +22,7 @@ export class CategoryUpdateComponent {
   alertCategoria: boolean = false;
   alertMessage: string = '';
 
-  editCategoria(categoria: Categoria) {
+  editCategoria(categoria: Categoria): void {
     this.categoriaService
       .editCategory(categoria.nome_categoria, categoria.descricao_categoria)
       .subscribe(
@@ -41,7 +41,7 @@ export class CategoryUpdateComponent {
       );
   }
 
-  sairDaCriacao() {
+  sairDaCriacao(): void {
     this.router.navigate(['home', 'categoria']);
   }
 }

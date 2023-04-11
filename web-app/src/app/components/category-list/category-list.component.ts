@@ -20,11 +20,11 @@ export class CategoryListComponent {
     this.getCategorias();
   }
 
-  criarCategoria() {
+  criarCategoria(): void {
     this.router.navigate(['home', 'criacao-nova-categoria']);
   }
 
-  editarCategoria(id: String, descricao: String) {
+  editarCategoria(id: String, descricao: String): void {
     this.categoriaService.setInfo(id, descricao);
     this.router.navigate(['home', 'categoria', id]);
   }

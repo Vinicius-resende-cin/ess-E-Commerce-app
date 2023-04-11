@@ -22,7 +22,7 @@ export class CategoryCreationComponent {
   alertCategoria: boolean = false;
   alertMessage: string = '';
 
-  createCategoria(categoria: Categoria) {
+  createCategoria(categoria: Categoria): void {
     if (!categoria.nome_categoria || categoria.nome_categoria.trim() === '') {
       this.alertMessage = 'Nome necessário';
       this.alertCategoria = true;
@@ -48,7 +48,7 @@ export class CategoryCreationComponent {
     }
   }
 
-  sairDaCriacao() {
+  sairDaCriacao(): void {
     this.router.navigate(['home', 'categoria']);
   }
 }
