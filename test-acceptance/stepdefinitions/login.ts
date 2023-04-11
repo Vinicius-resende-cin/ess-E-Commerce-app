@@ -105,20 +105,20 @@ async function tryLogin(email: string, password: string, param: string) {
   return result;
 }
 
-async function resetTries() {
-  const cookies = await browser.manage().getCookies();
-  const options = {
-    url: "http://localhost:3000/api/auth/resetTries",
-    method: "GET",
-    withCredentials: true
-  };
+// async function resetTries() {
+//   const cookies = await browser.manage().getCookies();
+//   const options = {
+//     url: "http://localhost:3000/api/auth/resetTries",
+//     method: "GET",
+//     withCredentials: true
+//   };
 
-  await new Promise((resolve, reject) => {
-    request(options, function (err: any, resp: any) {
-      resolve(resp.body);
-    });
-  });
-}
+//   await new Promise((resolve, reject) => {
+//     request(options, function (err: any, resp: any) {
+//       resolve(resp.body);
+//     });
+//   });
+// }
 
 async function changePassword(email: string, password: string) {
   const token = await getToken(email);
@@ -193,9 +193,9 @@ async function registerUser(email: string, password: string) {
 
 defineSupportCode(function ({ Given, When, Then, Before, After }) {
   //reseta tentativas de login
-  // Before(async () => {
-  //   await resetTries();
-  // });
+  Before(async () => {
+    await browser.get("http://localhost:4200/resetTries");
+  });
   //desloga se estiver logado e
   After(async () => {
     const logged = await checkLogged();

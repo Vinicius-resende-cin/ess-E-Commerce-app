@@ -1,73 +1,58 @@
 <div class="container">
-    <h2 class="title text-left">{{item.nome}}</h2>
+  <h2 class="title text-left">{{ item.nome }}</h2>
 
-    <ul class="col list-group list-group-horizontal">
+  <ul class="col list-group list-group-horizontal">
+    <li class="list-group-item">
+      <ul class="list-group m-2">
+        <li class="list-group-item active">ID:</li>
         <li class="list-group-item">
-            <ul class="list-group m-2">
-                <li class="list-group-item active">
-                    ID: 
-                </li>
-                <li class="list-group-item">
-                    {{item._id}}
-                </li>
-            </ul>
-
-            <ul class="list-group m-2">
-                <li class="list-group-item active">
-                    Nome: 
-                </li>
-                <li class="list-group-item">
-                    {{item.nome}}
-                </li>
-            </ul>
-
-            <ul class="list-group m-2">
-                <li class="list-group-item active">
-                    Descrição: 
-                </li>
-                <li class="list-group-item">
-                    {{item.descricao}}
-                </li>
-            </ul>
-
-            <ul class="list-group m-2">
-                <li class="list-group-item active">
-                    Estoque: 
-                </li>
-                <li class="list-group-item">
-                    {{item.quantidade}}
-                </li>
-            </ul>
-
-            <ul class="list-group m-2">
-                <li class="list-group-item active">
-                    Valor: 
-                </li>
-                <li class="list-group-item">
-                    {{item.preco}}
-                </li>
-            </ul>
-
-            <ul class="list-group m-2">
-                <li class="list-group-item active">
-                    Formas de Pagamento: 
-                </li>
-                <li class="list-group-item">
-                    {{item.forma_pagamento}}
-                </li>
-            </ul>
-
-            <ul class="list-group m-2">
-                <li class="list-group-item active">
-                    Categorias: 
-                </li>
-                <li class="list-group-item">
-                    {{item.categoria}}
-                </li>
-            </ul>
-
+          {{ item._id }}
         </li>
-    </ul>
+      </ul>
 
-    <button type="button" class="col btn btn-primary">Comprar</button>
+      <ul class="list-group m-2">
+        <li class="list-group-item active">Nome:</li>
+        <li class="list-group-item">
+          {{ item.nome }}
+        </li>
+      </ul>
+
+      <ul class="list-group m-2">
+        <li class="list-group-item active">Descrição:</li>
+        <li class="list-group-item">
+          {{ item.descricao }}
+        </li>
+      </ul>
+
+      <ul class="list-group m-2">
+        <li class="list-group-item active">Estoque:</li>
+        <li class="list-group-item">
+          {{ item.quantidade }}
+        </li>
+      </ul>
+
+      <ul class="list-group m-2">
+        <li class="list-group-item active">Valor:</li>
+        <li class="list-group-item">
+          {{ item.preco }}
+        </li>
+      </ul>
+
+      <ul class="list-group m-2">
+        <li class="list-group-item active">Formas de Pagamento:</li>
+        <li class="list-group-item">
+          {{ item.forma_pagamento }}
+        </li>
+      </ul>
+
+      <ul class="list-group m-2">
+        <li class="list-group-item active">Categorias:</li>
+        <li class="list-group-item">
+          {{ item.categoria }}
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <button type="button" class="btn btn-primary m-2">Comprar</button>
 </div>

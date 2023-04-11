@@ -3,8 +3,7 @@
   "description": "Testes de aceitação",
   "scripts": {
     "tsc": "node node_modules/typescript/bin/tsc",
-    "test-firefox": "npm run tsc && protractor typeScript/test-acceptance/config/config-firefox.js",
-    "test-chrome": "npm run tsc && protractor typeScript/test-acceptance/config/config-chrome.js",
+    "test": "npm run tsc && protractor typeScript/test-acceptance/config/config.js",
     "webdriver-update": "webdriver-manager update",
     "webdriver-start": "webdriver-manager start"
   },
