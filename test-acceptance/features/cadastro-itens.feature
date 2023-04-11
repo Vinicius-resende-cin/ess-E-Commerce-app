@@ -16,6 +16,29 @@ And eu clico em "Cadastrar"
 Then eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo" na loja
 
+Scenario: Tentativa mal-sucedida de cadastro de novo produto com título já existente
+Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+When eu estou na pagina "Cadastrar Produto"
+And eu digito "Camisa polo" em "Nome"
+And eu digito "Camisa polo azul" em "Descricao"
+And eu digito "20" em "Preco"
+And eu digito "10" em "Quantidade"
+And eu escolho "Transferencia bancaria" em "Formas de pagamento"
+And eu escolho "Corrida" em "Categorias"
+And eu clico em "Cadastrar"
+Then eu vejo na tela uma mensagem de erro "Já existe um produto com esse titulo em sua loja"
+And eu clico em "Itens"
+And eu sou redirecionado para a página "Minha Loja"
+And eu vejo o produto com nome "Camisa polo" na loja
+And eu clico em "Ver tudo"
+And eu sou redirecionado para a página do produto com nome "Camisa polo"
+And eu vejo "Camisa polo" em "Nome"
+And eu vejo "Camisa polo preta esportiva com bom pano" em "Descricao"
+And eu vejo "80" em "Preco"
+And eu vejo "20" em "Quantidade"
+And eu vejo "Cartao de credito e Boleto bancario" em "Formas de pagamento"
+And eu vejo "Roupas" em "Categorias"
+
 Scenario: Atualizando um produto
 Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
 And eu estou na pagina "Minha Loja"
@@ -39,4 +62,5 @@ Then eu sou redirecionado para a página de confirmacao de senha
 And eu digito "13032003jR!" em "Senha"
 And eu clico em "Confirmar"
 Then eu sou redirecionado para a página "Minha Loja"
-And eu vejo que o produto com nome "Camisa polo azul bebe" foi excluido da loja
+And eu vejo que o produto com nome "Camisa polo azul bebe" nao esta na loja
+

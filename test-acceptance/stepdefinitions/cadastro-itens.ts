@@ -18,6 +18,24 @@ async function containsSubstring(value, elem) {
     const valueSubstrings = value.toLowerCase().split(' ');
     return valueSubstrings.every(substring => elem.toLowerCase().includes(substring));
 }
+
+const PageUrls = {
+    INICIAL: "",
+    PRINCIPAL: "home",
+    LOGIN: "login",
+    REDEFINIR_SENHA: "redefinir-senha",
+    RECUPERAR_CONTA: "recuperar-conta",
+    CADASTRO_USUARIO: "Cadastro-Usuario",
+    PERFIL_DO_USUARIO: "home/perfil-user",
+    ADMIN_PAINEL: "home/admin-painel",
+    GERENCIAR_CATEGORIAS: "home/categoria",
+    CATEGORIA_ESPORTES: "home/categoria/Esportes",
+    RESUMO_MENSAL: "home/resumo-mensal",
+    CADASTRAR_PRODUTO: "home/create-item",	
+    MINHA_LOJA: "home/view-itens",	
+    VIEW_FULL: "home/item/:id",
+  
+  };
   
 
 defineSupportCode(function ({ Given, When, Then }) { 
@@ -133,7 +151,6 @@ defineSupportCode(function ({ Given, When, Then }) {
         }
     });
 
-    //And eu vejo a(s) opcao(es) "Boleto bancário" em "Formas de pagamento"
     Then(/^eu vejo "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {
 
         const elemValues = value.toString().split(" e ");
@@ -164,8 +181,7 @@ defineSupportCode(function ({ Given, When, Then }) {
     
     });
 
-    //eu vejo o produto com nome "Camisa polo azul bebe" foi excluido da loja
-    Then(/^eu vejo que o produto com nome "(.*)" foi excluido da loja$/, async(elemName) => {
+    Then(/^eu vejo que o produto com nome "(.*)" nao esta na loja$/, async(elemName) => {
         const itemNames = await $$("h5.fw-bolder");
         let found = false;
 
@@ -181,4 +197,17 @@ defineSupportCode(function ({ Given, When, Then }) {
 
         expect(found).to.be.false;
     });
+
+    Then(/^eu vejo na tela uma mensagem de erro "(.*)"$/, async(msgError) => {
+        const msg = await element(by.name('error-msg')).getText();
+
+        expect(msgError).to.equal(msg);
+    });
+
+    Then(/^eu vejo o botão "(.*)" indisponivel para clicar$/, async(elementName) => {
+        const button = await $(`button[name="${elementName}"]`);
+        const isDisabled = await button.isDisabled();
+        expect(isDisabled).to.be.true;
+    });
+
 });

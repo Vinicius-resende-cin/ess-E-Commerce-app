@@ -35,9 +35,7 @@ const PageUrls = {
   CATEGORIA_ESPORTES: "home/categoria/Esportes",
   RESUMO_MENSAL: "home/resumo-mensal",
   CADASTRAR_PRODUTO: "home/create-item",	
-  MINHA_LOJA: "home/view-itens",	
-  VIEW_FULL: "home/item/:id",
-
+  MINHA_LOJA: "home/view-itens"
 };
 
 async function getToken(email: string) {

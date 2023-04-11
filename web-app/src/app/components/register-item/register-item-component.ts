@@ -45,7 +45,6 @@ export class RegisterItemComponent {
             this.router.navigate(['home', 'view-itens']);
           },
           (erro) => {
-            alert(erro.error.message);
             this.errorMsg = erro.error.message;
           }
         );
