@@ -24,7 +24,6 @@ defineSupportCode(function ({ Given, When, Then }) {
       await request.del(endpointURL, null);
       await browser.refresh();
       
-
       const categoria = await element(by.cssContainingText('.nome-categoria', nomeCategoria));
   
       expect(await categoria.isPresent()).to.be.false;
