@@ -39,6 +39,18 @@ And eu vejo "20" em "Quantidade"
 And eu vejo "Cartao de credito e Boleto bancario" em "Formas de pagamento"
 And eu vejo "Roupas" em "Categorias"
 
+Scenario: Tentativa mal-sucedida de cadastro de novo produto deixando algum campo obrigatório em branco
+Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+When eu estou na pagina "Cadastrar Produto"
+And eu digito "" em "Nome"
+And eu digito "Uma calca com otima fibra para malhacao" em "Descricao"
+And eu digito "20" em "Preco"
+And eu digito "10" em "Quantidade"
+Then eu vejo o botão "Cadastrar" indisponivel para clicar
+And eu clico em "Itens"
+And eu sou redirecionado para a página "Minha Loja"
+And eu vejo que o produto com nome "Camisa polo" nao esta na loja
+
 Scenario: Atualizando um produto
 Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
 And eu estou na pagina "Minha Loja"
@@ -63,4 +75,3 @@ And eu digito "13032003jR!" em "Senha"
 And eu clico em "Confirmar"
 Then eu sou redirecionado para a página "Minha Loja"
 And eu vejo que o produto com nome "Camisa polo azul bebe" nao esta na loja
-

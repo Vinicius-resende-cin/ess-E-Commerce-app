@@ -206,8 +206,8 @@ defineSupportCode(function ({ Given, When, Then }) {
 
     Then(/^eu vejo o botão "(.*)" indisponivel para clicar$/, async(elementName) => {
         const button = await $(`button[name="${elementName}"]`);
-        const isDisabled = await button.isDisabled();
-        expect(isDisabled).to.be.true;
+        const isEnabled = await button.isEnabled();
+        expect(isEnabled).to.be.false;
     });
 
 });
