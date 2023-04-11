@@ -42,14 +42,14 @@ And eu vejo "Roupas" em "Categorias"
 Scenario: Tentativa mal-sucedida de cadastro de novo produto deixando algum campo obrigatório em branco
 Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
 When eu estou na pagina "Cadastrar Produto"
-And eu digito "" em "Nome"
+And eu digito "Calca legging" em "Nome"
 And eu digito "Uma calca com otima fibra para malhacao" em "Descricao"
 And eu digito "20" em "Preco"
 And eu digito "10" em "Quantidade"
 Then eu vejo o botão "Cadastrar" indisponivel para clicar
 And eu clico em "Itens"
 And eu sou redirecionado para a página "Minha Loja"
-And eu vejo que o produto com nome "Camisa polo" nao esta na loja
+And eu vejo que o produto com nome "Calca legging" nao esta na loja
 
 Scenario: Atualizando um produto
 Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
@@ -65,6 +65,19 @@ And eu clico em "Ver tudo"
 And eu sou redirecionado para a página do produto com nome "Camisa polo azul bebe"
 And eu vejo "Boleto bancario" em "Formas de pagamento"
 And eu vejo "Corrida" em "Categorias"
+
+Scenario: Tentativa mal-sucedida de atualizar um produto com titulo já existente
+Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+And eu estou na pagina "Minha Loja"
+And eu clico no icone que indica "Atualizar produto" do produto com nome "Camisa polo azul bebe"
+When eu altero "Nome" para "Botas Vermelhas do Astro Boy"
+And eu altero "Formas de pagamento" para "Cartao de credito"
+And eu altero "Categorias" para "Moda"
+And eu clico em "Atualizar"
+Then eu vejo na tela uma mensagem de erro "Já existe um produto com esse titulo em sua loja"
+And eu clico em "Itens"
+And eu sou redirecionado para a página "Minha Loja"
+And eu vejo o produto com nome "Camisa polo azul bebe" na loja
 
 Scenario: Removendo um produto
 Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
