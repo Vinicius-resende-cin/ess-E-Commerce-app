@@ -101,7 +101,8 @@ defineSupportCode(function({Given, When, Then}) {
 
     Then(/^Eu vejo uma mensagem dizendo que "(.*)"$/, async(message) => {
         await browser.wait(protractor.ExpectedConditions.alertIsPresent(), 5000);
-        var alert = browser.switchTo().alert()
+        var alert = browser.switchTo().alert();
+        await new Promise(resolve => setTimeout(resolve, 500));
         expect(Promise.resolve(alert.getText())).to.eventually.equal(message);
         await alert.accept();
     });
