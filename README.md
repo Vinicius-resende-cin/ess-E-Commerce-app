@@ -11,19 +11,15 @@
 sudo apt install npm
 sudo npm install -g @angular/cli
 ```
-
-### Modificando a versão do Node
-```
-sudo npm install -g n
-n 14.15
-```
-
 ### Iniciando o projeto
 ```
 cd web-app
 sudo npm install
 cd ..
 cd server
+sudo npm install
+cd ..
+cd test-acceptance
 sudo npm install
 ```
 ### Rodando o projeto
@@ -35,7 +31,15 @@ npm start
 Iniciando o frontend
 ```
 cd web-app
-sudo npm install 
-cd src
 ng serve
+```
+### Iniciando os Testes
+```
+cd test-acceptance
+npm run webdriver-update
+npm run webdriver-start
+
+(em outro terminal)
+cd test-acceptance
+npm test
 ```
