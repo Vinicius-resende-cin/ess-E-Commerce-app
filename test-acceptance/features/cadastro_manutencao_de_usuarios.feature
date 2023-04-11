@@ -38,7 +38,7 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, senha com menos de
     And Escrevo "78085-730" em "CEP" 
     And Clico em "FinalizarCadastro"
     Then Eu recebo uma mensagem de senha erro no cadastro, senha com menos que 8 dígitos
-
+d
 Scenario: Cadastrar um novo Usuário
     Given eu estou na pagina "Cadastro_Usuario"
     When Escrevo "Joaquim Maria Machado de Assis" em "nomecompleto" 

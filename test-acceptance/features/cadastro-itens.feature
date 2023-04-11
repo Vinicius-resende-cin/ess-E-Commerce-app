@@ -102,7 +102,7 @@ When eu altero "Quantidade" para "-2"
 And eu altero "Formas de pagamento" para "Cartao de credito"
 And eu altero "Categorias" para "Moda"
 And eu clico em "Atualizar"
-Then eu vejo na tela uma mensagem de erro "Valores negativos não são permitdos"
+Then eu vejo na tela uma mensagem de erro "Valores negativos não são permitidos"
 And eu clico em "Itens"
 And eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo azul bebe" na loja
