@@ -79,6 +79,24 @@ And eu clico em "Itens"
 And eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo azul bebe" na loja
 
+Scenario: Tentativa mal-sucedida de atualizar um produto com campos negativos
+Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+And eu estou na pagina "Minha Loja"
+And eu clico no icone que indica "Atualizar produto" do produto com nome "Camisa polo azul bebe"
+When eu altero "Quantidade" para "-2"
+And eu altero "Formas de pagamento" para "Cartao de credito"
+And eu altero "Categorias" para "Moda"
+And eu clico em "Atualizar"
+Then eu vejo na tela uma mensagem de erro "Valores negativos não são permitdos"
+And eu clico em "Itens"
+And eu sou redirecionado para a página "Minha Loja"
+And eu vejo o produto com nome "Camisa polo azul bebe" na loja
+And eu clico em "Ver tudo"
+And eu sou redirecionado para a página do produto com nome "Camisa polo azul bebe"
+And eu vejo "20" em "Quantidade"
+And eu vejo "Boleto bancario" em "Formas de pagamento"
+And eu vejo "Corrida" em "Categorias"
+
 Scenario: Removendo um produto
 Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
 And eu estou na pagina "Minha Loja"

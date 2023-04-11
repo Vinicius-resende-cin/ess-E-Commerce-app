@@ -57,10 +57,9 @@ module.exports = () => {
       try {
         const id = req.params.id;
         
-        const item = await Item.findOne({ _id: id });
         const itemDuplicado = await Item.findOne({ nome: req.body.nome, id_user: req.session.user_email });
 
-        if (itemDuplicado){
+        if (itemDuplicado && itemDuplicado._id != id){
           res.status(400).json({ message: "Já existe um produto com esse titulo em sua loja" });
         } else if (req.body.quantidade < 0 || req.body.preco < 0) {
           res.status(400).json({ message: "Valores negativos não são permitdos" });
