@@ -29,6 +29,7 @@ import { EditItemComponent } from './components/edit-item/edit-item.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 import ptBr from '@angular/common/locales/pt';
+import { GenerateLinkComponent } from './components/generate-link/generate-link.component';
 import { PasswordConfirmationComponent } from './components/password-confirmation/password-confirmation.component';
 
 registerLocaleData(ptBr);
@@ -48,6 +49,7 @@ registerLocaleData(ptBr);
     ViewHistoryComponent,
     ProductDetailComponent,
     CadastroUserComponent,
+    GenerateLinkComponent,
     CategoryUpdateComponent,
     RegisterItemComponent,
     PerfilUserComponent,
