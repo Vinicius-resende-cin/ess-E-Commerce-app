@@ -38,7 +38,7 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, senha com menos de
     And Escrevo "78085-730" em "CEP" 
     And Clico em "FinalizarCadastro"
     Then Eu recebo uma mensagem de senha erro no cadastro, senha com menos que 8 dígitos
-d
+
 Scenario: Cadastrar um novo Usuário
     Given eu estou na pagina "Cadastro_Usuario"
     When Escrevo "Joaquim Maria Machado de Assis" em "nomecompleto" 
@@ -133,7 +133,7 @@ Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar s
     And Clico na opcao "OK"
     Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
 
-Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, coloca uma senha invállida
+Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, coloca uma senha inválida
     Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
     And eu estou na pagina "Perfil do Usuario"
     When Clico em "alterar-senha"
