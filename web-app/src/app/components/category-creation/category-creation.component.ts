@@ -22,6 +22,8 @@ export class CategoryCreationComponent {
   alertCategoria: boolean = false;
   alertMessage: string = '';
 
+  /* Recebe uma categoria como input, e chama o método de serviço createCategory, para 
+    enviar uma nova categoria para o servidor, e exibe um pop-up com a mensagem recebida */
   createCategoria(categoria: Categoria): void {
     if (!categoria.nome_categoria || categoria.nome_categoria.trim() === '') {
       this.alertMessage = 'Nome necessário';
@@ -48,6 +50,7 @@ export class CategoryCreationComponent {
     }
   }
 
+  /* Retorna para a página de categorias */
   sairDaCriacao(): void {
     this.router.navigate(['home', 'categoria']);
   }

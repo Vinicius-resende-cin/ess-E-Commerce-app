@@ -62,49 +62,49 @@ defineSupportCode(function ({ Given, When, Then }) {
       await element(by.name(btn)).click();
   });
 
-    When (
-      /^eu adiciono uma categoria de "([^"]*)" com descrição "([^"]*)"$/,
-      async (nomeCategoria: string, descricaoCategoria: string) => {
-        await element(by.name("name-box")).sendKeys(nomeCategoria);
-        await element(by.name("desc-box")).sendKeys(descricaoCategoria);
-    });
+  When (
+    /^eu adiciono uma categoria de "([^"]*)" com descrição "([^"]*)"$/,
+    async (nomeCategoria: string, descricaoCategoria: string) => {
+      await element(by.name("name-box")).sendKeys(nomeCategoria);
+      await element(by.name("desc-box")).sendKeys(descricaoCategoria);
+  });
 
-    When (
-      /^eu tento adicionar uma nova categoria sem nenhum nome$/,
-      async () => {
-        await element(by.name("name-box")).sendKeys();
-    });
+  When (
+    /^eu tento adicionar uma nova categoria sem nenhum nome$/,
+    async () => {
+      await element(by.name("name-box")).sendKeys();
+  });
 
-    When (
-      /^eu altero a informação para "([^"]*)"$/,
-      async (descricaoCategoria: string) => {
-        await element(by.name("desc-box")).clear();
-        await element(by.name("desc-box")).sendKeys(descricaoCategoria);
-    });
+  When (
+    /^eu altero a informação para "([^"]*)"$/,
+    async (descricaoCategoria: string) => {
+      await element(by.name("desc-box")).clear();
+      await element(by.name("desc-box")).sendKeys(descricaoCategoria);
+  });
 
-    Then(
-      /^eu vejo uma mensagem de "([^"]*)"$/,
-      async (mensagem: string) => {
-        const msg = await element(by.cssContainingText('[id=message]', mensagem));
-    
-        expect(await msg.isPresent()).to.be.true;
-    });
+  Then(
+    /^eu vejo uma mensagem de "([^"]*)"$/,
+    async (mensagem: string) => {
+      const msg = await element(by.cssContainingText('[id=message]', mensagem));
+  
+      expect(await msg.isPresent()).to.be.true;
+  });
 
-    Then(
-      /^eu vejo que a categoria de "([^"]*)" ainda não está cadastrada no sistema$/,
-      async (nomeCategoria: string) => {
-        const categoria = await element(by.cssContainingText('.nome-categoria', nomeCategoria));
-    
-        expect(await categoria.isPresent()).to.be.false;
-    });
+  Then(
+    /^eu vejo que a categoria de "([^"]*)" ainda não está cadastrada no sistema$/,
+    async (nomeCategoria: string) => {
+      const categoria = await element(by.cssContainingText('.nome-categoria', nomeCategoria));
+  
+      expect(await categoria.isPresent()).to.be.false;
+  });
 
-    Then(
-      /^eu vejo a descrição "([^"]*)" na categoria "([^"]*)"$/,
-      async (descricaoCategoria: string, nomeCategoria: string) => {
-        const tabelaCategorias = await element(by.css('.table'));
-        const linhaCategoria = await tabelaCategorias.element(by.cssContainingText('.nome-categoria', nomeCategoria)).element(by.xpath('..'));
-        const descricaoAtual = await linhaCategoria.element(by.css('.descricao-categoria')).getText();
+  Then(
+    /^eu vejo a descrição "([^"]*)" na categoria "([^"]*)"$/,
+    async (descricaoCategoria: string, nomeCategoria: string) => {
+      const tabelaCategorias = await element(by.css('.table'));
+      const linhaCategoria = await tabelaCategorias.element(by.cssContainingText('.nome-categoria', nomeCategoria)).element(by.xpath('..'));
+      const descricaoAtual = await linhaCategoria.element(by.css('.descricao-categoria')).getText();
 
-        expect(descricaoAtual).to.equal(descricaoCategoria);
-    });
+      expect(descricaoAtual).to.equal(descricaoCategoria);
+  });
 });

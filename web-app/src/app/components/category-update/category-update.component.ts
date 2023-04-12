@@ -22,6 +22,8 @@ export class CategoryUpdateComponent {
   alertCategoria: boolean = false;
   alertMessage: string = '';
 
+  /* Recebe uma categoria como input, e chama o método de serviço editCategory, para atualizar a
+    descrição de categoria já existente no servidor, e exibe um pop-up com a mensagem recebida */
   editCategoria(categoria: Categoria): void {
     this.categoriaService
       .editCategory(categoria.nome_categoria, categoria.descricao_categoria)
@@ -41,6 +43,7 @@ export class CategoryUpdateComponent {
       );
   }
 
+  /* Retorna para a página de categorias */
   sairDaCriacao(): void {
     this.router.navigate(['home', 'categoria']);
   }

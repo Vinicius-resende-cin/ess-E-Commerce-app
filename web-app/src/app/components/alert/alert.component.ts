@@ -14,6 +14,7 @@ export class AlertComponent {
     this.message = "";
   }
 
+  /* Retorna para a página de categorias */
   close(): void {
     this.show = false;
     this.router.navigate(['home', 'categoria']);
