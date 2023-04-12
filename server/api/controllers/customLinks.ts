@@ -36,7 +36,7 @@ module.exports = () => {
         const { id } = req.params;
         const link = await CustomLink.findOne({ id: id });
         if (link) {
-          res.status(200).redirect(link.url);
+          res.status(200).send(link.url);
         } else {
           res.status(404).json({ message: "Link não encontrado." });
         }
