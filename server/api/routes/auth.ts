@@ -34,9 +34,9 @@ module.exports = () => {
   router.post("/confirmPassword", loginLimiter, controller.confirmPassword);
   router.get("/session", controller.checkSession);
   router.post("/logout", controller.logout);
-  // router.get("/resetTries", async (req: any, res: any, next: any) => {
-  //   await loginLimiter.resetKey(<string>req.ip);
-  //   res.send("resetado");
-  // });
+  router.get("/resetTries", async (req: any, res: any, next: any) => {
+    await loginLimiter.resetKey(<string>req.ip);
+    res.send("resetado");
+  });
   return router;
 };

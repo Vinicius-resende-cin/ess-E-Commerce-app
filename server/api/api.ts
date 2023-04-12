@@ -3,7 +3,7 @@ module.exports = () => {
   const router = express.Router();
 
   // Define as rotas
-  const usuarios = require("./routes/usuarios")();
+  const contas = require("./routes/contas")();
   const auth = require("./routes/auth")();
   const users = require("./routes/users")();
   const pedidos = require("./routes/pedidos")();
@@ -11,7 +11,7 @@ module.exports = () => {
   const categorias = require("./routes/categorias")();
   const customLinks = require("./routes/customLinks")();
 
-  router.use("/usuarios", usuarios);
+  router.use("/contas", contas);
   router.use("/auth", auth);
   router.use("/users", users);
   router.use("/pedidos", pedidos);

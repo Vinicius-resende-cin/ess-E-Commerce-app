@@ -37,7 +37,7 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, senha com menos de
     And Escrevo "Casa" em "Complemento" 
     And Escrevo "78085-730" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de senha erro no cadastro, senha com menos que 8 dígitos
+    Then Eu recebo uma mensagem de erro, "Senha Inválida"
 
 Scenario: Cadastrar um novo Usuário
     Given eu estou na pagina "Cadastro_Usuario"
@@ -113,18 +113,9 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, CPF já utilizado
     And Clico em "FinalizarCadastro"
     Then Eu recebo uma mensagem de erro, "CPF inválido"
 
-Scenario: Usuário, já logado no sistema, deseja mudar sua senha
-    Given eu já estou logado no sistema como "gmm7@cin.ufpe.br" com a senha "123456Gui@"
-    And eu estou na pagina "Perfil do Usuario"
-    When Clico em "alterar-senha"
-    And Escrevo "123456Gui@" em "Senha-Atual"
-    And Escrevo "98765Gui@" em "Nova-Senha"
-    And Escrevo "98765Gui@" em "Confirmar-Senha"
-    And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de sucesso, "Senha foi alterada com sucesso"
-
 Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, erra sua senha atual
-    Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
+    Given o email "jmma@cin.ufpe.br" já foi cadastrado com a senha "12356jm@"
+    And eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
     And eu estou na pagina "Perfil do Usuario"
     When Clico em "alterar-senha"
     And Escrevo "12356jm" em "Senha-Atual"
@@ -132,6 +123,17 @@ Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar s
     And Escrevo "987654jm@" em "Confirmar-Senha"
     And Clico na opcao "OK"
     Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
+
+Scenario: Usuário, já logado no sistema, deseja mudar sua senha
+    Given o email "gmm7@cin.ufpe.br" já foi cadastrado com a senha "123456Gui@"
+    And eu já estou logado no sistema como "gmm7@cin.ufpe.br" com a senha "123456Gui@"
+    And eu estou na pagina "Perfil do Usuario"
+    When Clico em "alterar-senha"
+    And Escrevo "123456Gui@" em "Senha-Atual"
+    And Escrevo "98765Gui@" em "Nova-Senha"
+    And Escrevo "98765Gui@" em "Confirmar-Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de sucesso, "Senha foi alterada com sucesso"
 
 Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, coloca uma senha inválida
     Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
@@ -235,6 +237,24 @@ Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer
     And Clico na opcao "OK"
     Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
     And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuário"
+
+Scenario: Administrador deseja remover um usuário do sistema 
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    When Eu clico no Botão "X" do usuário "123.456.789-10"
+    And Escrevo "comercio2023@" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de sucesso, "Usuário Removido com sucesso"
+
+Scenario: Administrador deseja remover um usuário do sistema 
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Joaquim Maria Machado de Assis", "093.459.090-79" em "CPF", "jmma@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    When Eu clico no Botão "X" do usuário "093.459.090-79"
+    And Escrevo "comercio2023@" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de sucesso, "Usuário Removido com sucesso"
 
 
 

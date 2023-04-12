@@ -128,7 +128,7 @@ async function changePassword(email: string, password: string) {
   const cookies = await browser.manage().getCookies();
 
   const options = {
-    url: "http://localhost:3000/api/usuarios/",
+    url: "http://localhost:3000/api/contas/",
     method: "put",
     headers: {
       "Content-Type": "application/json",

@@ -50,7 +50,7 @@ export class AuthService {
   }
 
   requestReset(email: string){
-    const resetReqUrl = '/usuarios/' + email;
+    const resetReqUrl = '/contas/' + email;
     const endpointURL = this.apiURL + resetReqUrl;
     const body = {};
     const options = { withCredentials: true };
@@ -59,7 +59,7 @@ export class AuthService {
   }
 
   changePassword(password: string, token: string){
-    const changePassUrl = '/usuarios/';
+    const changePassUrl = '/contas/';
     const endpointURL = this.apiURL + changePassUrl;
     const body = {password, token};
     const options = { withCredentials: true };
