@@ -44,8 +44,8 @@ Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "co
 And Estou vendo o histórico de pedidos da minha conta
 And Estou vendo o item "Saia Laranja" do pedido "2" no histórico
 And Estou vendo o item "Top Amarela" do pedido "2" no histórico
-And Vejo que o produto "Saia Laranja" do pedido "1" ainda tem "12" em estoque no sistema
-And Vejo que o produto "Top Amarela" do pedido "5" não está em estoque no sistema
+And Vejo que o produto "Saia Laranja" do pedido "2" ainda tem "12" em estoque no sistema
+And Vejo que o produto "Top Amarela" do pedido "2" não está em estoque no sistema
 When Eu seleciono comprar novamente no pedido "2"
 Then Eu vejo uma mensagem dizendo que "Os itens Top Amarela estão indisponíveis"
 And Eu vejo que o produto "Saia Laranja" esta no carrinho de compras
