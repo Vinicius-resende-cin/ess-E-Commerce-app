@@ -37,7 +37,7 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, senha com menos de
     And Escrevo "Casa" em "Complemento" 
     And Escrevo "78085-730" em "CEP" 
     And Clico em "FinalizarCadastro"
-    Then Eu recebo uma mensagem de senha erro no cadastro, senha com menos que 8 dígitos
+    Then Eu recebo uma mensagem de erro, "Senha Inválida"
 
 Scenario: Cadastrar um novo Usuário
     Given eu estou na pagina "Cadastro_Usuario"
@@ -113,16 +113,6 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, CPF já utilizado
     And Clico em "FinalizarCadastro"
     Then Eu recebo uma mensagem de erro, "CPF inválido"
 
-Scenario: Usuário, já logado no sistema, deseja mudar sua senha
-    Given eu já estou logado no sistema como "gmm7@cin.ufpe.br" com a senha "123456Gui@"
-    And eu estou na pagina "Perfil do Usuario"
-    When Clico em "alterar-senha"
-    And Escrevo "123456Gui@" em "Senha-Atual"
-    And Escrevo "98765Gui@" em "Nova-Senha"
-    And Escrevo "98765Gui@" em "Confirmar-Senha"
-    And Clico na opcao "OK"
-    Then Eu recebo uma mensagem de sucesso, "Senha foi alterada com sucesso"
-
 Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, erra sua senha atual
     Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
     And eu estou na pagina "Perfil do Usuario"
@@ -132,6 +122,17 @@ Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar s
     And Escrevo "987654jm@" em "Confirmar-Senha"
     And Clico na opcao "OK"
     Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
+
+Scenario: Usuário, já logado no sistema, deseja mudar sua senha
+    Given o email "gmm7@cin.ufpe.br" já foi cadastrado com a senha "123456Gui@"
+    And eu já estou logado no sistema como "gmm7@cin.ufpe.br" com a senha "123456Gui@"
+    And eu estou na pagina "Perfil do Usuario"
+    When Clico em "alterar-senha"
+    And Escrevo "123456Gui@" em "Senha-Atual"
+    And Escrevo "98765Gui@" em "Nova-Senha"
+    And Escrevo "98765Gui@" em "Confirmar-Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de sucesso, "Senha foi alterada com sucesso"
 
 Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, coloca uma senha inválida
     Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
