@@ -38,19 +38,30 @@ export class GenerateLinkComponent {
     input2.select();
 
     const linkOriginal = input1.value.slice(7); // O slice serve para retirar a parte 'http://'
-    const nomeLink = input2.value;
+    const caminhoOriginal = linkOriginal.slice(15);
 
-    if (nomeLink.length == 0) {
-      alert('Erro: O nome do link não pode ser vazio.');
-    } else if (nomeLink.length < 8) {
-      alert('Erro: O nome do link deve ter 8 caracteres no mínimo.');
-    } else if (nomeLink.length > 15) {
-      alert('Erro: O nome do link pode ter 15 caracteres no máximo.');
+    const caminhoItem = new RegExp("^item/.*$");
+    const caminhoHome = "home";
+
+    if (linkOriginal != "localhost:4200" &&
+        !(caminhoOriginal == caminhoHome) &&
+        !(caminhoItem.test(caminhoOriginal))) {
+      alert('Erro: Não é possível gerar um link desta página.');
     } else {
-      const id: number = this.hash(nomeLink); // Usa a função hash para gerar o id do link
-      const url: string = `http://commerCin-${nomeLink}.${linkOriginal}`; // composição do link personalizado
+      const nomeLink = input2.value;
 
-      return {id, url};
+      if (nomeLink.length == 0) {
+        alert('Erro: O nome do link não pode ser vazio.');
+      } else if (nomeLink.length < 8) {
+        alert('Erro: O nome do link deve ter 8 caracteres no mínimo.');
+      } else if (nomeLink.length > 15) {
+        alert('Erro: O nome do link pode ter 15 caracteres no máximo.');
+      } else {
+        const id: number = this.hash(nomeLink); // Usa a função hash para gerar o id do link
+        const url: string = `http://commerCin-${nomeLink}.${linkOriginal}`; // composição do link personalizado
+
+        return {id, url};
+      }
     }
   }
 
