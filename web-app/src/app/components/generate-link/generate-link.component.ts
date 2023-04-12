@@ -58,7 +58,7 @@ export class GenerateLinkComponent {
         const params = urlOriginal.searchParams;
         params.set("name", `commerCin-${nomeLink}`);
         const url = `${urlOriginal.origin}${urlOriginal.pathname}?${params.toString()}${urlOriginal.hash}`; // Composição do novo link customizado
-        return {id, url};
+        return { id, url };
       }
     }
   }

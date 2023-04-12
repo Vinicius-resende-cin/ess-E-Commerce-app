@@ -5,13 +5,13 @@
       <div class="voltar" (click)="goBack()">voltar</div>
     </div>
     <div class="gl-body">
-      <input type="text" #input1 style="border-radius: 5px; width: 450px; display: inline-flex;" placeholder="Link original">
+      <input type="text" #input1 style="border-radius: 5px; width: 450px; display: inline-flex;" placeholder="Link original" name="Link original">
       <br><br>
-      <input type="text" #input2 style="border-radius: 5px; display: inline-flex;" placeholder="Nome do novo link">
+      <input type="text" #input2 style="border-radius: 5px; display: inline-flex;" placeholder="Nome do novo link" name="Nome do novo link">
         <span style="color: red;"> min: 8 caracteres; max: 15 caracteres</span>
     </div>
     <div class="gl-footer">
-      <button (click)="generateAndCopyCustomLink(input1, input2)">Gerar</button>
+      <button (click)="generateAndCopyCustomLink(input1, input2)" name="Gerar">Gerar</button>
     </div>
   </div>
 </div>
