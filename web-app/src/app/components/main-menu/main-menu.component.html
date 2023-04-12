@@ -29,30 +29,27 @@
       </div>
       <div class="sidebar">
         <ul class="menu">
-          <li class="menu-item">
+          <li class="menu-item" *ngIf="!isLoggedIn">
             <a
               name="Login"
               [routerLink]="['/login']"
-              *ngIf="!isLoggedIn"
               class="menu-link"
               >Login</a
             >
           </li>
-          <li class="menu-item">
+          <li class="menu-item" *ngIf="isLoggedIn">
             <a
               name="Logout"
               [routerLink]="['/login']"
-              *ngIf="isLoggedIn"
               class="menu-link"
               (click)="logout()"
               >Logout</a
             >
           </li>
-          <li class="menu-item">
+          <li class="menu-item" *ngIf="!isLoggedIn">
             <a
               name="Cadastro-Usuario"
               [routerLink]="['/Cadastro-Usuario']"
-              *ngIf="!isLoggedIn"
               class="menu-link"
               >Cadastro</a
             >
