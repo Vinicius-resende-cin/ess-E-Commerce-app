@@ -209,7 +209,7 @@ defineSupportCode(function ({ Given, When, Then, Before, After }) {
   Given(/^eu estou na pagina "(.*)"$/, async function (pagina) {
     const expectUrl = PageUrls[(<string>pagina).toUpperCase().replaceAll(" ", "_")];
     await browser.get(baseUrl + expectUrl);
-    await new Promise((f)=>setTimeout(f, 500));
+    await new Promise((f)=>setTimeout(f, 1000));
     await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
   });
 

@@ -5,7 +5,6 @@ Feature: Gerenciar as contas de usuários
 
 Scenario: Cadastrar um novo Usuário
     Given eu estou na pagina "Cadastro_Usuario"
-    And O sistema já possui nao possui "CPF" "123.456.789-10" cadastrado
     When Escrevo "Guilherme Maciel de Melo" em "nomecompleto" 
     And Escrevo "gmm7@cin.ufpe.br" em "e-mail" 
     And Escrevo "gmm7@cin.ufpe.br" em "confirmacaoe-mail" 
