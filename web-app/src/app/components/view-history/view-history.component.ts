@@ -163,21 +163,21 @@ export class ViewHistoryComponent implements OnInit, OnChanges {
     const endDate = new Date(end);
     this.listaPedidos = this.listaPedidos.filter(
       (pedido) =>
-        new Date(pedido.data_hora).getTime() >= startDate.getTime() && new Date(pedido.data_hora).getTime() <= endDate.getTime());
+        pedido.data_hora.getTime() >= startDate.getTime() && pedido.data_hora.getTime() <= endDate.getTime());
     }
 
     // Caso o usuario use apenas uma data inicial
     else if (start) {
       const startDate = new Date(start);
       this.listaPedidos = this.listaPedidos.filter(
-        (pedido) => new Date(pedido.data_hora).getTime() >= startDate.getTime());
+        (pedido) => pedido.data_hora.getTime() >= startDate.getTime());
     }
 
     // Caso o usuario use apenas uma data final
     else if (end) {
       const endDate = new Date(end);
       this.listaPedidos = this.listaPedidos.filter(
-        (pedido) => new Date(pedido.data_hora).getTime() <= endDate.getTime());
+        (pedido) => pedido.data_hora.getTime() <= endDate.getTime());
     };
   };
 };
