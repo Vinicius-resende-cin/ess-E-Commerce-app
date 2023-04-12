@@ -34,7 +34,7 @@ const PageUrls = {
   GERENCIAR_CATEGORIAS: "home/categoria",
   CATEGORIA_ESPORTES: "home/categoria/Esportes",
   RESUMO_MENSAL: "home/resumo-mensal",
-  CADASTRAR_PRODUTO: "home/create-item",	
+  CADASTRAR_PRODUTO: "home/create-item",
   MINHA_LOJA: "home/view-itens"
 };
 
@@ -195,9 +195,9 @@ async function registerUser(email: string, password: string) {
 
 defineSupportCode(function ({ Given, When, Then, Before, After }) {
   //reseta tentativas de login
-  Before(async () => {
-    await browser.get("http://localhost:4200/resetTries");
-  });
+  // Before(async () => {
+  //   await browser.get("http://localhost:4200/resetTries");
+  // });
   //desloga se estiver logado e
   After(async () => {
     const logged = await checkLogged();
@@ -209,6 +209,7 @@ defineSupportCode(function ({ Given, When, Then, Before, After }) {
   Given(/^eu estou na pagina "(.*)"$/, async function (pagina) {
     const expectUrl = PageUrls[(<string>pagina).toUpperCase().replaceAll(" ", "_")];
     await browser.get(baseUrl + expectUrl);
+    await new Promise((f) => setTimeout(f, 500));
     await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
   });
 
@@ -292,6 +293,7 @@ defineSupportCode(function ({ Given, When, Then, Before, After }) {
   });
 
   Then(/^eu sou redirecionado para a página "(.*)"$/, async (pagina) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     const expectUrl = PageUrls[(<string>pagina).toUpperCase().replaceAll(" ", "_")];
     await new Promise((resolve) => setTimeout(resolve, 2000));
     await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);

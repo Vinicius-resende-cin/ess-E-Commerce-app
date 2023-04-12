@@ -4,7 +4,8 @@ Feature: Cadastro e Manutenção de Produto
     So that a loja pertencente a conta seja atualizada
 
 Scenario: Cadastrando novo produto
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given o email "ecommercin@gmail.com" já foi cadastrado com a senha "comercio2023@"
+And eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 When eu estou na pagina "Cadastrar Produto"
 And eu digito "Camisa polo" em "Nome"
 And eu digito "Camisa polo preta esportiva com bom pano" em "Descricao"
@@ -17,7 +18,7 @@ Then eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo" na loja
 
 Scenario: Tentativa mal-sucedida de cadastro de novo produto com título já existente
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 When eu estou na pagina "Cadastrar Produto"
 And eu digito "Camisa polo" em "Nome"
 And eu digito "Camisa polo azul" em "Descricao"
@@ -30,7 +31,7 @@ Then eu vejo na tela uma mensagem de erro "Já existe um produto com esse titulo
 And eu clico em "Itens"
 And eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo" na loja
-And eu clico em "Ver tudo"
+And eu clico em "Camisa polo"
 And eu sou redirecionado para a página do produto com nome "Camisa polo"
 And eu vejo "Camisa polo" em "Nome"
 And eu vejo "Camisa polo preta esportiva com bom pano" em "Descricao"
@@ -40,7 +41,7 @@ And eu vejo "Cartao de credito e Boleto bancario" em "Formas de pagamento"
 And eu vejo "Roupas" em "Categorias"
 
 Scenario: Tentativa mal-sucedida de cadastro de novo produto deixando algum campo obrigatório em branco
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 When eu estou na pagina "Cadastrar Produto"
 And eu digito "Calca legging" em "Nome"
 And eu digito "Uma calca com otima fibra para malhacao" em "Descricao"
@@ -52,7 +53,7 @@ And eu sou redirecionado para a página "Minha Loja"
 And eu vejo que o produto com nome "Calca legging" nao esta na loja
 
 Scenario: Tentativa mal-sucedida de cadastro de novo produto com campos negativos
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 When eu estou na pagina "Cadastrar Produto"
 And eu digito "Casaco de veludo" em "Nome"
 And eu digito "Casaco elegante com disponbilidade de varias cores" em "Descricao"
@@ -67,7 +68,7 @@ And eu sou redirecionado para a página "Minha Loja"
 And eu vejo que o produto com nome "Casaco de veludo" nao esta na loja
 
 Scenario: Atualizando um produto
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 And eu estou na pagina "Minha Loja"
 And eu clico no icone que indica "Atualizar produto" do produto com nome "Camisa polo"
 When eu altero "Nome" para "Camisa polo azul bebe"
@@ -76,13 +77,13 @@ And eu altero "Categorias" para "Corrida"
 And eu clico em "Atualizar"
 Then eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo azul bebe" na loja
-And eu clico em "Ver tudo"
+And eu clico em "Camisa polo azul bebe"
 And eu sou redirecionado para a página do produto com nome "Camisa polo azul bebe"
 And eu vejo "Boleto bancario" em "Formas de pagamento"
 And eu vejo "Corrida" em "Categorias"
 
 Scenario: Tentativa mal-sucedida de atualizar um produto com titulo já existente
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 And eu estou na pagina "Minha Loja"
 And eu clico no icone que indica "Atualizar produto" do produto com nome "Camisa polo azul bebe"
 When eu altero "Nome" para "Botas Vermelhas do Astro Boy"
@@ -95,7 +96,7 @@ And eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo azul bebe" na loja
 
 Scenario: Tentativa mal-sucedida de atualizar um produto com campos negativos
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 And eu estou na pagina "Minha Loja"
 And eu clico no icone que indica "Atualizar produto" do produto com nome "Camisa polo azul bebe"
 When eu altero "Quantidade" para "-2"
@@ -106,18 +107,18 @@ Then eu vejo na tela uma mensagem de erro "Valores negativos não são permitido
 And eu clico em "Itens"
 And eu sou redirecionado para a página "Minha Loja"
 And eu vejo o produto com nome "Camisa polo azul bebe" na loja
-And eu clico em "Ver tudo"
+And eu clico em "Camisa polo azul bebe"
 And eu sou redirecionado para a página do produto com nome "Camisa polo azul bebe"
 And eu vejo "20" em "Quantidade"
 And eu vejo "Boleto bancario" em "Formas de pagamento"
 And eu vejo "Corrida" em "Categorias"
 
 Scenario: Removendo um produto
-Given eu já estou logado no sistema como "elsj@cin.ufpe.br" com a senha "13032003jR!"
+Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
 And eu estou na pagina "Minha Loja"
 When eu clico no icone que indica "Remover produto" do produto com nome "Camisa polo azul bebe"
 Then eu sou redirecionado para a página de confirmacao de senha
-And eu digito "13032003jR!" em "Senha"
+And eu digito "comercio2023@" em "senha"
 And eu clico em "Confirmar"
 Then eu sou redirecionado para a página "Minha Loja"
 And eu vejo que o produto com nome "Camisa polo azul bebe" nao esta na loja
