@@ -1,4 +1,13 @@
-<div class="alert alert-danger alert-dismissible fade show text-center" role="alert" *ngIf="show">
-    <h4>{{ message }}</h4>
-    <button type="button" class="btn-close" (click)="close()" aria-label="Close"></button>
+<div class="modal" tabindex="-1" [class.show]="show" [class.d-block]="show">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger text-white"></div>
+      <div class="modal-body text-center">
+        <h4 id="message">{{ message }}</h4>
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-primary" (click)="close()" name="Voltar">Voltar</button>
+      </div>
+    </div>
   </div>
+</div>

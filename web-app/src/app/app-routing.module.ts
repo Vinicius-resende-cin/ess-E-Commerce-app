@@ -43,6 +43,7 @@ const routes: Routes = [
     component: GenerateLinkComponent,
   },
   { path: '**', redirectTo: '' },
+
 ];
 
 @NgModule({

@@ -1,23 +1,24 @@
 <div class="container-fluid page-header d-flex flex-column">
-  <div class="align-self-center mb-2">
+  <div class="align-self-center text-center m-2 w-25">
     <a href="./home">
       <img
         id="logo"
         src="\assets\images\commercin.png"
         alt="Logo do commercin"
+        class="w-75"
       />
     </a>
   </div>
-  <div class="container-fluid d-inline-flex align-items-center mt-1 mb-3">
+  <div class="container-fluid d-inline-flex align-items-center mt-1 mb-4">
     <div class="w-75 d-inline-flex justify-content-end">
       <form class="w-66 d-inline-flex search-bar" role="search">
         <input
           class="form-control"
           type="search"
-          placeholder="Search"
+          placeholder="Pesquisar"
           aria-label="Search"
         />
-        <button class="btn btn-dark" type="submit">Search</button>
+        <button class="btn btn-dark" type="submit">Pesquisar</button>
       </form>
     </div>
     <div class="option">
@@ -53,7 +54,7 @@
               [routerLink]="['/Cadastro-Usuario']"
               *ngIf="!isLoggedIn"
               class="menu-link"
-              >Cadastro-Usuario</a
+              >Cadastro</a
             >
           </li>
           <li class="menu-item">
@@ -61,7 +62,7 @@
               name="Gerar-Link"
               [routerLink]="['/gerar-link']"
               class="menu-link"
-              >Gerar-Link</a
+              >Gerar Link</a
             >
           </li>
         </ul>
@@ -69,4 +70,4 @@
     </div>
   </div>
 </div>
-<app-general-main-page *ngIf="!isLoggedIn"></app-general-main-page>
+<router-outlet *ngIf="!isLoggedIn"></router-outlet>

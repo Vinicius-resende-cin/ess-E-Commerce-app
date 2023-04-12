@@ -1,49 +1,105 @@
-<br><br>
-<table>
-    <thead id="Tabela-titulos">
-        <th>Id_pedido</th>
-        <th>Produtos</th>
-        <th>Data</th>
-        <th>Valor</th>
-        <th>Status</th>
-        <th>Quantidade</th>
-        <th>Disponibilidade</th>
-    </thead>
+<div class="container">
+  <h2 class="title text-left">Carrinho de Compras</h2>
+</div>
 
+<div class="container p-2">
+  <form class="container">
+    <input
+      name="data-inicio"
+      class="form-control w-50"
+      type="month"
+      id="start-month"
+    />
+    <input
+      name="data-fim"
+      class="form-control w-50 mt-2"
+      type="month"
+      id="end-month"
+    />
+    <button
+      name="filtrar"
+      class="btn btn-primary mt-2 align-self-end"
+      (click)="searchRange()"
+    >
+      Filtrar
+    </button>
+  </form>
+</div>
 
-    <thead id={{p.id_pedido}} *ngFor="let p of listaPedidos">
-    
-        <th id="pedido">{{p.id_pedido}}</th>
-    
-        <th>
-            <span *ngFor="let id of p.id_produto">
-                <button (click)="verProduto(id)">
-                    {{consultarNome(id)}}
-                </button>
-            </span>
-        </th>
-    
-        <!--  Convertendo a data para string        Convertendo a hora para string -->
-        <th>{{p.data_hora.toLocaleDateString()}} {{p.data_hora.toLocaleTimeString()}}</th>
-    
-        <th>{{p.valor}}</th>
-    
-        <th>{{p.status}}</th>
-    
-        <th>
-            <span *ngFor="let quantidade of p.quantidade">
-                {{quantidade}}
-            </span>
-        </th>
-    
-        <th>
-            <span *ngFor="let id of p.id_produto">
-                {{consultarDisponibilidade(id)}}
-            </span>
-        </th>
-    
-        <th><button name="button-{{p.id_pedido}}">Comprar Novamente</button></th>
-    </thead>
-</table>
+<div name="historicoList" class="container text-center">
+  <div class="row p-2 text-center text-bg-primary rounded">
+    <div class="col p-2">Id_pedido</div>
+    <div class="col p-2">Produtos</div>
+    <div class="col p-2">Data da Compra</div>
+    <div class="col p-2">Valor</div>
+    <div class="col p-2">Status</div>
+    <div class="col p-2">Quantidade</div>
+    <div class="col p-2">Disponibilidade</div>
+    <div class="col p-2"></div>
+  </div>
 
-
+  <div
+    name="pedidosList"
+    class="row p-2 bg-light border text-center"
+    *ngFor="let p of listaPedidos"
+  >
+    <div name="id" id="id-{{ p.id_pedido }}" class="col">{{ p.id_pedido }}</div>
+    <div class="col">
+      <div name="itemList" class="row" *ngFor="let id of p.id_produto">
+        <button
+          name="item"
+          id="btn-{{ p.id_pedido }}-{{ listaItem.get(id)?.nome }}"
+          type="button"
+          class="list-group-item list-group-item-action"
+          (click)="verProduto(id)"
+          aria-current="true"
+        >
+          {{ listaItem.get(id)?.nome }}
+        </button>
+      </div>
+    </div>
+    <div name="hora" id="hora-{{ p.id_pedido }}" class="col">
+      {{ p.data_hora.toLocaleDateString() }}
+      {{ p.data_hora.toLocaleTimeString() }}
+    </div>
+    <div name="valor" id="valor-{{ p.id_pedido }}" class="col">
+      {{ p.valor }}
+    </div>
+    <div name="status" id="status-{{ p.id_pedido }}" class="col">
+      {{ p.status }}
+    </div>
+    <div class="col">
+      <div
+        name="quantidade"
+        id="quantidade-{{ p.id_pedido }}-{{
+          listaItem.get(p.id_produto[i])?.nome
+        }}"
+        class="row justify-content-center"
+        *ngFor="let quantidade of p.quantidade; let i = index"
+      >
+        {{ quantidade }}
+      </div>
+    </div>
+    <div name="estoqueList" class="col">
+      <div
+        name="estoque"
+        id="estoque-{{ p.id_pedido }}-{{ listaItem.get(id)?.nome }}"
+        class="row justify-content-center"
+        *ngFor="let id of p.id_produto"
+      >
+        {{ listaItem.get(id)?.quantidade }}
+      </div>
+    </div>
+    <div name="comprarList" class="col">
+      <button
+        name="comprar"
+        id="btn-{{ p.id_pedido }}"
+        type="button"
+        class="btn btn-primary"
+        (click)="comprar(p)"
+      >
+        Comprar Novamente
+      </button>
+    </div>
+  </div>
+</div>

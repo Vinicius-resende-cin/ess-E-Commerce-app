@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <table class="table">
+          <tr>
+            <td><label>Nome:</label></td>
+            <td><h2>{{ categoria.nome_categoria }}</h2></td>
+          </tr>
+          <tr>
+            <td><label>Descrição:</label></td>
+            <td>
+              <input
+                [(ngModel)]="categoria.descricao_categoria"
+                name="desc-box"
+                placeholder="Insira a Descrição da Categoria"
+                class="form-control"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2">
+              <div class="d-flex justify-content-between">
+                <button (click)="sairDaCriacao()" class="btn btn-primary" name="Cancelar">
+                  Cancelar
+                </button>
+                <button (click)="editCategoria(categoria)" class="btn btn-primary" name="Confirmar">
+                  Confirmar
+                </button>
+              </div>
+              <br />
+              <app-alert
+                [message]="alertMessage"
+                *ngIf="alertCategoria"
+              ></app-alert>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  

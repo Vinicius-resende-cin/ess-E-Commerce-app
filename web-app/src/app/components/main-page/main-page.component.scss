@@ -1,11 +1,29 @@
 $blue-alt: #2d60e3;
-$black-alt: #363636;
+$black-alt: #333333;
 
 .page-header {
-    background: $blue-alt;
-    color: $black-alt;
-  
-    &button {
-      background: $black-alt;
-    }
+  background: $blue-alt;
+  color: $black-alt;
+
+  &button {
+    background: $black-alt;
   }
+}
+
+.navbar{
+  background-color: $black-alt;
+  padding: 0px 12px 0px 12px;
+}
+
+.navbar a{
+  padding: 12px;
+  font-weight: lighter;
+}
+
+.navbar a:hover{
+  background-color: #444;
+}
+
+.navbar a:active{
+  background-color: #555;
+}

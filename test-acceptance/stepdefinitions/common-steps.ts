@@ -5,19 +5,6 @@ let expect = chai.expect;
 let assert = chai.assert;
 
 defineSupportCode(function ({ Given, When, Then }) {
-  Given(
-    /^eu estou logado como "(.*)" com login "(.*)" e senha "(.*)"$/,
-    function (nivelUsuario, login, senha) {
-      return;
-    }
-  );
-
-  Given(/^eu estou na página "(.*)"$/, async function (pagina) {
-    await browser.get("http://localhost:4200/");
-    await expect(browser.getTitle()).to.eventually.equal("E-commerCin");
-    await element(by.name((<string>pagina).toLowerCase().replaceAll(" ", "-"))).click();
-  });
-
   Then(
     /^eu vejo uma mensagem do tipo "(.*)" por conta de "(.*)"$/,
     async function (tipoMsg, motivoMsg) {

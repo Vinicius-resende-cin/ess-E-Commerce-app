@@ -1,6 +1,11 @@
 $blue-alt: #2d60e3;
-$black-alt: #363636;
+$black-alt: #333333;
 $white-alt: #fff;
+
+#logo:active {
+  transform: scale(0.98);
+  transition: all 0.3s ease;
+}
 
 .page-header {
   background: $blue-alt;
@@ -90,13 +95,20 @@ $white-alt: #fff;
   text-align: center;
   border-radius: 5px;
   margin-bottom: 5rem;
-  background-color: $white-alt;
-  font-size: 1.5rem;
+  background-color: $blue-alt;
+  font-size: 2.0rem;
 }
 
 .menu-link {
-  color: $black-alt;
+  color: $white-alt;
   text-decoration: none;
   font-size: 5;
-  font-weight: bold;
+}
+
+.search-bar input {
+  border-radius: 20px 0px 0px 20px;
+}
+
+.search-bar button {
+  border-radius: 0px 20px 20px 0px;
 }

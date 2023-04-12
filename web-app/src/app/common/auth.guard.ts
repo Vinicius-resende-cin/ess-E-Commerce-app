@@ -10,9 +10,9 @@ const checkSession = async (authService: AuthService): Promise<boolean> => {
     }
   });
 
-  await new Promise((f) => setTimeout(f, 500));
+  await new Promise((f) => setTimeout(f, 700));
   return isLoggedIn;
-}
+};
 
 export const authGuard = async () => {
   const authService = inject(AuthService);
@@ -30,11 +30,10 @@ export const authGuard = async () => {
 export const authGuardMain = async () => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  
+
   const isLoggedIn = await checkSession(authService);
 
-  if (isLoggedIn && router.url == '/')
-    return router.parseUrl('/home');
+  if (isLoggedIn && router.url == '/') return router.parseUrl('/home');
   return true;
 };
 

@@ -1,0 +1,55 @@
+<body>
+  <div class="mid">
+    <h4> Anunciando Produto </h4>
+  </div>
+  <form #myForm (submit)="cadastrarItem(item)" class="form">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="input-nome" class="label">Nome</label>
+        <input type="text" class="form-control" id="input-nome" placeholder="Nome" name="input-nome" (input)="validarCadastro()" [(ngModel)]="item.nome">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="input-image" class="label">Imagem</label>
+        <input type="file"  id="input-image" accept="image/*" class="form-control" name="input-image" (input)="validarCadastro()" [(ngModel)]="item.imagem">
+      </div>
+    </div>
+      <div class="form-group">
+        <label for="input-desc" class="label">Descrição</label>
+        <input type="text" class="form-control" id="input-desc" placeholder="Descrição" name="input-desc" (input)="validarCadastro()" [(ngModel)]="item.descricao">
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="input-quantidade" class="label">Quantidade</label>
+          <input type="number" class="form-control" id="input-quantidade" placeholder="Quantidade" name="input-quantidade" [(ngModel)]="item.quantidade">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="input-preco" class="label">Preço</label>
+          <input type="number" class="form-control" id="input-preco" placeholder="Preço" name="input-preco" (input)="validarCadastro()" [(ngModel)]="item.preco">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="input-pagamento" class="label">Formas de pagamento</label>
+          <select id="input-pagamento" class="custom-select" name="input-pagamento" (input)="validarCadastro()"[(ngModel)]="item.forma_pagamento" multiple>
+            <option value="cartao">Cartão de crédito</option>
+            <option value="boleto">Boleto bancário</option>
+            <option value="transferencia">Transferência bancária</option>
+            <option value="dinheiro">Dinheiro</option>
+          </select>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="input-categoria" class="label">Categorias</label>
+          <select id="input-categoria" class="custom-select" name="input-categoria" (input)="validarCadastro()" [(ngModel)]="item.categoria" multiple>
+            <option *ngFor="let categoria of category_list">{{categoria.nome_categoria}}</option>
+          </select>
+        </div>
+      </div>
+      <button 
+        class ="button" 
+        id="button-next-2" 
+        type="submit"
+        [disabled]="!validarCadastro()"
+        [ngStyle]="{'background-color': !validarCadastro() ? '#D9D9D9' : 'blue', 
+                    'color': !validarCadastro() ? '#999999' : 'white'}">
+          Cadastrar
+      </button>
+    </form>
+</body>

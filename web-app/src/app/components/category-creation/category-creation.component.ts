@@ -34,7 +34,6 @@ export class CategoryCreationComponent {
         .createCategory(categoria.nome_categoria, categoria.descricao_categoria)
         .subscribe(
           (novaCategoria) => {
-            console.log(novaCategoria);
             this.alertMessage = 'Categoria criada com sucesso';
             this.alertCategoria = true;
             this.clearCategoria();
@@ -43,10 +42,8 @@ export class CategoryCreationComponent {
             if (erro.error.message === 'A categoria precisa de um nome') {
               this.alertMessage = 'Nome necessário';
               this.alertCategoria = true;
-            } else if (
-              erro.error.message === 'Já existe uma Categoria com esse nome'
-            ) {
-              this.alertMessage = 'Categoria existente';
+            } else if (erro.error.message === 'Já existe uma Categoria com esse nome') {
+              this.alertMessage = 'Categoria já existe';
               this.alertCategoria = true;
             } else {
               this.alertMessage = 'Erro ao criar categoria';

@@ -27,4 +27,29 @@ export class CategoriaService {
 
     return this.http.get<Object>(endpointURL);
   }
+
+  editCategory(nome: String, descricao: String) {
+    const endpointURL = this.apiURL + '/categorias/' + nome;
+    const categoria = {
+      "descricao_categoria" : descricao
+    };
+
+    return this.http.put<Object>(endpointURL, categoria);
+  }
+
+  //Salva informaões da categoria que vai ser editada
+  nomeCategoria: String = '';
+  descricaoCategoria: String = '';
+  setInfo(name: String, descricao: String) {
+    this.nomeCategoria = name;
+    this.descricaoCategoria = descricao;
+  }  
+
+  getName() {
+    return this.nomeCategoria;
+  }
+
+  getDescription() {
+    return this.descricaoCategoria;
+  }
 }

@@ -1,0 +1,35 @@
+<div class="container text-center">
+<h2 class="title text-left">Carrinho de Compras</h2>
+</div>
+<div class="container text-center bg-light">
+    <div class="row">
+        <div class="col btn-primary">
+            Item
+        </div>
+        <div class="col">
+            Quantidade
+        </div>
+        <div class="col">
+            Preço
+        </div>
+    </div>
+    <div class="row bg-light border text-center" *ngFor="let item of listaItem; let i = index">
+        <div name="item" id="nome-{{item.nome}}" class="col btn-primary">
+            {{item.nome}}
+        </div>
+        <div name="quant" id="quant-{{item.nome}}" class="col">
+            {{quant[i]}}
+        </div>
+        <div name="preco" id="preco-{{item.nome}}" class="col">
+            {{item.preco}}
+        </div>
+    </div>
+
+    <div name="total" class="row p-2 btn-primary justify-content-center">
+        Preço Total: {{preco}}
+    </div>
+
+    <div>
+        <button type="button" class="btn btn-primary m-2">Comprar</button>
+    </div>
+</div>

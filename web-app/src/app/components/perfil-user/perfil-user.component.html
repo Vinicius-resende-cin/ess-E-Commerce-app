@@ -1,0 +1,30 @@
+<div class="p-6 font-style">
+    <h1>Olá {{userLogged.nomeCompleto}}</h1>
+    <div class="p-7">
+        <div class="container-fluid row">
+            <p class="col">CPF: {{ userLogged.cpf }}</p>
+            <p class="col">Email: {{ userLogged.email }}</p>
+        </div>
+        <div class="container-fluid row pt-4">
+            <p class="col">Celular: {{ userLogged.celular }}</p>
+            <p class="col">Endereço: {{ userLogged.endereco }}</p>
+        </div>
+        <div class="container-fluid row pt-4">
+            <p class="col">Complemento: {{ userLogged.complemento }}</p>
+            <p class="col">CEP: {{ userLogged.cep }}</p>
+        </div>
+
+        <div class="container-fluid row pt-4">
+            <p class="col">Cidade: {{ userLogged.cidade }}</p>
+            <p class="col">Estado: {{ userLogged.estado }}</p>
+        </div>
+        
+        
+        <div class="d-grid gap-4 d-md-flex justify-content-md-end p-button pb-4 pt-5">
+            <button type="button" class="btn btn-dark" (click)="recivePassword()" name="alterar-senha">Alterar Senha</button>
+            <button type="button" class="btn btn-dark" (click)="reciveAdrress()" name="alterar-endereco">Alterar Endereço</button>
+        </div>
+    </div>
+    
+    
+</div>
