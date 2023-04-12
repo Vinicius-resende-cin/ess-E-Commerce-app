@@ -33,22 +33,18 @@ export class GenerateLinkComponent {
 
   // Obtém o nome do link original e do link personalizado a partir dos elementos de
   // entrada HTML e gera um link personalizado
-  private generateCustomLink(input1: HTMLInputElement, input2: HTMLInputElement): { id: number, url: string } | void {
-    input1.select();
-    input2.select();
+  private generateCustomLink(linkOriginal: string, nomeLink: string): { id: number, url: string } | void {
+    const siteOriginal = linkOriginal.slice(0, 21);
+    const caminhoOriginal = linkOriginal.slice(22);
 
-    const linkOriginal = input1.value.slice(7); // O slice serve para retirar a parte 'http://'
-    const caminhoOriginal = linkOriginal.slice(15);
-
-    const caminhoItem = new RegExp("^item/.*$");
+    const caminhoItem = new RegExp("\\*item\\/\\*");
     const caminhoHome = "home";
 
-    if (linkOriginal != "localhost:4200" &&
-        !(caminhoOriginal == caminhoHome) &&
+    if (siteOriginal != "http://localhost:4200" &&
+        caminhoOriginal != caminhoHome &&
         !(caminhoItem.test(caminhoOriginal))) {
       alert('Erro: Não é possível gerar um link desta página.');
     } else {
-      const nomeLink = input2.value;
 
       if (nomeLink.length == 0) {
         alert('Erro: O nome do link não pode ser vazio.');
@@ -58,8 +54,10 @@ export class GenerateLinkComponent {
         alert('Erro: O nome do link pode ter 15 caracteres no máximo.');
       } else {
         const id: number = this.hash(nomeLink); // Usa a função hash para gerar o id do link
-        const url: string = `http://commerCin-${nomeLink}.${linkOriginal}`; // composição do link personalizado
-
+        const urlOriginal = new URL(linkOriginal); // Cria um objeto URL a partir da URL original
+        const params = urlOriginal.searchParams;
+        params.set("name", `commerCin-${nomeLink}`);
+        const url = `${urlOriginal.origin}${urlOriginal.pathname}?${params.toString()}${urlOriginal.hash}`; // Composição do novo link customizado
         return {id, url};
       }
     }
@@ -67,7 +65,10 @@ export class GenerateLinkComponent {
 
   // Gera um link personalizado a partir dos elementos de entrada HTML e copia para a área de transferência
   generateAndCopyCustomLink(input1: HTMLInputElement, input2: HTMLInputElement) {
-    const ret = this.generateCustomLink(input1, input2);
+    input1.select();
+    input2.select();
+
+    const ret = this.generateCustomLink(input1.value, input2.value);
     if (ret) {
       const { id, url } = ret;
 
