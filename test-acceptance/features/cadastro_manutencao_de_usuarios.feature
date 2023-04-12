@@ -114,7 +114,8 @@ Scenario: Tentiva mal-sucedida ao Cadastrar um novo Usuário, CPF já utilizado
     Then Eu recebo uma mensagem de erro, "CPF inválido"
 
 Scenario: Tentiva mal-sucedida do Usuário, já logado no sistema tenta trocar sua senha, erra sua senha atual
-    Given eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
+    Given o email "jmma@cin.ufpe.br" já foi cadastrado com a senha "12356jm@"
+    And eu já estou logado no sistema como "jmma@cin.ufpe.br" com a senha "12356jm@"
     And eu estou na pagina "Perfil do Usuario"
     When Clico em "alterar-senha"
     And Escrevo "12356jm" em "Senha-Atual"
@@ -236,6 +237,24 @@ Scenario: Tentiva mal-sucedida do administrador ao colocar sua senha quando quer
     And Clico na opcao "OK"
     Then Eu recebo uma mensagem de erro, "Senha inserida está incorreta"
     And Verifico que este usuário de "CPF" "123.456.789-10" possui a permissao de "usuário"
+
+Scenario: Administrador deseja remover um usuário do sistema 
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Guilherme Maciel de Melo", "123.456.789-10" em "CPF", "gmm7@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    When Eu clico no Botão "X" do usuário "123.456.789-10"
+    And Escrevo "comercio2023@" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de sucesso, "Usuário Removido com sucesso"
+
+Scenario: Administrador deseja remover um usuário do sistema 
+    Given eu já estou logado no sistema como "ecommercin@gmail.com" com a senha "comercio2023@"
+    And eu estou na pagina "Admin Painel"
+    And Eu vejo o usuário de "nome" "Joaquim Maria Machado de Assis", "093.459.090-79" em "CPF", "jmma@cin.ufpe.br" em "e-mail" na tabela de usuários do sistema
+    When Eu clico no Botão "X" do usuário "093.459.090-79"
+    And Escrevo "comercio2023@" em "Senha"
+    And Clico na opcao "OK"
+    Then Eu recebo uma mensagem de sucesso, "Usuário Removido com sucesso"
 
 
 
