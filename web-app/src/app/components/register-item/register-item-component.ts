@@ -28,7 +28,7 @@ export class RegisterItemComponent {
       id_user: '',
       nome: '',
       descricao: '',
-      imagem: null,
+      //imagem: null,
       quantidade: 0,
       preco: 0,
       forma_pagamento: [],

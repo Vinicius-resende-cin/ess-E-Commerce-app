@@ -30,7 +30,6 @@ const routes: Routes = [
       { path: 'categoria/:id', component: CategoryUpdateComponent },
       { path: 'historico-pedidos', component: ViewHistoryComponent },
       { path: 'item/:id', component: ProductDetailComponent },
-      { path: 'item', component: ViewItensComponent },
       { path: 'create-item', component: RegisterItemComponent },
       { path: 'view-itens', component: ViewItensComponent },
       { path: 'view-itens/edit-item/:id', component: EditItemComponent },

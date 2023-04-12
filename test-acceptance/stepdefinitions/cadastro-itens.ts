@@ -14,205 +14,152 @@ let assert = chai.assert;
 
 const baseUrl = "http://localhost:4200/";
 
-async function containsSubstring(value, elem) {
-  const valueSubstrings = value.toLowerCase().split(" ");
-  return valueSubstrings.every((substring) => elem.toLowerCase().includes(substring));
+async function searchItemInItens(itemName) {
+    const itemNames = await $$("h5.fw-bolder");
+
+    for (let i = 0; i < itemNames.length; i++) {
+      const elemItem = itemNames[i];
+      const text = await elemItem.getText();
+
+        if (text === itemName) {
+            return true;
+        }
+    }
+    return false;      
 }
 
-const PageUrls = {
-  INICIAL: "",
-  PRINCIPAL: "home",
-  LOGIN: "login",
-  REDEFINIR_SENHA: "redefinir-senha",
-  RECUPERAR_CONTA: "recuperar-conta",
-  CADASTRO_USUARIO: "Cadastro-Usuario",
-  PERFIL_DO_USUARIO: "home/perfil-user",
-  ADMIN_PAINEL: "home/admin-painel",
-  GERENCIAR_CATEGORIAS: "home/categoria",
-  CATEGORIA_ESPORTES: "home/categoria/Esportes",
-  RESUMO_MENSAL: "home/resumo-mensal",
-  CADASTRAR_PRODUTO: "home/create-item",
-  MINHA_LOJA: "home/view-itens",
-  VIEW_FULL: "home/item/:id"
-};
+async function getElementByName(name, type) {
+  let elementName = name.toLowerCase().replaceAll(" ", "-");
+  let selector = `${type}[name=${elementName}]`;
+  return $(selector);
+}
 
-defineSupportCode(function ({ Given, When, Then }) {
-  When(/^eu digito "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {
-    const element = await $(
-      "input[name=" + (<string>elemName).toLowerCase().replaceAll(" ", "-") + "]"
-    );
-    await element.clear();
-    await element.sendKeys(<string>value);
-  });
+async function getCategoryOptionByText(text) {
+  const selectElem = await element(by.name("categorias"));
+  const options = await selectElem.all(by.tagName("option"));
 
-  When(/^eu escolho "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {
-    const elemValues = value.toString().split(" e ");
+  for (let j = 0; j < options.length; j++) {
+    const categoryOption = options[j];
+    const optionText = await categoryOption.getText();
+    if (optionText.includes(text)) {
+      return categoryOption;
+    }
+  }
+}
 
-    for (let i = 0; i < elemValues.length; i++) {
-      if (elemName === "Formas de pagamento") {
-        const option = await $(
-          "option[name=" +
-            (<string>elemValues[i]).toLowerCase().replaceAll(" ", "-") +
-            "]"
-        );
-        await option.click();
-      } else if (elemName === "Categorias") {
-        const selectElem = await element(by.name("categorias"));
-        const options = await selectElem.all(by.tagName("option"));
+async function containsSubstring(value, elem) {
+    const valueSubstrings = value.toLowerCase().split(' ');
+    return valueSubstrings.every(substring => elem.toLowerCase().includes(substring));
+}
 
-        for (let j = 0; j < options.length; j++) {
-          const categoryOption = options[j];
-          const text = await categoryOption.getText();
-          if (text.includes(elemValues[i])) {
-            await categoryOption.click();
+
+defineSupportCode(function ({ Given, When, Then }) { 
+
+    When(/^eu envio "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {
+        if (elemName === "Formas de pagamento" || elemName === "Categorias"){
+            const elemValues = value.toString().split(" e ");
+
+            for (let i = 0; i < elemValues.length; i++) {
+                if (elemName === "Formas de pagamento") {
+                    const input = await getElementByName(elemValues[i], 'option');
+                    await input.click();
+                } else if (elemName === "Categorias") {
+                    const option = await getCategoryOptionByText(elemValues[i]);
+                    if (option) {
+                        await option.click();
+                    }
+                    // await option.click();
+                }
+            }    
+
+        } else {
+            const element = await getElementByName(elemName, 'input')
+            await element.clear()
+            await element.sendKeys(<string>value);
+        }  
+    });      
+
+    Then(/^eu vejo o produto com nome "(.*)" na loja$/, async (elemName) => {
+        const itemNames = await $$("h5.fw-bolder");
+        let found = false;
+    
+        for (let i = 0; i < itemNames.length; i++) {
+          const itemName = itemNames[i];
+          const text = await itemName.getText();
+    
+          if (text === elemName) {
+            found = true;
             break;
           }
         }
-      }
-    }
-  });
+    
+        expect(found).to.be.true;
+      });
 
-  Then(/^eu vejo o produto com nome "(.*)" na loja$/, async (elemName) => {
-    const itemNames = await $$("h5.fw-bolder");
-    let found = false;
+    Then(/^eu clico no icone que indica "(.*)" do produto com nome "(.*)"$/, async (elementName, name) => {
+        const elem = elementName == "Atualizar produto" ? `edit-${name}` : `delete-${name}`;
+        await element(by.name(elem)).click();
+    });
 
-    for (let i = 0; i < itemNames.length; i++) {
-      const itemName = itemNames[i];
-      const text = await itemName.getText();
+    Then(/^eu sou redirecionado para a página do produto com nome "(.*)"$/, async (nomeExpected) => {
+        const nome = await element(by.name('nome')).getText();
+        const id =  await element(by.name('id')).getText();
 
-      if (text === elemName) {
-        found = true;
-        break;
-      }
-    }
+        if (nome === nomeExpected){
+            const expectUrl = 'home/item/' + id;
+            await new Promise((resolve) => setTimeout(resolve, 2000));
+            await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
+        }
+    });
 
-    expect(found).to.be.true;
-  });
+    Then(/^eu vejo "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {
+        
+        const name = (<string> elemName).toLowerCase().replaceAll(" ", "-");
+        const elemText = await element(by.name(name)).getText();
 
-  //Then eu clico no icone que indica "Atualizar produto" do produto com nome "Camisa polo"
-  Then(
-    /^eu clico no icone que indica "(.*)" do produto com nome "(.*)"$/,
-    async (element_name, name) => {
-      let elem = "";
+        const elemValues = value.toString().split(" e ");
 
-      if (element_name == "Atualizar produto") {
-        elem = "edit-" + name;
-      } else {
-        elem = "delete-" + name;
-      }
+        const contador = elemValues.filter(async (value) => {
+            return await containsSubstring(value, elemText);
+        }).length;
 
-      await element(by.name(<string>elem)).click();
-    }
-  );
+        if (contador === elemValues.length) {
+            await expect(true).to.be.true;
+        }
+    });
 
-  Then(
-    /^eu sou redirecionado para a página do produto com nome "(.*)"$/,
-    async (nome_expected) => {
-      await new Promise((resolve) => setTimeout(resolve, 2000));
-      const elem = await element(by.name("nome"));
-      const nome = await elem.getText();
-      const id = await element(by.name("id")).getText();
-
-      if (nome === nome_expected) {
-        const expectUrl = "home/item/" + id;
+    Then(/^eu sou redirecionado para a página de confirmacao de senha$/, async () => {
+        const id: string = await element(by.name('Confirmar')).getAttribute('id');
+        const expectUrl = 'home/password-confirmation/' + id;
+        await new Promise((resolve) => setTimeout(resolve, 2000));
         await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
-      }
-    }
-  );
+    });
 
-  //eu altero "Nome" para "Camisa polo azul bebe"
-  When(/^eu altero "(.*)" para "(.*)"$/, async (elemName, value) => {
-    if (elemName === "Formas de pagamento" || elemName === "Categorias") {
-      const elemValues = value.toString().split(" e ");
-
-      for (let i = 0; i < elemValues.length; i++) {
-        if (elemName === "Formas de pagamento") {
-          const option = await $(
-            "option[name=" +
-              (<string>elemValues[i]).toLowerCase().replaceAll(" ", "-") +
-              "]"
-          );
-          //await option.clear();
-          await option.click();
-        } else if (elemName === "Categorias") {
-          const selectElem = await element(by.name("categorias"));
-          const options = await selectElem.all(by.tagName("option"));
-
-          for (let j = 0; j < options.length; j++) {
-            const categoryOption = options[j];
-            const text = await categoryOption.getText();
-            if (text.includes(elemValues[i])) {
-              await categoryOption.click();
-              break;
-            }
+    Then(/^eu vejo que o produto com nome "(.*)" nao esta na loja$/, async (elemName) => {
+        const itemNames = await $$("h5.fw-bolder");
+        let found = false;
+    
+        for (let i = 0; i < itemNames.length; i++) {
+          const itemName = itemNames[i];
+          const text = await itemName.getText();
+    
+          if (text === elemName) {
+            found = true;
+            break;
           }
         }
-      }
-    } else {
-      const element = await $(
-        "input[name=" + (<string>elemName).toLowerCase().replaceAll(" ", "-") + "]"
-      );
-      await element.clear();
-      await element.sendKeys(<string>value);
-    }
-  });
+    
+        expect(found).to.be.false;
+    });
 
-  Then(/^eu vejo "([^"]*)" em "([^"]*)"$/, async (value, elemName) => {
-    const elemValues = value.toString().split(" e ");
-    const name = (<string>elemName).toLowerCase().replaceAll(" ", "-");
-    const elem = element(by.name(name)).getText();
-    let contador = 0;
+    Then(/^eu vejo na tela uma mensagem de erro "(.*)"$/, async(msgError) => {
+        const msg = await element(by.name('error-msg')).getText();
+        expect(msgError).to.equal(msg);
+    });
 
-    for (let j = 0; j < elemValues.length; j++) {
-      const valueSubstrings = elemValues[j].toString().toLowerCase().split(" ");
-      const result = valueSubstrings.every((substring) =>
-        elem.toString().toLowerCase().includes(substring)
-      );
-
-      if (result) {
-        contador += 1;
-      }
-    }
-
-    if (contador === elemValues.length) {
-      await expect(true).to.be.true;
-    }
-  });
-
-  Then(/^eu sou redirecionado para a página de confirmacao de senha$/, async () => {
-    const id: string = await element(by.name("Confirmar")).getAttribute("id");
-
-    const expectUrl = "home/password-confirmation/" + id;
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    await expect(browser.getCurrentUrl()).to.eventually.equal(baseUrl + expectUrl);
-  });
-
-  Then(/^eu vejo que o produto com nome "(.*)" nao esta na loja$/, async (elemName) => {
-    const itemNames = await $$("h5.fw-bolder");
-    let found = false;
-
-    for (let i = 0; i < itemNames.length; i++) {
-      const itemName = itemNames[i];
-      const text = await itemName.getText();
-
-      if (text === elemName) {
-        found = true;
-        break;
-      }
-    }
-
-    expect(found).to.be.false;
-  });
-
-  Then(/^eu vejo na tela uma mensagem de erro "(.*)"$/, async (msgError) => {
-    const msg = await element(by.name("error-msg")).getText();
-
-    expect(msgError).to.equal(msg);
-  });
-
-  Then(/^eu vejo o botão "(.*)" indisponivel para clicar$/, async (elementName) => {
-    const button = await $(`button[name="${elementName}"]`);
-    const isEnabled = await button.isEnabled();
-    expect(isEnabled).to.be.false;
-  });
+    Then(/^eu vejo o botão "(.*)" indisponivel para clicar$/, async(elementName) => {
+        const button = await $(`button[name="${elementName}"]`);
+        const isEnabled = await button.isEnabled();
+        expect(isEnabled).to.be.false;
+    });
 });
