@@ -33,7 +33,8 @@ export class AuthService {
   confirmPassword(password: string){
     const loginUrl = '/auth/confirmPassword';
     const endpointURL = this.apiURL + loginUrl;
-    const body = { password };
+    const email = "ecommercin@gmail.com";
+    const body = { email, password };
     const options = { withCredentials: true };
 
     return this.http.post<Object>(endpointURL, body, options);

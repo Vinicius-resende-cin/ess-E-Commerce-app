@@ -22,7 +22,6 @@ export type Itens = {
   id_user: String;
   nome: String;
   descricao: String;
-  imagem: File | null;
   quantidade: number;
   preco: number;
   forma_pagamento: String[];
