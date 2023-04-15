@@ -8,7 +8,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { User } from '../../../../../common/usuario';
 import { UserService } from 'src/app/services/user.service';
 
-
 @Component({
   selector: 'app-register-item',
   templateUrl: './register-item.component.html',
@@ -19,6 +18,7 @@ export class RegisterItemComponent {
     category_list!: Categoria[];
     email!: String;
     errorMsg!: string;
+    imagem!: string;
 
     constructor(private itemservice: ItemService, private categoriaService: CategoriaService,  private userservice: UserService, private router: Router) { 
     }
@@ -28,7 +28,7 @@ export class RegisterItemComponent {
       id_user: '',
       nome: '',
       descricao: '',
-      //imagem: null,
+      imagem: '',
       quantidade: 0,
       preco: 0,
       forma_pagamento: [],
@@ -37,6 +37,8 @@ export class RegisterItemComponent {
 
     cadastrarItem(newItem: Itens) {
         newItem.id_user = this.email;
+        newItem.imagem = this.imagem;
+
         this.itemservice
         .createItem(newItem)
         .subscribe(
@@ -84,6 +86,18 @@ export class RegisterItemComponent {
         return true;
       }
       return false;
+    }
+
+    onImageSelected(event: any): void {
+      const selectedFile = event.target.files[0]; // pega o arquivo selecionado
+      const reader = new FileReader();
+      reader.readAsDataURL(selectedFile);
+      reader.onload = () => {
+        
+        if (reader.result){
+          this.imagem = reader.result.toString()
+        }
+      };
     }
 
 }

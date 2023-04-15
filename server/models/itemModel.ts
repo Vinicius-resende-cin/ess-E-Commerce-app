@@ -8,7 +8,7 @@ module.exports = () => {
         id_user: String,
         nome: String,
         descricao: String,
-        //imagem: Buffer,
+        imagem: String,
         quantidade: Number,
         preco: Number,
         forma_pagamento: Array<String>,

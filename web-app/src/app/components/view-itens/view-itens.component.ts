@@ -48,14 +48,6 @@ export class ViewItensComponent {
 
     this.router.navigate(['home', 'password-confirmation', id]);
     
-    /*if (this.confirmPassword) {
-      this.itemservice.deleteItem('/itens/' + id).subscribe(() => {
-        this.getAllItensUser();
-      });
-    }*/
   }
 
-  /*updateSharedVariable() {
-    this.confirmPassword =  this.sharedService.confirmPassword;
-  }*/
 }
