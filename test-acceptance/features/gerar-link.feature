@@ -76,4 +76,4 @@ Scenario: Erro ao gerar um link de compartilhamento da página do histórico de 
   When eu insiro "http://localhost:4200/home/historico-pedidos" no campo "Link original"
   And eu insiro "MeuHistorico" no campo "Nome do novo link"
   And eu seleciono a opção "Gerar"
-  Then eu vejo a mensagem "Erro: Não foi possível gerar o link."
+  Then eu vejo a mensagem "Erro: Não é possível gerar um link desta página."
