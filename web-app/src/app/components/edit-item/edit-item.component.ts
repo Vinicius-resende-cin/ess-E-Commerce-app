@@ -58,8 +58,6 @@ export class EditItemComponent implements OnInit {
       }
     );
   }
-  
-  
 
   validarEdicao(): boolean {
     const quantidade = (<HTMLInputElement>document.getElementById('input-quantidade')).value;
@@ -68,11 +66,22 @@ export class EditItemComponent implements OnInit {
     const categoria = (<HTMLInputElement>document.getElementById('input-categoria')).value;
     const titulo = (<HTMLInputElement>document.getElementById('input-nome')).value;
     const descricao = (<HTMLInputElement>document.getElementById('input-desc')).value;
-    //const imagem = (<HTMLInputElement>document.getElementById('input-image')).value;
 
     if (quantidade && preco && forma_pagamento && categoria && titulo && descricao) {
       return true;
     }
     return false;
+  }
+
+  onImageSelected(event: any): void {
+    const selectedFile = event.target.files[0];
+    const reader = new FileReader();
+    reader.readAsDataURL(selectedFile);
+    reader.onload = () => {
+      
+      if (reader.result){
+        this.itemModifiqued.imagem = reader.result.toString()
+      }
+    };
   }
 }
